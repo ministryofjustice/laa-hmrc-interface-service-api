@@ -1,0 +1,23 @@
+require:
+  - rubocop-performance
+  - rubocop-rails
+
+inherit_from: .rubocop_todo.yml
+
+AllCops:
+  TargetRubyVersion: 3.0
+  NewCops: enable
+  SuggestExtensions: false
+  Exclude:
+    - 'db/schema.rb'
+    - 'log/**/*'
+    - 'tmp/**/*'
+    - 'vendor/**/*'
+    - 'node_modules/**/*'
+    - 'bin/bundle'
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
