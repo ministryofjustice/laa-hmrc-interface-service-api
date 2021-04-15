@@ -3,7 +3,7 @@
 This Service facilitates the HMRC API access for the LAA Use Cases
 
 ## Development 
-### dependencies
+### Dependencies
 * Ruby 3
 * Rails 6.1.x API
 
