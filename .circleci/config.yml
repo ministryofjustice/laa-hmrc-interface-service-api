@@ -150,7 +150,7 @@ jobs:
       - checkout
       - setup_remote_docker:
           version: 19.03.13
-#      - *decrypt_secrets
+      - *decrypt_secrets
       - *build_docker_image
       - *push_to_ecr
 #  deploy_uat: &deploy_uat
