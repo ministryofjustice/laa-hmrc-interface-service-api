@@ -13,13 +13,13 @@ executors:
           GITHUB_TEAM_NAME_SLUG: laa-apply-for-legal-aid
   linting-executor:
     docker:
-      - image: circleci/ruby:2.7.2-node-browsers
+      - image: circleci/ruby:3.0.1-node-browsers
         environment:
           - RAILS_ENV=test
           - TZ: "Europe/London"
   test-executor:
     docker:
-      - image: circleci/ruby:2.7.2-node-browsers
+      - image: circleci/ruby:3.0.1-node-browsers
         environment:
           - RAILS_ENV=test
           - PGHOST=localhost
@@ -131,7 +131,7 @@ jobs:
       - *save_gems_cache
       - run:
           name: Run Rubocop
-          command:  bin/rails rubocop
+          command:  bundle exec rubocop
   unit_tests:
     executor: test-executor
     steps:
@@ -150,7 +150,7 @@ jobs:
       - checkout
       - setup_remote_docker:
           version: 19.03.13
-      - *decrypt_secrets
+#      - *decrypt_secrets
       - *build_docker_image
       - *push_to_ecr
 #  deploy_uat: &deploy_uat
