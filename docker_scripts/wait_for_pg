@@ -42,6 +42,5 @@ probe() {
 #  log "This is a staging or production deployment, no need to check for postgres container"
 #  exit 0
 #fi
->>>>>>> Stashed changes
 
 unset PGPASSWORD
