@@ -153,20 +153,19 @@ jobs:
       - *decrypt_secrets
       - *build_docker_image
       - *push_to_ecr
-#  deploy_uat: &deploy_uat
-#    executor: cloud-platform-executor
-#    steps:
-#      - checkout
-#      - setup_remote_docker:
-#          docker_layer_caching: true
-#      - *decrypt_secrets
-#      - *authenticate_k8s
-#      - deploy:
-#          name: Helm deployment to UAT
-#          command: |
-#            echo "k8s authenticated"
-#            echo "Installing LFAPI helm chart"
-#            ./bin/uat_deploy
+  deploy_uat: &deploy_uat
+    executor: cloud-platform-executor
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - *decrypt_secrets
+      - *authenticate_k8s
+      - deploy:
+          name: Helm deployment to UAT
+          command: |
+            echo "k8s authenticated"
+            ./bin/uat_deploy
 #  deploy_main_uat:
 #    <<: *deploy_uat
 #  delete_uat_branch:
@@ -235,12 +234,12 @@ workflows:
           filters:
             branches:
               ignore: main
-#      - deploy_uat:
-#          context: laa-hmrc-interface-uat
-#          requires:
-#            - lint_checks
-#            - unit_tests
-#            - build_and_push
+      - deploy_uat:
+          context: laa-hmrc-interface-uat
+          requires:
+            - lint_checks
+            - unit_tests
+            - build_and_push
 
 #  merge_pr:
 #    jobs:
