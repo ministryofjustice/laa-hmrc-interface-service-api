@@ -249,6 +249,7 @@ workflows:
             branches:
               only: main
       - build_and_push:
+          context: laa-hmrc-interface-uat
           requires:
             - lint_checks
             - unit_tests
