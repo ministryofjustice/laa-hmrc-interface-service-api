@@ -22,7 +22,7 @@ env:
   - name: POSTGRES_DATABASE
     valueFrom:
       secretKeyRef:
-        name: rds-instance-output
+        name: {{ template "app.fullname" . }}
         key: database_name
   - name: SECRET_KEY_BASE
     valueFrom:
