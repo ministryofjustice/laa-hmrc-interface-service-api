@@ -163,21 +163,18 @@ jobs:
       - *authenticate_k8s
       - deploy:
           name: Helm deployment to UAT
-          command: |
-            echo "k8s authenticated"
-            ./bin/uat_deploy
-#  deploy_main_uat:
-#    <<: *deploy_uat
-#  delete_uat_branch:
-#    executor: cloud-platform-executor
-#    steps:
-#      - checkout
-#      - setup_remote_docker
-#      - *authenticate_k8s
-#      - run:
-#          name: Delete UAT release
-#          command: |
-#            ./bin/delete_uat_release.sh
+          command: ./bin/uat_deploy
+  deploy_main_uat:
+    <<: *deploy_uat
+  delete_uat_branch:
+    executor: cloud-platform-executor
+    steps:
+      - checkout
+      - setup_remote_docker
+      - *authenticate_k8s
+      - run:
+          name: Delete UAT release
+          command: ./bin/uat_delete_release
 #  deploy_staging:
 #    executor: cloud-platform-executor
 #    steps:
@@ -241,28 +238,28 @@ workflows:
             - unit_tests
             - build_and_push
 
-#  merge_pr:
-#    jobs:
-#      - lint_checks:
-#          filters:
-#            branches:
-#              only: main
-#      - unit_tests:
-#          filters:
-#            branches:
-#              only: main
-#      - build_and_push:
-#          requires:
-#            - lint_checks
-#            - unit_tests
-#      - deploy_main_uat:
-#          context: laa-hmrc-interface-uat
-#          requires:
-#            - build_and_push
-#      - delete_uat_branch:
-#          context: laa-hmrc-interface-uat
-#          requires:
-#            - deploy_main_uat
+  merge_pr:
+    jobs:
+      - lint_checks:
+          filters:
+            branches:
+              only: main
+      - unit_tests:
+          filters:
+            branches:
+              only: main
+      - build_and_push:
+          requires:
+            - lint_checks
+            - unit_tests
+      - deploy_main_uat:
+          context: laa-hmrc-interface-uat
+          requires:
+            - build_and_push
+      - delete_uat_branch:
+          context: laa-hmrc-interface-uat
+          requires:
+            - deploy_main_uat
 #      - deploy_staging:
 #          context: laa-hmrc-interface-staging
 #          requires:
