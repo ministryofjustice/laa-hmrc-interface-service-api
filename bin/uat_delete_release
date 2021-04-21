@@ -2,32 +2,30 @@
 
 GIT_MESSAGE=$(git log --format=%B -n 1 $CIRCLE_SHA1)
 
-echo "git message is:"
-echo "$GIT_MESSAGE"
+echo "git message is: $GIT_MESSAGE"
 
-if [[ $GIT_MESSAGE =~ "Merge pull request #" ]]
-then
-  MERGED_BRANCH=$(echo $GIT_MESSAGE | sed -n "s/^.*from ministryofjustice\/\s*\(\S*\).*$/\1/p")
-  UAT_RELEASE="$(echo $MERGED_BRANCH | sed 's:^\w*\/::' | tr -s ' _/[]().' '-' | cut -c1-30 | sed 's/-$//')"
+case "$GIT_MESSAGE" in
+  "Merge pull request #"*)
+    MERGED_BRANCH=$(echo $GIT_MESSAGE | sed -n "s/^.*from ministryofjustice\/\s*\(\S*\).*$/\1/p")
+    UAT_RELEASE="$(echo $MERGED_BRANCH | sed 's:^\w*\/::' | tr -s ' _/[]().' '-' | cut -c1-30 | sed 's/-$//')"
 
-  echo "Attempting to delete UAT release $UAT_RELEASE"
+    echo "Attempting to delete UAT release: $UAT_RELEASE"
 
-  UAT_RELEASES=$(helm list --namespace=${K8S_NAMESPACE} --all)
+    UAT_RELEASES=$(helm list --namespace=${K8S_NAMESPACE} --all)
 
-  echo "Current UAT releases:"
-  echo "$UAT_RELEASES"
+    echo "Current UAT releases:"
+    echo "$UAT_RELEASES"
 
-  if [[ $UAT_RELEASES =~ "$UAT_RELEASE" ]]
-  then
-    echo Delete database via $POD
-    POD=$(kubectl -n ${K8S_NAMESPACE} get pods | grep -m4 $UAT_RELEASE | head -n1 | cut -d' ' -f 1)
-    kubectl -n ${K8S_NAMESPACE} exec -it $POD -- rake db:drop
-    echo "Deleting UAT release $UAT_RELEASE"
-    helm delete $UAT_RELEASE --namespace=${K8S_NAMESPACE}
-  else
-    echo "UAT release $UAT_RELEASE was not found"
-  fi
-
-else
-  echo "This commit is not a merged pull request"
-fi
+    case "$UAT_RELEASES" in
+      *"$UAT_RELEASE"*)
+        POD=$(kubectl -n ${K8S_NAMESPACE} get pods | grep -m4 $UAT_RELEASE | head -n1 | cut -d' ' -f 1)
+        echo Delete database via $POD
+        kubectl -n ${K8S_NAMESPACE} exec -it $POD -- rake db:drop
+        echo "Deleting UAT release $UAT_RELEASE"
+        helm delete $UAT_RELEASE --namespace=${K8S_NAMESPACE}
+        ;;
+      *) echo "UAT release $UAT_RELEASE was not found";;
+    esac
+    ;;
+  *) echo "This commit is not a merged pull request";;
+esac
