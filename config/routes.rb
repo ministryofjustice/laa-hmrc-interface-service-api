@@ -4,4 +4,6 @@ Rails.application.routes.draw do
   get 'ping', to: 'status#ping', format: :json
   get 'health_check', to: 'status#health_check', format: :json
   get 'status', to: 'status#ping', format: :json
+
+  resources :use_case_one, only: %i[create], format: :json
 end
