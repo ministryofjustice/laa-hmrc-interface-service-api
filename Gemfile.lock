@@ -124,6 +124,13 @@ GEM
       http_parser.rb (~> 0.6.0)
     erubi (1.10.0)
     eventmachine (1.2.7)
+    factory_bot (6.2.0)
+      activesupport (>= 5.0.0)
+    factory_bot_rails (6.2.0)
+      factory_bot (~> 6.2.0)
+      railties (>= 5.0.0)
+    faker (2.18.0)
+      i18n (>= 1.6, < 2)
     faraday (1.5.1)
       faraday-em_http (~> 1.0)
       faraday-em_synchrony (~> 1.0)
@@ -175,6 +182,7 @@ GEM
     http_parser.rb (0.6.0)
     i18n (1.8.10)
       concurrent-ruby (~> 1.0)
+    jwt (2.2.3)
     listen (3.6.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -370,10 +378,13 @@ DEPENDENCIES
   byebug
   config
   dotenv-rails
+  factory_bot_rails
+  faker
   guard-livereload
   guard-rspec
   guard-rubocop
   highline
+  jwt
   listen (~> 3.6)
   mock_redis
   pg (~> 1.1)
