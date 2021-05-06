@@ -64,9 +64,9 @@ RSpec.describe StatusController, type: :request do
       end
 
       before do
-        ENV['BUILD_DATE']       = '20150721'
-        ENV['BUILD_TAG']        = 'test'
-        ENV['APP_BRANCH']       = 'test_branch'
+        allow(Settings.status).to receive(:build_date).and_return('20150721')
+        allow(Settings.status).to receive(:build_tag).and_return('test')
+        allow(Settings.status).to receive(:app_branch).and_return('test_branch')
 
         get('/ping')
       end
@@ -78,10 +78,9 @@ RSpec.describe StatusController, type: :request do
 
     context 'when environment variables not set' do
       before do
-        ENV['VERSION_NUMBER']   = nil
-        ENV['BUILD_DATE']       = nil
-        ENV['BUILD_TAG']        = nil
-        ENV['APP_BRANCH']       = nil
+        allow(Settings.status).to receive(:build_date).and_return('Not Available')
+        allow(Settings.status).to receive(:build_tag).and_return('Not Available')
+        allow(Settings.status).to receive(:app_branch).and_return('Not Available')
 
         get '/ping'
       end

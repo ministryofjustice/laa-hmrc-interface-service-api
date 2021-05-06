@@ -10,9 +10,9 @@ class StatusController < ApplicationController
 
   def ping
     render json: {
-      'build_date' => ENV['BUILD_DATE'] || 'Not Available',
-      'build_tag' => ENV['BUILD_TAG'] || 'Not Available',
-      'app_branch' => ENV['APP_BRANCH'] || 'Not Available'
+      'build_date' => Settings.status.build_date,
+      'build_tag' => Settings.status.build_tag,
+      'app_branch' => Settings.status.app_branch
     }
   end
 
