@@ -5,9 +5,14 @@ ruby '3.0.1'
 
 gem 'bootsnap', '>= 1.4.4', require: false
 gem 'config'
+gem 'dotenv-rails'
 gem 'pg', '~> 1.1'
 gem 'puma', '~> 5.3'
 gem 'rails', '~> 6.1.3'
+gem 'redis'
+gem 'redis-namespace'
+gem 'rest-client'
+gem 'rotp'
 
 group :development, :test do
   gem 'byebug'
@@ -19,9 +24,11 @@ group :development, :test do
 end
 
 group :test do
+  gem 'mock_redis'
   gem 'rspec-rails', '~> 5.0'
   gem 'simplecov', require: false
   gem 'simplecov-rcov'
+  gem 'webmock'
 end
 
 group :development do

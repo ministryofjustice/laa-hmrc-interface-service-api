@@ -16,6 +16,9 @@
 
 require 'simplecov'
 require 'highline/import'
+require 'webmock'
+require 'webmock/rspec'
+WebMock.disable_net_connect!
 
 SimpleCov.minimum_coverage 100
 unless ENV['NOCOVERAGE']
