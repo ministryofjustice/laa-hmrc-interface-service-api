@@ -29,6 +29,11 @@ env:
       secretKeyRef:
         name: {{ template "app.fullname" . }}
         key: secretKeyBase
+  - name: ENVIRONMENT
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "app.fullname" . }}
+        key: settings__environment
   - name: RAILS_ENV
     value: production
   - name: RAILS_LOG_TO_STDOUT
