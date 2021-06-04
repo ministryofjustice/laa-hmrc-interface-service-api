@@ -34,6 +34,31 @@ env:
       secretKeyRef:
         name: {{ template "app.fullname" . }}
         key: settings__environment
+  - name: SETTINGS__CREDENTIALS__DESCRIPTION
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "app.fullname" . }}
+        key: settings__credentials__description
+  - name: SETTINGS__CREDENTIALS__HOST
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "app.fullname" . }}
+        key: settings__credentials__host
+  - name: SETTINGS__CREDENTIALS__HMRC_CLIENT_SECRET
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "app.fullname" . }}
+        key: settings__credentials__hmrc_client_secret
+  - name: SETTINGS__CREDENTIALS__HMRC_CLIENT_ID
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "app.fullname" . }}
+        key: settings__credentials__hmrc_client_id
+  - name: SETTINGS__CREDENTIALS__HMRC_TOTP_SECRET
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "app.fullname" . }}
+        key: settings__credentials__hmrc_totp_secret
   - name: RAILS_ENV
     value: production
   - name: RAILS_LOG_TO_STDOUT
