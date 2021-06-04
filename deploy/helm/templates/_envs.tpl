@@ -29,7 +29,7 @@ env:
       secretKeyRef:
         name: {{ template "app.fullname" . }}
         key: secretKeyBase
-  - name: ENVIRONMENT
+  - name: SETTINGS__ENVIRONMENT
     valueFrom:
       secretKeyRef:
         name: {{ template "app.fullname" . }}
