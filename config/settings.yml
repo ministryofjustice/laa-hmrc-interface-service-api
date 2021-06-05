@@ -4,8 +4,10 @@ status:
   app_branch: <%= ENV['APP_BRANCH'] || 'Not Available' %>
 
 credentials:
-  description: 'store actual value as SETTINGS__CREDENTIALS__DESCRIPTION'
-  host: 'store actual value as SETTINGS__CREDENTIALS__HOST'
-  hmrc_client_secret: 'store actual value as SETTINGS__CREDENTIALS__HMRC_CLIENT_SECRET'
-  hmrc_client_id: 'store actual value as SETTINGS__CREDENTIALS__HMRC_CLIENT_ID'
-  hmrc_totp_secret: 'store actual value as SETTINGS__CREDENTIALS__HMRC_TOTP_SECRET'
+  host: &host 'store actual value as SETTINGS__CREDENTIALS__HOST'
+  use_case_1:
+    host: *host
+    description: 'store actual value as SETTINGS__CREDENTIALS__DESCRIPTION'
+    hmrc_client_secret: 'store actual value as SETTINGS__CREDENTIALS__HMRC_CLIENT_SECRET'
+    hmrc_client_id: 'store actual value as SETTINGS__CREDENTIALS__HMRC_CLIENT_ID'
+    hmrc_totp_secret: 'store actual value as SETTINGS__CREDENTIALS__HMRC_TOTP_SECRET'

@@ -1,6 +1,8 @@
 credentials:
-  description: 'This is fake'
-  host: 'https://fake.api'
-  hmrc_client_secret: 'NotASecret'
-  hmrc_client_id: 'NotAClientID'
-  hmrc_totp_secret: 'AlsoNotASecret'
+  host: &host 'https://fake.api'
+  apply:
+    host: *host
+    description: 'This is fake'
+    hmrc_client_secret: 'NotASecret'
+    hmrc_client_id: 'NotAClientID'
+    hmrc_totp_secret: 'AlsoNotASecret'
