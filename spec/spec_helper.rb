@@ -36,11 +36,6 @@ unless ENV['NOCOVERAGE']
 end
 
 RSpec.configure do |config|
-  config.before(:each) do
-    mock_redis = MockRedis.new
-    allow(Redis).to receive(:new).and_return(mock_redis)
-  end
-
   config.expect_with :rspec do |expectations|
     # This option will default to `true` in RSpec 4. It makes the `description`
     # and `failure_message` of custom matchers include text for helper methods
