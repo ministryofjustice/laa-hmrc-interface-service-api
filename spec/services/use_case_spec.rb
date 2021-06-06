@@ -6,7 +6,7 @@ RSpec.describe UseCase do
   it { is_expected.to be_a UseCase }
 
   context 'when a valid bearer_token is available' do
-    # set up mock-redis with a value
+    before { REDIS.set('use_case_1_bearer_token', 'fake_token_value') }
 
     it 'does not call the bearer_token generator' do
       expect(BearerToken).not_to receive(:call)
