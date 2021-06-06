@@ -1,3 +1,5 @@
 class UseCase
-  def initialize; end
+  def initialize
+    BearerToken.call
+  end
 end
