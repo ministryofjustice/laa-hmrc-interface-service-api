@@ -12,7 +12,7 @@ describe BearerToken do
   end
 
   before do
-    stub_request(:post, %r{\A#{Settings.credentials.host}/oauth/token\z}).to_return(status: 200, body: faked_response)
+    stub_request(:post, %r{\A#{Settings.credentials.apply.host}/oauth/token\z}).to_return(status: 200, body: faked_response)
   end
 
   describe '.call' do

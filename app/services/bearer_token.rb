@@ -14,19 +14,19 @@ class BearerToken
   def payload
     {
       grant_type: 'client_credentials',
-      client_secret: "#{totp.now}#{Settings.credentials.hmrc_client_secret}",
-      client_id: Settings.credentials.hmrc_client_id
+      client_secret: "#{totp.now}#{Settings.credentials.apply.hmrc_client_secret}",
+      client_id: Settings.credentials.apply.hmrc_client_id
     }
   end
 
   def totp
-    ROTP::TOTP.new(Settings.credentials.hmrc_totp_secret,
+    ROTP::TOTP.new(Settings.credentials.apply.hmrc_totp_secret,
                    digits: 8,
                    digest: 'sha512',
-                   issuer: Settings.credentials.description)
+                   issuer: Settings.credentials.apply.description)
   end
 
   def url
-    "#{Settings.credentials.host}/oauth/token"
+    "#{Settings.credentials.apply.host}/oauth/token"
   end
 end
