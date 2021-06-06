@@ -21,6 +21,7 @@ require 'webmock/rspec'
 WebMock.disable_net_connect!
 require 'redis'
 require 'mock_redis'
+REDIS = MockRedis.new
 
 SimpleCov.minimum_coverage 100
 unless ENV['NOCOVERAGE']
@@ -36,6 +37,10 @@ unless ENV['NOCOVERAGE']
 end
 
 RSpec.configure do |config|
+  config.before(:each) do
+    REDIS.flushdb
+  end
+
   config.expect_with :rspec do |expectations|
     # This option will default to `true` in RSpec 4. It makes the `description`
     # and `failure_message` of custom matchers include text for helper methods
