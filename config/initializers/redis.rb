@@ -1,6 +1,1 @@
-REDIS = case Rails.env
-        when 'test'
-          MockRedis.new
-        else
-          Redis::Namespace.new('lhisa_uat', redis: Redis.new)
-        end
+REDIS = Redis::Namespace.new('lhisa_uat', redis: Redis.new) unless Rails.env.test?
