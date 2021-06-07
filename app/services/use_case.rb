@@ -1,6 +1,6 @@
 class UseCase
   def initialize
-    BearerToken.call('apply') unless current_token
+    BearerToken.call('use_case_1') unless current_token
   end
 
   private
