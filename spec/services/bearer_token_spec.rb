@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe BearerToken do
-  subject(:bearer_token) { described_class.new('apply') }
+  subject(:bearer_token) { described_class.new('use_case_1') }
 
   let(:fake_data) do
     {
