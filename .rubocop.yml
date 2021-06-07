@@ -15,6 +15,7 @@ AllCops:
     - 'vendor/**/*'
     - 'node_modules/**/*'
     - 'bin/bundle'
+    - 'app/services/sync_test.rb' # This is for legacy comparison and should be deleted ASAP
 
 Style/FrozenStringLiteralComment:
   Enabled: false
