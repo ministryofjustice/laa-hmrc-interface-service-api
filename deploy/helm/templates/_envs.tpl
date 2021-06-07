@@ -34,7 +34,7 @@ env:
       secretKeyRef:
         name: {{ template "app.fullname" . }}
         key: settings__environment
-  - name: SETTINGS__CREDENTIALS__use_case_1__DESCRIPTION
+  - name: SETTINGS__CREDENTIALS__USE_CASE_1__DESCRIPTION
     valueFrom:
       secretKeyRef:
         name: {{ template "app.fullname" . }}
