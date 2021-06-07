@@ -12,7 +12,7 @@ describe BearerToken do
   end
 
   before do
-    stub_request(:post, %r{\A#{Settings.credentials.apply.host}/oauth/token\z}).to_return(status: 200, body: fake_data)
+    stub_request(:post, %r{\A#{Settings.credentials.use_case_1.host}/oauth/token\z}).to_return(status: 200, body: fake_data)
   end
 
   context 'when called with an invalid use_case' do
@@ -28,7 +28,7 @@ describe BearerToken do
   end
 
   describe '.call' do
-    subject(:call) { described_class.call('apply') }
+    subject(:call) { described_class.call('use_case_1') }
     it { is_expected.to eql 'zz00000z00z0z00000z0z0z0000z0000' }
   end
 end
