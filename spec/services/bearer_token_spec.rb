@@ -12,7 +12,8 @@ describe BearerToken do
   end
 
   before do
-    stub_request(:post, %r{\A#{Settings.credentials.use_case_1.host}/oauth/token\z}).to_return(status: 200, body: fake_data)
+    stub_request(:post, %r{\A#{Settings.credentials.use_case_1.host}/oauth/token\z})
+      .to_return(status: 200, body: fake_data)
   end
 
   context 'when called with an invalid use_case' do
