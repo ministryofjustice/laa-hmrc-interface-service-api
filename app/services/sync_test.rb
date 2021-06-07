@@ -2,7 +2,9 @@ class SyncTest
   attr_accessor :first_name, :last_name, :date_of_birth, :nino
 
   def initialize(first_name, last_name, date_of_birth, nino)
-    # run with RunTest.new('first_name', 'last_name', 'date_of_birth(yyyy_mm_dd)', 'nino').call to allow individual details output
+    # run with Benchmark.measure { SyncTest.new('first_name', 'last_name', 'date_of_birth(yyyy_mm_dd)', 'nino').call }.real to allow individual details output
+    # e.g. Benchmark.measure { SyncTest.new('jagger', 'stafford', '1978-05-28', 'EB268548C').call }.real
+
     @first_name = first_name
     @last_name = last_name
     @date_of_birth = date_of_birth
