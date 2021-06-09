@@ -67,7 +67,7 @@ class SyncTest
     write_to_file(JSON.pretty_generate(data))
     return data
   rescue RestClient::TooManyRequests
-    write_to_file("Rate limited while calling #{url}: waiting then trying again")
+    puts("Rate limited while calling #{url}: waiting then trying again")
     sleep(0.5)
     call_endpoint(href)
   end
