@@ -6,6 +6,12 @@ class UseCase
     @bearer_token = bearer_token
   end
 
+  # :nocov:
+  def run_sync_test(first_name, last_name, date_of_birth, nino)
+    Benchmark.measure { SyncTest.new(first_name, last_name, date_of_birth, nino).call }.real
+  end
+  # :nocov:
+
   private
 
   def bearer_token
