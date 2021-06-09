@@ -1,6 +1,6 @@
 class BearerToken
   def initialize(for_use_case)
-    raise 'Unsupported UseCase' unless for_use_case.eql?('use_case_1')
+    raise 'Unsupported UseCase' unless for_use_case.eql?('use_case_one')
 
     @credentials = Settings.credentials.send(for_use_case)
   end

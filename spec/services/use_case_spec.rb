@@ -6,7 +6,7 @@ RSpec.describe UseCase do
   describe 'initializing' do
     context 'when a valid bearer_token is available' do
       before do
-        REDIS.set('use_case_1_bearer_token', 'fake_token_value')
+        REDIS.set('use_case_one_bearer_token', 'fake_token_value')
         subject
       end
 

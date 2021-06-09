@@ -34,31 +34,31 @@ env:
       secretKeyRef:
         name: {{ template "app.fullname" . }}
         key: settings__environment
-  - name: SETTINGS__CREDENTIALS__USE_CASE_1__DESCRIPTION
+  - name: SETTINGS__CREDENTIALS__USE_CASE_ONE__DESCRIPTION
     valueFrom:
       secretKeyRef:
         name: {{ template "app.fullname" . }}
-        key: settings__credentials__use_case_1__description
-  - name: SETTINGS__CREDENTIALS__USE_CASE_1__HOST
+        key: settings__credentials__use_case_one__description
+  - name: SETTINGS__CREDENTIALS__USE_CASE_ONE__HOST
     valueFrom:
       secretKeyRef:
         name: {{ template "app.fullname" . }}
-        key: settings__credentials__use_case_1__host
-  - name: SETTINGS__CREDENTIALS__USE_CASE_1__HMRC_CLIENT_SECRET
+        key: settings__credentials__use_case_one__host
+  - name: SETTINGS__CREDENTIALS__USE_CASE_ONE__HMRC_CLIENT_SECRET
     valueFrom:
       secretKeyRef:
         name: {{ template "app.fullname" . }}
-        key: settings__credentials__use_case_1__hmrc_client_secret
-  - name: SETTINGS__CREDENTIALS__USE_CASE_1__HMRC_CLIENT_ID
+        key: settings__credentials__use_case_one__hmrc_client_secret
+  - name: SETTINGS__CREDENTIALS__USE_CASE_ONE__HMRC_CLIENT_ID
     valueFrom:
       secretKeyRef:
         name: {{ template "app.fullname" . }}
-        key: settings__credentials__use_case_1__hmrc_client_id
-  - name: SETTINGS__CREDENTIALS__USE_CASE_1__HMRC_TOTP_SECRET
+        key: settings__credentials__use_case_one__hmrc_client_id
+  - name: SETTINGS__CREDENTIALS__USE_CASE_ONE__HMRC_TOTP_SECRET
     valueFrom:
       secretKeyRef:
         name: {{ template "app.fullname" . }}
-        key: settings__credentials__use_case_1__hmrc_totp_secret
+        key: settings__credentials__use_case_one__hmrc_totp_secret
   - name: RAILS_ENV
     value: production
   - name: RAILS_LOG_TO_STDOUT

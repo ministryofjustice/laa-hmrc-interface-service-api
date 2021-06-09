@@ -5,7 +5,7 @@ status:
 
 credentials:
   host: &host 'store actual value as SETTINGS__CREDENTIALS__HOST'
-  use_case_1:
+  use_case_one:
     host: *host
     description: 'store actual value as SETTINGS__CREDENTIALS__DESCRIPTION'
     hmrc_client_secret: 'store actual value as SETTINGS__CREDENTIALS__HMRC_CLIENT_SECRET'

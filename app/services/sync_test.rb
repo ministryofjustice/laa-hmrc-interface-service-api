@@ -29,7 +29,7 @@ class SyncTest
 
   def use_case
     {
-      use_case_1: 'LAA-C1'
+      use_case_one: 'LAA-C1'
     }[@app.to_sym]
   end
 
@@ -92,10 +92,10 @@ class SyncTest
 
   def call
     puts 'get bearer token'
-    @app = 'use_case_1'
+    @app = 'use_case_one'
     bearer = BearerToken.new(@app)
     @token = bearer.call
-    @host = Settings.credentials.use_case_1.host
+    @host = Settings.credentials.use_case_one.host
     @correlation_id = SecureRandom.uuid
 
     puts 'Creating an output file for your data - it will be git ignored'
