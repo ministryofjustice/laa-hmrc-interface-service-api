@@ -65,7 +65,11 @@ class SyncTest
     data = JSON.parse(response)
     data = redact_individual(data) if i_should_redact?(data)
     write_to_file(JSON.pretty_generate(data))
-    data
+    return data
+  rescue RestClient::TooManyRequests
+    write_to_file("Rate limited while calling #{url}: waiting then trying again")
+    sleep(0.5)
+    call_endpoint(href)
   end
 
   def redact_individual(data)
