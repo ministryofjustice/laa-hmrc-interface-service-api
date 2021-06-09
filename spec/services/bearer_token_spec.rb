@@ -22,7 +22,7 @@ describe BearerToken do
     it { expect { subject }.to raise_error 'Unsupported UseCase' }
   end
 
-  describe '.call' do
+  describe '#call' do
     subject(:call) { bearer_token.call }
 
     it { is_expected.to eql 'zz00000z00z0z00000z0z0z0000z0000' }
