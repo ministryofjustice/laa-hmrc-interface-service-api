@@ -59,6 +59,16 @@ env:
       secretKeyRef:
         name: {{ template "app.fullname" . }}
         key: settings__credentials__use_case_one__hmrc_totp_secret
+  - name: REDIS_HOST
+    valueFrom:
+      secretKeyRef:
+        name: elasticache
+        key: primary_endpoint_address
+  - name: REDIS_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: elasticache
+        key: auth_token
   - name: RAILS_ENV
     value: production
   - name: RAILS_LOG_TO_STDOUT
