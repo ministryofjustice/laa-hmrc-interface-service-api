@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe UseCase do
-  subject(:use_case) { described_class.new }
+  subject(:use_case) { described_class.new(:one) }
 
   describe 'initializing' do
     context 'when a valid bearer_token is available' do
