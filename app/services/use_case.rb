@@ -7,6 +7,9 @@ class UseCase
   end
 
   # :nocov:
+  # This is ignored for coverage as it allows a legacy script to run
+  # It should be removed once a new set of sidekiq jobs is created
+  # that will allow a comparison before this is deleted
   def run_sync_test(first_name, last_name, date_of_birth, nino)
     Benchmark.measure { SyncTest.new(first_name, last_name, date_of_birth, nino).call }.real
   end
