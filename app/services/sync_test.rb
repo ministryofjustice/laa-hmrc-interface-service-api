@@ -56,11 +56,13 @@ class SyncTest
   def call_endpoint(href)
     url = "#{@host}#{parse_params(href)}"
     write_to_file("calling #{url}")
-    data = `curl --silent --request GET '#{url}' \
-          --header 'Accept: #{accept_header(href)}' \
-          --header 'correlationId: #{@correlation_id}' \
-          --header 'Authorization: Bearer #{@token}'`
-    data = JSON.parse(data)
+    headers = {
+      'accept': accept_header(href),
+      'correlationId': @correlation_id,
+      'Authorization': "Bearer #{@token}"
+    }
+    response = RestClient.get(url, headers)
+    data = JSON.parse(response)
     data = redact_individual(data) if i_should_redact?(data)
     write_to_file(JSON.pretty_generate(data))
     data
@@ -104,17 +106,19 @@ class SyncTest
     File.open(@filename, 'w') { |file| file.write "Data for #{@first_name} #{@last_name}\n\n"}
 
     puts 'POST individuals/Matching'
-    data = `curl --silent --request POST '#{@host}/individuals/matching' \
-            --header 'Accept: application/vnd.hmrc.2.0+json' \
-            --header 'Content-Type: application/json' \
-            --header 'correlationId: #{@correlation_id}' \
-            --header 'Authorization: Bearer #{@token}' \
-            --data-raw '{
-              "firstName": "#{@first_name}",
-              "lastName": "#{@last_name}",
-              "nino": "#{@nino}",
-              "dateOfBirth": "#{@date_of_birth}"
-            }'`
+    post_payload = {
+                      "firstName": "#{@first_name}",
+                      "lastName": "#{@last_name}",
+                      "nino": "#{@nino}",
+                      "dateOfBirth": "#{@date_of_birth}"
+                    }.to_json
+    post_headers = {
+                      'accept': 'application/vnd.hmrc.2.0+json',
+                      'content_type': 'application/json',
+                      'correlationId': @correlation_id.to_s,
+                      'Authorization': "Bearer #{@token}"
+                    }
+    data = RestClient.post("#{@host}/individuals/matching", post_payload, post_headers)
     matching = JSON.parse(data, object_class: OpenStruct)
 
     puts 'GET matchID'
