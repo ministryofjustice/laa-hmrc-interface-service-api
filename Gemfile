@@ -11,6 +11,8 @@ gem 'puma', '~> 5.3'
 gem 'rails', '~> 6.1.3'
 gem 'redis'
 gem 'redis-namespace'
+gem 'rest-client'
+gem 'rotp'
 
 group :development, :test do
   gem 'byebug'
@@ -26,6 +28,7 @@ group :test do
   gem 'rspec-rails', '~> 5.0'
   gem 'simplecov', require: false
   gem 'simplecov-rcov'
+  gem 'webmock'
 end
 
 group :development do
