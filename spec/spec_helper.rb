@@ -16,6 +16,9 @@
 
 require 'simplecov'
 require 'highline/import'
+require 'webmock'
+require 'webmock/rspec'
+WebMock.disable_net_connect!
 require 'redis'
 require 'mock_redis'
 REDIS = MockRedis.new
