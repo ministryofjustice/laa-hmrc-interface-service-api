@@ -1,0 +1,8 @@
+credentials:
+  host: &host 'https://fake.api'
+  use_case_one:
+    host: *host
+    description: 'This is fake'
+    hmrc_client_secret: 'NotASecret'
+    hmrc_client_id: 'NotAClientID'
+    hmrc_totp_secret: 'AlsoNotASecret'

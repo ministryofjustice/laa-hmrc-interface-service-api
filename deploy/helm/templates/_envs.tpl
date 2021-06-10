@@ -29,6 +29,41 @@ env:
       secretKeyRef:
         name: {{ template "app.fullname" . }}
         key: secretKeyBase
+  - name: SETTINGS__ENVIRONMENT
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "app.fullname" . }}
+        key: settings__environment
+  - name: SETTINGS__CREDENTIALS__USE_CASE_ONE__DESCRIPTION
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "app.fullname" . }}
+        key: settings__credentials__use_case_one__description
+  - name: SETTINGS__CREDENTIALS__USE_CASE_ONE__HOST
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "app.fullname" . }}
+        key: settings__credentials__use_case_one__host
+  - name: SETTINGS__CREDENTIALS__USE_CASE_ONE__HMRC_CLIENT_SECRET
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "app.fullname" . }}
+        key: settings__credentials__use_case_one__hmrc_client_secret
+  - name: SETTINGS__CREDENTIALS__USE_CASE_ONE__HMRC_CLIENT_ID
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "app.fullname" . }}
+        key: settings__credentials__use_case_one__hmrc_client_id
+  - name: SETTINGS__CREDENTIALS__USE_CASE_ONE__HMRC_TOTP_SECRET
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "app.fullname" . }}
+        key: settings__credentials__use_case_one__hmrc_totp_secret
+  - name: REDIS_URL
+    valueFrom:
+      secretKeyRef:
+        name: elasticache
+        key: redis_url
   - name: RAILS_ENV
     value: production
   - name: RAILS_LOG_TO_STDOUT
