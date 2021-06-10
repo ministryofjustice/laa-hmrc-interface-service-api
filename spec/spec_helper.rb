@@ -16,6 +16,9 @@
 
 require 'simplecov'
 require 'highline/import'
+require 'redis'
+require 'mock_redis'
+REDIS = MockRedis.new
 
 SimpleCov.minimum_coverage 100
 unless ENV['NOCOVERAGE']
@@ -31,9 +34,10 @@ unless ENV['NOCOVERAGE']
 end
 
 RSpec.configure do |config|
-  # rspec-expectations config goes here. You can use an alternate
-  # assertion/expectation library such as wrong or the stdlib/minitest
-  # assertions if you prefer.
+  config.before(:each) do
+    REDIS.flushdb
+  end
+
   config.expect_with :rspec do |expectations|
     # This option will default to `true` in RSpec 4. It makes the `description`
     # and `failure_message` of custom matchers include text for helper methods
