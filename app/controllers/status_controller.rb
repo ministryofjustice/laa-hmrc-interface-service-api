@@ -1,7 +1,8 @@
 class StatusController < ApplicationController
-  def status
+  def health_check
     checks = {
-      database: database_alive?
+      database: database_alive?,
+      redis: redis_alive?
     }
 
     status = :bad_gateway unless checks.except(:sidekiq_queue).values.all?
@@ -21,6 +22,12 @@ class StatusController < ApplicationController
   def database_alive?
     ActiveRecord::Base.connection.active?
   rescue PG::ConnectionBad
+    false
+  end
+
+  def redis_alive?
+    REDIS.ping.eql?('PONG')
+  rescue StandardError
     false
   end
 end

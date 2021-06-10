@@ -8,6 +8,8 @@ gem 'config'
 gem 'pg', '~> 1.1'
 gem 'puma', '~> 5.3'
 gem 'rails', '~> 6.1.3'
+gem 'redis'
+gem 'redis-namespace'
 
 group :development, :test do
   gem 'byebug'
@@ -19,6 +21,7 @@ group :development, :test do
 end
 
 group :test do
+  gem 'mock_redis'
   gem 'rspec-rails', '~> 5.0'
   gem 'simplecov', require: false
   gem 'simplecov-rcov'
