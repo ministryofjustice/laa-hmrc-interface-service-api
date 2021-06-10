@@ -2,17 +2,43 @@ require 'rails_helper'
 
 RSpec.describe StatusController, type: :request do
   describe '#healthcheck' do
-    context 'when an infrastructure problem exists' do
+    context 'when an postgres problem exists' do
       before do
         allow(ActiveRecord::Base.connection).to receive(:active?).and_raise(PG::ConnectionBad)
 
-        get '/healthcheck'
+        get '/health_check'
       end
 
       let(:failed_healthcheck) do
         {
           checks: {
-            database: false
+            database: false,
+            redis: true
+          }
+        }.to_json
+      end
+
+      it 'returns status bad gateway' do
+        expect(response).to have_http_status :bad_gateway
+      end
+
+      it 'returns the expected response report' do
+        expect(response.body).to eq(failed_healthcheck)
+      end
+    end
+
+    context 'when an redis problem exists' do
+      before do
+        allow(REDIS).to receive(:ping).and_raise(Redis::CannotConnectError)
+
+        get '/health_check'
+      end
+
+      let(:failed_healthcheck) do
+        {
+          checks: {
+            database: true,
+            redis: false
           }
         }.to_json
       end
@@ -30,24 +56,25 @@ RSpec.describe StatusController, type: :request do
       before do
         allow(ActiveRecord::Base.connection).to receive(:active?).and_return(true)
 
-        get '/healthcheck'
+        get '/health_check'
       end
 
       let(:expected_response) do
         {
           checks: {
-            database: true
+            database: true,
+            redis: true
           }
         }.to_json
       end
 
       it 'returns HTTP success' do
-        get '/healthcheck'
+        get '/health_check'
         expect(response.status).to eq(200)
       end
 
       it 'returns the expected response report' do
-        get '/healthcheck'
+        get '/health_check'
         expect(response.body).to eq(expected_response)
       end
     end
