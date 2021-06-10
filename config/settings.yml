@@ -2,3 +2,12 @@ status:
   build_date: <%= ENV['BUILD_DATE'] || 'Not Available' %>
   build_tag: <%= ENV['BUILD_TAG'] || 'Not Available' %>
   app_branch: <%= ENV['APP_BRANCH'] || 'Not Available' %>
+
+credentials:
+  host: &host 'store actual value as SETTINGS__CREDENTIALS__HOST'
+  use_case_one:
+    host: *host
+    description: 'store actual value as SETTINGS__CREDENTIALS__DESCRIPTION'
+    hmrc_client_secret: 'store actual value as SETTINGS__CREDENTIALS__HMRC_CLIENT_SECRET'
+    hmrc_client_id: 'store actual value as SETTINGS__CREDENTIALS__HMRC_CLIENT_ID'
+    hmrc_totp_secret: 'store actual value as SETTINGS__CREDENTIALS__HMRC_TOTP_SECRET'
