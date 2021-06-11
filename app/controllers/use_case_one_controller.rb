@@ -5,9 +5,8 @@ class UseCaseOneController < ApplicationController
     render status: :ok,
            json: {
              success: true,
-             message: 'Successfully Authenticated, '\
-                      'now we would call a service to begin the authentication and' \
-                      'start the tree walking required by the HMRC interactions'
+             message: 'Successfully Authenticated, now we would call a service to begin the authentication and ' \
+                      "start the tree walking required by the HMRC interactions to request data for: #{@decoded_data.first}"
            }
   rescue RuntimeError
     render json: { errors: ['Not Authenticated'] }, status: :unauthorized
