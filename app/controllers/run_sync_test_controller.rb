@@ -1,18 +1,26 @@
 class RunSyncTestController < ApplicationController
+  class AuthorisationError < RuntimeError; end
+
   def create
-    raise 'Unauthorised' unless validate_params
+    raise AuthorisationError unless validate_params
 
     time_taken = build_and_run_test_case
     render status: :ok,
-           json: {
-             success: true,
-             message: "ran request data for: #{@decoded_data.first['first_name']} #{@decoded_data.first['last_name']} and it took #{time_taken}"
-           }
-  rescue RuntimeError
+           json: build_json_return(time_taken)
+  rescue AuthorisationError
     render json: { errors: ['Not Authenticated'] }, status: :unauthorized
+  rescue RuntimeError => e
+    render json: { errors: e }, status: :bad_request
   end
 
   private
+
+  def build_json_return(time_taken)
+    {
+      success: true,
+      message: "ran request data for: #{@decoded_data.first['first_name']} #{@decoded_data.first['last_name']} and it took #{time_taken}"
+    }
+  end
 
   def build_and_run_test_case
     use_case = UseCase.new(:one)

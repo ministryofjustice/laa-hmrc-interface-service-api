@@ -96,15 +96,29 @@ describe RunSyncTestController, type: :request do
       end
     end
 
-    context 'when parameters are all valid' do
-      before do
-        allow_any_instance_of(BearerToken).to receive(:call).and_return('new_fake_token_value')
-        allow_any_instance_of(SyncTest).to receive(:call).and_return('done')
-        post_uc1
+    context 'when authorisation passes' do
+      context 'and external calls pass' do
+        before do
+          allow_any_instance_of(BearerToken).to receive(:call).and_return('new_fake_token_value')
+          allow_any_instance_of(SyncTest).to receive(:call).and_return('done')
+          post_uc1
+        end
+
+        it 'returns success' do
+          expect(response).to have_http_status(:success)
+        end
       end
 
-      it 'returns success' do
-        expect(response).to have_http_status(:success)
+      context 'when an external call fails' do
+        before do
+          allow_any_instance_of(BearerToken).to receive(:call).and_return('new_fake_token_value')
+          allow_any_instance_of(SyncTest).to receive(:call).and_raise(RuntimeError)
+          post_uc1
+        end
+
+        it 'returns bad_request' do
+          expect(response).to have_http_status(:bad_request)
+        end
       end
     end
   end
