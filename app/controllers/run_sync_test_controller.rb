@@ -2,13 +2,7 @@ class RunSyncTestController < ApplicationController
   def create
     raise 'Unauthorised' unless validate_params
 
-    use_case = UseCase.new(:one)
-    time_taken = use_case.run_sync_test(
-      @decoded_data.first['first_name'],
-      @decoded_data.first['last_name'],
-      @decoded_data.first['dob'],
-      @decoded_data.first['nino']
-    )
+    time_taken = build_and_run_test_case
     render status: :ok,
            json: {
              success: true,
@@ -19,6 +13,16 @@ class RunSyncTestController < ApplicationController
   end
 
   private
+
+  def build_and_run_test_case
+    use_case = UseCase.new(:one)
+    use_case.run_sync_test(
+      @decoded_data.first['first_name'],
+      @decoded_data.first['last_name'],
+      @decoded_data.first['dob'],
+      @decoded_data.first['nino']
+    )
+  end
 
   def validate_params
     validate_access_key && validate_data

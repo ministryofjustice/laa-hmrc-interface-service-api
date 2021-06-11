@@ -18,9 +18,10 @@ describe RunSyncTestController, type: :request do
         to: '2020-04-01'
       }
     end
-    before { post_uc1 }
 
     describe 'unauthorized checks' do
+      before { post_uc1 }
+
       context 'when no params are sent' do
         let(:params) { nil }
 
@@ -95,8 +96,16 @@ describe RunSyncTestController, type: :request do
       end
     end
 
-    it 'returns success' do
-      expect(response).to have_http_status(:success)
+    context 'when parameters are all valid' do
+      before do
+        allow_any_instance_of(BearerToken).to receive(:call).and_return('new_fake_token_value')
+        allow_any_instance_of(SyncTest).to receive(:call).and_return('done')
+        post_uc1
+      end
+
+      it 'returns success' do
+        expect(response).to have_http_status(:success)
+      end
     end
   end
 
