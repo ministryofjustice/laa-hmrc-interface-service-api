@@ -1,3 +1,4 @@
+# :nocov:
 class SyncTest
   attr_accessor :first_name, :last_name, :date_of_birth, :nino
 
@@ -136,3 +137,4 @@ class SyncTest
     puts 'done'
   end
 end
+# :nocov:
