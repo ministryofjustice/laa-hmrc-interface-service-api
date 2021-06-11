@@ -10,12 +10,16 @@ AllCops:
   SuggestExtensions: false
   Exclude:
     - 'db/schema.rb'
+    - 'db/seeds/**/*'
     - 'log/**/*'
     - 'tmp/**/*'
     - 'vendor/**/*'
     - 'node_modules/**/*'
     - 'bin/bundle'
     - 'app/services/sync_test.rb' # This is for legacy comparison and should be deleted ASAP
+
+Layout/LineLength:
+  Max: 180
 
 Style/FrozenStringLiteralComment:
   Enabled: false
