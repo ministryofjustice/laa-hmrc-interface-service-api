@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   get 'status', to: 'status#ping', format: :json
 
   resources :use_case_one, only: %i[create], format: :json
+  resources :run_sync_test, only: %i[create], format: :json
 end
 
 def secure_compare(passed, stored)
