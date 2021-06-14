@@ -14,6 +14,9 @@ gem 'redis-namespace'
 
 group :development, :test do
   gem 'byebug'
+  gem 'guard-livereload'
+  gem 'guard-rspec'
+  gem 'guard-rubocop'
   gem 'highline'
   gem 'pry-byebug'
   gem 'rubocop', require: false
