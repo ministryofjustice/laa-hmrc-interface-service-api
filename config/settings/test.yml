@@ -6,3 +6,7 @@ credentials:
     hmrc_client_secret: 'NotASecret'
     hmrc_client_id: 'NotAClientID'
     hmrc_totp_secret: 'AlsoNotASecret'
+
+sidekiq:
+  username: 'fake_username'
+  web_ui_password: 'fake_testing_password'

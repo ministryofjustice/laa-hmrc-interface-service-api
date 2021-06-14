@@ -29,6 +29,16 @@ env:
       secretKeyRef:
         name: {{ template "app.fullname" . }}
         key: secretKeyBase
+  - name: SETTINGS__SIDEKIQ__USERNAME
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "app.fullname" . }}
+        key: settings__sidekiq__username
+  - name: SETTINGS__SIDEKIQ__WEB_UI_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "app.fullname" . }}
+        key: settings__sidekiq__web_ui_password
   - name: SETTINGS__ENVIRONMENT
     valueFrom:
       secretKeyRef:
