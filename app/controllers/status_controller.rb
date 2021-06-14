@@ -2,7 +2,9 @@ class StatusController < ApplicationController
   def health_check
     checks = {
       database: database_alive?,
-      redis: redis_alive?
+      redis: redis_alive?,
+      sidekiq: sidekiq_alive?,
+      sidekiq_queue: sidekiq_queue_healthy?
     }
 
     status = :bad_gateway unless checks.except(:sidekiq_queue).values.all?
@@ -27,6 +29,21 @@ class StatusController < ApplicationController
 
   def redis_alive?
     REDIS.ping.eql?('PONG')
+  rescue StandardError
+    false
+  end
+
+  def sidekiq_alive?
+    ps = Sidekiq::ProcessSet.new
+    !ps.size.zero?
+  rescue StandardError
+    false
+  end
+
+  def sidekiq_queue_healthy?
+    dead = Sidekiq::DeadSet.new
+    retries = Sidekiq::RetrySet.new
+    dead.size.zero? && retries.size.zero?
   rescue StandardError
     false
   end

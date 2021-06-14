@@ -2,6 +2,12 @@ require 'rails_helper'
 
 RSpec.describe StatusController, type: :request do
   describe '#healthcheck' do
+    before do
+      allow(Sidekiq::ProcessSet).to receive(:new).and_return(instance_double(Sidekiq::ProcessSet, size: 1))
+      allow(Sidekiq::RetrySet).to receive(:new).and_return(instance_double(Sidekiq::RetrySet, size: 0))
+      allow(Sidekiq::DeadSet).to receive(:new).and_return(instance_double(Sidekiq::DeadSet, size: 0))
+    end
+
     context 'when an postgres problem exists' do
       before do
         allow(ActiveRecord::Base.connection).to receive(:active?).and_raise(PG::ConnectionBad)
@@ -13,7 +19,9 @@ RSpec.describe StatusController, type: :request do
         {
           checks: {
             database: false,
-            redis: true
+            redis: true,
+            sidekiq: true,
+            sidekiq_queue: true
           }
         }.to_json
       end
@@ -27,7 +35,7 @@ RSpec.describe StatusController, type: :request do
       end
     end
 
-    context 'when an redis problem exists' do
+    context 'when a redis problem exists' do
       before do
         allow(REDIS).to receive(:ping).and_raise(Redis::CannotConnectError)
 
@@ -38,7 +46,9 @@ RSpec.describe StatusController, type: :request do
         {
           checks: {
             database: true,
-            redis: false
+            redis: false,
+            sidekiq: true,
+            sidekiq_queue: true
           }
         }.to_json
       end
@@ -49,6 +59,136 @@ RSpec.describe StatusController, type: :request do
 
       it 'returns the expected response report' do
         expect(response.body).to eq(failed_healthcheck)
+      end
+    end
+
+    context 'when a sidekiq problem exists' do
+      before do
+        allow(REDIS).to receive(:ping).and_raise(Redis::CannotConnectError)
+        allow(Sidekiq::ProcessSet).to receive(:new).and_return(instance_double(Sidekiq::ProcessSet, size: 0))
+
+        connection = double('connection')
+        allow(connection).to receive(:info).and_raise(Redis::CannotConnectError)
+        allow(Sidekiq).to receive(:redis).and_yield(connection)
+
+        get '/health_check'
+      end
+
+      let(:failed_healthcheck) do
+        {
+          checks: {
+            database: true,
+            redis: false,
+            sidekiq: false,
+            sidekiq_queue: true
+          }
+        }.to_json
+      end
+
+      it 'returns status bad gateway' do
+        expect(response).to have_http_status :bad_gateway
+      end
+
+      it 'returns the expected response report' do
+        expect(response.body).to eq(failed_healthcheck)
+      end
+    end
+
+    context 'when failed Sidekiq jobs exist' do
+      let(:failed_job_health_check) do
+        {
+          checks: {
+            database: true,
+            redis: true,
+            sidekiq: true,
+            sidekiq_queue: false
+          }
+        }.to_json
+      end
+
+      context 'dead set exists' do
+        before do
+          allow(Sidekiq::DeadSet).to receive(:new).and_return(instance_double(Sidekiq::DeadSet, size: 1))
+          get '/health_check'
+        end
+
+        it 'returns ok http status' do
+          expect(response).to have_http_status :ok
+        end
+
+        it 'returns the expected response report' do
+          expect(response.body).to eq(failed_job_health_check)
+        end
+      end
+
+      context 'retry set exists' do
+        before do
+          allow(Sidekiq::RetrySet).to receive(:new).and_return(instance_double(Sidekiq::RetrySet, size: 1))
+          get '/health_check'
+        end
+
+        it 'returns ok http status' do
+          expect(response).to have_http_status :ok
+        end
+
+        it 'returns the expected response report' do
+          expect(response.body).to eq(failed_job_health_check)
+        end
+      end
+    end
+
+    context 'when Sidekiq::ProcessSet encounters an error' do
+      before do
+        allow(Sidekiq::ProcessSet).to receive(:new).and_raise(StandardError)
+
+        get '/health_check'
+      end
+
+      let(:failed_health_check) do
+        {
+          checks: {
+            database: true,
+            redis: true,
+            sidekiq: false,
+            sidekiq_queue: true
+          }
+        }.to_json
+      end
+
+      it 'returns status bad gateway' do
+        expect(response).to have_http_status :bad_gateway
+      end
+
+      it 'returns the expected response report' do
+        expect(response.body).to eq(failed_health_check)
+      end
+    end
+
+    context 'when sidekiq_queue_healthy encounters an error' do
+      before do
+        allow(Sidekiq::DeadSet).to receive(:new).and_raise(StandardError)
+
+        get '/health_check'
+      end
+
+      let(:failed_health_check) do
+        {
+          checks: {
+            database: true,
+            redis: true,
+            sidekiq: true,
+            sidekiq_queue: false
+          }
+        }.to_json
+      end
+
+      it 'returns ok http status' do
+        # queue health should not impact the status
+        expect(response).to have_http_status :ok
+      end
+
+      it 'returns the expected response report' do
+        expect(response.body).to eq(failed_health_check)
       end
     end
 
@@ -63,7 +203,9 @@ RSpec.describe StatusController, type: :request do
         {
           checks: {
             database: true,
-            redis: true
+            redis: true,
+            sidekiq: true,
+            sidekiq_queue: true
           }
         }.to_json
       end
