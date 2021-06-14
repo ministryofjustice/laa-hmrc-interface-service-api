@@ -25,7 +25,7 @@ describe UseCaseOneController, type: :request do
         let(:params) { nil }
 
         it 'returns unauthorized' do
-          expect(response).to have_http_status(:unauthorized)
+          expect(response).to have_http_status(:forbidden)
         end
       end
 
@@ -39,47 +39,6 @@ describe UseCaseOneController, type: :request do
 
       context 'when nil access_key is sent' do
         let(:access_key) { nil }
-
-        it 'returns unauthorized' do
-          expect(response).to have_http_status(:unauthorized)
-        end
-      end
-
-      context 'when no data is sent' do
-        let(:jwt) { '' }
-
-        it 'returns unauthorized' do
-          expect(response).to have_http_status(:unauthorized)
-        end
-      end
-
-      context 'when nil data is sent' do
-        let(:jwt) { nil }
-
-        it 'returns unauthorized' do
-          expect(response).to have_http_status(:unauthorized)
-        end
-      end
-
-      context 'when data encoded with the wrong key is sent' do
-        let(:jwt) { create_jwt_with(request_hash, 'incorrect_secret_key') }
-
-        it 'returns unauthorized' do
-          expect(response).to have_http_status(:unauthorized)
-        end
-      end
-
-      context 'when data encoded with the wrong keys is sent' do
-        let(:request_hash) do
-          {
-            first_name: 'fname',
-            malicious_name: 'lname',
-            dob: '1990-01-01',
-            nino: 'QQ123456C',
-            from: '2020-01-01',
-            to: '2020-04-01'
-          }
-        end
 
         it 'returns unauthorized' do
           expect(response).to have_http_status(:unauthorized)

@@ -2,11 +2,13 @@ class UseCaseOneController < ApplicationController
   def create
     raise 'Unauthorised' unless validate_params
 
+    task = application_user.tasks.create(data: data_param, use_case: :one)
+    return render status: :forbidden unless task.parse_payload
+
     render status: :ok,
            json: {
              success: true,
-             message: 'Successfully Authenticated, now we would call a service to begin the authentication and ' \
-                      "start the tree walking required by the HMRC interactions to request data for: #{@decoded_data.first}"
+             message: task.outcome
            }
   rescue RuntimeError
     render json: { errors: ['Not Authenticated'] }, status: :unauthorized
@@ -15,31 +17,7 @@ class UseCaseOneController < ApplicationController
   private
 
   def validate_params
-    validate_access_key && validate_data
-  end
-
-  def validate_data
-    data_param_present? &&
-      data_param_encoded_by_application_user? &&
-      decoded_data_matches_schema?
-  end
-
-  def data_param_present?
-    data_param.present?
-  end
-
-  def data_param_encoded_by_application_user?
-    decoded_data.present?
-  end
-
-  def decoded_data_matches_schema?
-    decoded_data.first.keys.sort.eql?(%w[dob first_name from last_name nino to])
-  end
-
-  def decoded_data
-    @decoded_data ||= JWT.decode(data_param, application_user.secret_key, true, { algorithm: 'HS512' })
-  rescue JWT::VerificationError
-    false
+    validate_access_key
   end
 
   def validate_access_key
