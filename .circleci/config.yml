@@ -25,6 +25,7 @@ executors:
           - PGHOST=localhost
           - PGUSER=user
           - TZ: "Europe/London"
+      - image: circleci/redis:5.0
       - image: postgres:10.5
         environment:
           - POSTGRES_USER=user
