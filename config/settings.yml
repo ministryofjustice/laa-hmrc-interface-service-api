@@ -11,3 +11,7 @@ credentials:
     hmrc_client_secret: 'store actual value as SETTINGS__CREDENTIALS__HMRC_CLIENT_SECRET'
     hmrc_client_id: 'store actual value as SETTINGS__CREDENTIALS__HMRC_CLIENT_ID'
     hmrc_totp_secret: 'store actual value as SETTINGS__CREDENTIALS__HMRC_TOTP_SECRET'
+
+sidekiq:
+  username: 'store actual value as SETTINGS__SIDEKIQ__USERNAME'
+  web_ui_password: 'store actual value as SETTINGS__SIDEKIQ__WEB_UI_PASSWORD'

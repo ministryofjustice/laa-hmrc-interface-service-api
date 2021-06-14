@@ -19,6 +19,7 @@ require 'highline/import'
 require 'redis'
 require 'mock_redis'
 REDIS = MockRedis.new
+require 'sidekiq/testing'
 
 SimpleCov.minimum_coverage 100
 unless ENV['NOCOVERAGE']
