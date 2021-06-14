@@ -11,6 +11,7 @@ gem 'puma', '~> 5.3'
 gem 'rails', '~> 6.1.3'
 gem 'redis'
 gem 'redis-namespace'
+gem 'sidekiq'
 
 group :development, :test do
   gem 'byebug'
