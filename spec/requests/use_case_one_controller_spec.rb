@@ -7,7 +7,7 @@ describe UseCaseOneController, type: :request do
     let(:params) { { data: jwt } }
     let(:application_user) { create :application_user }
     let(:access_key) { application_user.access_key }
-    let(:jwt) { create_jwt_with(request_hash, application_user.secret_key) }
+    let(:jwt) { create_jwt_with(request_hash.to_json, application_user.secret_key) }
     let(:request_hash) do
       {
         first_name: 'fname',
