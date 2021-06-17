@@ -24,4 +24,24 @@ RSpec.describe UseCase do
       end
     end
   end
+
+  describe '.call' do
+    subject(:call) { described_class.call(:one) }
+    before do
+      REDIS.set('use_case_one_bearer_token', 'fake_token_value')
+      subject
+    end
+
+    it { is_expected.to be_a UseCase }
+  end
+
+  describe '.host' do
+    subject(:host) { use_case.host }
+    before do
+      REDIS.set('use_case_one_bearer_token', 'fake_token_value')
+      subject
+    end
+
+    it { is_expected.to eql Settings.credentials.use_case_one.host }
+  end
 end
