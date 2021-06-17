@@ -21,5 +21,9 @@ RSpec.describe PostIndividualMatchingWorker do
       perform
       expect(a_request(:post, "#{Settings.credentials.host}/individuals/matching")).to have_been_made.times(1)
     end
+
+    it 'updates the task.calls_completed' do
+      expect { perform }.to change { task.reload.calls_completed }.by(1)
+    end
   end
 end

@@ -7,6 +7,7 @@ class PostIndividualMatchingWorker
     matching = JSON.parse(response, object_class: OpenStruct)
     Rails.logger.info matching
     # EndpointWorker(task.id, matching._links.individual.href)
+    @task.update(calls_completed: 1)
   end
 
   private
