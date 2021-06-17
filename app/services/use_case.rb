@@ -1,13 +1,11 @@
 class UseCase
   FOUR_HOURS = 14_400 # fours hours in seconds
 
+  attr_reader :bearer_token
+
   def initialize(use_case)
     @use_case = "use_case_#{use_case}"
-    @bearer_token = bearer_token
-  end
-
-  def self.call(use_case)
-    new(use_case)
+    @bearer_token = check_bearer_token
   end
 
   def host
@@ -25,7 +23,7 @@ class UseCase
 
   private
 
-  def bearer_token
+  def check_bearer_token
     generate_new_token if current_token.nil?
     current_token
   end
