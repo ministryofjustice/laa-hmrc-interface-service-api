@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Task, :model do
   subject(:task) { described_class.new(application_user: application_user, data: jwt, use_case: :one) }
   let(:application_user) { create :application_user }
-  let(:jwt) { create_jwt_with(request_hash, application_user.secret_key) }
+  let(:jwt) { create_jwt_with(request_hash.to_json, application_user.secret_key) }
   let(:request_hash) do
     {
       first_name: 'fname',
@@ -12,6 +12,16 @@ RSpec.describe Task, :model do
       nino: 'QQ123456C',
       from: '2020-01-01',
       to: '2020-04-01'
+    }
+  end
+  let(:expected_data) do
+    {
+      'first_name' => 'fname',
+      'last_name' => 'lname',
+      'dob' => '1990-01-01',
+      'nino' => 'QQ123456C',
+      'from' => '2020-01-01',
+      'to' => '2020-04-01'
     }
   end
 
@@ -26,6 +36,7 @@ RSpec.describe Task, :model do
     subject(:parse_payload) { task.parse_payload }
 
     context 'when all values are good' do
+      it { expect { parse_payload }.to change { task.data }.to(expected_data) }
       it { is_expected.to be true }
     end
 

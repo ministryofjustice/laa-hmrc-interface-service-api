@@ -13,6 +13,7 @@ class Task < ApplicationRecord
     mark_as_errored('json_schema_mismatch') unless decoded_data_matches_schema?
     return false unless outcome.nil?
 
+    update(data: @decoded_data)
     outcome.nil?
   end
 
@@ -40,11 +41,11 @@ class Task < ApplicationRecord
   end
 
   def decoded_data_matches_schema?
-    decoded_data.first.keys.sort.eql?(%w[dob first_name from last_name nino to])
+    decoded_data.keys.sort.eql?(%w[dob first_name from last_name nino to])
   end
 
   def decoded_data
-    @decoded_data ||= JWT.decode(data, application_user.secret_key, true, { algorithm: 'HS512' })
+    @decoded_data ||= JSON.parse(JWT.decode(data, application_user.secret_key, true, { algorithm: 'HS512' }).first)
   rescue JWT::VerificationError
     false
   end
