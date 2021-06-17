@@ -18,7 +18,8 @@ class Task < ApplicationRecord
   end
 
   def call
-    # needs to start calling the jobs
+    PostIndividualMatchingWorker.perform_async(id)
+    update(calls_started: 1)
     in_progress!
     update(outcome: 'Successfully Authenticated, now we would call a service to begin the authentication and ' \
                     'start the tree walking required by the HMRC interactions to request data') # placeholder for uc1controller test

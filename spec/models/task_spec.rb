@@ -89,6 +89,9 @@ RSpec.describe Task, :model do
     subject(:call) { task.call }
 
     it { expect { call }.to change { task.in_progress? }.from(false).to(true) }
+    it 'creates a new PostIndividualMatchingWorker' do
+      expect { call }.to change(PostIndividualMatchingWorker.jobs, :size).by(1)
+    end
   end
 
   def create_jwt_with(payload, secret)
