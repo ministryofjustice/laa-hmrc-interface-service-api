@@ -3,6 +3,8 @@ FactoryBot.define do
     application_user
     data { payload }
     use_case { :one }
+    calls_started { 0 }
+    calls_completed { 0 }
 
     trait :with_jwt do
       data { create_jwt_with(payload, application_user.secret_key) }
