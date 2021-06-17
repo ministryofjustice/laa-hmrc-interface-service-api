@@ -40,6 +40,11 @@ unless ENV['NOCOVERAGE']
 end
 
 RSpec.configure do |config|
+  # set up default stub for the host, this can be overwritten in individual stubs if needed
+  config.before do
+    stub_request(:post, %r{\A#{Settings.credentials.host}/.*\z}).to_return(status: 200, body: '')
+  end
+
   config.before(:each) do
     REDIS.flushdb
   end
