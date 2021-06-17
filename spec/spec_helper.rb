@@ -24,6 +24,8 @@ require 'mock_redis'
 REDIS = MockRedis.new
 require 'sidekiq/testing'
 
+NINO_REGEXP = /^[A-CEGHJ-PR-TW-Z]{1}[A-CEGHJ-NPR-TW-Z]{1}[0-9]{6}[A-DFM]{1}$/
+
 SimpleCov.minimum_coverage 100
 unless ENV['NOCOVERAGE']
   SimpleCov.start do
