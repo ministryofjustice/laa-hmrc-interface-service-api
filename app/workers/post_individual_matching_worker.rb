@@ -1,9 +1,9 @@
-class PostIndividualMatchingWorker
+class PostIndividualMatchingWorker < TaskWorker
   include Sidekiq::Worker
 
   def perform(task_id)
     @task = Task.find(task_id)
-    response = RestClient.post(post_url, post_payload, post_headers)
+    response = RestClient.post(url, post_payload, post_headers)
     matching = JSON.parse(response, object_class: OpenStruct)
     Rails.logger.info matching
     # EndpointWorker(task.id, matching._links.individual.href)
@@ -11,10 +11,6 @@ class PostIndividualMatchingWorker
   end
 
   private
-
-  def post_url
-    "#{use_case.host}/individuals/matching"
-  end
 
   def post_payload
     {
@@ -32,13 +28,5 @@ class PostIndividualMatchingWorker
       correlationId: @task.id.to_s,
       Authorization: "Bearer #{use_case.bearer_token}"
     }
-  end
-
-  def data
-    @data ||= @task.data.symbolize_keys
-  end
-
-  def use_case
-    @use_case ||= UseCase.new(@task.use_case)
   end
 end
