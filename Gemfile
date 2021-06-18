@@ -22,6 +22,7 @@ group :development, :test do
   gem 'guard-rubocop'
   gem 'highline'
   gem 'pry-byebug'
+  gem 'rspec_junit_formatter'
   gem 'rubocop', require: false
   gem 'rubocop-performance'
   gem 'rubocop-rails', require: false
