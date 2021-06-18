@@ -10,3 +10,6 @@ credentials:
 sidekiq:
   username: 'fake_username'
   web_ui_password: 'fake_testing_password'
+
+sentry:
+  environment: 'test'

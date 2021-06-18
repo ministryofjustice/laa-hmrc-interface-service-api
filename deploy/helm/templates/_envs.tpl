@@ -29,6 +29,16 @@ env:
       secretKeyRef:
         name: {{ template "app.fullname" . }}
         key: secretKeyBase
+  - name: SETTINGS__SENTRY__DSN
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "app.fullname" . }}
+        key: settings__sentry__dsn
+  - name: SETTINGS__SENTRY__ENVIRONMENT
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "app.fullname" . }}
+        key: settings__sentry__environment
   - name: SETTINGS__SIDEKIQ__USERNAME
     valueFrom:
       secretKeyRef:
