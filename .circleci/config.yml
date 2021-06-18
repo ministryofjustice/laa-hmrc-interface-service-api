@@ -82,8 +82,8 @@ references:
     run:
       name: Install ruby gems
       command: |
-        gem install bundler -v 2.0.2
-        bundle install --without development --path=vendor/bundle --jobs=4 && bundle clean
+        gem install bundler -v 2.2.15
+        bundle install --path=vendor/bundle --jobs=4 && bundle clean
   save_gems_cache: &save_gems_cache
     save_cache:
       key: laa-hmrc-interface-{{ checksum "Gemfile.lock" }}
@@ -144,7 +144,12 @@ jobs:
       - *setup_database
       - run:
           name: Run ruby tests
-          command: bin/rails spec
+          command: bundle exec rspec --format progress --format RspecJunitFormatter -o /tmp/test-results/rspec/rspec.xml
+      - store_test_results:
+          path: /tmp/test-results/rspec
+      - store_artifacts:
+          path: ./coverage
+
   build_and_push:
     executor: cloud-platform-executor
     steps:
