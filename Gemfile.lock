@@ -118,6 +118,15 @@ GEM
       http_parser.rb (~> 0.6.0)
     erubi (1.10.0)
     eventmachine (1.2.7)
+    faraday (1.4.1)
+      faraday-excon (~> 1.1)
+      faraday-net_http (~> 1.0)
+      faraday-net_http_persistent (~> 1.1)
+      multipart-post (>= 1.2, < 3)
+      ruby2_keywords (>= 0.0.4)
+    faraday-excon (1.1.0)
+    faraday-net_http (1.0.1)
+    faraday-net_http_persistent (1.1.0)
     ffi (1.15.0)
     formatador (0.2.5)
     globalid (0.4.2)
@@ -165,6 +174,7 @@ GEM
       ruby2_keywords
     msgpack (1.4.2)
     multi_json (1.15.0)
+    multipart-post (2.1.1)
     nenv (0.3.0)
     nio4r (2.5.7)
     nokogiri (1.11.4-x86_64-darwin)
@@ -267,6 +277,16 @@ GEM
       rubocop (>= 1.7.0, < 2.0)
     ruby-progressbar (1.11.0)
     ruby2_keywords (0.0.4)
+    sentry-rails (4.4.0)
+      railties (>= 5.0)
+      sentry-ruby-core (~> 4.4.0.pre.beta)
+    sentry-ruby (4.4.2)
+      concurrent-ruby (~> 1.0, >= 1.0.2)
+      faraday (>= 1.0)
+      sentry-ruby-core (= 4.4.2)
+    sentry-ruby-core (4.4.2)
+      concurrent-ruby
+      faraday
     shellany (0.0.1)
     sidekiq (6.2.1)
       connection_pool (>= 2.2.2)
@@ -325,6 +345,8 @@ DEPENDENCIES
   rubocop
   rubocop-performance
   rubocop-rails
+  sentry-rails
+  sentry-ruby
   sidekiq
   simplecov
   simplecov-rcov
