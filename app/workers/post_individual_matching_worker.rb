@@ -3,6 +3,7 @@ class PostIndividualMatchingWorker < TaskWorker
 
   def perform(task_id)
     @task = Task.find(task_id)
+    @task.update(calls_started: 1)
     response = RestClient.post(url, post_payload, post_headers)
     matching = JSON.parse(response, object_class: OpenStruct)
     Rails.logger.info matching
