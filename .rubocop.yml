@@ -26,3 +26,9 @@ Metrics/BlockLength:
   Exclude:
     - 'config/routes.rb'
     - 'spec/**/*'
+
+Naming/InclusiveLanguage:
+  FlaggedTerms:
+    master:
+      AllowedRegex:
+        - !ruby/regexp "/master.key/i"
