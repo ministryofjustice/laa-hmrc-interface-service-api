@@ -23,18 +23,11 @@ module Endpoint
     private
 
     def tax_years_from
-      tax_years_for(Date.parse(@options[:from_date]))
+      TaxYearsFor.call(Date.parse(@options[:from_date]))
     end
 
     def tax_years_to
-      tax_years_for(Date.parse(@options[:to_date]))
-    end
-
-    def tax_years_for(date)
-      year = date.year # set the current year by default
-      year -= 1 if date.month < 4 # reduce by a year if the month is pre-april
-      financial_year_start = Date.new(year, 4, 1)
-      "#{financial_year_start.year}-#{(financial_year_start + 1.year).strftime('%y')}"
+      TaxYearsFor.call(Date.parse(@options[:to_date]))
     end
   end
 end
