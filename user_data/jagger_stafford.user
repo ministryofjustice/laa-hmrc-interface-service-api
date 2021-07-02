@@ -1,0 +1,337 @@
+Data for jagger stafford
+
+calling https://test-api.service.hmrc.gov.uk/individuals/matching/d668b22f-d6b2-4072-8c48-61d11799f538
+{
+  "individual": "redacted",
+  "_links": {
+    "benefits-and-credits": {
+      "name": "GET",
+      "href": "/individuals/benefits-and-credits/?matchId=d668b22f-d6b2-4072-8c48-61d11799f538",
+      "title": "Get the individual's benefits and credits data"
+    },
+    "income": {
+      "name": "GET",
+      "href": "/individuals/income/?matchId=d668b22f-d6b2-4072-8c48-61d11799f538",
+      "title": "Get the individual's income data"
+    },
+    "self": {
+      "href": "/individuals/matching/d668b22f-d6b2-4072-8c48-61d11799f538"
+    },
+    "employments": {
+      "name": "GET",
+      "href": "/individuals/employments/?matchId=d668b22f-d6b2-4072-8c48-61d11799f538",
+      "title": "Get the individual's employment data"
+    }
+  }
+}
+calling https://test-api.service.hmrc.gov.uk/individuals/benefits-and-credits/?matchId=d668b22f-d6b2-4072-8c48-61d11799f538
+{
+  "_links": {
+    "working-tax-credit": {
+      "href": "/individuals/benefits-and-credits/working-tax-credit?matchId=d668b22f-d6b2-4072-8c48-61d11799f538{&fromDate,toDate}",
+      "title": "Get Working Tax Credit details"
+    },
+    "child-tax-credit": {
+      "href": "/individuals/benefits-and-credits/child-tax-credit?matchId=d668b22f-d6b2-4072-8c48-61d11799f538{&fromDate,toDate}",
+      "title": "Get Child Tax Credit details"
+    },
+    "self": {
+      "href": "/individuals/benefits-and-credits/?matchId=d668b22f-d6b2-4072-8c48-61d11799f538"
+    }
+  }
+}
+calling https://test-api.service.hmrc.gov.uk/individuals/benefits-and-credits/working-tax-credit?matchId=d668b22f-d6b2-4072-8c48-61d11799f538&fromDate=2020-12-01&toDate=2021-02-25
+{
+  "_links": {
+    "self": {
+      "href": "/individuals/benefits-and-credits/working-tax-credits?matchId=d668b22f-d6b2-4072-8c48-61d11799f538&fromDate=2020-12-01&toDate=2021-02-25"
+    }
+  },
+  "applications": [
+
+  ]
+}
+calling https://test-api.service.hmrc.gov.uk/individuals/benefits-and-credits/child-tax-credit?matchId=d668b22f-d6b2-4072-8c48-61d11799f538&fromDate=2020-12-01&toDate=2021-02-25
+{
+  "_links": {
+    "self": {
+      "href": "/individuals/benefits-and-credits/child-tax-credits?matchId=d668b22f-d6b2-4072-8c48-61d11799f538&fromDate=2020-12-01&toDate=2021-02-25"
+    }
+  },
+  "applications": [
+
+  ]
+}
+calling https://test-api.service.hmrc.gov.uk/individuals/income/?matchId=d668b22f-d6b2-4072-8c48-61d11799f538
+{
+  "_links": {
+    "paye": {
+      "href": "/individuals/income/paye?matchId=d668b22f-d6b2-4072-8c48-61d11799f538{&fromDate,toDate}",
+      "title": "Get an individual's PAYE income data per employment"
+    },
+    "sa": {
+      "href": "/individuals/income/sa?matchId=d668b22f-d6b2-4072-8c48-61d11799f538{&fromTaxYear,toTaxYear}",
+      "title": "Get an individual's Self Assessment income data"
+    },
+    "self": {
+      "href": "/individuals/income/?matchId=d668b22f-d6b2-4072-8c48-61d11799f538"
+    }
+  }
+}
+calling https://test-api.service.hmrc.gov.uk/individuals/income/paye?matchId=d668b22f-d6b2-4072-8c48-61d11799f538&fromDate=2020-12-01&toDate=2021-02-25
+{
+  "_links": {
+    "self": {
+      "href": "/individuals/income/paye?matchId=d668b22f-d6b2-4072-8c48-61d11799f538&fromDate=2020-12-01&toDate=2021-02-25"
+    }
+  },
+  "paye": {
+    "income": [
+
+    ]
+  }
+}
+calling https://test-api.service.hmrc.gov.uk/individuals/income/sa?matchId=d668b22f-d6b2-4072-8c48-61d11799f538&fromTaxYear=2019-20&toTaxYear=2020-21&useCase=LAA-C1
+{
+  "_links": {
+    "pensionsAndStateBenefits": {
+      "href": "/individuals/income/sa/pensions-and-state-benefits?matchId=d668b22f-d6b2-4072-8c48-61d11799f538{&fromTaxYear,toTaxYear}",
+      "title": "Get an individual's SA pensions and state benefits data"
+    },
+    "source": {
+      "href": "/individuals/income/sa/source?matchId=d668b22f-d6b2-4072-8c48-61d11799f538{&fromTaxYear,toTaxYear}",
+      "title": "Get an individual's SA source data"
+    },
+    "employments": {
+      "href": "/individuals/income/sa/employments?matchId=d668b22f-d6b2-4072-8c48-61d11799f538{&fromTaxYear,toTaxYear}",
+      "title": "Get an individual's SA employments data"
+    },
+    "additionalInformation": {
+      "href": "/individuals/income/sa/additional-information?matchId=d668b22f-d6b2-4072-8c48-61d11799f538{&fromTaxYear,toTaxYear}",
+      "title": "Get an individual's SA additional information data"
+    },
+    "self": {
+      "href": "/individuals/income/sa?matchId=d668b22f-d6b2-4072-8c48-61d11799f538&fromTaxYear=2019-20&toTaxYear=2020-21"
+    },
+    "partnerships": {
+      "href": "/individuals/income/sa/partnerships?matchId=d668b22f-d6b2-4072-8c48-61d11799f538{&fromTaxYear,toTaxYear}",
+      "title": "Get an individual's SA partnerships data"
+    },
+    "ukProperties": {
+      "href": "/individuals/income/sa/uk-properties?matchId=d668b22f-d6b2-4072-8c48-61d11799f538{&fromTaxYear,toTaxYear}",
+      "title": "Get an individual's SA UK properties data"
+    },
+    "foreign": {
+      "href": "/individuals/income/sa/foreign?matchId=d668b22f-d6b2-4072-8c48-61d11799f538{&fromTaxYear,toTaxYear}",
+      "title": "Get an individual's SA foreign income data"
+    },
+    "furtherDetails": {
+      "href": "/individuals/income/sa/further-details?matchId=d668b22f-d6b2-4072-8c48-61d11799f538{&fromTaxYear,toTaxYear}",
+      "title": "Get an individual's SA further details data"
+    },
+    "interestsAndDividends": {
+      "href": "/individuals/income/sa/interests-and-dividends?matchId=d668b22f-d6b2-4072-8c48-61d11799f538{&fromTaxYear,toTaxYear}",
+      "title": "Get an individual's SA interest and dividends data"
+    },
+    "other": {
+      "href": "/individuals/income/sa/other?matchId=d668b22f-d6b2-4072-8c48-61d11799f538{&fromTaxYear,toTaxYear}",
+      "title": "Get an individual's SA other data"
+    },
+    "summary": {
+      "href": "/individuals/income/sa/summary?matchId=d668b22f-d6b2-4072-8c48-61d11799f538{&fromTaxYear,toTaxYear}",
+      "title": "Get an individual's SA summary data"
+    },
+    "trusts": {
+      "href": "/individuals/income/sa/trusts?matchId=d668b22f-d6b2-4072-8c48-61d11799f538{&fromTaxYear,toTaxYear}",
+      "title": "Get an individual's SA trusts data"
+    }
+  },
+  "selfAssessment": {
+    "registrations": [
+
+    ],
+    "taxReturns": [
+
+    ]
+  }
+}
+calling https://test-api.service.hmrc.gov.uk/individuals/income/sa/pensions-and-state-benefits?matchId=d668b22f-d6b2-4072-8c48-61d11799f538&fromTaxYear=2019-20&toTaxYear=2020-21&useCase=LAA-C1
+{
+  "_links": {
+    "self": {
+      "href": "/individuals/income/sa/pensions-and-state-benefits?matchId=d668b22f-d6b2-4072-8c48-61d11799f538&fromTaxYear=2019-20&toTaxYear=2020-21"
+    }
+  },
+  "selfAssessment": {
+    "taxReturns": [
+
+    ]
+  }
+}
+calling https://test-api.service.hmrc.gov.uk/individuals/income/sa/source?matchId=d668b22f-d6b2-4072-8c48-61d11799f538&fromTaxYear=2019-20&toTaxYear=2020-21&useCase=LAA-C1
+{
+  "_links": {
+    "self": {
+      "href": "/individuals/income/sa/source?matchId=d668b22f-d6b2-4072-8c48-61d11799f538&fromTaxYear=2019-20&toTaxYear=2020-21"
+    }
+  },
+  "selfAssessment": {
+    "taxReturns": [
+
+    ]
+  }
+}
+calling https://test-api.service.hmrc.gov.uk/individuals/income/sa/employments?matchId=d668b22f-d6b2-4072-8c48-61d11799f538&fromTaxYear=2019-20&toTaxYear=2020-21&useCase=LAA-C1
+{
+  "_links": {
+    "self": {
+      "href": "/individuals/income/sa/employments?matchId=d668b22f-d6b2-4072-8c48-61d11799f538&fromTaxYear=2019-20&toTaxYear=2020-21"
+    }
+  },
+  "selfAssessment": {
+    "taxReturns": [
+
+    ]
+  }
+}
+calling https://test-api.service.hmrc.gov.uk/individuals/income/sa/additional-information?matchId=d668b22f-d6b2-4072-8c48-61d11799f538&fromTaxYear=2019-20&toTaxYear=2020-21&useCase=LAA-C1
+{
+  "_links": {
+    "self": {
+      "href": "/individuals/income/sa/additional-information?matchId=d668b22f-d6b2-4072-8c48-61d11799f538&fromTaxYear=2019-20&toTaxYear=2020-21"
+    }
+  },
+  "selfAssessment": {
+    "taxReturns": [
+
+    ]
+  }
+}
+calling https://test-api.service.hmrc.gov.uk/individuals/income/sa/partnerships?matchId=d668b22f-d6b2-4072-8c48-61d11799f538&fromTaxYear=2019-20&toTaxYear=2020-21&useCase=LAA-C1
+{
+  "_links": {
+    "self": {
+      "href": "/individuals/income/sa/partnerships?matchId=d668b22f-d6b2-4072-8c48-61d11799f538&fromTaxYear=2019-20&toTaxYear=2020-21"
+    }
+  },
+  "selfAssessment": {
+    "taxReturns": [
+
+    ]
+  }
+}
+calling https://test-api.service.hmrc.gov.uk/individuals/income/sa/uk-properties?matchId=d668b22f-d6b2-4072-8c48-61d11799f538&fromTaxYear=2019-20&toTaxYear=2020-21&useCase=LAA-C1
+{
+  "_links": {
+    "self": {
+      "href": "/individuals/income/sa/uk-properties?matchId=d668b22f-d6b2-4072-8c48-61d11799f538&fromTaxYear=2019-20&toTaxYear=2020-21"
+    }
+  },
+  "selfAssessment": {
+    "taxReturns": [
+
+    ]
+  }
+}
+calling https://test-api.service.hmrc.gov.uk/individuals/income/sa/foreign?matchId=d668b22f-d6b2-4072-8c48-61d11799f538&fromTaxYear=2019-20&toTaxYear=2020-21&useCase=LAA-C1
+{
+  "_links": {
+    "self": {
+      "href": "/individuals/income/sa/foreign?matchId=d668b22f-d6b2-4072-8c48-61d11799f538&fromTaxYear=2019-20&toTaxYear=2020-21"
+    }
+  },
+  "selfAssessment": {
+    "taxReturns": [
+
+    ]
+  }
+}
+calling https://test-api.service.hmrc.gov.uk/individuals/income/sa/further-details?matchId=d668b22f-d6b2-4072-8c48-61d11799f538&fromTaxYear=2019-20&toTaxYear=2020-21&useCase=LAA-C1
+{
+  "_links": {
+    "self": {
+      "href": "/individuals/income/sa/further-details?matchId=d668b22f-d6b2-4072-8c48-61d11799f538&fromTaxYear=2019-20&toTaxYear=2020-21"
+    }
+  },
+  "selfAssessment": {
+    "taxReturns": [
+
+    ]
+  }
+}
+calling https://test-api.service.hmrc.gov.uk/individuals/income/sa/interests-and-dividends?matchId=d668b22f-d6b2-4072-8c48-61d11799f538&fromTaxYear=2019-20&toTaxYear=2020-21&useCase=LAA-C1
+calling https://test-api.service.hmrc.gov.uk/individuals/income/sa/interests-and-dividends?matchId=d668b22f-d6b2-4072-8c48-61d11799f538&fromTaxYear=2019-20&toTaxYear=2020-21&useCase=LAA-C1
+{
+  "_links": {
+    "self": {
+      "href": "/individuals/income/sa/interests-and-dividends?matchId=d668b22f-d6b2-4072-8c48-61d11799f538&fromTaxYear=2019-20&toTaxYear=2020-21"
+    }
+  },
+  "selfAssessment": {
+    "taxReturns": [
+
+    ]
+  }
+}
+calling https://test-api.service.hmrc.gov.uk/individuals/income/sa/other?matchId=d668b22f-d6b2-4072-8c48-61d11799f538&fromTaxYear=2019-20&toTaxYear=2020-21&useCase=LAA-C1
+{
+  "_links": {
+    "self": {
+      "href": "/individuals/income/sa/other?matchId=d668b22f-d6b2-4072-8c48-61d11799f538&fromTaxYear=2019-20&toTaxYear=2020-21"
+    }
+  },
+  "selfAssessment": {
+    "taxReturns": [
+
+    ]
+  }
+}
+calling https://test-api.service.hmrc.gov.uk/individuals/income/sa/summary?matchId=d668b22f-d6b2-4072-8c48-61d11799f538&fromTaxYear=2019-20&toTaxYear=2020-21&useCase=LAA-C1
+{
+  "_links": {
+    "self": {
+      "href": "/individuals/income/sa/summary?matchId=d668b22f-d6b2-4072-8c48-61d11799f538&fromTaxYear=2019-20&toTaxYear=2020-21"
+    }
+  },
+  "selfAssessment": {
+    "taxReturns": [
+
+    ]
+  }
+}
+calling https://test-api.service.hmrc.gov.uk/individuals/income/sa/trusts?matchId=d668b22f-d6b2-4072-8c48-61d11799f538&fromTaxYear=2019-20&toTaxYear=2020-21&useCase=LAA-C1
+{
+  "_links": {
+    "self": {
+      "href": "/individuals/income/sa/trusts?matchId=d668b22f-d6b2-4072-8c48-61d11799f538&fromTaxYear=2019-20&toTaxYear=2020-21"
+    }
+  },
+  "selfAssessment": {
+    "taxReturns": [
+
+    ]
+  }
+}
+calling https://test-api.service.hmrc.gov.uk/individuals/employments/?matchId=d668b22f-d6b2-4072-8c48-61d11799f538
+{
+  "_links": {
+    "paye": {
+      "href": "/individuals/employments/paye?matchId=d668b22f-d6b2-4072-8c48-61d11799f538{&fromDate,toDate}",
+      "title": "Get an individual's PAYE employment data"
+    },
+    "self": {
+      "href": "/individuals/employments/?matchId=d668b22f-d6b2-4072-8c48-61d11799f538"
+    }
+  }
+}
+calling https://test-api.service.hmrc.gov.uk/individuals/employments/paye?matchId=d668b22f-d6b2-4072-8c48-61d11799f538&fromDate=2020-12-01&toDate=2021-02-25
+{
+  "_links": {
+    "self": {
+      "href": "/individuals/employments/paye?matchId=d668b22f-d6b2-4072-8c48-61d11799f538&fromDate=2020-12-01&toDate=2021-02-25"
+    }
+  },
+  "employments": [
+
+  ]
+}
