@@ -17,7 +17,7 @@ case "$GIT_MESSAGE" in
 
     echo 'Sending RDS delete command'
     OUTPUT=""
-    for (( i=1; i<4; ++i )); do
+    for i in {1..3}; do
       echo "Attempt: $i"
       OUTPUT=`psql postgres://${DB_USER}:${DB_PWD}@localhost:5432/${DB_NAME} -c "DROP DATABASE \"${UAT_RELEASE}\";"`;
       echo "$OUTPUT"
