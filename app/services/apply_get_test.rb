@@ -22,7 +22,7 @@ class ApplyGetTest
 
   def call
     @correlation_id = SecureRandom.uuid
-    @result = {}
+    @result = { data: [] }
     user_match_id = request_match_id
     data = request_endpoint(user_match_id)
     next_links = extract_next_links(data)
@@ -30,6 +30,7 @@ class ApplyGetTest
 
     Rails.logger.info JSON.pretty_generate(JSON.parse(@result.to_json))
     Rails.logger.info 'done'
+    @result.to_json
   end
 
   private
@@ -49,7 +50,7 @@ class ApplyGetTest
 
     key = [parsed_uri.for_displaying, data.except('_links').keys.first].join('/').tr('-', '_')
     value = data[data.except('_links').keys.first].first
-    @result[key] = value
+    @result[:data] << { "#{key}": value }
   end
 
   def request_endpoint(uri)
