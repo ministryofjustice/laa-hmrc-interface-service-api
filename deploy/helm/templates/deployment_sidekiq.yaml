@@ -1,0 +1,73 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ template "app.fullname" . }}-sidekiq-default
+  labels:
+    app: {{ template "app.name" . }}
+    chart: {{ template "app.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  replicas: {{ .Values.sidekiq.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ template "app.name" . }}
+      release: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ template "app.name" . }}
+        release: {{ .Release.Name }}
+    spec:
+      containers:
+        - name: sidekiq-tasks
+          image: '{{ .Values.image.repository }}:{{ .Values.image.tag }}'
+          imagePullPolicy: IfNotPresent
+          command: ['bundle', 'exec', 'sidekiq', '-q tasks', '-c 1']
+          resources:
+            limits:
+              cpu: 500m
+              memory: 1Gi
+            requests:
+              cpu: 10m
+              memory: 512Mi
+          ports:
+            - containerPort: 7433
+          livenessProbe:
+            exec:
+              command: ['bin/sidekiq_health_check']
+            initialDelaySeconds: 35
+            timeoutSeconds: 5
+            periodSeconds: 120
+          readinessProbe:
+            exec:
+              command: ['bin/sidekiq_health_check']
+            initialDelaySeconds: 35
+            timeoutSeconds: 5
+{{ include "app.envs" . | nindent 10 }}
+        - name: sidekiq-default
+          image: '{{ .Values.image.repository }}:{{ .Values.image.tag }}'
+          imagePullPolicy: IfNotPresent
+          command: ['bundle', 'exec', 'sidekiq', '-q default']
+{{ include "app.envs" . | nindent 10 }}
+          resources:
+            limits:
+              cpu: 500m
+              memory: 1Gi
+            requests:
+              cpu: 10m
+              memory: 512Mi
+          ports:
+            - containerPort: 7433
+          livenessProbe:
+            exec:
+              command: ['bin/sidekiq_health_check']
+            initialDelaySeconds: 35
+            timeoutSeconds: 5
+            periodSeconds: 120
+          readinessProbe:
+            exec:
+              command: ['bin/sidekiq_health_check']
+            initialDelaySeconds: 35
+            timeoutSeconds: 5
+      terminationGracePeriodSeconds: 60

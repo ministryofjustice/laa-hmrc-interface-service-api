@@ -33,6 +33,7 @@ end
 group :test do
   gem 'mock_redis'
   gem 'rspec-rails', '~> 5.0'
+  gem 'rspec-sidekiq'
   gem 'simplecov', require: false
   gem 'simplecov-rcov'
   gem 'webmock'
