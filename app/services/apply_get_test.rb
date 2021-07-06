@@ -40,17 +40,33 @@ class ApplyGetTest
       parsed_uri = build_uri(uri)
       data = request_endpoint(parsed_uri.for_calling)
       extract_data_from(data, parsed_uri)
+      next if data.to_s.eql?('INTERNAL_SERVER_ERROR')
+
       next_links = extract_next_links(data)
       loop_each next_links if next_links.any?
     end
   end
 
   def extract_data_from(data, parsed_uri)
-    return if data.except('_links').keys.empty?
+    if data.to_s.eql?('INTERNAL_SERVER_ERROR')
+      record_error_data(parsed_uri)
+    elsif data_is_valid?(data)
+      record_valid_data(data, parsed_uri)
+    end
+  end
 
+  def data_is_valid?(data)
+    data.is_a?(Array) && data.except('_links').keys.present?
+  end
+
+  def record_valid_data(data, parsed_uri)
     key = [parsed_uri.for_displaying, data.except('_links').keys.first].join('/').tr('-', '_')
     value = data[data.except('_links').keys.first].first
     @result[:data] << { "#{key}": value }
+  end
+
+  def record_error_data(parsed_uri)
+    @result[:data] << { "#{parsed_uri.for_displaying}": 'returned INTERNAL_SERVER_ERROR' }
   end
 
   def request_endpoint(uri)
@@ -60,6 +76,8 @@ class ApplyGetTest
     Rails.logger.info "Rate limited while calling #{uri}: waiting then trying again"
     sleep(0.33)
     request_endpoint(uri)
+  rescue RestClient::InternalServerError
+    'INTERNAL_SERVER_ERROR' # improve this, hard to do currently as only the live service fails
   end
 
   def request_match_id
