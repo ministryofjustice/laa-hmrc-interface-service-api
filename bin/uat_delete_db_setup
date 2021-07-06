@@ -1,0 +1,27 @@
+#!/bin/sh
+
+GIT_MESSAGE=$(git log --format=%B -n 1 $CIRCLE_SHA1)
+
+echo "git message is: $GIT_MESSAGE"
+
+case "$GIT_MESSAGE" in
+  "Merge pull request #"*)
+    MERGED_BRANCH=$(echo $GIT_MESSAGE | sed -n "s/^.*from ministryofjustice\/\s*\(\S*\).*$/\1/p")
+    UAT_RELEASE="$(echo $MERGED_BRANCH | sed 's:^\w*\/::' | tr -s ' _/[]().' '-' | cut -c1-30 | sed 's/-$//')"
+
+    echo "Ensuring port-forward-pod exists"
+
+    POD=$(kubectl -n ${K8S_NAMESPACE} get pods | grep -m4 port-forward-pod | head -n1 | cut -d' ' -f 1)
+    if [ -z "$POD" ]; then
+      echo 'Creating new port-forward-pod'
+      kubectl -n ${K8S_NAMESPACE} run port-forward-pod \
+        --image=ministryofjustice/port-forward \
+        --port=5432 \
+        --env="REMOTE_HOST=${HOST}" \
+        --env="LOCAL_PORT=5432" \
+        --env="REMOTE_PORT=5432"
+    fi
+    ./bin/wait_for.sh pod -n ${K8S_NAMESPACE} port-forward-pod
+    ;;
+  *) echo "This commit is not a merged pull request";;
+esac
