@@ -18,9 +18,6 @@ case "$GIT_MESSAGE" in
 
     case "$UAT_RELEASES" in
       *"$UAT_RELEASE"*)
-        POD=$(kubectl -n ${K8S_NAMESPACE} get pods | grep -m4 $UAT_RELEASE | head -n1 | cut -d' ' -f 1)
-        echo Delete database via $POD
-        kubectl -n ${K8S_NAMESPACE} exec -it $POD -- rake db:drop
         echo "Deleting UAT release $UAT_RELEASE"
         helm delete $UAT_RELEASE --namespace=${K8S_NAMESPACE}
         ;;
