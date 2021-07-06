@@ -22,6 +22,7 @@ WebMock.disable_net_connect!
 require 'redis'
 require 'mock_redis'
 REDIS = MockRedis.new
+require 'rspec-sidekiq'
 require 'sidekiq/testing'
 
 SimpleCov.minimum_coverage 100
@@ -29,12 +30,19 @@ unless ENV['NOCOVERAGE']
   SimpleCov.start do
     add_filter 'spec/'
     add_filter 'initializers/config.rb'
+    add_filter 'initializers/sidekiq_middleware.rb'
   end
 
   SimpleCov.at_exit do
     say("<%= color('Code coverage below 100%', RED) %>") if SimpleCov.result.coverage_statistics[:line].percent < 100
     SimpleCov.result.format!
   end
+end
+
+RSpec::Sidekiq.configure do |config|
+  config.clear_all_enqueued_jobs = true # default => true
+  config.enable_terminal_colours = true # default => true
+  config.warn_when_jobs_not_processed_by_sidekiq = false # default => true
 end
 
 RSpec.configure do |config|
