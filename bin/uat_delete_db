@@ -16,12 +16,12 @@ case "$GIT_MESSAGE" in
     DB_PWD=$(kubectl -n ${K8S_NAMESPACE} get secret rds-instance-output -o jsonpath="{.data.database_password}" | base64 --decode)
 
     echo 'Sending RDS delete command'
-    OUTPUT="";
-    for ((i=1; i<4; ++i)); do
+    OUTPUT=""
+    for (( i=1; i<4; ++i )); do
       echo "Attempt: $i"
       OUTPUT=`psql postgres://${DB_USER}:${DB_PWD}@localhost:5432/${DB_NAME} -c "DROP DATABASE \"${UAT_RELEASE}\";"`;
       echo "$OUTPUT"
-      [ `echo $OUTPUT | grep -c 'DROP DATABASE'` = 0 ] && break
+      [ `echo $OUTPUT | grep -c 'DROP DATABASE'` = 1 ] && break
       sleep 5
     done
 
