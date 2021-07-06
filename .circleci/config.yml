@@ -8,7 +8,7 @@ executors:
       - image: cimg/base:2020.01
   cloud-platform-executor:
     docker:
-      - image: ministryofjustice/cloud-platform-tools:1.24
+      - image: ministryofjustice/cloud-platform-tools:1.41
         environment:
           GITHUB_TEAM_NAME_SLUG: laa-apply-for-legal-aid
   linting-executor:
@@ -181,6 +181,22 @@ jobs:
       - run:
           name: Delete UAT release
           command: ./bin/uat_delete_release
+  delete_uat_db:
+    executor: cloud-platform-executor
+    steps:
+      - checkout
+      - setup_remote_docker
+      - *authenticate_k8s
+      - run:
+          name: Set up port-forward-pod
+          command: ./bin/uat_delete_db_setup
+      - run:
+          name: Start port forwarding
+          command: kubectl -n "${K8S_NAMESPACE}" port-forward port-forward-pod 5432:5432
+          background: true
+      - run:
+          name: Delete UAT database
+          command: ./bin/uat_delete_db
 #  deploy_staging:
 #    executor: cloud-platform-executor
 #    steps:
@@ -265,6 +281,11 @@ workflows:
           context: laa-hmrc-interface-uat
           requires:
             - deploy_main_uat
+      - delete_uat_db:
+          context: laa-hmrc-interface-uat
+          requires:
+            - delete_uat_branch
+
 #      - deploy_staging:
 #          context: laa-hmrc-interface-staging
 #          requires:
