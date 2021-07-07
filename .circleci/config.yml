@@ -149,7 +149,15 @@ jobs:
           path: /tmp/test-results/rspec
       - store_artifacts:
           path: ./coverage
-
+  clean_up_ecr:
+    executor: cloud-platform-executor
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: Delete old images from ecr repo
+          command: |
+            ./bin/delete_ecr_images
   build_and_push:
     executor: cloud-platform-executor
     steps:
@@ -285,21 +293,28 @@ workflows:
           context: laa-hmrc-interface-uat
           requires:
             - delete_uat_branch
-
 #      - deploy_staging:
 #          context: laa-hmrc-interface-staging
 #          requires:
-#            - build_and_push
+#            - delete_uat_db
 #      - hold_production_notification:
 #          requires:
-#            - delete_uat_branch
 #            - deploy_staging
 #      - hold_production:
 #          type: approval
 #          requires:
-#            - delete_uat_branch
 #            - deploy_staging
 #      - deploy_production:
 #          context: laa-hmrc-interface-production
 #          requires:
 #            - hold_production
+
+  nightly:
+    triggers:
+      - schedule:
+          cron: "0 2 * * *"
+          filters:
+            branches:
+              only: master
+    jobs:
+      - clean_up_ecr
