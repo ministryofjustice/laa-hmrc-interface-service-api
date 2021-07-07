@@ -187,8 +187,11 @@ jobs:
       - setup_remote_docker
       - *authenticate_k8s
       - run:
+          name: Setup gems required
+          command: gem install rest-client
+      - run:
           name: Delete UAT release
-          command: ./bin/uat_delete_release
+          command: ./bin/uat_delete_release NOT_A_DRY_RUN
   delete_uat_db:
     executor: cloud-platform-executor
     steps:
