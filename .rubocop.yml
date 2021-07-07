@@ -27,6 +27,10 @@ Metrics/BlockLength:
     - 'config/routes.rb'
     - 'spec/**/*'
 
+Performance/MapCompact:
+  Exclude:
+    - 'bin/uat_delete_release' # the circle container is running 2.6.3 and does not include filter_map
+
 Naming/InclusiveLanguage:
   FlaggedTerms:
     master:
