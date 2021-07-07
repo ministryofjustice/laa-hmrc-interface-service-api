@@ -293,19 +293,16 @@ workflows:
           context: laa-hmrc-interface-uat
           requires:
             - delete_uat_branch
-
 #      - deploy_staging:
 #          context: laa-hmrc-interface-staging
 #          requires:
-#            - build_and_push
+#            - delete_uat_db
 #      - hold_production_notification:
 #          requires:
-#            - delete_uat_branch
 #            - deploy_staging
 #      - hold_production:
 #          type: approval
 #          requires:
-#            - delete_uat_branch
 #            - deploy_staging
 #      - deploy_production:
 #          context: laa-hmrc-interface-production
