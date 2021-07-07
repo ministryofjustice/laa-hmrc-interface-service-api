@@ -1,28 +1,27 @@
-#!/bin/sh
+#!/usr/bin/env ruby
+require 'json'
+require 'rest-client'
 
-GIT_MESSAGE=$(git log --format=%B -n 1 $CIRCLE_SHA1)
+REPO_NAME = 'laa-hmrc-interface-service-api'.freeze
+IGNORE = %w[main].freeze
+DRYRUN = ARGV.empty?
+DRYRUN_SUFFIX = DRYRUN ? '--dry-run' : ''.freeze
 
-echo "git message is: $GIT_MESSAGE"
+pr_response = RestClient.get("https://api.github.com/repos/ministryofjustice/#{REPO_NAME}/pulls")
+open_pr = JSON.parse(pr_response.body, symbolize_names: true).map { |pr| pr[:head][:ref].gsub(%r{[()\[\]_/\s.]}, '-') }
+br_response = RestClient.get("https://api.github.com/repos/ministryofjustice/#{REPO_NAME}/branches?per_page=100")
+open_branches = JSON.parse(br_response.body, symbolize_names: true).map { |pr| pr[:name].gsub(%r{[()\[\]_/\s.]}, '-') }
+github_resources = (open_branches + open_pr).uniq
 
-case "$GIT_MESSAGE" in
-  "Merge pull request #"*)
-    MERGED_BRANCH=$(echo $GIT_MESSAGE | sed -n "s/^.*from ministryofjustice\/\s*\(\S*\).*$/\1/p")
-    UAT_RELEASE="$(echo $MERGED_BRANCH | sed 's:^\w*\/::' | tr -s ' _/[]().' '-' | cut -c1-30 | sed 's/-$//')"
+uat_releases = JSON.parse(`helm list --namespace=${K8S_NAMESPACE} --all --output json`, symbolize_names: true)
+active_namespaces = uat_releases.map { |helm| helm[:name] unless IGNORE.include? helm[:name] }.compact
 
-    echo "Attempting to delete UAT release: $UAT_RELEASE"
-
-    UAT_RELEASES=$(helm list --namespace=${K8S_NAMESPACE} --all)
-
-    echo "Current UAT releases:"
-    echo "$UAT_RELEASES"
-
-    case "$UAT_RELEASES" in
-      *"$UAT_RELEASE"*)
-        echo "Deleting UAT release $UAT_RELEASE"
-        helm delete $UAT_RELEASE --namespace=${K8S_NAMESPACE}
-        ;;
-      *) echo "UAT release $UAT_RELEASE was not found";;
-    esac
-    ;;
-  *) echo "This commit is not a merged pull request";;
-esac
+puts 'Dry-run only - this will NOT delete any environments' if DRYRUN
+active_namespaces.each do |environment|
+  if github_resources.map { |name| name.include?(environment) }.any?
+    puts "PR still open, retaining #{environment}"
+  else
+    puts `helm --namespace=${K8S_NAMESPACE} delete #{environment} #{DRYRUN_SUFFIX}`
+  end
+end
+puts 're-run command followed by `true` to actually delete any instances' if DRYRUN
