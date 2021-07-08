@@ -318,6 +318,6 @@ workflows:
           cron: "0 2 * * *"
           filters:
             branches:
-              only: master
+              only: main
     jobs:
       - clean_up_ecr
