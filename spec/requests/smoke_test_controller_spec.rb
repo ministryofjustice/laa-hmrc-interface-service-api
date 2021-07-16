@@ -11,12 +11,14 @@ RSpec.describe SmokeTestController, type: :request do
   describe '#call' do
     context 'when the smoke test passes' do
       let(:smoke_test_pass?) { true }
+
       it { expect(response.body).to eql expected_result }
       it { expect(response.status).to eql 200 }
     end
 
-    context 'when the smoke test failes' do
+    context 'when the smoke test fails' do
       let(:smoke_test_pass?) { false }
+
       it { expect(response.body).to eql expected_result }
       it { expect(response.status).to eql 500 }
     end
