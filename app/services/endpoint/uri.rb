@@ -17,7 +17,8 @@ module Endpoint
     end
 
     def for_displaying
-      Rack::Utils.parse_query(@href).keys[0].gsub(/\?.*/, '').split('/')[2...].join('/')
+      range = @href.include?('matching') ? (1..2) : (2...)
+      Rack::Utils.parse_query(@href).keys[0].gsub(/\?.*/, '').split('/')[range].join('/')
     end
 
     private
