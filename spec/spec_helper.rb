@@ -31,6 +31,7 @@ unless ENV['NOCOVERAGE']
     add_filter 'spec/'
     add_filter 'initializers/config.rb'
     add_filter 'initializers/sidekiq_middleware.rb'
+    add_filter 'services/smoke_test.rb'
   end
 
   SimpleCov.at_exit do
@@ -46,6 +47,8 @@ RSpec::Sidekiq.configure do |config|
 end
 
 RSpec.configure do |config|
+  config.filter_run_excluding :smoke_test
+
   # set up default stub for the host, this can be overwritten in individual stubs if needed
   config.before do
     stub_request(:post, %r{\A#{Settings.credentials.host}/.*\z}).to_return(status: 200, body: '')
