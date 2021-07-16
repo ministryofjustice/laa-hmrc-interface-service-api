@@ -327,7 +327,7 @@ workflows:
   smoke-test:
     triggers:
       - schedule:
-          cron: "30 8 * * MON-FRI"
+          cron: "30 8 * * 1-5" # 1-5 is Mon-Fri
           filters:
             branches:
               only: main
