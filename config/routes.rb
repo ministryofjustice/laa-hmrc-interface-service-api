@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   get 'ping', to: 'status#ping', format: :json
   get 'health_check', to: 'status#health_check', format: :json
   get 'status', to: 'status#ping', format: :json
+  get 'smoke-test', to: 'smoke_test#call', format: :json unless Settings.environment.eql?('live')
 end
 
 def secure_compare(passed, stored)
