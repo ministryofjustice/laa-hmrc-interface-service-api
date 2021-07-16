@@ -15,3 +15,13 @@ credentials:
 sidekiq:
   username: 'store actual value as SETTINGS__SIDEKIQ__USERNAME'
   web_ui_password: 'store actual value as SETTINGS__SIDEKIQ__WEB_UI_PASSWORD'
+
+smoke_test:
+  use_case_one:
+    first_name: 'store actual value as SETTINGS__SMOKE_TEST__USE_CASE_ONE__FIRST_NAME'
+    last_name: 'store actual value as SETTINGS__SMOKE_TEST__USE_CASE_ONE__LAST_NAME'
+    nino: 'store actual value as SETTINGS__SMOKE_TEST__USE_CASE_ONE__NINO'
+    dob: 'store actual value as SETTINGS__SMOKE_TEST__USE_CASE_ONE__DOB'
+    start_date: 'store actual value as SETTINGS__SMOKE_TEST__USE_CASE_ONE__START_DATE'
+    end_date: 'store actual value as SETTINGS__SMOKE_TEST__USE_CASE_ONE__END_DATE'
+    correlation_id: 'store actual value as SETTINGS__SMOKE_TEST__USE_CASE_ONE__CORRELATION_ID'
