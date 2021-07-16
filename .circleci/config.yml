@@ -149,6 +149,17 @@ jobs:
           path: /tmp/test-results/rspec
       - store_artifacts:
           path: ./coverage
+  smoke_tests:
+    executor: cloud-platform-executor
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - *decrypt_secrets
+      - *authenticate_k8s
+      - run:
+          name: Run curl
+          command: ./bin/smoke_tests
   clean_up_ecr:
     executor: cloud-platform-executor
     steps:
@@ -251,6 +262,8 @@ jobs:
 workflows:
   new_pull_request:
     jobs:
+      - smoke_tests:
+          context: laa-hmrc-interface-uat
       - lint_checks:
           filters:
             branches:
@@ -311,6 +324,16 @@ workflows:
 #          context: laa-hmrc-interface-production
 #          requires:
 #            - hold_production
+
+  smoke-test:
+    triggers:
+      - schedule:
+          cron: "30 8 * * *"
+          filters:
+            branches:
+              only: main
+    jobs:
+      - smoke_tests
 
   nightly:
     triggers:
