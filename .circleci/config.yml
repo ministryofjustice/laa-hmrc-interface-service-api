@@ -152,7 +152,7 @@ jobs:
       - *decrypt_secrets
       - *authenticate_k8s
       - run:
-          name: Run curl
+          name: Run smoke test script
           command: ./bin/smoke_tests
       - slack/status:
           success_message: ":yep: Smoke test of sandbox successful!"
@@ -327,7 +327,7 @@ workflows:
   smoke-test:
     triggers:
       - schedule:
-          cron: "30 8 * * *"
+          cron: "30 8 * * MON-FRI"
           filters:
             branches:
               only: main
