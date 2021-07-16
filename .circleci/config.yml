@@ -30,12 +30,6 @@ executors:
         environment:
           - POSTGRES_USER=user
           - POSTGRES_DB=laa_hmrc_interface_service_api_test
-  notification-executor:
-    docker:
-      - image: 'cibuilds/base:latest'
-        environment:
-          TERM: dumb
-    resource_class: small
 references:
   build_docker_image: &build_docker_image
     run:
@@ -160,6 +154,9 @@ jobs:
       - run:
           name: Run curl
           command: ./bin/smoke_tests
+      - slack/status:
+          success_message: ":yep: Smoke test of sandbox successful!"
+          failure_message: ":nope: Smoke test of sandbox failed!"
   clean_up_ecr:
     executor: cloud-platform-executor
     steps:
@@ -262,8 +259,6 @@ jobs:
 workflows:
   new_pull_request:
     jobs:
-      - smoke_tests:
-          context: laa-hmrc-interface-uat
       - lint_checks:
           filters:
             branches:
@@ -282,6 +277,10 @@ workflows:
             - lint_checks
             - unit_tests
             - build_and_push
+      - smoke_tests:
+          context: laa-hmrc-interface-uat
+          requires:
+            - deploy_uat
 
   merge_pr:
     jobs:
