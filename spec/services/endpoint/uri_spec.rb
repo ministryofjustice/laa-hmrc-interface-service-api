@@ -54,5 +54,11 @@ RSpec.describe Endpoint::Uri do
 
       it { is_expected.to eql 'type/sub' }
     end
+
+    context 'when the href contains matching' do
+      let(:href) { '/root/matching/type/123456' }
+
+      it { is_expected.to eql 'root/matching' }
+    end
   end
 end
