@@ -277,10 +277,6 @@ workflows:
             - lint_checks
             - unit_tests
             - build_and_push
-      - smoke_tests:
-          context: laa-hmrc-interface-uat
-          requires:
-            - deploy_uat
 
   merge_pr:
     jobs:
