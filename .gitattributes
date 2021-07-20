@@ -1,1 +1,2 @@
 deploy/helm/values-*.y*ml filter=git-crypt diff=git-crypt
+spec/fixtures/smoke_tests/*.json filter=git-crypt diff=git-crypt

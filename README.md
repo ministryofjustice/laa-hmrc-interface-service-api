@@ -32,3 +32,14 @@ ApplyGetTest.call(
 ```
 
 As long as the current dev/uat environment has the correct use case one configuration in settings a series of calls will be made to obtain, format and display the pre-created sandbox data
+
+### Smoke tests
+There is an endpoint available on non-live environments e.g. localhost:3000/smoke-tests that will run a smoke test against the sandbox environment
+
+You can also trigger it manually from a rails console using
+
+```ruby
+SmokeTest.call
+```
+
+By design, this will only output true or false, so as not to leak any sandbox data

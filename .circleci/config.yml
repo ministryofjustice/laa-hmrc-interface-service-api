@@ -30,12 +30,6 @@ executors:
         environment:
           - POSTGRES_USER=user
           - POSTGRES_DB=laa_hmrc_interface_service_api_test
-  notification-executor:
-    docker:
-      - image: 'cibuilds/base:latest'
-        environment:
-          TERM: dumb
-    resource_class: small
 references:
   build_docker_image: &build_docker_image
     run:
@@ -149,6 +143,20 @@ jobs:
           path: /tmp/test-results/rspec
       - store_artifacts:
           path: ./coverage
+  smoke_tests:
+    executor: cloud-platform-executor
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - *decrypt_secrets
+      - *authenticate_k8s
+      - run:
+          name: Run smoke test script
+          command: ./bin/smoke_tests
+      - slack/status:
+          success_message: ":yep: Smoke test of sandbox successful!"
+          failure_message: ":nope: Smoke test of sandbox failed!"
   clean_up_ecr:
     executor: cloud-platform-executor
     steps:
@@ -311,6 +319,16 @@ workflows:
 #          context: laa-hmrc-interface-production
 #          requires:
 #            - hold_production
+
+  smoke-test:
+    triggers:
+      - schedule:
+          cron: "30 8 * * 1-5" # 1-5 is Mon-Fri
+          filters:
+            branches:
+              only: main
+    jobs:
+      - smoke_tests
 
   nightly:
     triggers:

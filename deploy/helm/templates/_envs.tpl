@@ -79,6 +79,41 @@ env:
       secretKeyRef:
         name: {{ template "app.fullname" . }}
         key: settings__credentials__use_case_one__hmrc_totp_secret
+  - name: SETTINGS__SMOKE_TEST__USE_CASE_ONE__FIRST_NAME
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "app.fullname" . }}
+        key: settings__smoke_test__use_case_one__first_name
+  - name: SETTINGS__SMOKE_TEST__USE_CASE_ONE__LAST_NAME
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "app.fullname" . }}
+        key: settings__smoke_test__use_case_one__last_name
+  - name: SETTINGS__SMOKE_TEST__USE_CASE_ONE__NINO
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "app.fullname" . }}
+        key: settings__smoke_test__use_case_one__nino
+  - name: SETTINGS__SMOKE_TEST__USE_CASE_ONE__DOB
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "app.fullname" . }}
+        key: settings__smoke_test__use_case_one__dob
+  - name: SETTINGS__SMOKE_TEST__USE_CASE_ONE__START_DATE
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "app.fullname" . }}
+        key: settings__smoke_test__use_case_one__start_date
+  - name: SETTINGS__SMOKE_TEST__USE_CASE_ONE__END_DATE
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "app.fullname" . }}
+        key: settings__smoke_test__use_case_one__end_date
+  - name: SETTINGS__SMOKE_TEST__USE_CASE_ONE__CORRELATION_ID
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "app.fullname" . }}
+        key: settings__smoke_test__use_case_one__correlation_id
   - name: REDIS_URL
     valueFrom:
       secretKeyRef:
