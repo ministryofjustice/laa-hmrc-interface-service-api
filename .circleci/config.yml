@@ -257,7 +257,8 @@ jobs:
 #                        --set image.tag="${CIRCLE_SHA1}"
 
 workflows:
-  new_pull_request:
+  version: 2
+  open_pr:
     jobs:
       - lint_checks:
           filters:
