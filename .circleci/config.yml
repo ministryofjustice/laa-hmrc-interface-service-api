@@ -257,7 +257,8 @@ jobs:
 #                        --set image.tag="${CIRCLE_SHA1}"
 
 workflows:
-  new_pull_request:
+  version: 2
+  open_pr:
     jobs:
       - lint_checks:
           filters:
@@ -328,7 +329,8 @@ workflows:
             branches:
               only: main
     jobs:
-      - smoke_tests
+      - smoke_tests:
+          context: laa-hmrc-interface-uat
 
   nightly:
     triggers:
