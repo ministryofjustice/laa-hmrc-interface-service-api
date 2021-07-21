@@ -329,7 +329,8 @@ workflows:
             branches:
               only: main
     jobs:
-      - smoke_tests
+      - smoke_tests:
+          context: laa-hmrc-interface-uat
 
   nightly:
     triggers:
