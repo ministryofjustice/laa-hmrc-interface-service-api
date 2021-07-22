@@ -1,5 +1,6 @@
 #!/bin/sh
-URL=$(sed 's#.* ##g' <<< $(kubectl get ingresses | grep -o -m4 "main-laa-.*uk" | head -n1))
+INGRESS=$(kubectl get ingresses | grep -o -m4 "main-laa-.*uk" | head -n1)
+URL=$(echo "$INGRESS" | sed 's#.* ##g')
 STATUS=$(curl -s -o /dev/null -w '%{http_code}' "https://$URL/smoke-test")
 if [ $STATUS -eq 200 ]; then
   exit 0;
