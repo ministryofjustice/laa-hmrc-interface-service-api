@@ -11,6 +11,7 @@ executors:
       - image: ministryofjustice/cloud-platform-tools:1.41
         environment:
           GITHUB_TEAM_NAME_SLUG: laa-apply-for-legal-aid
+          TZ: Europe/London
   linting-executor:
     docker:
       - image: circleci/ruby:3.0.1-node-browsers
