@@ -5,7 +5,7 @@ orbs:
 executors:
   basic-executor:
     docker:
-      - image: cimg/base:2020.01
+      - image: cimg/base:2021.04
   cloud-platform-executor:
     docker:
       - image: ministryofjustice/cloud-platform-tools:1.41
@@ -145,7 +145,7 @@ jobs:
       - store_artifacts:
           path: ./coverage
   smoke_tests:
-    executor: cloud-platform-executor
+    executor: basic-executor
     steps:
       - checkout
       - setup_remote_docker:
