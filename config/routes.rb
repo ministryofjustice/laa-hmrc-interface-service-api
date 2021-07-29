@@ -6,6 +6,8 @@ Sidekiq::Web.use Rails.application.config.session_store, Rails.application.confi
 
 Rails.application.routes.draw do
   use_doorkeeper
+  mount Rswag::Ui::Engine => '/api-docs'
+  mount Rswag::Api::Engine => '/api-docs'
   mount Sidekiq::Web => '/sidekiq'
 
   Sidekiq::Web.use Rack::Auth::Basic do |username, password|
