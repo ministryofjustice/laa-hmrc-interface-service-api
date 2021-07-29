@@ -1,0 +1,13 @@
+---
+openapi: 3.0.1
+info:
+  title: LAA HMRC Interface Service
+  description: This Service facilitates the HMRC API access for the LAA Use Cases
+  version: v1
+paths:
+  "/smoke-test":
+    get:
+      summary: call smoke_test
+      responses:
+        '200':
+          description: 'true'
