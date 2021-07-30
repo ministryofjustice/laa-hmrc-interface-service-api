@@ -7,7 +7,7 @@ gem 'bootsnap', '>= 1.4.4', require: false
 gem 'config'
 gem 'dotenv-rails'
 gem 'pg', '~> 1.1'
-gem 'puma', '~> 5.3'
+gem 'puma', '~> 5.4'
 gem 'rails', '~> 6.1.4'
 gem 'redis'
 gem 'redis-namespace'
