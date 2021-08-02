@@ -22,7 +22,7 @@ RSpec.configure do |config|
         description: 'This Service facilitates the HMRC API access for the LAA Use Cases',
         version: 'v1'
       },
-      paths: {},
+      paths: {}
     }
   }
 
