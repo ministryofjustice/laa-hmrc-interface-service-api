@@ -1,4 +1,4 @@
-FROM ruby:3.0.1-alpine3.13
+FROM ruby:3.0.2-alpine3.13
 
 MAINTAINER Apply for legal aid team
 
@@ -19,7 +19,7 @@ RUN adduser --disabled-password apply -u 1001
 COPY Gemfile /app/Gemfile
 COPY Gemfile.lock /app/Gemfile.lock
 
-RUN gem install bundler -v 2.2.11 \
+RUN gem install bundler -v 2.2.24 \
 && bundle config build.nokogiri --use-system-libraries \
 && bundle config --global without test:development \
 && bundle install
