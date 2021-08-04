@@ -15,6 +15,7 @@ This Service facilitates the HMRC API access for the LAA Use Cases
 
 ### Initial setup
 * Clone the repo
+* Copy the `.env` values from LastPass 
 * Run `bundle install`
 * Run the tests with `bundle exec rspec`
 * Run the server with `bundle exec rails s`
