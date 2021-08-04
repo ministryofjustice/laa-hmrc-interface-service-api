@@ -1,20 +1,30 @@
 class SmokeTest
-  def self.call
-    new.call
+  def initialize(use_case)
+    @use_case = use_case
+  end
+
+  def self.call(use_case)
+    new(use_case).call
   end
 
   def call
-    JSON.parse(actual_response).eql?(JSON.parse(expected_response))
+    actual = JSON.parse(actual_response)['data']
+    expected = JSON.parse(expected_response)['data']
+    diff = (actual - expected) + (expected - actual)
+    result = diff.empty?
+    REDIS.setex("smoke-test-#{@use_case}", 3600, result)
+    result
   end
 
   private
 
   def expected_response
-    @expected_response ||= File.read('./spec/fixtures/smoke_tests/use_case_one.json')
+    @expected_response ||= File.read("./spec/fixtures/smoke_tests/use_case_#{@use_case}.json")
   end
 
   def actual_response
-    @actual_response ||= ApplyGetTest.new(first_name: smoke_test_settings.first_name,
+    @actual_response ||= ApplyGetTest.new(@use_case,
+                                          first_name: smoke_test_settings.first_name,
                                           last_name: smoke_test_settings.last_name,
                                           nino: smoke_test_settings.nino,
                                           dob: smoke_test_settings.dob,
@@ -24,6 +34,6 @@ class SmokeTest
   end
 
   def smoke_test_settings
-    @smoke_test_settings ||= Settings.smoke_test.use_case_one
+    @smoke_test_settings ||= Settings.smoke_test.send("use_case_#{@use_case}")
   end
 end
