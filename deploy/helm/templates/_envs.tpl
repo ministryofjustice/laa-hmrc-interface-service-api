@@ -79,6 +79,81 @@ env:
       secretKeyRef:
         name: {{ template "app.fullname" . }}
         key: settings__credentials__use_case_one__hmrc_totp_secret
+  - name: SETTINGS__CREDENTIALS__USE_CASE_TWO__DESCRIPTION
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "app.fullname" . }}
+        key: settings__credentials__use_case_two__description
+  - name: SETTINGS__CREDENTIALS__USE_CASE_TWO__HOST
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "app.fullname" . }}
+        key: settings__credentials__use_case_two__host
+  - name: SETTINGS__CREDENTIALS__USE_CASE_TWO__HMRC_CLIENT_SECRET
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "app.fullname" . }}
+        key: settings__credentials__use_case_two__hmrc_client_secret
+  - name: SETTINGS__CREDENTIALS__USE_CASE_TWO__HMRC_CLIENT_ID
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "app.fullname" . }}
+        key: settings__credentials__use_case_two__hmrc_client_id
+  - name: SETTINGS__CREDENTIALS__USE_CASE_TWO__HMRC_TOTP_SECRET
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "app.fullname" . }}
+        key: settings__credentials__use_case_two__hmrc_totp_secret
+  - name: SETTINGS__CREDENTIALS__USE_CASE_THREE__DESCRIPTION
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "app.fullname" . }}
+        key: settings__credentials__use_case_three__description
+  - name: SETTINGS__CREDENTIALS__USE_CASE_THREE__HOST
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "app.fullname" . }}
+        key: settings__credentials__use_case_three__host
+  - name: SETTINGS__CREDENTIALS__USE_CASE_THREE__HMRC_CLIENT_SECRET
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "app.fullname" . }}
+        key: settings__credentials__use_case_three__hmrc_client_secret
+  - name: SETTINGS__CREDENTIALS__USE_CASE_THREE__HMRC_CLIENT_ID
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "app.fullname" . }}
+        key: settings__credentials__use_case_three__hmrc_client_id
+  - name: SETTINGS__CREDENTIALS__USE_CASE_THREE__HMRC_TOTP_SECRET
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "app.fullname" . }}
+        key: settings__credentials__use_case_three__hmrc_totp_secret
+  - name: SETTINGS__CREDENTIALS__USE_CASE_FOUR__DESCRIPTION
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "app.fullname" . }}
+        key: settings__credentials__use_case_four__description
+  - name: SETTINGS__CREDENTIALS__USE_CASE_FOUR__HOST
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "app.fullname" . }}
+        key: settings__credentials__use_case_four__host
+  - name: SETTINGS__CREDENTIALS__USE_CASE_FOUR__HMRC_CLIENT_SECRET
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "app.fullname" . }}
+        key: settings__credentials__use_case_four__hmrc_client_secret
+  - name: SETTINGS__CREDENTIALS__USE_CASE_FOUR__HMRC_CLIENT_ID
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "app.fullname" . }}
+        key: settings__credentials__use_case_four__hmrc_client_id
+  - name: SETTINGS__CREDENTIALS__USE_CASE_FOUR__HMRC_TOTP_SECRET
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "app.fullname" . }}
+        key: settings__credentials__use_case_four__hmrc_totp_secret
   - name: SETTINGS__SMOKE_TEST__USE_CASE_ONE__FIRST_NAME
     valueFrom:
       secretKeyRef:
@@ -114,6 +189,111 @@ env:
       secretKeyRef:
         name: {{ template "app.fullname" . }}
         key: settings__smoke_test__use_case_one__correlation_id
+  - name: SETTINGS__SMOKE_TEST__USE_CASE_TWO__FIRST_NAME
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "app.fullname" . }}
+        key: settings__smoke_test__use_case_two__first_name
+  - name: SETTINGS__SMOKE_TEST__USE_CASE_TWO__LAST_NAME
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "app.fullname" . }}
+        key: settings__smoke_test__use_case_two__last_name
+  - name: SETTINGS__SMOKE_TEST__USE_CASE_TWO__NINO
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "app.fullname" . }}
+        key: settings__smoke_test__use_case_two__nino
+  - name: SETTINGS__SMOKE_TEST__USE_CASE_TWO__DOB
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "app.fullname" . }}
+        key: settings__smoke_test__use_case_two__dob
+  - name: SETTINGS__SMOKE_TEST__USE_CASE_TWO__START_DATE
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "app.fullname" . }}
+        key: settings__smoke_test__use_case_two__start_date
+  - name: SETTINGS__SMOKE_TEST__USE_CASE_TWO__END_DATE
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "app.fullname" . }}
+        key: settings__smoke_test__use_case_two__end_date
+  - name: SETTINGS__SMOKE_TEST__USE_CASE_TWO__CORRELATION_ID
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "app.fullname" . }}
+        key: settings__smoke_test__use_case_two__correlation_id
+  - name: SETTINGS__SMOKE_TEST__USE_CASE_THREE__FIRST_NAME
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "app.fullname" . }}
+        key: settings__smoke_test__use_case_three__first_name
+  - name: SETTINGS__SMOKE_TEST__USE_CASE_THREE__LAST_NAME
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "app.fullname" . }}
+        key: settings__smoke_test__use_case_three__last_name
+  - name: SETTINGS__SMOKE_TEST__USE_CASE_THREE__NINO
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "app.fullname" . }}
+        key: settings__smoke_test__use_case_three__nino
+  - name: SETTINGS__SMOKE_TEST__USE_CASE_THREE__DOB
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "app.fullname" . }}
+        key: settings__smoke_test__use_case_three__dob
+  - name: SETTINGS__SMOKE_TEST__USE_CASE_THREE__START_DATE
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "app.fullname" . }}
+        key: settings__smoke_test__use_case_three__start_date
+  - name: SETTINGS__SMOKE_TEST__USE_CASE_THREE__END_DATE
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "app.fullname" . }}
+        key: settings__smoke_test__use_case_three__end_date
+  - name: SETTINGS__SMOKE_TEST__USE_CASE_THREE__CORRELATION_ID
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "app.fullname" . }}
+        key: settings__smoke_test__use_case_three__correlation_id
+  - name: SETTINGS__SMOKE_TEST__USE_CASE_FOUR__FIRST_NAME
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "app.fullname" . }}
+        key: settings__smoke_test__use_case_four__first_name
+  - name: SETTINGS__SMOKE_TEST__USE_CASE_FOUR__LAST_NAME
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "app.fullname" . }}
+        key: settings__smoke_test__use_case_four__last_name
+  - name: SETTINGS__SMOKE_TEST__USE_CASE_FOUR__NINO
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "app.fullname" . }}
+        key: settings__smoke_test__use_case_four__nino
+  - name: SETTINGS__SMOKE_TEST__USE_CASE_FOUR__DOB
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "app.fullname" . }}
+        key: settings__smoke_test__use_case_four__dob
+  - name: SETTINGS__SMOKE_TEST__USE_CASE_FOUR__START_DATE
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "app.fullname" . }}
+        key: settings__smoke_test__use_case_four__start_date
+  - name: SETTINGS__SMOKE_TEST__USE_CASE_FOUR__END_DATE
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "app.fullname" . }}
+        key: settings__smoke_test__use_case_four__end_date
+  - name: SETTINGS__SMOKE_TEST__USE_CASE_FOUR__CORRELATION_ID
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "app.fullname" . }}
+        key: settings__smoke_test__use_case_four__correlation_id
   - name: REDIS_URL
     valueFrom:
       secretKeyRef:
