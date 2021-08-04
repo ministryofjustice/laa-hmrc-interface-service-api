@@ -6,6 +6,24 @@ credentials:
     hmrc_client_secret: 'NotASecret'
     hmrc_client_id: 'NotAClientID'
     hmrc_totp_secret: 'AlsoNotASecret'
+  use_case_two:
+    host: *host
+    description: 'This is fake'
+    hmrc_client_secret: 'NotASecret'
+    hmrc_client_id: 'NotAClientID'
+    hmrc_totp_secret: 'AlsoNotASecret'
+  use_case_three:
+    host: *host
+    description: 'This is fake'
+    hmrc_client_secret: 'NotASecret'
+    hmrc_client_id: 'NotAClientID'
+    hmrc_totp_secret: 'AlsoNotASecret'
+  use_case_four:
+    host: *host
+    description: 'This is fake'
+    hmrc_client_secret: 'NotASecret'
+    hmrc_client_id: 'NotAClientID'
+    hmrc_totp_secret: 'AlsoNotASecret'
 
 sidekiq:
   username: 'fake_username'
