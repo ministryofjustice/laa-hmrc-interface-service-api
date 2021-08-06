@@ -2,10 +2,10 @@
 class ApplyGetTest
   attr_reader :data
 
-  def initialize(**args)
+  def initialize(use_case, **args)
     return unless args.keys.difference(%i[first_name last_name nino dob start_date end_date]).empty?
 
-    @use_case = UseCase.new(:one)
+    @use_case = UseCase.new(use_case)
     @data = JSON.parse({
       first_name: args[:first_name],
       last_name: args[:last_name],
@@ -16,8 +16,8 @@ class ApplyGetTest
     }.to_json, object_class: OpenStruct)
   end
 
-  def self.call(**args)
-    new(**args).call
+  def self.call(use_case, **args)
+    new(use_case, **args).call
   end
 
   def call(correlation_id: SecureRandom.uuid)
@@ -92,7 +92,7 @@ class ApplyGetTest
     Rails.logger.info "Rate limited while calling #{uri}: waiting then trying again"
     sleep(0.33)
     request_endpoint(uri)
-  rescue RestClient::InternalServerError
+  rescue RestClient::InternalServerError, RestClient::NotFound
     'INTERNAL_SERVER_ERROR' # improve this, hard to do currently as only the live service fails
   end
 

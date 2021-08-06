@@ -117,6 +117,14 @@ references:
 #      - slack/approval:
 #          message: << parameters.message >>
 #          webhook: << parameters.webhook >>
+commands:
+  run-smoke-test:
+    parameters:
+      use_case:
+        type: string
+        default: expect_fail
+    steps:
+      - run: ./bin/smoke_tests << parameters.use_case >>
 jobs:
   lint_checks:
     executor: linting-executor
@@ -155,16 +163,19 @@ jobs:
           path: ./coverage
   smoke_tests:
     executor: basic-executor
+    parameters:
+      use_case:
+        type: string
+        default: set_in_workflow
     steps:
       - checkout
       - setup_remote_docker:
           docker_layer_caching: true
-      - run:
-          name: Run smoke test script
-          command: ./bin/smoke_tests
+      - run-smoke-test:
+          use_case: << parameters.use_case >>
       - slack/status:
-          success_message: ":yep: Smoke test of sandbox successful!"
-          failure_message: ":nope: Smoke test of sandbox failed!"
+          success_message: ":yep: Smoke test of use case << parameters.use_case >> on sandbox successful!"
+          failure_message: ":nope: Smoke test of use case << parameters.use_case >> on sandbox failed!"
   clean_up_ecr:
     executor: cloud-platform-executor
     steps:
@@ -329,15 +340,52 @@ workflows:
 #          requires:
 #            - hold_production
 
-  smoke-test:
+  smoke-test-one:
     triggers:
       - schedule:
-          cron: "30 8 * * 1-5" # 1-5 is Mon-Fri
+          cron: "30 7 * * 1-5" # 1-5 is Mon-Fri
           filters:
             branches:
               only: main
     jobs:
       - smoke_tests:
+          use_case: one
+          context: laa-hmrc-interface-uat
+
+  smoke-test-two:
+    triggers:
+      - schedule:
+          cron: "35 7 * * 1-5" # 1-5 is Mon-Fri
+          filters:
+            branches:
+              only: main
+    jobs:
+      - smoke_tests:
+          use_case: two
+          context: laa-hmrc-interface-uat
+
+  smoke-test-three:
+    triggers:
+      - schedule:
+          cron: "40 7 * * 1-5" # 1-5 is Mon-Fri
+          filters:
+            branches:
+              only: main
+    jobs:
+      - smoke_tests:
+          use_case: three
+          context: laa-hmrc-interface-uat
+
+  smoke-test-four:
+    triggers:
+      - schedule:
+          cron: "45 7 * * 1-5" # 1-5 is Mon-Fri
+          filters:
+            branches:
+              only: main
+    jobs:
+      - smoke_tests:
+          use_case: four
           context: laa-hmrc-interface-uat
 
   nightly:

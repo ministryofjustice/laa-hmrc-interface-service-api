@@ -1,5 +1,5 @@
 #!/bin/sh
-STATUS=$(curl -s -o /dev/null -w '%{http_code}' "https://$SMOKE_TEST_URI/smoke-test")
+STATUS=$(curl -s -o /dev/null -w '%{http_code}' "https://$SMOKE_TEST_URI/smoke-test/$1")
 if [ $STATUS -eq 200 ]; then
   exit 0;
 else
