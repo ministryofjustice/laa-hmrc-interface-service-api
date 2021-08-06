@@ -5,6 +5,7 @@ Sidekiq::Web.use ActionDispatch::Cookies
 Sidekiq::Web.use Rails.application.config.session_store, Rails.application.config.session_options
 
 Rails.application.routes.draw do
+  use_doorkeeper
   mount Sidekiq::Web => '/sidekiq'
 
   Sidekiq::Web.use Rack::Auth::Basic do |username, password|
