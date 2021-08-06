@@ -7,10 +7,28 @@ credentials:
   host: &host 'store actual value as SETTINGS__CREDENTIALS__HOST'
   use_case_one:
     host: *host
-    description: 'store actual value as SETTINGS__CREDENTIALS__DESCRIPTION'
-    hmrc_client_secret: 'store actual value as SETTINGS__CREDENTIALS__HMRC_CLIENT_SECRET'
-    hmrc_client_id: 'store actual value as SETTINGS__CREDENTIALS__HMRC_CLIENT_ID'
-    hmrc_totp_secret: 'store actual value as SETTINGS__CREDENTIALS__HMRC_TOTP_SECRET'
+    description: ' store actual value as SETTINGS__CREDENTIALS__USE_CASE_ONE__DESCRIPTION'
+    hmrc_client_secret: ' store actual value as SETTINGS__CREDENTIALS__USE_CASE_ONE__HMRC_CLIENT_SECRET'
+    hmrc_client_id: ' store actual value as SETTINGS__CREDENTIALS__USE_CASE_ONE__HMRC_CLIENT_ID'
+    hmrc_totp_secret: ' store actual value as SETTINGS__CREDENTIALS__USE_CASE_ONE__HMRC_TOTP_SECRET'
+  use_case_two:
+    host: *host
+    description: ' store actual value as SETTINGS__CREDENTIALS__USE_CASE_TWO__DESCRIPTION'
+    hmrc_client_secret: ' store actual value as SETTINGS__CREDENTIALS__USE_CASE_TWO__HMRC_CLIENT_SECRET'
+    hmrc_client_id: ' store actual value as SETTINGS__CREDENTIALS__USE_CASE_TWO__HMRC_CLIENT_ID'
+    hmrc_totp_secret: ' store actual value as SETTINGS__CREDENTIALS__USE_CASE_TWO__HMRC_TOTP_SECRET'
+  use_case_three:
+    host: *host
+    description: ' store actual value as SETTINGS__CREDENTIALS__USE_CASE_THREE__DESCRIPTION'
+    hmrc_client_secret: ' store actual value as SETTINGS__CREDENTIALS__USE_CASE_THREE__HMRC_CLIENT_SECRET'
+    hmrc_client_id: ' store actual value as SETTINGS__CREDENTIALS__USE_CASE_THREE__HMRC_CLIENT_ID'
+    hmrc_totp_secret: ' store actual value as SETTINGS__CREDENTIALS__USE_CASE_THREE__HMRC_TOTP_SECRET'
+  use_case_four:
+    host: *host
+    description: ' store actual value as SETTINGS__CREDENTIALS__USE_CASE_FOUR__DESCRIPTION'
+    hmrc_client_secret: ' store actual value as SETTINGS__CREDENTIALS__USE_CASE_FOUR__HMRC_CLIENT_SECRET'
+    hmrc_client_id: ' store actual value as SETTINGS__CREDENTIALS__USE_CASE_FOUR__HMRC_CLIENT_ID'
+    hmrc_totp_secret: ' store actual value as SETTINGS__CREDENTIALS__USE_CASE_FOUR__HMRC_TOTP_SECRET'
 
 sidekiq:
   username: 'store actual value as SETTINGS__SIDEKIQ__USERNAME'
@@ -25,3 +43,27 @@ smoke_test:
     start_date: 'store actual value as SETTINGS__SMOKE_TEST__USE_CASE_ONE__START_DATE'
     end_date: 'store actual value as SETTINGS__SMOKE_TEST__USE_CASE_ONE__END_DATE'
     correlation_id: 'store actual value as SETTINGS__SMOKE_TEST__USE_CASE_ONE__CORRELATION_ID'
+  use_case_two:
+    first_name: 'store actual value as SETTINGS__SMOKE_TEST__USE_CASE_TWO__FIRST_NAME'
+    last_name: 'store actual value as SETTINGS__SMOKE_TEST__USE_CASE_TWO__LAST_NAME'
+    nino: 'store actual value as SETTINGS__SMOKE_TEST__USE_CASE_TWO__NINO'
+    dob: 'store actual value as SETTINGS__SMOKE_TEST__USE_CASE_TWO__DOB'
+    start_date: 'store actual value as SETTINGS__SMOKE_TEST__USE_CASE_TWO__START_DATE'
+    end_date: 'store actual value as SETTINGS__SMOKE_TEST__USE_CASE_TWO__END_DATE'
+    correlation_id: 'store actual value as SETTINGS__SMOKE_TEST__USE_CASE_TWO__CORRELATION_ID'
+  use_case_three:
+    first_name: 'store actual value as SETTINGS__SMOKE_TEST__USE_CASE_THREE__FIRST_NAME'
+    last_name: 'store actual value as SETTINGS__SMOKE_TEST__USE_CASE_THREE__LAST_NAME'
+    nino: 'store actual value as SETTINGS__SMOKE_TEST__USE_CASE_THREE__NINO'
+    dob: 'store actual value as SETTINGS__SMOKE_TEST__USE_CASE_THREE__DOB'
+    start_date: 'store actual value as SETTINGS__SMOKE_TEST__USE_CASE_THREE__START_DATE'
+    end_date: 'store actual value as SETTINGS__SMOKE_TEST__USE_CASE_THREE__END_DATE'
+    correlation_id: 'store actual value as SETTINGS__SMOKE_TEST__USE_CASE_THREE__CORRELATION_ID'
+  use_case_four:
+    first_name: 'store actual value as SETTINGS__SMOKE_TEST__USE_CASE_FOUR__FIRST_NAME'
+    last_name: 'store actual value as SETTINGS__SMOKE_TEST__USE_CASE_FOUR__LAST_NAME'
+    nino: 'store actual value as SETTINGS__SMOKE_TEST__USE_CASE_FOUR__NINO'
+    dob: 'store actual value as SETTINGS__SMOKE_TEST__USE_CASE_FOUR__DOB'
+    start_date: 'store actual value as SETTINGS__SMOKE_TEST__USE_CASE_FOUR__START_DATE'
+    end_date: 'store actual value as SETTINGS__SMOKE_TEST__USE_CASE_FOUR__END_DATE'
+    correlation_id: 'store actual value as SETTINGS__SMOKE_TEST__USE_CASE_FOUR__CORRELATION_ID'
