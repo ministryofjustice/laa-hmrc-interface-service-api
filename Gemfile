@@ -49,3 +49,5 @@ group :development do
 end
 
 gem 'tzinfo-data'
+
+gem 'versionist', '~> 2.0'
