@@ -2,10 +2,10 @@
 class ApplyGetTest
   attr_reader :data
 
-  def initialize(use_case, **args)
-    return unless args.keys.difference(%i[first_name last_name nino dob start_date end_date]).empty?
+  def initialize(args = {})
+    return unless args.keys.difference(%i[use_case first_name last_name nino date_of_birth start_date end_date]).empty?
 
-    @use_case = UseCase.new(use_case)
+    @use_case = UseCase.new(args[:use_case])
     @data = JSON.parse({
       first_name: args[:first_name],
       last_name: args[:last_name],
@@ -16,8 +16,8 @@ class ApplyGetTest
     }.to_json, object_class: OpenStruct)
   end
 
-  def self.call(use_case, **args)
-    new(use_case, **args).call
+  def self.call(args = {})
+    new(args).call
   end
 
   def call(correlation_id: SecureRandom.uuid)
