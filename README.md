@@ -26,6 +26,7 @@ A test script has been added to run a single test on use_case one
 It can be run from a rails console with 
 ```ruby 
 ApplyGetTest.call(
+  use_case: :one,
   first_name: 'first', 
   last_name: 'name', 
   nino: 'QQ123456C', 
