@@ -17,6 +17,10 @@ Rails.application.routes.draw do
     secure_compare(username, Settings.sidekiq.username) & secure_compare(password, Settings.sidekiq.web_ui_password)
   end
 
+  api_version(module: 'V1', path: { value: 'v1' }, default: true) do
+    use_doorkeeper
+  end
+
   root to: 'main#show'
   get 'main', to: 'main#show', format: :json
   get 'ping', to: 'status#ping', format: :json
@@ -25,6 +29,12 @@ Rails.application.routes.draw do
   unless Settings.environment.eql?('live')
     get 'smoke-test/:use_case', to: 'smoke_test#call', as: 'smoke-test-use-case', format: :json
     get 'smoke-test', to: 'smoke_test#health_check', format: :json
+  end
+
+  namespace :api do
+    api_version(module: 'V1', path: { value: 'v1' }, default: true) do
+      resources :use_case, only: [:index]
+    end
   end
 end
 
