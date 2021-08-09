@@ -5,9 +5,70 @@ info:
   description: This Service facilitates the HMRC API access for the LAA Use Cases
   version: v1
 paths:
+  "/api/v1/use_case":
+    get:
+      summary: get hearing
+      description: GET individual user data for use_case one
+      tags:
+      - Apply service
+      security:
+      - oAuth: []
+      parameters:
+      - name: filter[first_name]
+        in: query
+        required: true
+        description: The first name of the individual
+        schema:
+          type: string
+      - name: filter[last_name]
+        in: query
+        required: true
+        description: The last name of the individual
+        schema:
+          type: string
+      - name: filter[date_of_birth]
+        in: query
+        required: true
+        description: The individual's date of birth (YYYY-MM-DD)
+        schema:
+          type: string
+      - name: filter[nino]
+        in: query
+        required: true
+        description: The individual's National Insurance number
+        schema:
+          type: string
+      - name: filter[start_date]
+        in: query
+        required: true
+        description: The earliest date you need data from
+        schema:
+          type: string
+      - name: filter[end_date]
+        in: query
+        required: true
+        description: The end date you need data to
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+        '401':
+          description: Unauthorized
   "/smoke-test":
     get:
       summary: call smoke_test
+      description: Fetch recent smoke_test results
       responses:
         '200':
-          description: 'true'
+          description: Success
+components:
+  securitySchemes:
+    oAuth:
+      in: header
+      type: oauth2
+      description: OAuth2 client credentials flow
+      flows:
+        clientCredentials:
+          scopes: []
+          tokenUrl: "/oauth/token"
