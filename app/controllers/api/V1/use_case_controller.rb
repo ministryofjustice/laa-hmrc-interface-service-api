@@ -1,6 +1,3 @@
-# :nocov:
-# nocov added on creation as this is a placeholder controller until it
-# can be extended
 module Api
   module V1
     class UseCaseController < ApplicationController
@@ -27,4 +24,3 @@ module Api
     end
   end
 end
-# :nocov:
