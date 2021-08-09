@@ -22,7 +22,22 @@ RSpec.configure do |config|
         description: 'This Service facilitates the HMRC API access for the LAA Use Cases',
         version: 'v1'
       },
-      paths: {}
+      paths: {},
+      components: {
+        securitySchemes: {
+          oAuth: {
+            in: :header,
+            type: :oauth2,
+            description: 'OAuth2 client credentials flow',
+            flows: {
+              clientCredentials: {
+                scopes: [],
+                tokenUrl: '/oauth/token'
+              }
+            }
+          }
+        }
+      }
     }
   }
 
