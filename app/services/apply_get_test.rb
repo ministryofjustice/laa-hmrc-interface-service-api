@@ -10,7 +10,7 @@ class ApplyGetTest
       first_name: args[:first_name],
       last_name: args[:last_name],
       nino: args[:nino],
-      dob: args[:dob],
+      dob: args[:date_of_birth],
       start_date: args[:start_date],
       end_date: args[:end_date]
     }.to_json, object_class: OpenStruct)
