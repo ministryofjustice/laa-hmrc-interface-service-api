@@ -1,7 +1,7 @@
 class SmokeTestController < ApplicationController
   def call
     result = SmokeTest.call(smoke_test_params)
-    render status: status, json: { "smoke_test_#{smoke_test_params}_result": result }
+    render status: result ? 200 : 500, json: { "smoke_test_#{smoke_test_params}_result": result }
   end
 
   def health_check
