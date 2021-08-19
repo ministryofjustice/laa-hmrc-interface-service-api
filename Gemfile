@@ -40,7 +40,7 @@ group :test do
 end
 
 group :development do
-  gem 'listen', '~> 3.6'
+  gem 'listen', '~> 3.7'
   gem 'spring'
 end
 
