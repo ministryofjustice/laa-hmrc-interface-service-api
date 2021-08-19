@@ -27,6 +27,7 @@ group :development, :test do
   gem 'highline'
   gem 'pry-byebug'
   gem 'rspec_junit_formatter'
+  gem 'rswag-specs'
   gem 'rubocop', require: false
   gem 'rubocop-performance'
   gem 'rubocop-rails', require: false
@@ -36,7 +37,6 @@ group :test do
   gem 'mock_redis'
   gem 'rspec-rails', '~> 5.0'
   gem 'rspec-sidekiq'
-  gem 'rswag-specs'
   gem 'simplecov', require: false
   gem 'simplecov-rcov'
   gem 'webmock'
