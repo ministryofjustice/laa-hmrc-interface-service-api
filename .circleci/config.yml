@@ -310,7 +310,7 @@ workflows:
       - deploy_staging:
           context: laa-hmrc-interface-staging
           requires:
-            - build_and_push
+            - deploy_main_uat
             - delete_uat_branch
 #      - hold_production_notification:
 #          requires:
