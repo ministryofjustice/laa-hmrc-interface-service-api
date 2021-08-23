@@ -19,11 +19,19 @@ env:
       secretKeyRef:
         name: rds-instance-output
         key: rds_instance_address
+  {{- if eq .Values.deploy.settings__sentry__environment "uat" }}
   - name: POSTGRES_DATABASE
     valueFrom:
       secretKeyRef:
         name: {{ template "app.fullname" . }}
         key: database_name
+  {{ else }}
+  - name: POSTGRES_DATABASE
+    valueFrom:
+      secretKeyRef:
+        name: rds-instance-output
+        key: database_name
+  {{ end }}
   - name: SECRET_KEY_BASE
     valueFrom:
       secretKeyRef:
