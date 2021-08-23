@@ -222,23 +222,23 @@ jobs:
       - run:
           name: Delete UAT database
           command: ./bin/uat_full_db_delete
-#  deploy_staging:
-#    executor: cloud-platform-executor
-#    steps:
-#      - checkout
-#      - setup_remote_docker:
-#          docker_layer_caching: true
-#      - *decrypt_secrets
-#      - *authenticate_k8s
-#      - deploy:
-#          name: Helm deployment to staging
-#          command: |
-#            helm upgrade laa-hmrc-interface ./deploy/helm/. \
-#                          --install --wait \
-#                          --namespace=${K8S_NAMESPACE} \
-#                          --values ./deploy/helm/values-staging.yaml \
-#                          --set image.repository="$ECR_ENDPOINT/laa-apply-for-legal-aid/laa-hmrc-interface-uat-ecr" \
-#                          --set image.tag="${CIRCLE_SHA1}"
+  deploy_staging:
+    executor: cloud-platform-executor
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - *decrypt_secrets
+      - *authenticate_k8s
+      - deploy:
+          name: Helm deployment to staging
+          command: |
+            helm upgrade laa-hmrc-interface ./deploy/helm/. \
+                          --install --wait \
+                          --namespace=${K8S_NAMESPACE} \
+                          --values ./deploy/helm/values-staging.yaml \
+                          --set image.repository="$ECR_ENDPOINT/laa-apply-for-legal-aid/laa-hmrc-interface-uat-ecr" \
+                          --set image.tag="${CIRCLE_SHA1}"
 #  hold_production_notification:
 #    executor: notification-executor
 #    steps:
@@ -306,11 +306,12 @@ workflows:
       - delete_uat_branch:
           context: laa-hmrc-interface-uat
           requires:
-            - deploy_main_uat
-#      - deploy_staging:
-#          context: laa-hmrc-interface-staging
-#          requires:
-#            - delete_uat_branch
+            - build_and_push
+      - deploy_staging:
+          context: laa-hmrc-interface-staging
+          requires:
+            - build_and_push
+            - delete_uat_branch
 #      - hold_production_notification:
 #          requires:
 #            - deploy_staging
