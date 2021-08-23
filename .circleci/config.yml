@@ -219,22 +219,9 @@ jobs:
       - run:
           name: Delete UAT release
           command: ./bin/uat_delete_release NOT_A_DRY_RUN
-  delete_uat_db:
-    executor: cloud-platform-executor
-    steps:
-      - checkout
-      - setup_remote_docker
-      - *authenticate_k8s
-      - run:
-          name: Set up port-forward-pod
-          command: ./bin/uat_delete_db_setup
-      - run:
-          name: Start port forwarding
-          command: kubectl -n "${K8S_NAMESPACE}" port-forward port-forward-pod 5432:5432
-          background: true
       - run:
           name: Delete UAT database
-          command: ./bin/uat_delete_db
+          command: ./bin/uat_full_db_delete
 #  deploy_staging:
 #    executor: cloud-platform-executor
 #    steps:
@@ -320,14 +307,10 @@ workflows:
           context: laa-hmrc-interface-uat
           requires:
             - deploy_main_uat
-      - delete_uat_db:
-          context: laa-hmrc-interface-uat
-          requires:
-            - delete_uat_branch
 #      - deploy_staging:
 #          context: laa-hmrc-interface-staging
 #          requires:
-#            - delete_uat_db
+#            - delete_uat_branch
 #      - hold_production_notification:
 #          requires:
 #            - deploy_staging
