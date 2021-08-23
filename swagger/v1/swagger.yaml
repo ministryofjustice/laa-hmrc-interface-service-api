@@ -5,9 +5,56 @@ info:
   description: This Service facilitates the HMRC API access for the LAA Use Cases
   version: v1
 paths:
+  "/smoke-test/{use_case}":
+    get:
+      summary: individual use_case smoke-test
+      description: Run a smoke test for chosen use_case
+      tags:
+      - Smoke tests
+      parameters:
+      - name: use_case
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              example:
+                smoke_test_one_result: true
+        '500':
+          description: internal server error
+          content:
+            application/json:
+              example:
+                smoke_test_one_result: false
   "/smoke-test":
     get:
       summary: call smoke_test
+      description: Fetch smoke_test results that have been generated within the last
+        hour
+      tags:
+      - Smoke tests
       responses:
         '200':
-          description: 'true'
+          description: success
+          content:
+            application/json:
+              example:
+                smoke_test_result:
+                  use_case_one: true
+                  use_case_two: true
+                  use_case_three: true
+                  use_case_four: true
+        '500':
+          description: internal server error
+          content:
+            application/json:
+              example:
+                smoke_test_result:
+                  use_case_one: false
+                  use_case_two: true
+                  use_case_three: true
+                  use_case_four: true

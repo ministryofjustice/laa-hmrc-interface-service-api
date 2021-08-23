@@ -57,3 +57,18 @@ Successful results are stored for 1 hour, to ensure that stale successes don;t g
 https://HOST/smoke-test
 ```
 That will show echo the recently successful tests
+
+### Documentation
+
+We use [rswag](https://github.com/rswag/rswag) to document with [swagger](https://swagger.io/) the endpoints that are being exposed.
+
+To view the API documentation, start the rails server locally using `rails s` and then browse to http://localhost:3000/api-docs/index.html.
+
+To use the 'Try it out' functionality, you need to have first created an oAuth user in your local database
+
+To add a new endpoint, run `rails generate rspec:swagger <controller_name>` to generate a request spec. 
+Add appropriate tests and content to the spec, then run `NOCOVERAGE=true rake rswag`.
+The new endpoint should now appear in the Swagger UI interface.
+
+**Note**: the `NOCOVERAGE` prefix is not strictly required but it will silence the coverage warnings. 
+As it only runs swagger test files the coverage will be well below the expected 100% 
