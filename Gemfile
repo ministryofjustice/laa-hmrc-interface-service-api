@@ -39,6 +39,7 @@ group :test do
   gem 'rspec-sidekiq'
   gem 'simplecov', require: false
   gem 'simplecov-rcov'
+  gem 'vcr'
   gem 'webmock'
 end
 
