@@ -5,6 +5,56 @@ info:
   description: This Service facilitates the HMRC API access for the LAA Use Cases
   version: v1
 paths:
+  "/api/v1/use_case/submit":
+    parameters:
+    - name: filter[use_case]
+      in: query
+      required: true
+      description: Use case
+      schema:
+        type: string
+    - name: filter[last_name]
+      in: query
+      required: true
+      description: Last name
+      schema:
+        type: string
+    - name: filter[first_name]
+      in: query
+      required: true
+      description: First name
+      schema:
+        type: string
+    - name: filter[dob]
+      in: query
+      required: true
+      description: Date of birth
+      schema:
+        type: string
+    - name: filter[nino]
+      in: query
+      required: true
+      description: National Insurance Number
+      schema:
+        type: string
+    - name: filter[start_date]
+      in: query
+      required: true
+      description: Start date
+      schema:
+        type: string
+    - name: filter[end_date]
+      in: query
+      required: true
+      description: End date
+      schema:
+        type: string
+    post:
+      summary: call use_case/submit
+      description: Post a submission to HMRC
+      responses:
+        '202':
+          description: Accepted
   "/api/v1/use_case/one":
     parameters:
     - name: filter[last_name]
