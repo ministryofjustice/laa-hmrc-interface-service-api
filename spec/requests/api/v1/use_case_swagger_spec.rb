@@ -31,16 +31,7 @@ RSpec.describe 'api/v1/use_case', type: :request, swagger_doc: 'v1/swagger.yaml'
     parameter name: 'filter[end_date]', in: :query, required: true, type: :string,
               description: 'End date'
 
-<<<<<<< Updated upstream
-    before do
-      remove_request_stub(@hmrc_stub_requests)
-      allow(REDIS).to receive(:get).with('use_case_one_bearer_token').and_return('dummy_bearer_token')
-    end
-
-    get('call use_case/one') do
-=======
     post('call use_case/submit') do
->>>>>>> Stashed changes
       produces 'application/json'
       response(202, 'Accepted') do
         description 'Post a submission to HMRC'
