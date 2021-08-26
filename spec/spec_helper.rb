@@ -53,7 +53,7 @@ VCR.configure do |vcr_config|
   vcr_config.hook_into :webmock
   vcr_config.configure_rspec_metadata!
   vcr_config.filter_sensitive_data('<SETTINGS__CREDENTIALS__HOST>') do
-    ENV['SETTINGS__CREDENTIALS__HOST']
+    Settings.credentials.host
   end
 end
 
