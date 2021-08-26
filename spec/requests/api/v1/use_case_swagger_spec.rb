@@ -33,6 +33,7 @@ RSpec.describe 'api/v1/use_case', type: :request, swagger_doc: 'v1/swagger.yaml'
     end
 
     get('call use_case/one') do
+      produces 'application/json', 'application/xml'
       response(200, 'Success') do
         around do |example|
           VCR.use_cassette('use_case_one_success') do
@@ -79,6 +80,7 @@ RSpec.describe 'api/v1/use_case', type: :request, swagger_doc: 'v1/swagger.yaml'
     end
 
     get('call use_case/two') do
+      produces 'application/json', 'application/xml'
       response(200, 'Success') do
         around do |example|
           VCR.use_cassette('use_case_two_success') do
@@ -125,6 +127,7 @@ RSpec.describe 'api/v1/use_case', type: :request, swagger_doc: 'v1/swagger.yaml'
     end
 
     get('call use_case/three') do
+      produces 'application/json', 'application/xml'
       response(200, 'Success') do
         around do |example|
           VCR.use_cassette('use_case_three_success') do
@@ -171,6 +174,7 @@ RSpec.describe 'api/v1/use_case', type: :request, swagger_doc: 'v1/swagger.yaml'
     end
 
     get('call use_case/four') do
+      produces 'application/json', 'application/xml'
       response(200, 'Success') do
         around do |example|
           VCR.use_cassette('use_case_four_success') do
