@@ -5,6 +5,182 @@ info:
   description: This Service facilitates the HMRC API access for the LAA Use Cases
   version: v1
 paths:
+  "/api/v1/use_case/one":
+    parameters:
+    - name: filter[last_name]
+      in: query
+      required: true
+      description: Last name
+      schema:
+        type: string
+    - name: filter[first_name]
+      in: query
+      required: true
+      description: First name
+      schema:
+        type: string
+    - name: filter[dob]
+      in: query
+      required: true
+      description: Date of birth
+      schema:
+        type: string
+    - name: filter[nino]
+      in: query
+      required: true
+      description: National Insurance Number
+      schema:
+        type: string
+    - name: filter[start_date]
+      in: query
+      required: true
+      description: Start date
+      schema:
+        type: string
+    - name: filter[end_date]
+      in: query
+      required: true
+      description: End date
+      schema:
+        type: string
+    get:
+      summary: call use_case/one
+      description: Fetch use case one results
+      responses:
+        '200':
+          description: Success
+  "/api/v1/use_case/two":
+    parameters:
+    - name: filter[last_name]
+      in: query
+      required: true
+      description: Last name
+      schema:
+        type: string
+    - name: filter[first_name]
+      in: query
+      required: true
+      description: First name
+      schema:
+        type: string
+    - name: filter[dob]
+      in: query
+      required: true
+      description: Date of birth
+      schema:
+        type: string
+    - name: filter[nino]
+      in: query
+      required: true
+      description: National Insurance Number
+      schema:
+        type: string
+    - name: filter[start_date]
+      in: query
+      required: true
+      description: Start date
+      schema:
+        type: string
+    - name: filter[end_date]
+      in: query
+      required: true
+      description: End date
+      schema:
+        type: string
+    get:
+      summary: call use_case/two
+      description: Fetch use case two results
+      responses:
+        '200':
+          description: Success
+  "/api/v1/use_case/three":
+    parameters:
+    - name: filter[last_name]
+      in: query
+      required: true
+      description: Last name
+      schema:
+        type: string
+    - name: filter[first_name]
+      in: query
+      required: true
+      description: First name
+      schema:
+        type: string
+    - name: filter[dob]
+      in: query
+      required: true
+      description: Date of birth
+      schema:
+        type: string
+    - name: filter[nino]
+      in: query
+      required: true
+      description: National Insurance Number
+      schema:
+        type: string
+    - name: filter[start_date]
+      in: query
+      required: true
+      description: Start date
+      schema:
+        type: string
+    - name: filter[end_date]
+      in: query
+      required: true
+      description: End date
+      schema:
+        type: string
+    get:
+      summary: call use_case/three
+      description: Fetch use case three results
+      responses:
+        '200':
+          description: Success
+  "/api/v1/use_case/four":
+    parameters:
+    - name: filter[last_name]
+      in: query
+      required: true
+      description: Last name
+      schema:
+        type: string
+    - name: filter[first_name]
+      in: query
+      required: true
+      description: First name
+      schema:
+        type: string
+    - name: filter[dob]
+      in: query
+      required: true
+      description: Date of birth
+      schema:
+        type: string
+    - name: filter[nino]
+      in: query
+      required: true
+      description: National Insurance Number
+      schema:
+        type: string
+    - name: filter[start_date]
+      in: query
+      required: true
+      description: Start date
+      schema:
+        type: string
+    - name: filter[end_date]
+      in: query
+      required: true
+      description: End date
+      schema:
+        type: string
+    get:
+      summary: call use_case/four
+      description: Fetch use case four results
+      responses:
+        '200':
+          description: Success
   "/smoke-test/{use_case}":
     get:
       summary: individual use_case smoke-test

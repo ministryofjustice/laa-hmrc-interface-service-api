@@ -1,0 +1,1127 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: "<SETTINGS__CREDENTIALS__HOST>/individuals/matching"
+    body:
+      encoding: UTF-8
+      string: '{"firstName":"Langley","lastName":"Yorke","nino":"MN212451D","dateOfBirth":"1992-07-22"}'
+    headers:
+      Accept:
+      - application/vnd.hmrc.2.0+json
+      User-Agent:
+      - rest-client/2.1.0 (darwin19 x86_64) ruby/3.0.2p107
+      Correlationid:
+      - 7198f753-4ab7-4f6e-b1d2-97d0fe469cd1
+      Authorization:
+      - Bearer dummy_bearer_token
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '88'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Host:
+      - <SETTINGS__CREDENTIALS__HOST>
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json
+      Cache-Control:
+      - no-cache,no-store,max-age=0
+      X-Envoy-Upstream-Service-Time:
+      - '63'
+      Strict-Transport-Security:
+      - max-age=31536000;
+      Content-Security-Policy:
+      - default-src 'self'
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Content-Type-Options:
+      - nosniff
+      Content-Length:
+      - '200'
+      Date:
+      - Wed, 25 Aug 2021 08:55:00 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJfbGlua3MiOnsic2VsZiI6eyJocmVmIjoiL2luZGl2aWR1YWxzL21hdGNoaW5nLyJ9LCJpbmRpdmlkdWFsIjp7Im5hbWUiOiJHRVQiLCJocmVmIjoiL2luZGl2aWR1YWxzL21hdGNoaW5nL2JiYzcyMDI3LWQ0NmUtNDdlYy05OGU4LTM1ZGQyZWZmODdlOSIsInRpdGxlIjoiR2V0IGEgbWF0Y2hlZCBpbmRpdmlkdWFs4oCZcyBpbmZvcm1hdGlvbiJ9fX0=
+  recorded_at: Wed, 25 Aug 2021 08:55:00 GMT
+- request:
+    method: get
+    uri: "<SETTINGS__CREDENTIALS__HOST>/individuals/matching/bbc72027-d46e-47ec-98e8-35dd2eff87e9"
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.hmrc.2.0+json
+      User-Agent:
+      - rest-client/2.1.0 (darwin19 x86_64) ruby/3.0.2p107
+      Correlationid:
+      - 7198f753-4ab7-4f6e-b1d2-97d0fe469cd1
+      Authorization:
+      - Bearer dummy_bearer_token
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Host:
+      - <SETTINGS__CREDENTIALS__HOST>
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json
+      Cache-Control:
+      - no-cache,no-store,max-age=0
+      X-Envoy-Upstream-Service-Time:
+      - '21'
+      Strict-Transport-Security:
+      - max-age=31536000;
+      Content-Security-Policy:
+      - default-src 'self'
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Content-Type-Options:
+      - nosniff
+      Content-Length:
+      - '673'
+      Date:
+      - Wed, 25 Aug 2021 08:55:00 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"individual":{"firstName":"Langley","lastName":"Yorke","nino":"MN212451D","dateOfBirth":"1992-07-22"},"_links":{"employments":{"name":"GET","href":"/individuals/employments/?matchId=bbc72027-d46e-47ec-98e8-35dd2eff87e9","title":"Get
+        the individual''s employment data"},"benefits-and-credits":{"name":"GET","href":"/individuals/benefits-and-credits/?matchId=bbc72027-d46e-47ec-98e8-35dd2eff87e9","title":"Get
+        the individual''s benefits and credits data"},"income":{"name":"GET","href":"/individuals/income/?matchId=bbc72027-d46e-47ec-98e8-35dd2eff87e9","title":"Get
+        the individual''s income data"},"self":{"href":"/individuals/matching/bbc72027-d46e-47ec-98e8-35dd2eff87e9"}}}'
+  recorded_at: Wed, 25 Aug 2021 08:55:00 GMT
+- request:
+    method: get
+    uri: "<SETTINGS__CREDENTIALS__HOST>/individuals/employments/?matchId=bbc72027-d46e-47ec-98e8-35dd2eff87e9"
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.hmrc.2.0+json
+      User-Agent:
+      - rest-client/2.1.0 (darwin19 x86_64) ruby/3.0.2p107
+      Correlationid:
+      - 7198f753-4ab7-4f6e-b1d2-97d0fe469cd1
+      Authorization:
+      - Bearer dummy_bearer_token
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Host:
+      - <SETTINGS__CREDENTIALS__HOST>
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json
+      Cache-Control:
+      - no-cache,no-store,max-age=0
+      X-Envoy-Upstream-Service-Time:
+      - '49'
+      Strict-Transport-Security:
+      - max-age=31536000;
+      Content-Security-Policy:
+      - default-src 'self'
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Content-Type-Options:
+      - nosniff
+      Content-Length:
+      - '263'
+      Date:
+      - Wed, 25 Aug 2021 08:55:00 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"_links":{"paye":{"href":"/individuals/employments/paye?matchId=bbc72027-d46e-47ec-98e8-35dd2eff87e9{&fromDate,toDate}","title":"Get
+        an individual''s PAYE employment data"},"self":{"href":"/individuals/employments/?matchId=bbc72027-d46e-47ec-98e8-35dd2eff87e9"}}}'
+  recorded_at: Wed, 25 Aug 2021 08:55:00 GMT
+- request:
+    method: get
+    uri: "<SETTINGS__CREDENTIALS__HOST>/individuals/employments/paye?fromDate=2020-08-01&matchId=bbc72027-d46e-47ec-98e8-35dd2eff87e9&toDate=2020-10-01"
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.hmrc.2.0+json
+      User-Agent:
+      - rest-client/2.1.0 (darwin19 x86_64) ruby/3.0.2p107
+      Correlationid:
+      - 7198f753-4ab7-4f6e-b1d2-97d0fe469cd1
+      Authorization:
+      - Bearer dummy_bearer_token
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Host:
+      - <SETTINGS__CREDENTIALS__HOST>
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json
+      Cache-Control:
+      - no-cache,no-store,max-age=0
+      X-Envoy-Upstream-Service-Time:
+      - '59'
+      Strict-Transport-Security:
+      - max-age=31536000;
+      Content-Security-Policy:
+      - default-src 'self'
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Content-Type-Options:
+      - nosniff
+      Content-Length:
+      - '160'
+      Date:
+      - Wed, 25 Aug 2021 08:55:01 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"_links":{"self":{"href":"/individuals/employments/paye?matchId=bbc72027-d46e-47ec-98e8-35dd2eff87e9&fromDate=2020-08-01&toDate=2020-10-01"}},"employments":[]}'
+  recorded_at: Wed, 25 Aug 2021 08:55:01 GMT
+- request:
+    method: get
+    uri: "<SETTINGS__CREDENTIALS__HOST>/individuals/benefits-and-credits/?matchId=bbc72027-d46e-47ec-98e8-35dd2eff87e9"
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.hmrc.1.0+json
+      User-Agent:
+      - rest-client/2.1.0 (darwin19 x86_64) ruby/3.0.2p107
+      Correlationid:
+      - 7198f753-4ab7-4f6e-b1d2-97d0fe469cd1
+      Authorization:
+      - Bearer dummy_bearer_token
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Host:
+      - <SETTINGS__CREDENTIALS__HOST>
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json
+      Cache-Control:
+      - no-cache,no-store,max-age=0
+      X-Envoy-Upstream-Service-Time:
+      - '54'
+      Strict-Transport-Security:
+      - max-age=31536000;
+      Content-Security-Policy:
+      - default-src 'self'
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Content-Type-Options:
+      - nosniff
+      Content-Length:
+      - '482'
+      Date:
+      - Wed, 25 Aug 2021 08:55:01 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"_links":{"working-tax-credit":{"href":"/individuals/benefits-and-credits/working-tax-credit?matchId=bbc72027-d46e-47ec-98e8-35dd2eff87e9{&fromDate,toDate}","title":"Get
+        Working Tax Credit details"},"child-tax-credit":{"href":"/individuals/benefits-and-credits/child-tax-credit?matchId=bbc72027-d46e-47ec-98e8-35dd2eff87e9{&fromDate,toDate}","title":"Get
+        Child Tax Credit details"},"self":{"href":"/individuals/benefits-and-credits/?matchId=bbc72027-d46e-47ec-98e8-35dd2eff87e9"}}}'
+  recorded_at: Wed, 25 Aug 2021 08:55:01 GMT
+- request:
+    method: get
+    uri: "<SETTINGS__CREDENTIALS__HOST>/individuals/benefits-and-credits/working-tax-credit?fromDate=2020-08-01&matchId=bbc72027-d46e-47ec-98e8-35dd2eff87e9&toDate=2020-10-01"
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.hmrc.1.0+json
+      User-Agent:
+      - rest-client/2.1.0 (darwin19 x86_64) ruby/3.0.2p107
+      Correlationid:
+      - 7198f753-4ab7-4f6e-b1d2-97d0fe469cd1
+      Authorization:
+      - Bearer dummy_bearer_token
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Host:
+      - <SETTINGS__CREDENTIALS__HOST>
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json
+      Cache-Control:
+      - no-cache,no-store,max-age=0
+      X-Envoy-Upstream-Service-Time:
+      - '94'
+      Strict-Transport-Security:
+      - max-age=31536000;
+      Content-Security-Policy:
+      - default-src 'self'
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Content-Type-Options:
+      - nosniff
+      Content-Length:
+      - '185'
+      Date:
+      - Wed, 25 Aug 2021 08:55:01 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"_links":{"self":{"href":"/individuals/benefits-and-credits/working-tax-credits?matchId=bbc72027-d46e-47ec-98e8-35dd2eff87e9&fromDate=2020-08-01&toDate=2020-10-01"}},"applications":[]}'
+  recorded_at: Wed, 25 Aug 2021 08:55:01 GMT
+- request:
+    method: get
+    uri: "<SETTINGS__CREDENTIALS__HOST>/individuals/benefits-and-credits/child-tax-credit?fromDate=2020-08-01&matchId=bbc72027-d46e-47ec-98e8-35dd2eff87e9&toDate=2020-10-01"
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.hmrc.1.0+json
+      User-Agent:
+      - rest-client/2.1.0 (darwin19 x86_64) ruby/3.0.2p107
+      Correlationid:
+      - 7198f753-4ab7-4f6e-b1d2-97d0fe469cd1
+      Authorization:
+      - Bearer dummy_bearer_token
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Host:
+      - <SETTINGS__CREDENTIALS__HOST>
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json
+      Cache-Control:
+      - no-cache,no-store,max-age=0
+      X-Envoy-Upstream-Service-Time:
+      - '93'
+      Strict-Transport-Security:
+      - max-age=31536000;
+      Content-Security-Policy:
+      - default-src 'self'
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Content-Type-Options:
+      - nosniff
+      Content-Length:
+      - '183'
+      Date:
+      - Wed, 25 Aug 2021 08:55:02 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"_links":{"self":{"href":"/individuals/benefits-and-credits/child-tax-credits?matchId=bbc72027-d46e-47ec-98e8-35dd2eff87e9&fromDate=2020-08-01&toDate=2020-10-01"}},"applications":[]}'
+  recorded_at: Wed, 25 Aug 2021 08:55:02 GMT
+- request:
+    method: get
+    uri: "<SETTINGS__CREDENTIALS__HOST>/individuals/income/?matchId=bbc72027-d46e-47ec-98e8-35dd2eff87e9"
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.hmrc.2.0+json
+      User-Agent:
+      - rest-client/2.1.0 (darwin19 x86_64) ruby/3.0.2p107
+      Correlationid:
+      - 7198f753-4ab7-4f6e-b1d2-97d0fe469cd1
+      Authorization:
+      - Bearer dummy_bearer_token
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Host:
+      - <SETTINGS__CREDENTIALS__HOST>
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json
+      Cache-Control:
+      - no-cache,no-store,max-age=0
+      X-Envoy-Upstream-Service-Time:
+      - '55'
+      Strict-Transport-Security:
+      - max-age=31536000;
+      Content-Security-Policy:
+      - default-src 'self'
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Content-Type-Options:
+      - nosniff
+      Content-Length:
+      - '430'
+      Date:
+      - Wed, 25 Aug 2021 08:55:02 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"_links":{"paye":{"href":"/individuals/income/paye?matchId=bbc72027-d46e-47ec-98e8-35dd2eff87e9{&fromDate,toDate}","title":"Get
+        an individual''s PAYE income data per employment"},"sa":{"href":"/individuals/income/sa?matchId=bbc72027-d46e-47ec-98e8-35dd2eff87e9{&fromTaxYear,toTaxYear}","title":"Get
+        an individual''s Self Assessment income data"},"self":{"href":"/individuals/income/?matchId=bbc72027-d46e-47ec-98e8-35dd2eff87e9"}}}'
+  recorded_at: Wed, 25 Aug 2021 08:55:02 GMT
+- request:
+    method: get
+    uri: "<SETTINGS__CREDENTIALS__HOST>/individuals/income/paye?fromDate=2020-08-01&matchId=bbc72027-d46e-47ec-98e8-35dd2eff87e9&toDate=2020-10-01"
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.hmrc.2.0+json
+      User-Agent:
+      - rest-client/2.1.0 (darwin19 x86_64) ruby/3.0.2p107
+      Correlationid:
+      - 7198f753-4ab7-4f6e-b1d2-97d0fe469cd1
+      Authorization:
+      - Bearer dummy_bearer_token
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Host:
+      - <SETTINGS__CREDENTIALS__HOST>
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json
+      Cache-Control:
+      - no-cache,no-store,max-age=0
+      X-Envoy-Upstream-Service-Time:
+      - '87'
+      Strict-Transport-Security:
+      - max-age=31536000;
+      Content-Security-Policy:
+      - default-src 'self'
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Content-Type-Options:
+      - nosniff
+      Content-Length:
+      - '159'
+      Date:
+      - Wed, 25 Aug 2021 08:55:02 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"_links":{"self":{"href":"/individuals/income/paye?matchId=bbc72027-d46e-47ec-98e8-35dd2eff87e9&fromDate=2020-08-01&toDate=2020-10-01"}},"paye":{"income":[]}}'
+  recorded_at: Wed, 25 Aug 2021 08:55:02 GMT
+- request:
+    method: get
+    uri: "<SETTINGS__CREDENTIALS__HOST>/individuals/income/sa?fromTaxYear=2020-21&matchId=bbc72027-d46e-47ec-98e8-35dd2eff87e9&toTaxYear=2020-21"
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.hmrc.2.0+json
+      User-Agent:
+      - rest-client/2.1.0 (darwin19 x86_64) ruby/3.0.2p107
+      Correlationid:
+      - 7198f753-4ab7-4f6e-b1d2-97d0fe469cd1
+      Authorization:
+      - Bearer dummy_bearer_token
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Host:
+      - <SETTINGS__CREDENTIALS__HOST>
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json
+      Cache-Control:
+      - no-cache,no-store,max-age=0
+      X-Envoy-Upstream-Service-Time:
+      - '87'
+      Strict-Transport-Security:
+      - max-age=31536000;
+      Content-Security-Policy:
+      - default-src 'self'
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Content-Type-Options:
+      - nosniff
+      Content-Length:
+      - '2502'
+      Date:
+      - Wed, 25 Aug 2021 08:55:03 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"_links":{"pensionsAndStateBenefits":{"href":"/individuals/income/sa/pensions-and-state-benefits?matchId=bbc72027-d46e-47ec-98e8-35dd2eff87e9{&fromTaxYear,toTaxYear}","title":"Get
+        an individual''s SA pensions and state benefits data"},"source":{"href":"/individuals/income/sa/source?matchId=bbc72027-d46e-47ec-98e8-35dd2eff87e9{&fromTaxYear,toTaxYear}","title":"Get
+        an individual''s SA source data"},"employments":{"href":"/individuals/income/sa/employments?matchId=bbc72027-d46e-47ec-98e8-35dd2eff87e9{&fromTaxYear,toTaxYear}","title":"Get
+        an individual''s SA employments data"},"additionalInformation":{"href":"/individuals/income/sa/additional-information?matchId=bbc72027-d46e-47ec-98e8-35dd2eff87e9{&fromTaxYear,toTaxYear}","title":"Get
+        an individual''s SA additional information data"},"self":{"href":"/individuals/income/sa?matchId=bbc72027-d46e-47ec-98e8-35dd2eff87e9&fromTaxYear=2020-21&toTaxYear=2020-21"},"partnerships":{"href":"/individuals/income/sa/partnerships?matchId=bbc72027-d46e-47ec-98e8-35dd2eff87e9{&fromTaxYear,toTaxYear}","title":"Get
+        an individual''s SA partnerships data"},"ukProperties":{"href":"/individuals/income/sa/uk-properties?matchId=bbc72027-d46e-47ec-98e8-35dd2eff87e9{&fromTaxYear,toTaxYear}","title":"Get
+        an individual''s SA UK properties data"},"foreign":{"href":"/individuals/income/sa/foreign?matchId=bbc72027-d46e-47ec-98e8-35dd2eff87e9{&fromTaxYear,toTaxYear}","title":"Get
+        an individual''s SA foreign income data"},"furtherDetails":{"href":"/individuals/income/sa/further-details?matchId=bbc72027-d46e-47ec-98e8-35dd2eff87e9{&fromTaxYear,toTaxYear}","title":"Get
+        an individual''s SA further details data"},"interestsAndDividends":{"href":"/individuals/income/sa/interests-and-dividends?matchId=bbc72027-d46e-47ec-98e8-35dd2eff87e9{&fromTaxYear,toTaxYear}","title":"Get
+        an individual''s SA interest and dividends data"},"other":{"href":"/individuals/income/sa/other?matchId=bbc72027-d46e-47ec-98e8-35dd2eff87e9{&fromTaxYear,toTaxYear}","title":"Get
+        an individual''s SA other data"},"summary":{"href":"/individuals/income/sa/summary?matchId=bbc72027-d46e-47ec-98e8-35dd2eff87e9{&fromTaxYear,toTaxYear}","title":"Get
+        an individual''s SA summary data"},"trusts":{"href":"/individuals/income/sa/trusts?matchId=bbc72027-d46e-47ec-98e8-35dd2eff87e9{&fromTaxYear,toTaxYear}","title":"Get
+        an individual''s SA trusts data"}},"selfAssessment":{"registrations":[{"registrationDate":"2019-02-20"}],"taxReturns":[{"taxYear":"2019-20","submissions":[{"receivedDate":"2019-02-20"}]}]}}'
+  recorded_at: Wed, 25 Aug 2021 08:55:03 GMT
+- request:
+    method: get
+    uri: "<SETTINGS__CREDENTIALS__HOST>/individuals/income/sa/pensions-and-state-benefits?fromTaxYear=2020-21&matchId=bbc72027-d46e-47ec-98e8-35dd2eff87e9&toTaxYear=2020-21"
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.hmrc.2.0+json
+      User-Agent:
+      - rest-client/2.1.0 (darwin19 x86_64) ruby/3.0.2p107
+      Correlationid:
+      - 7198f753-4ab7-4f6e-b1d2-97d0fe469cd1
+      Authorization:
+      - Bearer dummy_bearer_token
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Host:
+      - <SETTINGS__CREDENTIALS__HOST>
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json
+      Cache-Control:
+      - no-cache,no-store,max-age=0
+      X-Envoy-Upstream-Service-Time:
+      - '44'
+      Strict-Transport-Security:
+      - max-age=31536000;
+      Content-Security-Policy:
+      - default-src 'self'
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Content-Type-Options:
+      - nosniff
+      Content-Length:
+      - '279'
+      Date:
+      - Wed, 25 Aug 2021 08:55:03 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"_links":{"self":{"href":"/individuals/income/sa/pensions-and-state-benefits?matchId=bbc72027-d46e-47ec-98e8-35dd2eff87e9&fromTaxYear=2020-21&toTaxYear=2020-21"}},"selfAssessment":{"taxReturns":[{"taxYear":"2019-20","pensionsAndStateBenefits":[{"totalIncome":99999999999.9}]}]}}'
+  recorded_at: Wed, 25 Aug 2021 08:55:03 GMT
+- request:
+    method: get
+    uri: "<SETTINGS__CREDENTIALS__HOST>/individuals/income/sa/source?fromTaxYear=2020-21&matchId=bbc72027-d46e-47ec-98e8-35dd2eff87e9&toTaxYear=2020-21"
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.hmrc.2.0+json
+      User-Agent:
+      - rest-client/2.1.0 (darwin19 x86_64) ruby/3.0.2p107
+      Correlationid:
+      - 7198f753-4ab7-4f6e-b1d2-97d0fe469cd1
+      Authorization:
+      - Bearer dummy_bearer_token
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Host:
+      - <SETTINGS__CREDENTIALS__HOST>
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json
+      Cache-Control:
+      - no-cache,no-store,max-age=0
+      X-Envoy-Upstream-Service-Time:
+      - '56'
+      Strict-Transport-Security:
+      - max-age=31536000;
+      Content-Security-Policy:
+      - default-src 'self'
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Content-Type-Options:
+      - nosniff
+      Content-Length:
+      - '374'
+      Date:
+      - Wed, 25 Aug 2021 08:55:03 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"_links":{"self":{"href":"/individuals/income/sa/source?matchId=bbc72027-d46e-47ec-98e8-35dd2eff87e9&fromTaxYear=2020-21&toTaxYear=2020-21"}},"selfAssessment":{"taxReturns":[{"taxYear":"2019-20","sources":[{"businessDescription":"Dogs
+        body","businessAddress":{"line1":"ap","line2":"ao","line3":"ai","line4":"au","postalCode":"NE65
+        0UH"},"telephoneNumber":"0191111222"}]}]}}'
+  recorded_at: Wed, 25 Aug 2021 08:55:03 GMT
+- request:
+    method: get
+    uri: "<SETTINGS__CREDENTIALS__HOST>/individuals/income/sa/employments?fromTaxYear=2020-21&matchId=bbc72027-d46e-47ec-98e8-35dd2eff87e9&toTaxYear=2020-21"
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.hmrc.2.0+json
+      User-Agent:
+      - rest-client/2.1.0 (darwin19 x86_64) ruby/3.0.2p107
+      Correlationid:
+      - 7198f753-4ab7-4f6e-b1d2-97d0fe469cd1
+      Authorization:
+      - Bearer dummy_bearer_token
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Host:
+      - <SETTINGS__CREDENTIALS__HOST>
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json
+      Cache-Control:
+      - no-cache,no-store,max-age=0
+      X-Envoy-Upstream-Service-Time:
+      - '30'
+      Strict-Transport-Security:
+      - max-age=31536000;
+      Content-Security-Policy:
+      - default-src 'self'
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Content-Type-Options:
+      - nosniff
+      Content-Length:
+      - '256'
+      Date:
+      - Wed, 25 Aug 2021 08:55:03 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"_links":{"self":{"href":"/individuals/income/sa/employments?matchId=bbc72027-d46e-47ec-98e8-35dd2eff87e9&fromTaxYear=2020-21&toTaxYear=2020-21"}},"selfAssessment":{"taxReturns":[{"taxYear":"2019-20","employments":[{"employmentIncome":99999999999.97}]}]}}'
+  recorded_at: Wed, 25 Aug 2021 08:55:03 GMT
+- request:
+    method: get
+    uri: "<SETTINGS__CREDENTIALS__HOST>/individuals/income/sa/additional-information?fromTaxYear=2020-21&matchId=bbc72027-d46e-47ec-98e8-35dd2eff87e9&toTaxYear=2020-21"
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.hmrc.2.0+json
+      User-Agent:
+      - rest-client/2.1.0 (darwin19 x86_64) ruby/3.0.2p107
+      Correlationid:
+      - 7198f753-4ab7-4f6e-b1d2-97d0fe469cd1
+      Authorization:
+      - Bearer dummy_bearer_token
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Host:
+      - <SETTINGS__CREDENTIALS__HOST>
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json
+      Cache-Control:
+      - no-cache,no-store,max-age=0
+      X-Envoy-Upstream-Service-Time:
+      - '37'
+      Strict-Transport-Security:
+      - max-age=31536000;
+      Content-Security-Policy:
+      - default-src 'self'
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Content-Type-Options:
+      - nosniff
+      Content-Length:
+      - '317'
+      Date:
+      - Wed, 25 Aug 2021 08:55:04 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"_links":{"self":{"href":"/individuals/income/sa/additional-information?matchId=bbc72027-d46e-47ec-98e8-35dd2eff87e9&fromTaxYear=2020-21&toTaxYear=2020-21"}},"selfAssessment":{"taxReturns":[{"taxYear":"2019-20","additionalInformation":[{"gainsOnLifePolicies":99999999999.88,"sharesOptionsIncome":99999999999.87}]}]}}'
+  recorded_at: Wed, 25 Aug 2021 08:55:04 GMT
+- request:
+    method: get
+    uri: "<SETTINGS__CREDENTIALS__HOST>/individuals/income/sa/partnerships?fromTaxYear=2020-21&matchId=bbc72027-d46e-47ec-98e8-35dd2eff87e9&toTaxYear=2020-21"
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.hmrc.2.0+json
+      User-Agent:
+      - rest-client/2.1.0 (darwin19 x86_64) ruby/3.0.2p107
+      Correlationid:
+      - 7198f753-4ab7-4f6e-b1d2-97d0fe469cd1
+      Authorization:
+      - Bearer dummy_bearer_token
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Host:
+      - <SETTINGS__CREDENTIALS__HOST>
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json
+      Cache-Control:
+      - no-cache,no-store,max-age=0
+      X-Envoy-Upstream-Service-Time:
+      - '41'
+      Strict-Transport-Security:
+      - max-age=31536000;
+      Content-Security-Policy:
+      - default-src 'self'
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Content-Type-Options:
+      - nosniff
+      Content-Length:
+      - '259'
+      Date:
+      - Wed, 25 Aug 2021 08:55:04 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"_links":{"self":{"href":"/individuals/income/sa/partnerships?matchId=bbc72027-d46e-47ec-98e8-35dd2eff87e9&fromTaxYear=2020-21&toTaxYear=2020-21"}},"selfAssessment":{"taxReturns":[{"taxYear":"2019-20","partnerships":[{"partnershipProfit":99999999999.96}]}]}}'
+  recorded_at: Wed, 25 Aug 2021 08:55:04 GMT
+- request:
+    method: get
+    uri: "<SETTINGS__CREDENTIALS__HOST>/individuals/income/sa/uk-properties?fromTaxYear=2020-21&matchId=bbc72027-d46e-47ec-98e8-35dd2eff87e9&toTaxYear=2020-21"
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.hmrc.2.0+json
+      User-Agent:
+      - rest-client/2.1.0 (darwin19 x86_64) ruby/3.0.2p107
+      Correlationid:
+      - 7198f753-4ab7-4f6e-b1d2-97d0fe469cd1
+      Authorization:
+      - Bearer dummy_bearer_token
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Host:
+      - <SETTINGS__CREDENTIALS__HOST>
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json
+      Cache-Control:
+      - no-cache,no-store,max-age=0
+      X-Envoy-Upstream-Service-Time:
+      - '35'
+      Strict-Transport-Security:
+      - max-age=31536000;
+      Content-Security-Policy:
+      - default-src 'self'
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Content-Type-Options:
+      - nosniff
+      Content-Length:
+      - '254'
+      Date:
+      - Wed, 25 Aug 2021 08:55:04 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"_links":{"self":{"href":"/individuals/income/sa/uk-properties?matchId=bbc72027-d46e-47ec-98e8-35dd2eff87e9&fromTaxYear=2020-21&toTaxYear=2020-21"}},"selfAssessment":{"taxReturns":[{"taxYear":"2019-20","ukProperties":[{"totalProfit":99999999999.95}]}]}}'
+  recorded_at: Wed, 25 Aug 2021 08:55:04 GMT
+- request:
+    method: get
+    uri: "<SETTINGS__CREDENTIALS__HOST>/individuals/income/sa/foreign?fromTaxYear=2020-21&matchId=bbc72027-d46e-47ec-98e8-35dd2eff87e9&toTaxYear=2020-21"
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.hmrc.2.0+json
+      User-Agent:
+      - rest-client/2.1.0 (darwin19 x86_64) ruby/3.0.2p107
+      Correlationid:
+      - 7198f753-4ab7-4f6e-b1d2-97d0fe469cd1
+      Authorization:
+      - Bearer dummy_bearer_token
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Host:
+      - <SETTINGS__CREDENTIALS__HOST>
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json
+      Cache-Control:
+      - no-cache,no-store,max-age=0
+      X-Envoy-Upstream-Service-Time:
+      - '35'
+      Strict-Transport-Security:
+      - max-age=31536000;
+      Content-Security-Policy:
+      - default-src 'self'
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Content-Type-Options:
+      - nosniff
+      Content-Length:
+      - '245'
+      Date:
+      - Wed, 25 Aug 2021 08:55:04 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"_links":{"self":{"href":"/individuals/income/sa/foreign?matchId=bbc72027-d46e-47ec-98e8-35dd2eff87e9&fromTaxYear=2020-21&toTaxYear=2020-21"}},"selfAssessment":{"taxReturns":[{"taxYear":"2019-20","foreign":[{"foreignIncome":99999999999.94}]}]}}'
+  recorded_at: Wed, 25 Aug 2021 08:55:04 GMT
+- request:
+    method: get
+    uri: "<SETTINGS__CREDENTIALS__HOST>/individuals/income/sa/further-details?fromTaxYear=2020-21&matchId=bbc72027-d46e-47ec-98e8-35dd2eff87e9&toTaxYear=2020-21"
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.hmrc.2.0+json
+      User-Agent:
+      - rest-client/2.1.0 (darwin19 x86_64) ruby/3.0.2p107
+      Correlationid:
+      - 7198f753-4ab7-4f6e-b1d2-97d0fe469cd1
+      Authorization:
+      - Bearer dummy_bearer_token
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Host:
+      - <SETTINGS__CREDENTIALS__HOST>
+  response:
+    status:
+      code: 429
+      message: Too Many Requests
+    headers:
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '117'
+      Strict-Transport-Security:
+      - max-age=31536000;
+      Content-Security-Policy:
+      - default-src 'self'
+      Date:
+      - Wed, 25 Aug 2021 08:55:04 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"code": "MESSAGE_THROTTLED_OUT", "message": "The request for the API
+        is throttled as you have exceeded your quota."}'
+  recorded_at: Wed, 25 Aug 2021 08:55:04 GMT
+- request:
+    method: get
+    uri: "<SETTINGS__CREDENTIALS__HOST>/individuals/income/sa/further-details?fromTaxYear=2020-21&matchId=bbc72027-d46e-47ec-98e8-35dd2eff87e9&toTaxYear=2020-21"
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.hmrc.2.0+json
+      User-Agent:
+      - rest-client/2.1.0 (darwin19 x86_64) ruby/3.0.2p107
+      Correlationid:
+      - 7198f753-4ab7-4f6e-b1d2-97d0fe469cd1
+      Authorization:
+      - Bearer dummy_bearer_token
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Host:
+      - <SETTINGS__CREDENTIALS__HOST>
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json
+      Cache-Control:
+      - no-cache,no-store,max-age=0
+      X-Envoy-Upstream-Service-Time:
+      - '36'
+      Strict-Transport-Security:
+      - max-age=31536000;
+      Content-Security-Policy:
+      - default-src 'self'
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Content-Type-Options:
+      - nosniff
+      Content-Length:
+      - '490'
+      Date:
+      - Wed, 25 Aug 2021 08:55:05 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"_links":{"self":{"href":"/individuals/income/sa/further-details?matchId=bbc72027-d46e-47ec-98e8-35dd2eff87e9&fromTaxYear=2020-21&toTaxYear=2020-21"}},"selfAssessment":{"taxReturns":[{"taxYear":"2019-20","furtherDetails":[{"busStartDate":"2019-02-21","busEndDate":"2019-02-22","totalTaxPaid":-99.99,"totalNIC":99999999999.99,"turnover":345435.03,"otherBusIncome":34545.88,"tradingIncomeAllowance":100,"deducts":{"totalBusExpenses":99999999999.86,"totalDisallowBusExp":99999999999.85}}]}]}}'
+  recorded_at: Wed, 25 Aug 2021 08:55:05 GMT
+- request:
+    method: get
+    uri: "<SETTINGS__CREDENTIALS__HOST>/individuals/income/sa/interests-and-dividends?fromTaxYear=2020-21&matchId=bbc72027-d46e-47ec-98e8-35dd2eff87e9&toTaxYear=2020-21"
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.hmrc.2.0+json
+      User-Agent:
+      - rest-client/2.1.0 (darwin19 x86_64) ruby/3.0.2p107
+      Correlationid:
+      - 7198f753-4ab7-4f6e-b1d2-97d0fe469cd1
+      Authorization:
+      - Bearer dummy_bearer_token
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Host:
+      - <SETTINGS__CREDENTIALS__HOST>
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json
+      Cache-Control:
+      - no-cache,no-store,max-age=0
+      X-Envoy-Upstream-Service-Time:
+      - '38'
+      Strict-Transport-Security:
+      - max-age=31536000;
+      Content-Security-Policy:
+      - default-src 'self'
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Content-Type-Options:
+      - nosniff
+      Content-Length:
+      - '354'
+      Date:
+      - Wed, 25 Aug 2021 08:55:05 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"_links":{"self":{"href":"/individuals/income/sa/interests-and-dividends?matchId=bbc72027-d46e-47ec-98e8-35dd2eff87e9&fromTaxYear=2020-21&toTaxYear=2020-21"}},"selfAssessment":{"taxReturns":[{"taxYear":"2019-20","interestsAndDividends":[{"ukInterestsIncome":99999999999.92,"foreignDividendsIncome":99999999999.93,"ukDividendsIncome":99999999999.91}]}]}}'
+  recorded_at: Wed, 25 Aug 2021 08:55:05 GMT
+- request:
+    method: get
+    uri: "<SETTINGS__CREDENTIALS__HOST>/individuals/income/sa/other?fromTaxYear=2020-21&matchId=bbc72027-d46e-47ec-98e8-35dd2eff87e9&toTaxYear=2020-21"
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.hmrc.2.0+json
+      User-Agent:
+      - rest-client/2.1.0 (darwin19 x86_64) ruby/3.0.2p107
+      Correlationid:
+      - 7198f753-4ab7-4f6e-b1d2-97d0fe469cd1
+      Authorization:
+      - Bearer dummy_bearer_token
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Host:
+      - <SETTINGS__CREDENTIALS__HOST>
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json
+      Cache-Control:
+      - no-cache,no-store,max-age=0
+      X-Envoy-Upstream-Service-Time:
+      - '31'
+      Strict-Transport-Security:
+      - max-age=31536000;
+      Content-Security-Policy:
+      - default-src 'self'
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Content-Type-Options:
+      - nosniff
+      Content-Length:
+      - '239'
+      Date:
+      - Wed, 25 Aug 2021 08:55:05 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"_links":{"self":{"href":"/individuals/income/sa/other?matchId=bbc72027-d46e-47ec-98e8-35dd2eff87e9&fromTaxYear=2020-21&toTaxYear=2020-21"}},"selfAssessment":{"taxReturns":[{"taxYear":"2019-20","other":[{"otherIncome":99999999999.89}]}]}}'
+  recorded_at: Wed, 25 Aug 2021 08:55:05 GMT
+- request:
+    method: get
+    uri: "<SETTINGS__CREDENTIALS__HOST>/individuals/income/sa/summary?fromTaxYear=2020-21&matchId=bbc72027-d46e-47ec-98e8-35dd2eff87e9&toTaxYear=2020-21"
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.hmrc.2.0+json
+      User-Agent:
+      - rest-client/2.1.0 (darwin19 x86_64) ruby/3.0.2p107
+      Correlationid:
+      - 7198f753-4ab7-4f6e-b1d2-97d0fe469cd1
+      Authorization:
+      - Bearer dummy_bearer_token
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Host:
+      - <SETTINGS__CREDENTIALS__HOST>
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json
+      Cache-Control:
+      - no-cache,no-store,max-age=0
+      X-Envoy-Upstream-Service-Time:
+      - '31'
+      Strict-Transport-Security:
+      - max-age=31536000;
+      Content-Security-Policy:
+      - default-src 'self'
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Content-Type-Options:
+      - nosniff
+      Content-Length:
+      - '243'
+      Date:
+      - Wed, 25 Aug 2021 08:55:06 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"_links":{"self":{"href":"/individuals/income/sa/summary?matchId=bbc72027-d46e-47ec-98e8-35dd2eff87e9&fromTaxYear=2020-21&toTaxYear=2020-21"}},"selfAssessment":{"taxReturns":[{"taxYear":"2019-20","summary":[{"totalIncome":99999999999.99}]}]}}'
+  recorded_at: Wed, 25 Aug 2021 08:55:06 GMT
+- request:
+    method: get
+    uri: "<SETTINGS__CREDENTIALS__HOST>/individuals/income/sa/trusts?fromTaxYear=2020-21&matchId=bbc72027-d46e-47ec-98e8-35dd2eff87e9&toTaxYear=2020-21"
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.hmrc.2.0+json
+      User-Agent:
+      - rest-client/2.1.0 (darwin19 x86_64) ruby/3.0.2p107
+      Correlationid:
+      - 7198f753-4ab7-4f6e-b1d2-97d0fe469cd1
+      Authorization:
+      - Bearer dummy_bearer_token
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Host:
+      - <SETTINGS__CREDENTIALS__HOST>
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json
+      Cache-Control:
+      - no-cache,no-store,max-age=0
+      X-Envoy-Upstream-Service-Time:
+      - '33'
+      Strict-Transport-Security:
+      - max-age=31536000;
+      Content-Security-Policy:
+      - default-src 'self'
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Content-Type-Options:
+      - nosniff
+      Content-Length:
+      - '241'
+      Date:
+      - Wed, 25 Aug 2021 08:55:06 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"_links":{"self":{"href":"/individuals/income/sa/trusts?matchId=bbc72027-d46e-47ec-98e8-35dd2eff87e9&fromTaxYear=2020-21&toTaxYear=2020-21"}},"selfAssessment":{"taxReturns":[{"taxYear":"2019-20","trusts":[{"trustIncome":99999999999.98}]}]}}'
+  recorded_at: Wed, 25 Aug 2021 08:55:06 GMT
+recorded_with: VCR 6.0.0
