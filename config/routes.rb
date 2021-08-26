@@ -30,6 +30,7 @@ Rails.application.routes.draw do
   end
 
   namespace :api do
+    use_doorkeeper
     namespace :v1 do
       post 'use_case/submit', to: 'use_case#submit', format: :json
       get 'use_case/one', to: 'use_case#one', format: :json
