@@ -13,16 +13,16 @@ paths:
       description: Use case
       schema:
         type: string
-    - name: filter[last_name]
-      in: query
-      required: true
-      description: Last name
-      schema:
-        type: string
     - name: filter[first_name]
       in: query
       required: true
       description: First name
+      schema:
+        type: string
+    - name: filter[last_name]
+      in: query
+      required: true
+      description: Last name
       schema:
         type: string
     - name: filter[dob]
@@ -51,6 +51,8 @@ paths:
         type: string
     post:
       summary: call use_case/submit
+      tags:
+      - Use cases
       description: Post a submission to HMRC
       responses:
         '202':
@@ -59,16 +61,16 @@ paths:
           description: Bad Request
   "/api/v1/use_case/one":
     parameters:
-    - name: filter[last_name]
-      in: query
-      required: true
-      description: Last name
-      schema:
-        type: string
     - name: filter[first_name]
       in: query
       required: true
       description: First name
+      schema:
+        type: string
+    - name: filter[last_name]
+      in: query
+      required: true
+      description: Last name
       schema:
         type: string
     - name: filter[dob]
@@ -97,22 +99,24 @@ paths:
         type: string
     get:
       summary: call use_case/one
+      tags:
+      - Use cases
       description: Fetch use case one results
       responses:
         '200':
           description: Success
   "/api/v1/use_case/two":
     parameters:
-    - name: filter[last_name]
-      in: query
-      required: true
-      description: Last name
-      schema:
-        type: string
     - name: filter[first_name]
       in: query
       required: true
       description: First name
+      schema:
+        type: string
+    - name: filter[last_name]
+      in: query
+      required: true
+      description: Last name
       schema:
         type: string
     - name: filter[dob]
@@ -141,22 +145,24 @@ paths:
         type: string
     get:
       summary: call use_case/two
+      tags:
+      - Use cases
       description: Fetch use case two results
       responses:
         '200':
           description: Success
   "/api/v1/use_case/three":
     parameters:
-    - name: filter[last_name]
-      in: query
-      required: true
-      description: Last name
-      schema:
-        type: string
     - name: filter[first_name]
       in: query
       required: true
       description: First name
+      schema:
+        type: string
+    - name: filter[last_name]
+      in: query
+      required: true
+      description: Last name
       schema:
         type: string
     - name: filter[dob]
@@ -185,22 +191,24 @@ paths:
         type: string
     get:
       summary: call use_case/three
+      tags:
+      - Use cases
       description: Fetch use case three results
       responses:
         '200':
           description: Success
   "/api/v1/use_case/four":
     parameters:
-    - name: filter[last_name]
-      in: query
-      required: true
-      description: Last name
-      schema:
-        type: string
     - name: filter[first_name]
       in: query
       required: true
       description: First name
+      schema:
+        type: string
+    - name: filter[last_name]
+      in: query
+      required: true
+      description: Last name
       schema:
         type: string
     - name: filter[dob]
@@ -229,6 +237,8 @@ paths:
         type: string
     get:
       summary: call use_case/four
+      tags:
+      - Use cases
       description: Fetch use case four results
       responses:
         '200':
