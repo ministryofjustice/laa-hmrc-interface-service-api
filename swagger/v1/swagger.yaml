@@ -28,7 +28,7 @@ paths:
     - name: filter[nino]
       in: query
       required: true
-      description: NINO
+      description: National Insurance Number
       schema:
         type: string
     - name: filter[start_date]
@@ -72,7 +72,7 @@ paths:
     - name: filter[nino]
       in: query
       required: true
-      description: NINO
+      description: National Insurance Number
       schema:
         type: string
     - name: filter[start_date]
@@ -116,7 +116,7 @@ paths:
     - name: filter[nino]
       in: query
       required: true
-      description: NINO
+      description: National Insurance Number
       schema:
         type: string
     - name: filter[start_date]
@@ -160,7 +160,7 @@ paths:
     - name: filter[nino]
       in: query
       required: true
-      description: NINO
+      description: National Insurance Number
       schema:
         type: string
     - name: filter[start_date]
