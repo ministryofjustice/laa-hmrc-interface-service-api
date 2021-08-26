@@ -16,6 +16,7 @@ AllCops:
     - 'vendor/**/*'
     - 'node_modules/**/*'
     - 'bin/bundle'
+    - 'db/migrate/**/*'
 
 Style/FrozenStringLiteralComment:
   Enabled: false
@@ -33,6 +34,8 @@ Performance/MapCompact:
     - 'bin/uat_delete_release' # the circle container is running 2.6.3 and does not include filter_map
 
 Naming/InclusiveLanguage:
+  Exclude:
+    - 'config/initializers/doorkeeper.rb'
   FlaggedTerms:
     master:
       AllowedRegex:
