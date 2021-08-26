@@ -1,12 +1,53 @@
 require 'swagger_helper'
 
 RSpec.describe 'api/v1/use_case', type: :request, swagger_doc: 'v1/swagger.yaml' do
+  let(:'filter[use_case]') { 'use case' }
   let(:'filter[last_name]') { 'Yorke' }
   let(:'filter[first_name]') { 'Langley' }
   let(:'filter[nino]') { 'MN212451D' }
   let(:'filter[dob]') { '1992-07-22' }
   let(:'filter[start_date]') { '2020-08-01' }
   let(:'filter[end_date]') { '2020-10-01' }
+
+  path '/api/v1/use_case/submit' do
+    parameter name: 'filter[use_case]', in: :query, required: true, type: :string,
+              description: 'Use case'
+
+    parameter name: 'filter[last_name]', in: :query, required: true, type: :string,
+              description: 'Last name'
+
+    parameter name: 'filter[first_name]', in: :query, required: true, type: :string,
+              description: 'First name'
+
+    parameter name: 'filter[dob]', in: :query, required: true, type: :string,
+              description: 'Date of birth'
+
+    parameter name: 'filter[nino]', in: :query, required: true, type: :string,
+              description: 'National Insurance Number'
+
+    parameter name: 'filter[start_date]', in: :query, required: true, type: :string,
+              description: 'Start date'
+
+    parameter name: 'filter[end_date]', in: :query, required: true, type: :string,
+              description: 'End date'
+
+<<<<<<< Updated upstream
+    before do
+      remove_request_stub(@hmrc_stub_requests)
+      allow(REDIS).to receive(:get).with('use_case_one_bearer_token').and_return('dummy_bearer_token')
+    end
+
+    get('call use_case/one') do
+=======
+    post('call use_case/submit') do
+>>>>>>> Stashed changes
+      produces 'application/json'
+      response(202, 'Accepted') do
+        description 'Post a submission to HMRC'
+        run_test!
+      end
+    end
+  end
 
   path '/api/v1/use_case/one' do
     parameter name: 'filter[last_name]', in: :query, required: true, type: :string,
