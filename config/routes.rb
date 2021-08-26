@@ -27,6 +27,15 @@ Rails.application.routes.draw do
     get 'smoke-test/:use_case', to: 'smoke_test#call', as: 'smoke-test-use-case', format: :json
     get 'smoke-test', to: 'smoke_test#health_check', format: :json
   end
+
+  namespace :api do
+    namespace :v1 do
+      get 'use_case/one', to: 'use_case#one', format: :json
+      get 'use_case/two', to: 'use_case#two', format: :json
+      get 'use_case/three', to: 'use_case#three', format: :json
+      get 'use_case/four', to: 'use_case#four', format: :json
+    end
+  end
 end
 
 def secure_compare(passed, stored)
