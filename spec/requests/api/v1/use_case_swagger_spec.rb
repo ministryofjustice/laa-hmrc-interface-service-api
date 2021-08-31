@@ -1,7 +1,7 @@
 require 'swagger_helper'
 
 RSpec.describe 'api/v1/use_case', type: :request, swagger_doc: 'v1/swagger.yaml' do
-  let(:'filter[use_case]') { 'use case' }
+  let(:'filter[use_case]') { 'one' }
   let(:'filter[last_name]') { 'Yorke' }
   let(:'filter[first_name]') { 'Langley' }
   let(:'filter[nino]') { 'MN212451D' }
@@ -35,7 +35,33 @@ RSpec.describe 'api/v1/use_case', type: :request, swagger_doc: 'v1/swagger.yaml'
       produces 'application/json'
       response(202, 'Accepted') do
         description 'Post a submission to HMRC'
-        run_test!
+        after do |example|
+          example.metadata[:response][:content] = {
+            'application/json' => {
+              example: JSON.parse(response.body, symbolize_names: true)
+            }
+          }
+        end
+        run_test! do |response|
+          expect(response.media_type).to eq('application/json')
+          expect(response.body).to match(/id/)
+        end
+      end
+
+      context 'when data is bad' do
+        response('400', 'Bad Request') do
+          let(:'filter[use_case]') { 'five' }
+
+          post('call use_case/submit') do
+            produces 'application/json'
+            response(400, 'Bad request') do
+              run_test! do |response|
+                expect(response.media_type).to eq('application/json')
+                expect(response.body).to match(/Invalid use case/)
+              end
+            end
+          end
+        end
       end
     end
   end

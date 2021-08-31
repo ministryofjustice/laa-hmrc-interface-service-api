@@ -335,6 +335,8 @@ GEM
       concurrent-ruby
       faraday
     shellany (0.0.1)
+    shoulda-matchers (5.0.0)
+      activesupport (>= 5.2.0)
     sidekiq (6.2.2)
       connection_pool (>= 2.2.2)
       rack (~> 2.0)
@@ -409,6 +411,7 @@ DEPENDENCIES
   rubocop-rails
   sentry-rails
   sentry-ruby
+  shoulda-matchers
   sidekiq
   simplecov
   simplecov-rcov

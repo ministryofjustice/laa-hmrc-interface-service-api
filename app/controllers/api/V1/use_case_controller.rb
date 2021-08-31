@@ -3,8 +3,11 @@ module Api
     class UseCaseController < ApiController
       def submit
         submission = Submission.new(filtered_params.merge(status: 'created'))
-        submission.save
-        render json: { id: submission.id }, status: :accepted
+        if submission.save
+          render json: { id: submission.id }, status: :accepted
+        else
+          render json: submission.errors&.to_json, status: :bad_request
+        end
       end
 
       def one
