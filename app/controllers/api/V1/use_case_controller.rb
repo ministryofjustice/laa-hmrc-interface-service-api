@@ -11,7 +11,12 @@ module Api
       end
 
       def one
-        result = ApplyGetTest.call('one', **transformed_params)
+        submission = Submission.create(filtered_params.merge(use_case: :one, status: 'created'))
+        result = ApplyGetTest.call_with(submission)
+        submission.result.attach(io: StringIO.new(result),
+                                 filename: "#{submission.id}.json",
+                                 content_type: 'application/json',
+                                 key: "submission/result/#{submission.id}")
         render json: result
       end
 

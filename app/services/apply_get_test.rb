@@ -20,6 +20,12 @@ class ApplyGetTest
     new(use_case, **args).call
   end
 
+  def self.call_with(submission)
+    use_case = submission.use_case.to_sym
+    values = submission.as_json.except('use_case').symbolize_keys
+    new(use_case, **values).call(correlation_id: submission.id)
+  end
+
   def call(correlation_id: SecureRandom.uuid)
     @correlation_id = correlation_id
     @result = { data: [{ correlation_id: @correlation_id }] }
