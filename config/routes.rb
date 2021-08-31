@@ -30,6 +30,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
+      post 'use_case/submit', to: 'use_case#submit', format: :json
       get 'use_case/one', to: 'use_case#one', format: :json
       get 'use_case/two', to: 'use_case#two', format: :json
       get 'use_case/three', to: 'use_case#three', format: :json

@@ -1,6 +1,15 @@
 module Api
   module V1
     class UseCaseController < ApiController
+      def submit
+        submission = Submission.new(filtered_params.merge(status: 'created'))
+        if submission.save
+          render json: { id: submission.id }, status: :accepted
+        else
+          render json: submission.errors&.to_json, status: :bad_request
+        end
+      end
+
       def one
         result = ApplyGetTest.call('one', **transformed_params)
         render json: result
@@ -24,7 +33,8 @@ module Api
       private
 
       def filtered_params
-        params.require(:filter).permit(:last_name,
+        params.require(:filter).permit(:use_case,
+                                       :last_name,
                                        :first_name,
                                        :dob,
                                        :nino,
