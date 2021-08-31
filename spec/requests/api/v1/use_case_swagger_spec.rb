@@ -13,11 +13,11 @@ RSpec.describe 'api/v1/use_case', type: :request, swagger_doc: 'v1/swagger.yaml'
     parameter name: 'filter[use_case]', in: :query, required: true, type: :string,
               description: 'Use case'
 
-    parameter name: 'filter[last_name]', in: :query, required: true, type: :string,
-              description: 'Last name'
-
     parameter name: 'filter[first_name]', in: :query, required: true, type: :string,
               description: 'First name'
+
+    parameter name: 'filter[last_name]', in: :query, required: true, type: :string,
+              description: 'Last name'
 
     parameter name: 'filter[dob]', in: :query, required: true, type: :string,
               description: 'Date of birth'
@@ -32,7 +32,9 @@ RSpec.describe 'api/v1/use_case', type: :request, swagger_doc: 'v1/swagger.yaml'
               description: 'End date'
 
     post('call use_case/submit') do
+      tags 'Use cases'
       produces 'application/json'
+      consumes 'application/json'
       response(202, 'Accepted') do
         description 'Post a submission to HMRC'
         after do |example|
@@ -67,11 +69,11 @@ RSpec.describe 'api/v1/use_case', type: :request, swagger_doc: 'v1/swagger.yaml'
   end
 
   path '/api/v1/use_case/one' do
-    parameter name: 'filter[last_name]', in: :query, required: true, type: :string,
-              description: 'Last name'
-
     parameter name: 'filter[first_name]', in: :query, required: true, type: :string,
               description: 'First name'
+
+    parameter name: 'filter[last_name]', in: :query, required: true, type: :string,
+              description: 'Last name'
 
     parameter name: 'filter[dob]', in: :query, required: true, type: :string,
               description: 'Date of birth'
@@ -91,7 +93,9 @@ RSpec.describe 'api/v1/use_case', type: :request, swagger_doc: 'v1/swagger.yaml'
     end
 
     get('call use_case/one') do
+      tags 'Use cases'
       produces 'application/json'
+      consumes 'application/json'
       response(200, 'Success') do
         around do |example|
           VCR.use_cassette('use_case_one_success') do
@@ -114,11 +118,11 @@ RSpec.describe 'api/v1/use_case', type: :request, swagger_doc: 'v1/swagger.yaml'
   end
 
   path '/api/v1/use_case/two' do
-    parameter name: 'filter[last_name]', in: :query, required: true, type: :string,
-              description: 'Last name'
-
     parameter name: 'filter[first_name]', in: :query, required: true, type: :string,
               description: 'First name'
+
+    parameter name: 'filter[last_name]', in: :query, required: true, type: :string,
+              description: 'Last name'
 
     parameter name: 'filter[dob]', in: :query, required: true, type: :string,
               description: 'Date of birth'
@@ -138,7 +142,9 @@ RSpec.describe 'api/v1/use_case', type: :request, swagger_doc: 'v1/swagger.yaml'
     end
 
     get('call use_case/two') do
+      tags 'Use cases'
       produces 'application/json'
+      consumes 'application/json'
       response(200, 'Success') do
         around do |example|
           VCR.use_cassette('use_case_two_success') do
@@ -161,11 +167,11 @@ RSpec.describe 'api/v1/use_case', type: :request, swagger_doc: 'v1/swagger.yaml'
   end
 
   path '/api/v1/use_case/three' do
-    parameter name: 'filter[last_name]', in: :query, required: true, type: :string,
-              description: 'Last name'
-
     parameter name: 'filter[first_name]', in: :query, required: true, type: :string,
               description: 'First name'
+
+    parameter name: 'filter[last_name]', in: :query, required: true, type: :string,
+              description: 'Last name'
 
     parameter name: 'filter[dob]', in: :query, required: true, type: :string,
               description: 'Date of birth'
@@ -185,7 +191,9 @@ RSpec.describe 'api/v1/use_case', type: :request, swagger_doc: 'v1/swagger.yaml'
     end
 
     get('call use_case/three') do
+      tags 'Use cases'
       produces 'application/json'
+      consumes 'application/json'
       response(200, 'Success') do
         around do |example|
           VCR.use_cassette('use_case_three_success') do
@@ -208,11 +216,11 @@ RSpec.describe 'api/v1/use_case', type: :request, swagger_doc: 'v1/swagger.yaml'
   end
 
   path '/api/v1/use_case/four' do
-    parameter name: 'filter[last_name]', in: :query, required: true, type: :string,
-              description: 'Last name'
-
     parameter name: 'filter[first_name]', in: :query, required: true, type: :string,
               description: 'First name'
+
+    parameter name: 'filter[last_name]', in: :query, required: true, type: :string,
+              description: 'Last name'
 
     parameter name: 'filter[dob]', in: :query, required: true, type: :string,
               description: 'Date of birth'
@@ -232,7 +240,9 @@ RSpec.describe 'api/v1/use_case', type: :request, swagger_doc: 'v1/swagger.yaml'
     end
 
     get('call use_case/four') do
+      tags 'Use cases'
       produces 'application/json'
+      consumes 'application/json'
       response(200, 'Success') do
         around do |example|
           VCR.use_cassette('use_case_four_success') do
