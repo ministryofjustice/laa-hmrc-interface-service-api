@@ -51,17 +51,12 @@ RSpec.describe 'api/v1/use_case', type: :request, swagger_doc: 'v1/swagger.yaml'
       end
 
       context 'when data is bad' do
-        response('400', 'Bad Request') do
+        response(400, 'Bad request') do
           let(:'filter[use_case]') { 'five' }
 
-          post('call use_case/submit') do
-            produces 'application/json'
-            response(400, 'Bad request') do
-              run_test! do |response|
-                expect(response.media_type).to eq('application/json')
-                expect(response.body).to match(/Invalid use case/)
-              end
-            end
+          run_test! do |response|
+            expect(response.media_type).to eq('application/json')
+            expect(response.body).to match(/Invalid use case/)
           end
         end
       end
