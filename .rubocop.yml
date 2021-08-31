@@ -9,6 +9,7 @@ AllCops:
   NewCops: enable
   SuggestExtensions: false
   Exclude:
+    - 'db/migrate/*'
     - 'db/schema.rb'
     - 'log/**/*'
     - 'tmp/**/*'
@@ -26,10 +27,6 @@ Metrics/BlockLength:
   Exclude:
     - 'config/routes.rb'
     - 'spec/**/*'
-
-Metrics/MethodLength:
-  Exclude:
-    - 'db/migrate/*'
 
 Performance/MapCompact:
   Exclude:
