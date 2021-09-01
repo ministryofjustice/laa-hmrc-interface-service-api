@@ -1,0 +1,2 @@
+class ServiceAccount < ApplicationRecord
+end
