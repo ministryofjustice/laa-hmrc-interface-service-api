@@ -6,3 +6,13 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+puts "Seeding the database...
+"
+Dir[Rails.root.join('db/populators/*.rb')].sort.each do |seed_file|
+  load seed_file
+end
+
+ServiceAccountPopulator.call
+
+puts "Seeding complete."
