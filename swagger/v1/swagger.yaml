@@ -69,10 +69,14 @@ paths:
       summary: call use_case/submit
       tags:
       - Use cases
+      security:
+      - oAuth: []
       description: Post a submission to HMRC
       responses:
         '202':
           description: Accepted
+        '401':
+          description: 'Error: Unauthorized'
         '400':
           description: Bad request
   "/api/v1/use_case/one":
@@ -117,10 +121,14 @@ paths:
       summary: call use_case/one
       tags:
       - Use cases
+      security:
+      - oAuth: []
       description: Fetch use case one results
       responses:
         '200':
           description: Success
+        '401':
+          description: 'Error: Unauthorized'
   "/api/v1/use_case/two":
     parameters:
     - name: filter[first_name]
@@ -163,10 +171,14 @@ paths:
       summary: call use_case/two
       tags:
       - Use cases
+      security:
+      - oAuth: []
       description: Fetch use case two results
       responses:
         '200':
           description: Success
+        '401':
+          description: 'Error: Unauthorized'
   "/api/v1/use_case/three":
     parameters:
     - name: filter[first_name]
@@ -209,10 +221,14 @@ paths:
       summary: call use_case/three
       tags:
       - Use cases
+      security:
+      - oAuth: []
       description: Fetch use case three results
       responses:
         '200':
           description: Success
+        '401':
+          description: 'Error: Unauthorized'
   "/api/v1/use_case/four":
     parameters:
     - name: filter[first_name]
@@ -255,10 +271,14 @@ paths:
       summary: call use_case/four
       tags:
       - Use cases
+      security:
+      - oAuth: []
       description: Fetch use case four results
       responses:
         '200':
           description: Success
+        '401':
+          description: 'Error: Unauthorized'
   "/smoke-test/{use_case}":
     get:
       summary: individual use_case smoke-test
@@ -312,3 +332,15 @@ paths:
                   use_case_two: true
                   use_case_three: true
                   use_case_four: true
+components:
+  securitySchemes:
+    oAuth:
+      in: header
+      type: oauth2
+      description: OAuth2 client credentials flow
+      flows:
+        clientCredentials:
+          scopes:
+            use_case_one: description goes here
+            use_case_two: description more times
+          tokenUrl: "/oauth/token"

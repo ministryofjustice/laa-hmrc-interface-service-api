@@ -2,6 +2,15 @@ module Api
   module V1
     class UseCaseController < ApiController
       def submit
+        # if the service_account calling the API does not have appropriate
+        # use_case access it will raise an error
+
+        # currently works on scopes which are part of doorkeeper but I need to make this work
+        # with the use_cases on the model because it seems like you can just add the other
+        # use cases to your account when logging in to swagger which is not great
+        # look to use the ServiceAccount.use_cases attribute instead of doorkeeper.application_scopes
+        raise "Unauthorised used case" unless doorkeeper_token.application.scopes.to_a.map { |scope| scope.ends_with? filtered_params['use_case'] }.any?
+        binding.pry
         submission = Submission.new(filtered_params.merge(status: 'created'))
         if submission.save
           SubmissionProcessWorker.perform_async(submission.id)

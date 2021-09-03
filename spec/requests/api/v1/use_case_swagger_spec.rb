@@ -1,6 +1,10 @@
 require 'swagger_helper'
 
 RSpec.describe 'api/v1/use_case', type: :request, swagger_doc: 'v1/swagger.yaml' do
+  include AuthorisedRequestHelper
+
+  let(:token) { access_token }
+  let(:Authorization) { "Bearer #{token.token}" }
   let(:'filter[use_case]') { 'one' }
   let(:'filter[last_name]') { 'Yorke' }
   let(:'filter[first_name]') { 'Langley' }
@@ -35,6 +39,7 @@ RSpec.describe 'api/v1/use_case', type: :request, swagger_doc: 'v1/swagger.yaml'
       tags 'Use cases'
       produces 'application/json'
       consumes 'application/json'
+      security [{ oAuth: [] }]
       response(202, 'Accepted') do
         description 'Post a submission to HMRC'
         after do |example|
@@ -50,6 +55,12 @@ RSpec.describe 'api/v1/use_case', type: :request, swagger_doc: 'v1/swagger.yaml'
           expect(response.body).to match(/_links/)
           expect(JSON.parse(response.body)['_links'].first['href']).to match(%r{http://www.example.com/api/v1/submission-status/})
         end
+      end
+
+      response(401, 'Error: Unauthorized') do
+        let(:Authorization) { nil }
+
+        run_test!
       end
 
       context 'when data is bad' do
@@ -93,6 +104,7 @@ RSpec.describe 'api/v1/use_case', type: :request, swagger_doc: 'v1/swagger.yaml'
       tags 'Use cases'
       produces 'application/json'
       consumes 'application/json'
+      security [{ oAuth: [] }]
       response(200, 'Success') do
         around do |example|
           VCR.use_cassette('use_case_one_success') do
@@ -109,6 +121,12 @@ RSpec.describe 'api/v1/use_case', type: :request, swagger_doc: 'v1/swagger.yaml'
             }
           }
         end
+        run_test!
+      end
+
+      response(401, 'Error: Unauthorized') do
+        let(:Authorization) { nil }
+
         run_test!
       end
     end
@@ -142,6 +160,7 @@ RSpec.describe 'api/v1/use_case', type: :request, swagger_doc: 'v1/swagger.yaml'
       tags 'Use cases'
       produces 'application/json'
       consumes 'application/json'
+      security [{ oAuth: [] }]
       response(200, 'Success') do
         around do |example|
           VCR.use_cassette('use_case_two_success') do
@@ -158,6 +177,12 @@ RSpec.describe 'api/v1/use_case', type: :request, swagger_doc: 'v1/swagger.yaml'
             }
           }
         end
+        run_test!
+      end
+
+      response(401, 'Error: Unauthorized') do
+        let(:Authorization) { nil }
+
         run_test!
       end
     end
@@ -191,6 +216,7 @@ RSpec.describe 'api/v1/use_case', type: :request, swagger_doc: 'v1/swagger.yaml'
       tags 'Use cases'
       produces 'application/json'
       consumes 'application/json'
+      security [{ oAuth: [] }]
       response(200, 'Success') do
         around do |example|
           VCR.use_cassette('use_case_three_success') do
@@ -207,6 +233,12 @@ RSpec.describe 'api/v1/use_case', type: :request, swagger_doc: 'v1/swagger.yaml'
             }
           }
         end
+        run_test!
+      end
+
+      response(401, 'Error: Unauthorized') do
+        let(:Authorization) { nil }
+
         run_test!
       end
     end
@@ -240,6 +272,7 @@ RSpec.describe 'api/v1/use_case', type: :request, swagger_doc: 'v1/swagger.yaml'
       tags 'Use cases'
       produces 'application/json'
       consumes 'application/json'
+      security [{ oAuth: [] }]
       response(200, 'Success') do
         around do |example|
           VCR.use_cassette('use_case_four_success') do
@@ -256,6 +289,12 @@ RSpec.describe 'api/v1/use_case', type: :request, swagger_doc: 'v1/swagger.yaml'
             }
           }
         end
+        run_test!
+      end
+
+      response(401, 'Error: Unauthorized') do
+        let(:Authorization) { nil }
+
         run_test!
       end
     end

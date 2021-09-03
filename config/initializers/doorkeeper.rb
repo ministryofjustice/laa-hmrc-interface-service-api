@@ -3,6 +3,20 @@
 Doorkeeper.configure do
   orm :active_record
 
+  # Define access token scopes for your provider
+  # For more information go to
+  # https://github.com/doorkeeper-gem/doorkeeper/wiki/Using-Scopes
+  # https://doorkeeper.gitbook.io/guides/ruby-on-rails/scopes
+  # default_scopes
+
+  # other available scopes
+  optional_scopes :use_case_one, :use_case_two, :use_case_three, :use_case_four
+
+  # ensures applications can only ask for configured scopes defined in default_scopes and optional_scopes
+  # seems to me this would prevent different scopes being entered to try and escalate privilege or something
+  # need to look into it more, for now it should not break anything
+  enforce_configured_scopes
+
   # This is not required as we do not have an admin interface to manage OAuth application
   # This block will be called to check whether the resource owner is authenticated or not.
   # resource_owner_authenticator do
@@ -217,13 +231,6 @@ Doorkeeper.configure do
   # to provide the necessary support
   #
   # enable_application_owner confirmation: false
-
-  # Define access token scopes for your provider
-  # For more information go to
-  # https://doorkeeper.gitbook.io/guides/ruby-on-rails/scopes
-  #
-  # default_scopes  :public
-  # optional_scopes :write, :update
 
   # Allows to restrict only certain scopes for grant_type.
   # By default, all the scopes will be available for all the grant types.
