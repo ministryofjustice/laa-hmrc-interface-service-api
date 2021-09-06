@@ -2,22 +2,8 @@ require 'rails_helper'
 
 RSpec.describe SubmissionStatusController, type: :request do
   describe 'GET /submission-status/:id' do
-    let(:params) do
-      {
-        use_case: 'one',
-        first_name: 'Bob',
-        last_name: 'Smith',
-        nino: 'XX123456Y',
-        dob: '1990-01-01',
-        start_date: '2021-01-01',
-        end_date: '2021-03-31'
-      }
-    end
-    let(:submission) { Submission.new(params) }
-
+    let(:submission) { create :submission, :in_progress }
     before do
-      submission.status = 'in_progress'
-      submission.save!
       get submission_status_id_path(id)
     end
 
