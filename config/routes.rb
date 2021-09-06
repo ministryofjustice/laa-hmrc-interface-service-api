@@ -37,6 +37,8 @@ Rails.application.routes.draw do
       get 'use_case/four', to: 'use_case#four', format: :json
     end
   end
+
+  get 'submission-status/:id', to: 'submission_status#show', as: 'submission-status-id', format: :json
 end
 
 def secure_compare(passed, stored)
