@@ -22,6 +22,8 @@ gem 'sidekiq'
 
 group :development, :test do
   gem 'byebug'
+  gem 'factory_bot_rails', '>= 5.2.0'
+  gem 'faker', '>=1.9.1'
   gem 'guard-livereload'
   gem 'guard-rspec'
   gem 'guard-rubocop'
