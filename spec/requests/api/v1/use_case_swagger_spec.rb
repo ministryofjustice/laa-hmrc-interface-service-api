@@ -47,6 +47,8 @@ RSpec.describe 'api/v1/use_case', type: :request, swagger_doc: 'v1/swagger.yaml'
         run_test! do |response|
           expect(response.media_type).to eq('application/json')
           expect(response.body).to match(/id/)
+          expect(response.body).to match(/_links/)
+          expect(JSON.parse(response.body)['_links'].first['href']).to match(%r{http://www.example.com/submission-status/})
         end
       end
 
