@@ -4,7 +4,8 @@ module Api
       def submit
         submission = Submission.new(filtered_params.merge(status: 'created'))
         if submission.save
-          render json: { id: submission.id }, status: :accepted
+          render json: { id: submission.id, _links: [href: "#{request.base_url}/submission-status/#{submission.id}"] },
+                 status: :accepted
         else
           render json: submission.errors&.to_json, status: :bad_request
         end

@@ -68,4 +68,7 @@ RSpec.configure do |config|
       with.library :rails
     end
   end
+
+  # remove the need to prefix every create or build with FactoryBot
+  config.include FactoryBot::Syntax::Methods
 end
