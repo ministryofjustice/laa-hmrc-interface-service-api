@@ -15,6 +15,6 @@ class SubmissionProcessWorker
     end
 
     submission.process!
-    submission.update!(status: 'completed')
+    submission.update!(status: 'processed')
   end
 end

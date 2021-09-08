@@ -51,6 +51,8 @@ module SubmissionProcessable
       data[data.except('_links').keys.first]
     else
       # :nocov:
+      # is this required? (it doesn't seem to be getting called,
+      # I am not sure what sort of data structure it would apply to?)
       data[data.except('_links').keys.first].first
       # :nocov:
     end
