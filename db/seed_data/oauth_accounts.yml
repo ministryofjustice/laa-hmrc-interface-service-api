@@ -1,0 +1,9 @@
+---
+# this file lists the oauth accounts
+#
+- - applyforlegalaid
+  - ["use_case_one", "use_case_two"]
+- - fraudinvestigation
+  - ["use_case_four"]
+- - anothertestuse
+  - ["use_case_two", "use_case_three"]

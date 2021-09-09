@@ -13,6 +13,6 @@ Dir[Rails.root.join('db/populators/*.rb')].sort.each do |seed_file|
   load seed_file
 end
 
-ServiceAccountPopulator.call
+OauthAccountPopulator.call
 
 puts "Seeding complete."
