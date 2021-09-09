@@ -1,6 +1,6 @@
 class ServiceAccount < ApplicationRecord
 
-  USE_CASES = %w[one two three four].freeze
+  USE_CASES = %w[use_case_one use_case_two use_case_three use_case_four].freeze
   validates :use_cases, presence: true, inclusion: { in: USE_CASES, message: 'Invalid use case'}
 
   has_many :access_grants,
