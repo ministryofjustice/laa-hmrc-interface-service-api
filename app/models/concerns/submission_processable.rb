@@ -72,7 +72,7 @@ module SubmissionProcessable
     request_endpoint(uri)
     # :nocov:
   rescue RestClient::InternalServerError, RestClient::NotFound
-    'INTERNAL_SERVER_ERROR' # improve this, hard to do currently as only the live service fails
+    'INTERNAL_SERVER_ERROR' # TODO: improve this, hard to do currently as only the live service fails
   end
 
   def request_match_id
