@@ -5,6 +5,22 @@ info:
   description: This Service facilitates the HMRC API access for the LAA Use Cases
   version: v1
 paths:
+  "/api/v1/submission-status/{id}":
+    get:
+      summary: Retrieves the status of a submission
+      tags:
+      - submission-status
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: submission found
+        '404':
+          description: submission not found
   "/api/v1/use_case/submit":
     parameters:
     - name: filter[use_case]
@@ -58,7 +74,7 @@ paths:
         '202':
           description: Accepted
         '400':
-          description: Bad Request
+          description: Bad request
   "/api/v1/use_case/one":
     parameters:
     - name: filter[first_name]
