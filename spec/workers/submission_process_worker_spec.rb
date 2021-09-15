@@ -2,18 +2,18 @@ require 'rails_helper'
 
 RSpec.describe SubmissionProcessWorker do
   let(:worker) { described_class.new }
-  let!(:submission) { create :submission }
+  let(:submission) { create :submission }
 
   subject { worker.perform(submission.id) }
 
   before do
     allow(Submission).to receive(:find).with(submission.id).and_return(submission)
-    allow(submission).to receive(:process!).and_return(true)
+    allow(SubmissionService).to receive(:call).and_return(true)
   end
 
   describe '.perform' do
-    it 'calls process! on the submission' do
-      expect(submission).to receive(:process!)
+    it 'calls SubmissionService' do
+      expect(SubmissionService).to receive(:call)
       subject
     end
 
