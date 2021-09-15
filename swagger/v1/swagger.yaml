@@ -10,8 +10,8 @@ paths:
       summary: Retrieves the status of a submission
       tags:
       - submission-status
-      secuirty:
-        - oAuth: []
+      security:
+      - oAuth: []
       parameters:
       - name: id
         in: path
@@ -24,7 +24,31 @@ paths:
         '404':
           description: submission not found
         '401':
-          description: 'Error: Unauthorised'
+          description: 'Error: Unauthorized'
+  "/api/v1/submission/{id}":
+    get:
+      summary: Retrieves a submission
+      tags:
+      - submission
+      security:
+      - oAuth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: completed submission found
+        '202':
+          description: incomplete submission found
+        '500':
+          description: submission has been completed but no result object is present
+        '404':
+          description: submission not found
+        '401':
+          description: 'Error: Unauthorized'
   "/api/v1/use_case/submit":
     parameters:
     - name: filter[use_case]
