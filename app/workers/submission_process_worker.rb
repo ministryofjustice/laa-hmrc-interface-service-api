@@ -14,7 +14,7 @@ class SubmissionProcessWorker
       return
     end
 
-    submission.process!
+    SubmissionService.call(submission)
     submission.update!(status: 'processed')
   end
 end
