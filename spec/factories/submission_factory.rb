@@ -16,4 +16,18 @@ FactoryBot.define do
   trait :in_progress do
     status { :in_progress }
   end
+
+  trait :completed do
+    status { :completed }
+  end
+
+  trait :with_attachment do
+    after :create do |submission|
+      submission.result.attach(io: File.open('spec/fixtures/test_result.json'),
+                               filename: "#{submission.id}.json",
+                               content_type: 'application/json',
+                               key: "submission/result/#{submission.id}")
+      submission.reload
+    end
+  end
 end
