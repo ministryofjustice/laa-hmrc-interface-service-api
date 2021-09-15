@@ -20,7 +20,7 @@ module Endpoint
     private
 
     def date_is_pre_april_6th
-      date.month < 4 || date.month.eql?(4) && date.day < 6
+      date.month < 4 || (date.month.eql?(4) && date.day < 6)
     end
   end
 end
