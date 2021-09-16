@@ -10,6 +10,8 @@ paths:
       summary: Retrieves the status of a submission
       tags:
       - submission-status
+      security:
+      - oAuth: []
       parameters:
       - name: id
         in: path
@@ -21,6 +23,8 @@ paths:
           description: submission found
         '404':
           description: submission not found
+        '401':
+          description: 'Error: Unauthorized'
   "/api/v1/use_case/submit":
     parameters:
     - name: filter[use_case]
