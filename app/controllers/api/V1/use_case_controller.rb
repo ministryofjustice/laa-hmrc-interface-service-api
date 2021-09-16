@@ -5,7 +5,8 @@ module Api
         submission = Submission.new(filtered_params.merge(status: 'created'))
         if submission.save
           SubmissionProcessWorker.perform_async(submission.id)
-          render json: { id: submission.id, _links: [href: "#{request.base_url}/submission-status/#{submission.id}"] },
+          render json: { id: submission.id,
+                         _links: [href: "#{request.base_url}/api/v1/submission-status/#{submission.id}"] },
                  status: :accepted
         else
           render json: submission.errors&.to_json, status: :bad_request
