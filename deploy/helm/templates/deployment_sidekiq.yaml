@@ -20,10 +20,10 @@ spec:
         release: {{ .Release.Name }}
     spec:
       containers:
-        - name: sidekiq-tasks
+        - name: sidekiq-submissions
           image: '{{ .Values.image.repository }}:{{ .Values.image.tag }}'
           imagePullPolicy: IfNotPresent
-          command: ['bundle', 'exec', 'sidekiq', '-q tasks', '-c 1']
+          command: ['bundle', 'exec', 'sidekiq', '-q submissions', '-c 1']
           resources:
             limits:
               cpu: 500m
