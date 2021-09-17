@@ -17,11 +17,6 @@ Doorkeeper.configure do
   # need to look into it more, for now it should not break anything
   enforce_configured_scopes
 
-
-  resource_owner_from_credentials do |_routes|
-    ServiceAccount.authenticate(params[:service_name], params[:password])
-  end
-
   # This is not required as we do not have an admin interface to manage OAuth application
   # This block will be called to check whether the resource owner is authenticated or not.
   # resource_owner_authenticator do

@@ -1,23 +1,22 @@
 module Api
   module V1
     class UseCaseController < ApiController
-      def submit
-        # if the service_account calling the API does not have appropriate
-        # use_case access it will raise an error
+      rescue_from ::StandardError, with: :deny_access
 
-        raise "Unauthorised used case" unless doorkeeper_token.application.scopes.to_a.map { |scope| scope.ends_with? filtered_params['use_case'] }.any?
-        # raise "Unauthorised SERVICE ACCOUNT/USE_CASE #{ServiceAccount.find_by_id(doorkeeper_token.resource_owner_id).use_cases.to_a} " unless
-        #   ServiceAccount.find_by_id(doorkeeper_token.resource_owner_id).use_cases.to_a.map { |use_case| use_case.ends_with? filtered_params['use_case'] }.any?
+      def submit
+        raise 'Unauthorised use case' unless authorised_use_case?
 
         submission = Submission.new(filtered_params.merge(status: 'created'))
-        if submission.save
-          SubmissionProcessWorker.perform_async(submission.id)
-          render json: { id: submission.id,
-                         _links: [href: "#{request.base_url}/api/v1/submission-status/#{submission.id}"] },
-                 status: :accepted
-        else
-          render json: submission.errors&.to_json, status: :bad_request
-        end
+
+        return unless submission.save
+
+        SubmissionProcessWorker.perform_async(submission.id)
+        render json: { id: submission.id,
+                       _links: [href: "#{request.base_url}/api/v1/submission-status/#{submission.id}"] },
+               status: :accepted
+        #  TO DO show errors when the request does not include all required data
+        # else
+        #   render json: submission.errors&.to_json, status: :bad_request
       end
 
       def one
@@ -46,6 +45,16 @@ module Api
       end
 
       private
+
+      def deny_access
+        render json: { error: 'Unauthorised use case' }.to_json, status: :bad_request
+      end
+
+      def authorised_use_case?
+        doorkeeper_token.application.scopes.to_a.map do |scope|
+          scope.ends_with? filtered_params['use_case']
+        end.any?
+      end
 
       def filtered_params
         params.require(:filter).permit(:use_case,

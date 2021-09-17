@@ -40,6 +40,3 @@ config/environments/*.local.yml
 
 # ignore legacy script outputs
 user_data/**.*
-
-# ignore IDE files
-.idea/
