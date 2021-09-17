@@ -1,4 +1,6 @@
 class SmokeTestController < ApplicationController
+  skip_before_action :doorkeeper_authorize!, only: %i[call health_check]
+
   def call
     result = SmokeTest.call(smoke_test_params)
     render status: result ? 200 : 500, json: { "smoke_test_#{smoke_test_params}_result": result }

@@ -28,7 +28,7 @@ RSpec.describe SubmissionProcessWorker do
       end
 
       it 'sends a sentry alert' do
-        expect(Sentry).to receive(:capture_message).with(/^Retry attempts exhauasted for submission: #{submission.id}/)
+        expect(Sentry).to receive(:capture_message).with(/^Retry attempts exhausted for submission: #{submission.id}/)
         subject
       end
 

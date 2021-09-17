@@ -1,4 +1,6 @@
 class StatusController < ApplicationController
+  skip_before_action :doorkeeper_authorize!, only: %i[health_check ping]
+
   def health_check
     checks = {
       database: database_alive?,
