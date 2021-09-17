@@ -23,7 +23,7 @@ spec:
         - name: sidekiq-submissions
           image: '{{ .Values.image.repository }}:{{ .Values.image.tag }}'
           imagePullPolicy: IfNotPresent
-          command: ['bundle', 'exec', 'sidekiq', '-q submissions', '-c 1']
+          command: ['bundle', 'exec', 'sidekiq', '-q', 'submissions', '-c', '1']
           resources:
             limits:
               cpu: 500m
@@ -48,7 +48,7 @@ spec:
         - name: sidekiq-default
           image: '{{ .Values.image.repository }}:{{ .Values.image.tag }}'
           imagePullPolicy: IfNotPresent
-          command: ['bundle', 'exec', 'sidekiq', '-q default']
+          command: ['bundle', 'exec', 'sidekiq', '-q', 'default']
 {{ include "app.envs" . | nindent 10 }}
           resources:
             limits:
