@@ -31,8 +31,6 @@ RSpec.configure do |config|
             description: 'OAuth2 client credentials flow',
             flows: {
               clientCredentials: {
-                scopes: { use_case_one: 'description goes here',
-                          use_case_two: 'description more times' },
                 tokenUrl: '/oauth/token'
               }
             }
