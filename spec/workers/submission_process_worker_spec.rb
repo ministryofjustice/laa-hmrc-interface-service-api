@@ -19,7 +19,7 @@ RSpec.describe SubmissionProcessWorker do
 
     it 'updates the submission status' do
       subject
-      expect(submission.status).to eq('processed')
+      expect(submission.status).to eq('completed')
     end
 
     context 'when the retry is exceeding the max retries' do
