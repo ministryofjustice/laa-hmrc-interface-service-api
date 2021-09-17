@@ -10,7 +10,7 @@ class SubmissionProcessWorker
 
     if @retry_count.to_i >= MAX_RETRIES
       submission.update!(status: 'failed')
-      Sentry.capture_message("Retry attempts exhauasted for submission: #{submission.id}")
+      Sentry.capture_message("Retry attempts exhausted for submission: #{submission.id}")
       return
     end
 
