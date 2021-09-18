@@ -50,12 +50,12 @@ paths:
       schema:
         type: string
     post:
-      summary: call use_case/submit
+      summary: Create new submission
       tags:
-      - Use cases
+      - Submissions
       security:
       - oAuth: []
-      description: Post a submission to HMRC
+      description: Create a submission record and start the HMRC process asyncronously
       responses:
         '202':
           description: Accepted
@@ -67,7 +67,7 @@ paths:
     get:
       summary: Retrieves the status of a submission
       tags:
-      - submission-status
+      - Submissions
       security:
       - oAuth: []
       parameters:
@@ -87,7 +87,7 @@ paths:
     get:
       summary: Retrieves a submission
       tags:
-      - submission
+      - Submissions
       security:
       - oAuth: []
       parameters:
