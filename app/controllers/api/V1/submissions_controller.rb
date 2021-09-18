@@ -1,6 +1,6 @@
 module Api
   module V1
-    class SubmissionController < ApiController
+    class SubmissionsController < ApiController
       def show
         render status: :accepted unless submission.status.eql? 'completed'
         render status: :internal_server_error if completed_but_no_attachment?
