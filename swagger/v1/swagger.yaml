@@ -5,51 +5,7 @@ info:
   description: This Service facilitates the HMRC API access for the LAA Use Cases
   version: v1
 paths:
-  "/api/v1/submission-status/{id}":
-    get:
-      summary: Retrieves the status of a submission
-      tags:
-      - submission-status
-      security:
-      - oAuth: []
-      parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: string
-      responses:
-        '200':
-          description: submission found
-        '404':
-          description: submission not found
-        '401':
-          description: 'Error: Unauthorized'
-  "/api/v1/submission/{id}":
-    get:
-      summary: Retrieves a submission
-      tags:
-      - submission
-      security:
-      - oAuth: []
-      parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: string
-      responses:
-        '200':
-          description: completed submission found
-        '202':
-          description: incomplete submission found
-        '500':
-          description: submission has been completed but no result object is present
-        '404':
-          description: submission not found
-        '401':
-          description: 'Error: Unauthorized'
-  "/api/v1/use_case/submit":
+  "/api/v1/submission/create":
     parameters:
     - name: filter[use_case]
       in: query
@@ -107,6 +63,50 @@ paths:
           description: 'Error: Unauthorized'
         '400':
           description: Bad request
+  "/api/v1/submission/status/{id}":
+    get:
+      summary: Retrieves the status of a submission
+      tags:
+      - submission-status
+      security:
+      - oAuth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: submission found
+        '404':
+          description: submission not found
+        '401':
+          description: 'Error: Unauthorized'
+  "/api/v1/submission/result/{id}":
+    get:
+      summary: Retrieves a submission
+      tags:
+      - submission
+      security:
+      - oAuth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: completed submission found
+        '202':
+          description: incomplete submission found
+        '500':
+          description: submission has been completed but no result object is present
+        '404':
+          description: submission not found
+        '401':
+          description: 'Error: Unauthorized'
   "/api/v1/use_case/one":
     parameters:
     - name: filter[first_name]
