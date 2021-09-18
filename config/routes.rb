@@ -36,7 +36,7 @@ Rails.application.routes.draw do
       get 'use_case/two', to: 'use_case#two', format: :json
       get 'use_case/three', to: 'use_case#three', format: :json
       get 'use_case/four', to: 'use_case#four', format: :json
-      get 'submission-status/:id', to: 'submission_status#show', as: 'submission-status-id', format: :json
+      get 'submission/status/:id', to: 'submissions#status', as: 'submission-status-id', format: :json
       get 'submission/result/:id', to: 'submissions#result', as: 'submission-result-id', format: :json
     end
   end
