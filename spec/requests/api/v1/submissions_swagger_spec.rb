@@ -39,13 +39,13 @@ RSpec.describe 'GET submission', type: :request, swagger_doc: 'v1/swagger.yaml' 
       parameter name: 'filter[end_date]', in: :query, required: true, type: :string,
                 description: 'End date'
 
-      post('call use_case/submit') do
-        tags 'Use cases'
+      post('Create new submission') do
+        tags 'Submissions'
         produces 'application/json'
         consumes 'application/json'
         security [{ oAuth: [] }]
         response(202, 'Accepted') do
-          description 'Post a submission to HMRC'
+          description 'Create a submission record and start the HMRC process asyncronously'
           after do |example|
             example.metadata[:response][:content] = {
               'application/json' => {
@@ -103,7 +103,7 @@ RSpec.describe 'GET submission', type: :request, swagger_doc: 'v1/swagger.yaml' 
 
     path '/api/v1/submission/status/{id}' do
       get 'Retrieves the status of a submission' do
-        tags 'submission-status'
+        tags 'Submissions'
         produces 'application/json'
         consumes 'application/json'
         security [{ oAuth: [] }]
@@ -145,7 +145,7 @@ RSpec.describe 'GET submission', type: :request, swagger_doc: 'v1/swagger.yaml' 
 
     path '/api/v1/submission/result/{id}' do
       get 'Retrieves a submission' do
-        tags 'submission'
+        tags 'Submissions'
         produces 'application/json'
         consumes 'application/json'
         security [{ oAuth: [] }]
