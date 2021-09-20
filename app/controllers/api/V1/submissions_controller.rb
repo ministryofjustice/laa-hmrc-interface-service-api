@@ -20,7 +20,6 @@ module Api
       end
 
       def status
-        submission = Submission.find(params.fetch(:id))
         render json: { submission: submission.id,
                        status: submission.status,
                        _links: [href: "#{request.base_url}/api/v1/submission/status/#{submission.id}"] }
@@ -29,14 +28,33 @@ module Api
       end
 
       def result
-        render status: :accepted unless submission.status.eql? 'completed'
-        render status: :internal_server_error if completed_but_no_attachment?
-        render json: attachment.blob.download if completed_with_attachment?
+        render json: return_body, status: return_status
       rescue ActiveRecord::RecordNotFound
         render status: :not_found
       end
 
       private
+
+      def return_status
+        if completed_but_no_attachment?
+          :internal_server_error
+        elsif completed_with_attachment?
+          :ok
+        elsif !submission.status.eql?('completed')
+          :accepted
+        end
+      end
+
+      def return_body
+        if completed_with_attachment?
+          attachment.blob.download
+        elsif completed_but_no_attachment?
+          { code: 'INCOMPLETE_SUBMISSION', message: 'Process complete but no result available' }
+        else
+          { submission: submission.id, status: submission.status,
+            _links: [href: "#{request.base_url}/api/v1/submission/status/#{submission.id}"] }
+        end
+      end
 
       def deny_access
         render json: { error: 'Unauthorised use case' }.to_json, status: :bad_request

@@ -162,12 +162,33 @@ RSpec.describe 'GET submission', type: :request, swagger_doc: 'v1/swagger.yaml' 
 
         response 202, 'incomplete submission found' do
           let!(:submission) { create :submission, :in_progress }
-          run_test!
+          let(:expected_response) do
+            {
+              submission: id,
+              status: 'in_progress',
+              _links: [
+                href: "http://www.example.com/api/v1/submission/status/#{id}"
+              ]
+            }
+          end
+          run_test! do |response|
+            expect(response.media_type).to eq('application/json')
+            expect(JSON.parse(response.body, symbolize_names: true)).to eq(expected_response)
+          end
         end
 
         response 500, 'submission has been completed but no result object is present' do
           let!(:submission) { create :submission, :completed }
-          run_test!
+          let(:expected_response) do
+            {
+              code: 'INCOMPLETE_SUBMISSION',
+              message: 'Process complete but no result available'
+            }
+          end
+          run_test! do
+            expect(response.media_type).to eq('application/json')
+            expect(JSON.parse(response.body).symbolize_keys).to eq(expected_response)
+          end
         end
 
         response 404, 'submission not found' do
