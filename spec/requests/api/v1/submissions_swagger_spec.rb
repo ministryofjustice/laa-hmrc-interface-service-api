@@ -98,7 +98,7 @@ RSpec.describe 'GET submission', type: :request, swagger_doc: 'v1/swagger.yaml' 
 
   context 'status' do
     let(:application) { dk_application }
-    let!(:submission) { create :submission, :in_progress }
+    let!(:submission) { create :submission, :processing }
     let(:id) { submission.id }
 
     path '/api/v1/submission/status/{id}' do
@@ -113,7 +113,7 @@ RSpec.describe 'GET submission', type: :request, swagger_doc: 'v1/swagger.yaml' 
           let(:expected_response) do
             {
               submission: id,
-              status: 'in_progress',
+              status: 'processing',
               _links: [
                 href: "http://www.example.com/api/v1/submission/status/#{id}"
               ]
@@ -161,11 +161,11 @@ RSpec.describe 'GET submission', type: :request, swagger_doc: 'v1/swagger.yaml' 
         end
 
         response 202, 'incomplete submission found' do
-          let!(:submission) { create :submission, :in_progress }
+          let!(:submission) { create :submission, :processing }
           let(:expected_response) do
             {
               submission: id,
-              status: 'in_progress',
+              status: 'processing',
               _links: [
                 href: "http://www.example.com/api/v1/submission/status/#{id}"
               ]
