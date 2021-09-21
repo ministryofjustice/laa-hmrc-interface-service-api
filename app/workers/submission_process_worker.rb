@@ -7,6 +7,7 @@ class SubmissionProcessWorker
 
   def perform(submission_id)
     submission = Submission.find(submission_id)
+    submission.update!(status: 'processing')
 
     if @retry_count.to_i >= MAX_RETRIES
       submission.update!(status: 'failed')
