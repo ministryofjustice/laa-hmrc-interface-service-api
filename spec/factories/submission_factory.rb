@@ -13,12 +13,16 @@ FactoryBot.define do
     end_date { start_date + 3.months }
   end
 
-  trait :in_progress do
-    status { :in_progress }
+  trait :processing do
+    status { :processing }
   end
 
   trait :completed do
     status { :completed }
+  end
+
+  trait :failed do
+    status { :failed }
   end
 
   trait :with_attachment do
