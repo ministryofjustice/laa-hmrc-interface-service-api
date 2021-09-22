@@ -2,13 +2,11 @@ class OauthAccountPopulator
   DATA_FILE = Rails.root.join('db/seed_data/test_oauth_accounts.yml').freeze
 
   def self.call
-    return if Rails.env.production?
-
     new.call
   end
 
   def call
-    seed_data.each { |seed_row| populate(seed_row) }.freeze
+    seed_data.each { |seed_row| populate(seed_row) }.freeze unless Settings.environment.eql?('live')
   end
 
   private
