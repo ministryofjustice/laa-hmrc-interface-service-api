@@ -19,25 +19,25 @@ RSpec.describe 'GET submission', type: :request, swagger_doc: 'v1/swagger.yaml' 
 
     path '/api/v1/submission/create' do
       parameter name: 'filter[use_case]', in: :query, required: true, type: :string,
-                description: 'Use case'
+                description: 'The use case you wish to request', schema: { enum: %w[one two three four] }
 
       parameter name: 'filter[first_name]', in: :query, required: true, type: :string,
-                description: 'First name'
+                description: 'The first name of the applicant'
 
       parameter name: 'filter[last_name]', in: :query, required: true, type: :string,
-                description: 'Last name'
+                description: 'The last name of the applicant'
 
       parameter name: 'filter[dob]', in: :query, required: true, type: :string,
-                description: 'Date of birth'
+                description: "YYYY-MM-DD - The applicant's date of birth", format: 'date'
 
       parameter name: 'filter[nino]', in: :query, required: true, type: :string,
-                description: 'National Insurance Number'
+                description: "The applicant's national insurance number, in upper case without spaces e.g. QQ123456C"
 
-      parameter name: 'filter[start_date]', in: :query, required: true, type: :string,
-                description: 'Start date'
+      parameter name: 'filter[start_date]', in: :query, required: true, type: :string, format: 'date',
+                description: "YYYY-MM-DD - The earliest date to request data for\n\n<i>example</i>: '2021-01-01'"
 
-      parameter name: 'filter[end_date]', in: :query, required: true, type: :string,
-                description: 'End date'
+      parameter name: 'filter[end_date]', in: :query, required: true, type: :string, format: 'date',
+                description: "YYYY-MM-DD - The latest date to request data for \n\n<i>example</i>: '2021-03-31'"
 
       post('Create new submission') do
         tags 'Submissions'
