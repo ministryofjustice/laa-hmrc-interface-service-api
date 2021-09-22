@@ -10,43 +10,56 @@ paths:
     - name: filter[use_case]
       in: query
       required: true
-      description: Use case
+      type: string
+      description: The use case you wish to request
       schema:
-        type: string
+        enum:
+        - one
+        - two
+        - three
+        - four
     - name: filter[first_name]
       in: query
       required: true
-      description: First name
+      description: The first name of the applicant
       schema:
         type: string
     - name: filter[last_name]
       in: query
       required: true
-      description: Last name
+      description: The last name of the applicant
       schema:
         type: string
     - name: filter[dob]
       in: query
       required: true
-      description: Date of birth
+      description: YYYY-MM-DD - The applicant's date of birth
+      format: date
       schema:
         type: string
     - name: filter[nino]
       in: query
       required: true
-      description: National Insurance Number
+      description: The applicant's national insurance number, in upper case without
+        spaces e.g. QQ123456C
       schema:
         type: string
     - name: filter[start_date]
       in: query
       required: true
-      description: Start date
+      format: date
+      description: |-
+        YYYY-MM-DD - The earliest date to request data for
+
+        <i>example</i>: '2021-01-01'
       schema:
         type: string
     - name: filter[end_date]
       in: query
       required: true
-      description: End date
+      format: date
+      description: "YYYY-MM-DD - The latest date to request data for \n\n<i>example</i>:
+        '2021-03-31'"
       schema:
         type: string
     post:
