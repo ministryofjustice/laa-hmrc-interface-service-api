@@ -12,7 +12,7 @@ module Api
 
         SubmissionProcessWorker.perform_async(submission.id)
         render json: { id: submission.id,
-                       _links: [href: "#{request.base_url}/api/v1/submission-status/#{submission.id}"] },
+                       _links: [href: "#{request.base_url}/api/v1/submission/status/#{submission.id}"] },
                status: :accepted
         #  TO DO show errors when the request does not include all required data
         # else
