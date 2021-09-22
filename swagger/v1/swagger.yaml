@@ -77,8 +77,10 @@ paths:
         schema:
           type: string
       responses:
+        '202':
+          description: incomplete submission found
         '200':
-          description: submission found
+          description: complete submission found
         '404':
           description: submission not found
         '401':

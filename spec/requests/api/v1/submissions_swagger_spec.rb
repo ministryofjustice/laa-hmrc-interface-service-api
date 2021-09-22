@@ -109,19 +109,40 @@ RSpec.describe 'GET submission', type: :request, swagger_doc: 'v1/swagger.yaml' 
         security [{ oAuth: [] }]
         parameter name: :id, in: :path, type: :string
 
-        response '200', 'submission found' do
-          let(:expected_response) do
-            {
-              submission: id,
-              status: 'processing',
-              _links: [
-                href: "http://www.example.com/api/v1/submission/status/#{id}"
-              ]
-            }
+        context 'when the submission has not completed' do
+          response '202', 'incomplete submission found' do
+            let(:expected_response) do
+              {
+                submission: id,
+                status: 'processing',
+                _links: [
+                  href: "http://www.example.com/api/v1/submission/status/#{id}"
+                ]
+              }
+            end
+            run_test! do |response|
+              expect(response.media_type).to eq('application/json')
+              expect(JSON.parse(response.body, symbolize_names: true)).to eq(expected_response)
+            end
           end
-          run_test! do |response|
-            expect(response.media_type).to eq('application/json')
-            expect(JSON.parse(response.body, symbolize_names: true)).to eq(expected_response)
+        end
+
+        context 'when the submission has completed' do
+          let!(:submission) { create :submission, :completed, :with_attachment }
+          response '200', 'complete submission found' do
+            let(:expected_response) do
+              {
+                submission: id,
+                status: 'completed',
+                _links: [
+                  href: "http://www.example.com/api/v1/submission/result/#{id}"
+                ]
+              }
+            end
+            run_test! do |response|
+              expect(response.media_type).to eq('application/json')
+              expect(JSON.parse(response.body, symbolize_names: true)).to eq(expected_response)
+            end
           end
         end
 

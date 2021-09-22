@@ -22,7 +22,8 @@ module Api
       def status
         render json: { submission: submission.id,
                        status: submission.status,
-                       _links: [href: "#{request.base_url}/api/v1/submission/status/#{submission.id}"] }
+                       _links: [href: "#{request.base_url}/api/v1/submission/#{result_or_status}/#{submission.id}"] },
+               status: return_status
       rescue ActiveRecord::RecordNotFound
         render status: :not_found
       end
@@ -90,6 +91,10 @@ module Api
 
       def completed_but_no_attachment?
         submission.status.eql?('completed') && attachment.nil?
+      end
+
+      def result_or_status
+        submission.status.eql?('completed') ? 'result' : 'status'
       end
     end
   end
