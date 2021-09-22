@@ -110,7 +110,7 @@ RSpec.describe 'GET submission', type: :request, swagger_doc: 'v1/swagger.yaml' 
         parameter name: :id, in: :path, type: :string
 
         context 'when the submission has not completed' do
-          response '202', 'incomplete submission found' do
+          response 202, 'Submission still processing' do
             let(:expected_response) do
               {
                 submission: id,
@@ -129,7 +129,7 @@ RSpec.describe 'GET submission', type: :request, swagger_doc: 'v1/swagger.yaml' 
 
         context 'when the submission has completed' do
           let!(:submission) { create :submission, :completed, :with_attachment }
-          response '200', 'complete submission found' do
+          response 200, 'Submission complete' do
             let(:expected_response) do
               {
                 submission: id,
@@ -146,7 +146,7 @@ RSpec.describe 'GET submission', type: :request, swagger_doc: 'v1/swagger.yaml' 
           end
         end
 
-        response '404', 'submission not found' do
+        response 404, 'Submission not found' do
           let(:id) { '1234' }
           run_test!
         end
@@ -172,7 +172,7 @@ RSpec.describe 'GET submission', type: :request, swagger_doc: 'v1/swagger.yaml' 
         security [{ oAuth: [] }]
         parameter name: :id, in: :path, type: :string
 
-        response 200, 'completed submission found' do
+        response 200, 'Submission complete' do
           let!(:submission) { create :submission, :completed, :with_attachment }
           let(:expected_response) { { data: 'test_data' } }
           run_test! do |response|
@@ -181,7 +181,7 @@ RSpec.describe 'GET submission', type: :request, swagger_doc: 'v1/swagger.yaml' 
           end
         end
 
-        response 202, 'incomplete submission found' do
+        response 202, 'Submission still processing' do
           let!(:submission) { create :submission, :processing }
           let(:expected_response) do
             {
@@ -198,7 +198,7 @@ RSpec.describe 'GET submission', type: :request, swagger_doc: 'v1/swagger.yaml' 
           end
         end
 
-        response 500, 'submission has been completed but no result object is present' do
+        response 500, 'Submission complete but no result object is present' do
           let!(:submission) { create :submission, :completed }
           let(:expected_response) do
             {
@@ -212,7 +212,7 @@ RSpec.describe 'GET submission', type: :request, swagger_doc: 'v1/swagger.yaml' 
           end
         end
 
-        response 404, 'submission not found' do
+        response 404, 'Submission not found' do
           let(:id) { '1234' }
           run_test!
         end
