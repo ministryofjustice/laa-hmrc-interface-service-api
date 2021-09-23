@@ -98,6 +98,8 @@ paths:
           description: Submission not found
         '401':
           description: 'Error: Unauthorized'
+        '400':
+          description: Bad request
   "/api/v1/submission/result/{id}":
     get:
       summary: Retrieves a submission
@@ -122,6 +124,8 @@ paths:
           description: Submission not found
         '401':
           description: 'Error: Unauthorized'
+        '400':
+          description: Bad request
   "/api/v1/use_case/one":
     parameters:
     - name: filter[first_name]
