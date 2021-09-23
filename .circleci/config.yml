@@ -243,7 +243,7 @@ jobs:
 #    executor: notification-executor
 #    steps:
 #      - hold-notification:
-#          message: "$CIRCLE_USERNAME has a pending Legal Framework API production approval for $CIRCLE_BRANCH"
+#          message: "$CIRCLE_USERNAME has a pending HMRC Interface production approval for $CIRCLE_BRANCH"
 #  deploy_production:
 #    executor: cloud-platform-executor
 #    steps:
