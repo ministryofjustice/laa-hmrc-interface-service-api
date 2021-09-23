@@ -5,7 +5,7 @@ RSpec.describe SubmissionProcessWorker do
 
   let(:worker) { described_class.new }
   let(:application) { dk_application }
-  let(:submission) { create :submission, oauth_application_id: application.id }
+  let(:submission) { create :submission, oauth_application: application }
 
   subject { worker.perform(submission.id) }
 
