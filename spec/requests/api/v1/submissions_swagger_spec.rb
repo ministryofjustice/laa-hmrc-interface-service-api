@@ -128,7 +128,7 @@ RSpec.describe 'GET submission', type: :request, swagger_doc: 'v1/swagger.yaml' 
         end
 
         context 'when the submission has completed' do
-          let!(:submission) { create :submission, :completed, :with_attachment }
+          let!(:submission) { create :submission, :completed, :with_attachment, oauth_application_id: application.id }
           response 200, 'Submission complete' do
             let(:expected_response) do
               {
@@ -157,11 +157,11 @@ RSpec.describe 'GET submission', type: :request, swagger_doc: 'v1/swagger.yaml' 
           run_test!
         end
 
-        context 'when application is unauthorised to view a submission' do
+        context 'when application is not the application that created the submission' do
           response(400, 'Bad request') do
             let(:submitting_application) { dk_application }
             let(:submission) do
-              create :submission, :processing, use_case: 'two', oauth_application_id: submitting_application.id
+              create :submission, :processing, oauth_application_id: submitting_application.id
             end
 
             run_test! do |response|
@@ -187,7 +187,7 @@ RSpec.describe 'GET submission', type: :request, swagger_doc: 'v1/swagger.yaml' 
         parameter name: :id, in: :path, type: :string
 
         response 200, 'Submission complete' do
-          let!(:submission) { create :submission, :completed, :with_attachment }
+          let!(:submission) { create :submission, :completed, :with_attachment, oauth_application_id: application.id }
           let(:expected_response) { { data: 'test_data' } }
           run_test! do |response|
             expect(response.media_type).to eq('application/json')
@@ -196,7 +196,7 @@ RSpec.describe 'GET submission', type: :request, swagger_doc: 'v1/swagger.yaml' 
         end
 
         response 202, 'Submission still processing' do
-          let!(:submission) { create :submission, :processing }
+          let!(:submission) { create :submission, :processing, oauth_application_id: application.id }
           let(:expected_response) do
             {
               submission: id,
@@ -213,7 +213,7 @@ RSpec.describe 'GET submission', type: :request, swagger_doc: 'v1/swagger.yaml' 
         end
 
         response 500, 'Submission complete but no result object is present' do
-          let!(:submission) { create :submission, :completed }
+          let!(:submission) { create :submission, :completed, oauth_application_id: application.id }
           let(:expected_response) do
             {
               code: 'INCOMPLETE_SUBMISSION',
@@ -237,11 +237,11 @@ RSpec.describe 'GET submission', type: :request, swagger_doc: 'v1/swagger.yaml' 
           run_test!
         end
 
-        context 'when application is unauthorised to view a submission' do
+        context 'when application is not the application that created the submission' do
           response(400, 'Bad request') do
             let(:submitting_application) { dk_application }
             let(:submission) do
-              create :submission, :processing, use_case: 'two', oauth_application_id: submitting_application.id
+              create :submission, :processing, oauth_application_id: submitting_application.id
             end
 
             run_test! do |response|
