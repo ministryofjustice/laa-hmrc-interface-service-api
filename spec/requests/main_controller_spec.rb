@@ -6,8 +6,8 @@ describe MainController, type: :request do
 
     before { get_main }
 
-    it 'returns success' do
-      expect(response).to have_http_status(:success)
+    it 'redirects to the rswag documentation' do
+      expect(response).to redirect_to('/api-docs')
     end
   end
 end
