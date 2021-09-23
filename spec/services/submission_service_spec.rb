@@ -1,9 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe SubmissionService, vcr: { cassette_name: 'use_case_one_success' } do
+  include AuthorisedRequestHelper
+
   describe '.call' do
     subject(:call) { described_class.call(submission) }
     let(:submission) { create :submission, data }
+    let(:application) { dk_application }
     let(:data) do
       {
         use_case: 'one',
@@ -12,7 +15,8 @@ RSpec.describe SubmissionService, vcr: { cassette_name: 'use_case_one_success' }
         nino: 'MN212451D',
         dob: '1992-07-22',
         start_date: '2020-08-01',
-        end_date: '2020-10-01'
+        end_date: '2020-10-01',
+        oauth_application_id: application.id
       }
     end
 

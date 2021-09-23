@@ -98,7 +98,7 @@ RSpec.describe 'GET submission', type: :request, swagger_doc: 'v1/swagger.yaml' 
 
   context 'status' do
     let(:application) { dk_application }
-    let!(:submission) { create :submission, :processing }
+    let(:submission) { create :submission, :processing, oauth_application_id: application.id }
     let(:id) { submission.id }
 
     path '/api/v1/submission/status/{id}' do
@@ -155,6 +155,20 @@ RSpec.describe 'GET submission', type: :request, swagger_doc: 'v1/swagger.yaml' 
           let(:Authorization) { nil }
 
           run_test!
+        end
+
+        context 'when application is unauthorised to view a submission' do
+          response(400, 'Bad request') do
+            let(:submitting_application) { dk_application }
+            let(:submission) do
+              create :submission, :processing, use_case: 'two', oauth_application_id: submitting_application.id
+            end
+
+            run_test! do |response|
+              expect(response.media_type).to eq('application/json')
+              expect(response.body).to match(/Unauthorised application/)
+            end
+          end
         end
       end
     end
@@ -221,6 +235,20 @@ RSpec.describe 'GET submission', type: :request, swagger_doc: 'v1/swagger.yaml' 
           let(:id) { '1234' }
           let(:Authorization) { nil }
           run_test!
+        end
+
+        context 'when application is unauthorised to view a submission' do
+          response(400, 'Bad request') do
+            let(:submitting_application) { dk_application }
+            let(:submission) do
+              create :submission, :processing, use_case: 'two', oauth_application_id: submitting_application.id
+            end
+
+            run_test! do |response|
+              expect(response.media_type).to eq('application/json')
+              expect(response.body).to match(/Unauthorised application/)
+            end
+          end
         end
       end
     end
