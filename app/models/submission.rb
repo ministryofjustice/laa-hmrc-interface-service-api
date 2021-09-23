@@ -1,6 +1,6 @@
 class Submission < ApplicationRecord
+  belongs_to :oauth_application, class_name: 'Doorkeeper::Application'
   has_one_attached :result
-  attr_reader :data
 
   USE_CASES = %w[one two three four].freeze
   validates :use_case, presence: true, inclusion: { in: USE_CASES, message: 'Invalid use case' }

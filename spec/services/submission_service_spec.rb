@@ -16,7 +16,7 @@ RSpec.describe SubmissionService, vcr: { cassette_name: 'use_case_one_success' }
         dob: '1992-07-22',
         start_date: '2020-08-01',
         end_date: '2020-10-01',
-        oauth_application_id: application.id
+        oauth_application: application
       }
     end
 

@@ -11,7 +11,7 @@ module Api
         raise InvalidUseCaseError, 'Unauthorised use case' unless authorised_use_case?
 
         submission = Submission.new(filtered_params.merge(status: 'created',
-                                                          oauth_application_id: doorkeeper_token.application.id))
+                                                          oauth_application: doorkeeper_token.application))
 
         return unless submission.save
 
@@ -111,7 +111,7 @@ module Api
       end
 
       def authorised_application?
-        submission.oauth_application_id == doorkeeper_token.application.id
+        submission.oauth_application == doorkeeper_token.application
       end
     end
   end
