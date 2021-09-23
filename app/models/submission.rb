@@ -1,5 +1,6 @@
 class Submission < ApplicationRecord
   has_one_attached :result
+  belongs_to :oauth_application, class_name: 'Doorkeeper::Application'
   attr_reader :data
 
   USE_CASES = %w[one two three four].freeze

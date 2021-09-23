@@ -7,12 +7,15 @@ class SubmissionProcessWorker
 
   def perform(submission_id)
     submission = Submission.find(submission_id)
-    submission.update!(status: 'processing')
-
+    puts '------'
+    puts submission.inspect
+    puts '------'
     if @retry_count.to_i >= MAX_RETRIES
       submission.update!(status: 'failed')
       Sentry.capture_message("Retry attempts exhausted for submission: #{submission.id}")
       return
+    else
+      submission.update!(status: 'processing')
     end
 
     SubmissionService.call(submission)
