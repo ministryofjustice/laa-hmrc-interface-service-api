@@ -90,10 +90,12 @@ paths:
         schema:
           type: string
       responses:
+        '202':
+          description: Submission still processing
         '200':
-          description: submission found
+          description: Submission complete
         '404':
-          description: submission not found
+          description: Submission not found
         '401':
           description: 'Error: Unauthorized'
   "/api/v1/submission/result/{id}":
@@ -111,13 +113,13 @@ paths:
           type: string
       responses:
         '200':
-          description: completed submission found
+          description: Submission complete
         '202':
-          description: incomplete submission found
+          description: Submission still processing
         '500':
-          description: submission has been completed but no result object is present
+          description: Submission complete but no result object is present
         '404':
-          description: submission not found
+          description: Submission not found
         '401':
           description: 'Error: Unauthorized'
   "/api/v1/use_case/one":
