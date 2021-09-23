@@ -11,6 +11,7 @@ FactoryBot.define do
     dob { Faker::Date.birthday }
     start_date { Faker::Date.backward(days: 180) }
     end_date { start_date + 3.months }
+    oauth_application_id { SecureRandom.uuid }
   end
 
   trait :processing do
