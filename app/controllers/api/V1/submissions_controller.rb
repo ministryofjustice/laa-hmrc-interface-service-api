@@ -1,12 +1,17 @@
 module Api
   module V1
     class SubmissionsController < ApiController
-      rescue_from ::StandardError, with: :deny_access
+      class InvalidUseCaseError < StandardError; end
+
+      class UnauthorisedApplicationError < StandardError; end
+      rescue_from InvalidUseCaseError, with: :unauthorised_use_case
+      rescue_from UnauthorisedApplicationError, with: :unauthorised_application
 
       def create
-        raise 'Unauthorised use case' unless authorised_use_case?
+        raise InvalidUseCaseError, 'Unauthorised use case' unless authorised_use_case?
 
-        submission = Submission.new(filtered_params.merge(status: 'created'))
+        submission = Submission.new(filtered_params.merge(status: 'created',
+                                                          oauth_application_id: doorkeeper_token.application.id))
 
         return unless submission.save
 
@@ -20,6 +25,8 @@ module Api
       end
 
       def status
+        raise UnauthorisedApplicationError, 'Unauthorised application' unless authorised_application?
+
         render json: { submission: submission.id,
                        status: submission.status,
                        _links: [href: "#{request.base_url}/api/v1/submission/#{result_or_status}/#{submission.id}"] },
@@ -29,6 +36,8 @@ module Api
       end
 
       def result
+        raise UnauthorisedApplicationError, 'Unauthorised application' unless authorised_application?
+
         render json: return_body, status: return_status
       rescue ActiveRecord::RecordNotFound
         render status: :not_found
@@ -57,8 +66,12 @@ module Api
         end
       end
 
-      def deny_access
+      def unauthorised_use_case
         render json: { error: 'Unauthorised use case' }.to_json, status: :bad_request
+      end
+
+      def unauthorised_application
+        render json: { error: 'Unauthorised application' }.to_json, status: :bad_request
       end
 
       def authorised_use_case?
@@ -95,6 +108,10 @@ module Api
 
       def result_or_status
         submission.status.eql?('completed') ? 'result' : 'status'
+      end
+
+      def authorised_application?
+        submission.oauth_application_id == doorkeeper_token.application.id
       end
     end
   end
