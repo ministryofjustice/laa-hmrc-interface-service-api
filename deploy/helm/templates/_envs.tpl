@@ -77,6 +77,7 @@ env:
       secretKeyRef:
         name: {{ template "app.fullname" . }}
         key: settings__environment
+  {{- if eq .Values.deploy.settings__environment "non-live" }}
   - name: SETTINGS__CREDENTIALS__USE_CASE_ONE__DESCRIPTION
     valueFrom:
       secretKeyRef:
@@ -317,6 +318,7 @@ env:
       secretKeyRef:
         name: {{ template "app.fullname" . }}
         key: settings__smoke_test__use_case_four__correlation_id
+  {{ end }}
   - name: REDIS_URL
     valueFrom:
       secretKeyRef:
