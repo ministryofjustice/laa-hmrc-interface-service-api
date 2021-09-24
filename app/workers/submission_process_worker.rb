@@ -4,18 +4,30 @@ class SubmissionProcessWorker
 
   MAX_RETRIES = 3
   sidekiq_options queue: 'submissions', retry: MAX_RETRIES
+  sidekiq_retries_exhausted do |msg, _ex|
+    Sentry.capture_message <<~ERROR
+      Moving #{msg['class']}##{msg['args'].first} to dead set, it failed with: #{msg['error_class']}/#{msg['error_message']}
+    ERROR
+  end
 
   def perform(submission_id)
     submission = Submission.find(submission_id)
     submission.update!(status: 'processing')
 
-    if @retry_count.to_i >= MAX_RETRIES
-      submission.update!(status: 'failed')
-      Sentry.capture_message("Retry attempts exhausted for submission: #{submission.id}")
-      return
-    end
-
     SubmissionService.call(submission)
     submission.update!(status: 'completed')
+  rescue Errors::ClientDetailsMismatchError, StandardError
+    if @retry_count >= MAX_RETRIES
+      submission.update!(status: 'failed')
+      raise
+    end
+
+    raise Errors::SentryIgnoresThisSidekiqFailError, retry_error_message(submission_id)
+  end
+
+  private
+
+  def retry_error_message(submission_id)
+    "Retry #{@retry_count.to_i} for SubmissionProcessWorker: #{submission_id}"
   end
 end
