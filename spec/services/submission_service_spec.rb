@@ -46,6 +46,26 @@ RSpec.describe SubmissionService, vcr: { cassette_name: 'use_case_one_success' }
       expect(submission.result.content_type).to eq 'application/json'
     end
 
+    context 'when the details are complete but not found on the calling service',
+            vcr: { cassette_name: 'use_case_one_fail' } do
+      let(:data) do
+        {
+          use_case: 'one',
+          first_name: 'this user',
+          last_name: 'does-not-exist',
+          nino: 'MN212451D',
+          dob: '1992-07-22',
+          start_date: '2020-08-01',
+          end_date: '2020-10-01',
+          oauth_application: application
+        }
+      end
+
+      it 'raises a ClientDetailsMismatch error' do
+        expect { subject }.to raise_error Errors::ClientDetailsMismatchError, 'User details not matched'
+      end
+    end
+
     context 'RestClient::InternalServerError' do
       before do
         allow(RestClient).to receive(:get).with(any_args).and_raise(RestClient::InternalServerError)

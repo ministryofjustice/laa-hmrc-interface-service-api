@@ -79,6 +79,8 @@ module SubmissionProcessable
     uri = '/individuals/matching'
     response = RestClient.post("#{host}#{uri}", request_payload, build_headers(uri))
     JSON.parse(response, object_class: OpenStruct)._links.individual.href
+  rescue RestClient::ExceptionWithResponse => e
+    raise Errors::ClientDetailsMismatchError, 'User details not matched' if response_code(e, 'MATCHING_FAILED')
   end
 
   def request_payload
@@ -99,5 +101,9 @@ module SubmissionProcessable
 
   def host
     @host ||= @use_case.host
+  end
+
+  def response_code(error, text)
+    JSON.parse(error.response.body)['code'].match /#{text}/
   end
 end

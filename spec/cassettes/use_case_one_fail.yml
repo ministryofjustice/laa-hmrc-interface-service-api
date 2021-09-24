@@ -1,0 +1,52 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: "<SETTINGS__CREDENTIALS__HOST>/individuals/matching"
+    body:
+      encoding: UTF-8
+      string: '{"firstName":"this user","lastName":"does-not-exist","nino":"MN212451D","dateOfBirth":"1992-07-22"}'
+    headers:
+      Accept:
+      - application/vnd.hmrc.2.0+json
+      User-Agent:
+      - rest-client/2.1.0 (darwin19 x86_64) ruby/3.0.2p107
+      Correlationid:
+      - bd612fe9-4560-432b-be34-c04a89c1d585
+      Authorization:
+      - Bearer dummy_bearer_token
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '99'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Host:
+      - test-api.service.hmrc.gov.uk
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Content-Type:
+      - application/json
+      Cache-Control:
+      - no-cache
+      X-Envoy-Upstream-Service-Time:
+      - '84'
+      Strict-Transport-Security:
+      - max-age=31536000;
+      Content-Security-Policy:
+      - default-src 'self'
+      Content-Length:
+      - '85'
+      Date:
+      - Fri, 24 Sep 2021 09:20:18 GMT
+      Connection:
+      - close
+    body:
+      encoding: UTF-8
+      string: '{"code":"MATCHING_FAILED","message":"There is no match for the information
+        provided"}'
+  recorded_at: Fri, 24 Sep 2021 09:20:18 GMT
+recorded_with: VCR 6.0.0
