@@ -61,8 +61,9 @@ RSpec.describe SubmissionService, vcr: { cassette_name: 'use_case_one_success' }
         }
       end
 
-      it 'raises a ClientDetailsMismatch error' do
+      it 'raises an error and records the error in the result' do
         expect { subject }.to raise_error Errors::ClientDetailsMismatchError, 'User details not matched'
+        expect(submission.result.blob.download).to match(/submitted client details could not be found in HMRC service/)
       end
     end
 
