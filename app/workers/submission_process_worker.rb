@@ -16,11 +16,10 @@ class SubmissionProcessWorker
 
     SubmissionService.call(submission)
     submission.update!(status: 'completed')
-  rescue Errors::ClientDetailsMismatchError, StandardError
-    if @retry_count >= MAX_RETRIES
-      submission.update!(status: 'failed')
-      raise
-    end
+  rescue Errors::ClientDetailsMismatchError
+    submission.update!(status: 'failed')
+  rescue StandardError
+    submission.update!(status: 'failed') && raise if @retry_count >= MAX_RETRIES
 
     raise Errors::SentryIgnoresThisSidekiqFailError, retry_error_message(submission_id)
   end
