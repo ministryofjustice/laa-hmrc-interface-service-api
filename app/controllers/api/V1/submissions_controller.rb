@@ -12,16 +12,13 @@ module Api
 
         submission = Submission.new(filtered_params.merge(status: 'created',
                                                           oauth_application: doorkeeper_token.application))
+        submission.save
 
-        return unless submission.save
-
-        SubmissionProcessWorker.perform_async(submission.id)
-        render json: { id: submission.id,
-                       _links: [href: "#{request.base_url}/api/v1/submission/status/#{submission.id}"] },
-               status: :accepted
-        #  TO DO show errors when the request does not include all required data
-        # else
-        #   render json: submission.errors&.to_json, status: :bad_request
+        if submission.errors.empty?
+          process_submission(submission.id)
+        else
+          render json: submission.errors&.to_json, status: :bad_request
+        end
       end
 
       def status
@@ -96,6 +93,13 @@ module Api
 
       def attachment
         @attachment ||= submission.result.attachment
+      end
+
+      def process_submission(id)
+        SubmissionProcessWorker.perform_async(id)
+        render json: { id: id,
+                       _links: [href: "#{request.base_url}/api/v1/submission/status/#{id}"] },
+               status: :accepted
       end
 
       def completed_with_attachment?
