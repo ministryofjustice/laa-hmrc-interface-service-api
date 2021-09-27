@@ -384,6 +384,10 @@ GEM
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
     thor (1.1.0)
+    timeliness (0.4.4)
+    timeliness-i18n (0.10.1)
+      railties
+      timeliness
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
     tzinfo-data (1.2021.1)
@@ -392,6 +396,8 @@ GEM
       unf_ext
     unf_ext (0.0.7.7)
     unicode-display_width (2.0.0)
+    validates_timeliness (6.0.0.alpha1)
+      timeliness (>= 0.3.10, < 1)
     vcr (6.0.0)
     webmock (3.14.0)
       addressable (>= 2.8.0)
@@ -446,7 +452,9 @@ DEPENDENCIES
   simplecov
   simplecov-rcov
   spring
+  timeliness-i18n
   tzinfo-data
+  validates_timeliness (~> 6.0.0.alpha1)
   vcr
   webmock
 
