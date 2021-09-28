@@ -77,7 +77,6 @@ env:
       secretKeyRef:
         name: {{ template "app.fullname" . }}
         key: settings__environment
-  {{- if eq .Values.deploy.settings__environment "non-live" }}
   - name: SETTINGS__CREDENTIALS__USE_CASE_ONE__DESCRIPTION
     valueFrom:
       secretKeyRef:
@@ -178,6 +177,7 @@ env:
       secretKeyRef:
         name: {{ template "app.fullname" . }}
         key: settings__credentials__use_case_four__hmrc_totp_secret
+  {{- if eq .Values.deploy.settings__environment "non-live" }}
   - name: SETTINGS__SMOKE_TEST__USE_CASE_ONE__FIRST_NAME
     valueFrom:
       secretKeyRef:
