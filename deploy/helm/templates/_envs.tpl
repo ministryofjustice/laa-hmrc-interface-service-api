@@ -318,12 +318,12 @@ env:
       secretKeyRef:
         name: {{ template "app.fullname" . }}
         key: settings__smoke_test__use_case_four__correlation_id
-  {{ end }}
   - name: REDIS_URL
     valueFrom:
       secretKeyRef:
         name: elasticache
         key: redis_url
+  {{ end }}
   - name: RAILS_ENV
     value: production
   - name: RAILS_LOG_TO_STDOUT
