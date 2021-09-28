@@ -25,19 +25,49 @@ RSpec.describe SubmissionProcessWorker do
       expect(submission.status).to eq('completed')
     end
 
-    context 'when the retry is exceeding the max retries' do
-      before do
-        worker.retry_count = 4
+    context 'when submission errors' do
+      context 'with a client details mismatch error' do
+        before do
+          allow(SubmissionService).to receive(:call).and_raise(Errors::CitizenDetailsMismatchError)
+          worker.retry_count = 0
+        end
+
+        it 'updates the submission status amd records the error ' do
+          subject
+          expect(submission.status).to eq('failed')
+        end
       end
 
-      it 'sends a sentry alert' do
-        expect(Sentry).to receive(:capture_message).with(/^Retry attempts exhausted for submission: #{submission.id}/)
-        subject
-      end
+      context 'with a generic error' do
+        before do
+          allow(SubmissionService).to receive(:call).and_raise(StandardError, 'A problem occurred')
+        end
 
-      it 'updates the submission status' do
-        subject
-        expect(submission.status).to eq('failed')
+        context 'before the final retry' do
+          before { worker.retry_count = 2 }
+
+          it 'raises a not tracked error and leaves the status' do
+            expect { subject }.to raise_error Errors::SentryIgnoresThisSidekiqFailError
+            expect(submission.status).to eq 'processing'
+          end
+        end
+
+        context 'when the retry is at the max retries' do
+          let(:expected_message) { "Moving SubmissionProcessWorker# to dead set, it failed with: /An error occured\n" }
+
+          before { worker.retry_count = 3 }
+
+          it 'updates the submission status' do
+            expect { subject }.to raise_error StandardError, 'A problem occurred'
+            expect(submission.status).to eq('failed')
+          end
+
+          it 'notifies sentry of the deadset addition' do
+            SubmissionProcessWorker.within_sidekiq_retries_exhausted_block do
+              expect(Sentry).to receive(:capture_message).with(expected_message)
+            end
+          end
+        end
       end
     end
   end

@@ -3,7 +3,7 @@ Sentry.init do |config|
   config.breadcrumbs_logger = %i[active_support_logger http_logger]
   config.environment = Settings.sentry.environment
   config.excluded_exceptions += %w[
-    TestWorker::SentryIgnoresThisSidekiqFailError
+    Errors::SentryIgnoresThisSidekiqFailError
   ]
   # Send 5% of non-ping transactions for performance monitoring
   # :nocov:
