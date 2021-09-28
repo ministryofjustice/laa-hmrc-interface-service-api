@@ -80,7 +80,7 @@ module SubmissionProcessable
     response = RestClient.post("#{host}#{uri}", request_payload, build_headers(uri))
     JSON.parse(response, object_class: OpenStruct)._links.individual.href
   rescue RestClient::ExceptionWithResponse => e
-    raise Errors::ClientDetailsMismatchError, 'User details not matched' if response_code(e, 'MATCHING_FAILED')
+    raise Errors::CitizenDetailsMismatchError, 'User details not matched' if response_code(e, 'MATCHING_FAILED')
   end
 
   def request_payload

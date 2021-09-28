@@ -28,7 +28,7 @@ RSpec.describe SubmissionProcessWorker do
     context 'when submission errors' do
       context 'with a client details mismatch error' do
         before do
-          allow(SubmissionService).to receive(:call).and_raise(Errors::ClientDetailsMismatchError)
+          allow(SubmissionService).to receive(:call).and_raise(Errors::CitizenDetailsMismatchError)
           worker.retry_count = 0
         end
 

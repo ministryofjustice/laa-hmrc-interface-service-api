@@ -16,7 +16,7 @@ class SubmissionProcessWorker
 
     SubmissionService.call(submission)
     submission.update!(status: 'completed')
-  rescue Errors::ClientDetailsMismatchError
+  rescue Errors::CitizenDetailsMismatchError
     submission.update!(status: 'failed')
   rescue StandardError
     submission.update!(status: 'failed') && raise if @retry_count >= MAX_RETRIES
