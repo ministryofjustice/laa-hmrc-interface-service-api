@@ -20,6 +20,8 @@ gem 'rswag-ui'
 gem 'sentry-rails'
 gem 'sentry-ruby'
 gem 'sidekiq'
+gem 'timeliness-i18n'
+gem 'validates_timeliness', '~> 6.0.0.alpha1'
 
 group :development, :test do
   gem 'byebug'

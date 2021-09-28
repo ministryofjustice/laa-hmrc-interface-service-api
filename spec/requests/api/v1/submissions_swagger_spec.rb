@@ -67,16 +67,34 @@ RSpec.describe 'GET submission', type: :request, swagger_doc: 'v1/swagger.yaml' 
           run_test!
         end
 
-        xcontext 'when data is bad' do
+        context 'when use_case is bad' do
           response(400, 'Bad request') do
-            let(:'filter[start_date]') { nil }
-            let(:'filter[first_name]') { nil }
-            let(:'filter[last_name]') { nil }
             let(:application) { dk_application(['use_case_three']) }
 
             run_test! do |response|
               expect(response.media_type).to eq('application/json')
-              expect(response.body).to match(/Invalid use case/)
+              expect(response.body).to match(/Unauthorised use case/)
+            end
+          end
+        end
+
+        context 'when data is bad' do
+          response(400, 'Bad request') do
+            let(:'filter[first_name]') { nil }
+            let(:'filter[last_name]') { nil }
+            let(:'filter[nino]') { 'abc123' }
+            let(:'filter[dob]') { '1234' }
+            let(:'filter[start_date]') { nil }
+            let(:'filter[end_date]') { nil }
+            run_test! do |response|
+              errors = JSON.parse(response.body)
+              expect(response.media_type).to eq('application/json')
+              expect(errors['first_name']).to eq(["can't be blank"])
+              expect(errors['last_name']).to eq(["can't be blank"])
+              expect(errors['nino']).to eq(['is not valid'])
+              expect(errors['dob']).to eq(['is not a valid date'])
+              expect(errors['start_date']).to eq(['is not a valid date'])
+              expect(errors['end_date']).to eq(['is not a valid date'])
             end
           end
         end
