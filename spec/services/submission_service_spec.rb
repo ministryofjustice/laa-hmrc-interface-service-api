@@ -77,5 +77,36 @@ RSpec.describe SubmissionService, vcr: { cassette_name: 'use_case_one_success' }
         expect(submission.result.blob.download).to match(/returned INTERNAL_SERVER_ERROR/)
       end
     end
+
+    context 'RestClient::TooManyRequests' do
+      before do
+        call_count = 0
+        allow(RestClient).to receive(:get).with(any_args) do
+          if call_count < 1
+            call_count += 1
+            raise(RestClient::TooManyRequests)
+          else
+            { _links: {} }.to_json
+          end
+        end
+      end
+
+      it 'logs that rate limiting occurred' do
+        allow(Rails.logger).to receive(:info).at_least(:once)
+        subject
+        expect(Rails.logger).to have_received(:info).with(/Rate limited while calling/).once
+      end
+
+      it 'adds a result attachment to the submission' do
+        expect do
+          subject
+        end.to change(ActiveStorage::Attachment, :count).by(1)
+      end
+
+      it 'does not add a result attachment detailing an error' do
+        subject
+        expect(submission.result.blob.download).not_to match(/ERROR/)
+      end
+    end
   end
 end
