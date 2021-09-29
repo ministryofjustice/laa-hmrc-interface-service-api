@@ -66,11 +66,9 @@ module SubmissionProcessable
     response = RestClient.get("#{host}#{uri}", Endpoint::Headers.call(uri, @correlation_id, @use_case.bearer_token))
     JSON.parse(response)
   rescue RestClient::TooManyRequests
-    # :nocov:
     Rails.logger.info "Rate limited while calling #{uri}: waiting then trying again"
     sleep(0.33)
     request_endpoint(uri)
-    # :nocov:
   rescue RestClient::InternalServerError, RestClient::NotFound
     'INTERNAL_SERVER_ERROR' # TODO: improve this, hard to do currently as only the live service fails
   end
