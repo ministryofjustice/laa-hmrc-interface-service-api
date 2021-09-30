@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  slack: circleci/slack@3.4.2
+  slack: circleci/slack@4.4.4
 executors:
   basic-executor:
     docker:
@@ -178,9 +178,34 @@ jobs:
           docker_layer_caching: true
       - run-smoke-test:
           use_case: << parameters.use_case >>
-      - slack/status:
-          success_message: ":yep: Smoke test of use case << parameters.use_case >> on sandbox successful!"
-          failure_message: ":nope: Smoke test of use case << parameters.use_case >> on sandbox failed!"
+      - slack/notify:
+          event: pass
+          custom: |
+            {
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": ":yep: Smoke test of use case << parameters.use_case >> on sandbox successful!"
+                  }
+                }
+              ]
+            }
+      - slack/notify:
+          event: fail
+          custom: |
+            {
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": ":nope: Smoke test of use case << parameters.use_case >> on sandbox failed!"
+                  }
+                }
+              ]
+            }
   clean_up_ecr:
     executor: cloud-platform-executor
     steps:
@@ -266,6 +291,12 @@ jobs:
                         --values ./deploy/helm/values-production.yaml \
                         --set image.repository="$ECR_ENDPOINT/laa-apply-for-legal-aid/laa-hmrc-interface-uat-ecr" \
                         --set image.tag="${CIRCLE_SHA1}"
+      - slack/notify:
+          event: fail
+          template: basic_fail_1
+      - slack/notify:
+          event: pass
+          template: success_tagged_deploy_1
 
 workflows:
   version: 2
@@ -317,13 +348,13 @@ workflows:
           requires:
             - deploy_main_uat
             - delete_uat_branch
-      - hold_production_notification:
+      - slack/on-hold:
           requires:
             - deploy_staging
       - hold_production:
           type: approval
           requires:
-            - deploy_staging
+            - slack/on-hold
       - deploy_production:
           context: laa-hmrc-interface-production
           requires:
