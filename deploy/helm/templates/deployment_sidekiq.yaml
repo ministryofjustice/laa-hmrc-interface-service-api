@@ -23,7 +23,7 @@ spec:
         - name: sidekiq-submissions
           image: '{{ .Values.image.repository }}:{{ .Values.image.tag }}'
           imagePullPolicy: IfNotPresent
-          command: ['bundle', 'exec', 'sidekiq', '-q', 'submissions', '-c', '1']
+          command: ['bundle', 'exec', 'sidekiq', '-q', '{{ .Values.sidekiq.queue_name | default "submissions" }}', '-c', '1']
           resources:
             limits:
               cpu: 500m
