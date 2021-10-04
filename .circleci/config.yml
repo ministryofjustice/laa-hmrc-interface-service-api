@@ -211,9 +211,6 @@ jobs:
       - slack/notify:
           event: fail
           template: basic_fail_1
-      - slack/notify:
-          event: pass
-          template: success_tagged_deploy_1
   deploy_main_uat:
     <<: *deploy_uat
   delete_uat_branch:
@@ -328,10 +325,11 @@ workflows:
       - hold_production:
           type: approval
           requires:
-            - slack/on-hold
+            - deploy_staging
       - deploy_production:
           context: laa-hmrc-interface-production
           requires:
+            - slack/on-hold
             - hold_production
 
   smoke-test-one:
