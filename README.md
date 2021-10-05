@@ -12,8 +12,10 @@ This Service facilitates the HMRC API access for the LAA Use Cases
 
 ### System Dependencies
 * postgres 
+* redis
+* sidekiq
 
 ### Further reading
-* Developer looking to use the API?  After the above - [Click here](docs/development.md)
+* Developer looking to use the API? - [Click here](docs/development.md)
 * Looking for info on how the tests work? - [Click here](docs/testing.md)
 * Want to read the API documentation? - [Click here](docs/swagger.md)
