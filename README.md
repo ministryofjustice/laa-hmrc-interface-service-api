@@ -19,3 +19,4 @@ This Service facilitates the HMRC API access for the LAA Use Cases
 * Developer looking to use the API? - [Click here](docs/development.md)
 * Looking for info on how the tests work? - [Click here](docs/testing.md)
 * Want to read the API documentation? - [Click here](docs/swagger.md)
+* Want to connect to the hosted solution? - [Click here](docs/connect.md)
