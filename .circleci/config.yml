@@ -332,7 +332,7 @@ workflows:
             - slack/on-hold
             - hold_production
 
-  smoke-test-one:
+  smoke-tests:
     triggers:
       - schedule:
           cron: "30 7 * * 1-5" # 1-5 is Mon-Fri
@@ -341,42 +341,19 @@ workflows:
               only: main
     jobs:
       - smoke_tests:
+          name: smoke-test-one
           use_case: one
           context: laa-hmrc-interface-uat
-
-  smoke-test-two:
-    triggers:
-      - schedule:
-          cron: "35 7 * * 1-5" # 1-5 is Mon-Fri
-          filters:
-            branches:
-              only: main
-    jobs:
       - smoke_tests:
+          name: smoke-test-two
           use_case: two
           context: laa-hmrc-interface-uat
-
-  smoke-test-three:
-    triggers:
-      - schedule:
-          cron: "40 7 * * 1-5" # 1-5 is Mon-Fri
-          filters:
-            branches:
-              only: main
-    jobs:
       - smoke_tests:
+          name: smoke-test-three
           use_case: three
           context: laa-hmrc-interface-uat
-
-  smoke-test-four:
-    triggers:
-      - schedule:
-          cron: "45 7 * * 1-5" # 1-5 is Mon-Fri
-          filters:
-            branches:
-              only: main
-    jobs:
       - smoke_tests:
+          name: smoke-test-four
           use_case: four
           context: laa-hmrc-interface-uat
 
