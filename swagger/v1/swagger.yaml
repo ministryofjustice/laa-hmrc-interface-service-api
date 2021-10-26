@@ -5,7 +5,7 @@ info:
   description: This Service facilitates the HMRC API access for the LAA Use Cases
   version: v1
 paths:
-  "/api/v1/submission/create":
+  "/api/v1/submission/create/{use_case}":
     post:
       summary: Create new submission
       tags:
@@ -14,7 +14,7 @@ paths:
       - oAuth: []
       parameters:
       - name: use_case
-        in: query
+        in: path
         required: true
         type: string
         description: The use case you wish to request

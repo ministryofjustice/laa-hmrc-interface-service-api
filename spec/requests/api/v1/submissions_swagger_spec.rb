@@ -23,14 +23,14 @@ RSpec.describe 'GET submission', type: :request, swagger_doc: 'v1/swagger.yaml' 
         }
       }
     end
-    path '/api/v1/submission/create' do
+    path '/api/v1/submission/create/{use_case}' do
       post('Create new submission') do
         tags 'Submissions'
         produces 'application/json'
         consumes 'application/json'
         security [{ oAuth: [] }]
         parameter name: :use_case,
-                  in: :query,
+                  in: :path,
                   required: true,
                   type: :string,
                   description: 'The use case you wish to request',
