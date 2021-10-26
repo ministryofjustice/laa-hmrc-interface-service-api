@@ -9,43 +9,53 @@ RSpec.describe 'GET submission', type: :request, swagger_doc: 'v1/swagger.yaml' 
 
   context 'create' do
     let(:application) { dk_application }
-    let(:'filter[use_case]') { 'one' }
-    let(:'filter[last_name]') { 'Yorke' }
-    let(:'filter[first_name]') { 'Langley' }
-    let(:'filter[nino]') { 'MN212451D' }
-    let(:'filter[dob]') { '1992-07-22' }
-    let(:'filter[start_date]') { '2020-08-01' }
-    let(:'filter[end_date]') { '2020-10-01' }
-
+    let(:use_case) { 'one' }
+    let(:submission) do
+      {
+        filter: {
+          use_case: 'one',
+          last_name: 'Yorke',
+          first_name: 'Langley',
+          nino: 'MN212451D',
+          dob: '1992-07-22',
+          start_date: '2020-08-01',
+          end_date: '2020-10-01'
+        }
+      }
+    end
     path '/api/v1/submission/create' do
-      parameter name: 'filter[use_case]', in: :query, required: true, type: :string,
-                description: 'The use case you wish to request', schema: { enum: %w[one two three four] }
-
-      parameter name: 'filter[first_name]', in: :query, required: true, type: :string,
-                description: 'The first name of the applicant'
-
-      parameter name: 'filter[last_name]', in: :query, required: true, type: :string,
-                description: 'The last name of the applicant'
-
-      parameter name: 'filter[dob]', in: :query, required: true, type: :string,
-                description: "YYYY-MM-DD - The applicant's date of birth", format: 'date'
-
-      parameter name: 'filter[nino]', in: :query, required: true, type: :string,
-                description: "The applicant's national insurance number, in upper case without spaces e.g. QQ123456C"
-
-      parameter name: 'filter[start_date]', in: :query, required: true, type: :string, format: 'date',
-                description: "YYYY-MM-DD - The earliest date to request data for\n\n<i>example</i>: '2021-01-01'"
-
-      parameter name: 'filter[end_date]', in: :query, required: true, type: :string, format: 'date',
-                description: "YYYY-MM-DD - The latest date to request data for \n\n<i>example</i>: '2021-03-31'"
-
       post('Create new submission') do
         tags 'Submissions'
         produces 'application/json'
         consumes 'application/json'
         security [{ oAuth: [] }]
+        parameter name: :use_case,
+                  in: :query,
+                  required: true,
+                  type: :string,
+                  description: 'The use case you wish to request',
+                  schema: { enum: %w[one two three four] }
+        parameter name: :submission,
+                  in: :body,
+                  required: true,
+                  schema: {
+                    type: :object,
+                    properties: {
+                      filter: {
+                        type: :object,
+                        properties: {
+                          first_name: { type: String, example: 'Langley' },
+                          last_name: { type: String, example: 'Yorke' },
+                          nino: { type: String, example: 'MN212451D' },
+                          dob: { type: Date, example: '1992-07-22' },
+                          start_date: { type: Date, example: '2020-08-01' },
+                          end_date: { type: Date, example: '2020-10-01' }
+                        }
+                      }
+                    }
+                  }
         response(202, 'Accepted') do
-          description 'Create a submission record and start the HMRC process asyncronously'
+          description 'Create a submission record and start the HMRC process asynchronously'
           after do |example|
             example.metadata[:response][:content] = {
               'application/json' => {
@@ -80,12 +90,18 @@ RSpec.describe 'GET submission', type: :request, swagger_doc: 'v1/swagger.yaml' 
 
         context 'when data is bad' do
           response(400, 'Bad request') do
-            let(:'filter[first_name]') { nil }
-            let(:'filter[last_name]') { nil }
-            let(:'filter[nino]') { 'abc123' }
-            let(:'filter[dob]') { '1234' }
-            let(:'filter[start_date]') { nil }
-            let(:'filter[end_date]') { nil }
+            let(:submission) do
+              {
+                filter: {
+                  last_name: nil,
+                  first_name: nil,
+                  nino: 'abc123',
+                  dob: '1234',
+                  start_date: nil,
+                  end_date: nil
+                }
+              }
+            end
             run_test! do |response|
               errors = JSON.parse(response.body)
               expect(response.media_type).to eq('application/json')
@@ -101,7 +117,7 @@ RSpec.describe 'GET submission', type: :request, swagger_doc: 'v1/swagger.yaml' 
 
         context 'when scope is invalid' do
           response(400, 'Bad request') do
-            let(:'filter[use_case]') { 'three' }
+            let(:use_case) { 'three' }
             let(:application) { dk_application(%w[use_case_one use_case_two]) }
 
             run_test! do |response|
