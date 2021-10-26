@@ -10,7 +10,8 @@ module Api
       def create
         raise InvalidUseCaseError, 'Unauthorised use case' unless authorised_use_case?
 
-        submission = Submission.new(filtered_params.merge(status: 'created',
+        submission = Submission.new(filtered_params.merge(use_case: use_case_param,
+                                                          status: 'created',
                                                           oauth_application: doorkeeper_token.application))
         submission.save
 
@@ -73,8 +74,12 @@ module Api
 
       def authorised_use_case?
         doorkeeper_token.application.scopes.to_a.map do |scope|
-          scope.ends_with? filtered_params['use_case']
+          scope.ends_with? use_case_param
         end.any?
+      end
+
+      def use_case_param
+        params.require(:use_case)
       end
 
       def filtered_params

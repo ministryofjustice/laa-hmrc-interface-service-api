@@ -5,70 +5,26 @@ info:
   description: This Service facilitates the HMRC API access for the LAA Use Cases
   version: v1
 paths:
-  "/api/v1/submission/create":
-    parameters:
-    - name: filter[use_case]
-      in: query
-      required: true
-      type: string
-      description: The use case you wish to request
-      schema:
-        enum:
-        - one
-        - two
-        - three
-        - four
-    - name: filter[first_name]
-      in: query
-      required: true
-      description: The first name of the applicant
-      schema:
-        type: string
-    - name: filter[last_name]
-      in: query
-      required: true
-      description: The last name of the applicant
-      schema:
-        type: string
-    - name: filter[dob]
-      in: query
-      required: true
-      description: YYYY-MM-DD - The applicant's date of birth
-      format: date
-      schema:
-        type: string
-    - name: filter[nino]
-      in: query
-      required: true
-      description: The applicant's national insurance number, in upper case without
-        spaces e.g. QQ123456C
-      schema:
-        type: string
-    - name: filter[start_date]
-      in: query
-      required: true
-      format: date
-      description: |-
-        YYYY-MM-DD - The earliest date to request data for
-
-        <i>example</i>: '2021-01-01'
-      schema:
-        type: string
-    - name: filter[end_date]
-      in: query
-      required: true
-      format: date
-      description: "YYYY-MM-DD - The latest date to request data for \n\n<i>example</i>:
-        '2021-03-31'"
-      schema:
-        type: string
+  "/api/v1/submission/create/{use_case}":
     post:
       summary: Create new submission
       tags:
       - Submissions
       security:
       - oAuth: []
-      description: Create a submission record and start the HMRC process asyncronously
+      parameters:
+      - name: use_case
+        in: path
+        required: true
+        type: string
+        description: The use case you wish to request
+        schema:
+          enum:
+          - one
+          - two
+          - three
+          - four
+      description: Create a submission record and start the HMRC process asynchronously
       responses:
         '202':
           description: Accepted
@@ -76,6 +32,34 @@ paths:
           description: 'Error: Unauthorized'
         '400':
           description: Bad request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                filter:
+                  type: object
+                  properties:
+                    first_name:
+                      type: String
+                      example: Langley
+                    last_name:
+                      type: String
+                      example: Yorke
+                    nino:
+                      type: String
+                      example: MN212451D
+                    dob:
+                      type: Date
+                      example: '1992-07-22'
+                    start_date:
+                      type: Date
+                      example: '2020-08-01'
+                    end_date:
+                      type: Date
+                      example: '2020-10-01'
+        required: true
   "/api/v1/submission/status/{id}":
     get:
       summary: Retrieves the status of a submission
