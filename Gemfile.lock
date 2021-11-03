@@ -198,7 +198,7 @@ GEM
     http-cookie (1.0.4)
       domain_name (~> 0.5)
     http_parser.rb (0.6.0)
-    i18n (1.8.10)
+    i18n (1.8.11)
       concurrent-ruby (~> 1.0)
     jmespath (1.4.0)
     json-schema (2.8.1)
