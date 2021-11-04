@@ -33,4 +33,14 @@ FactoryBot.define do
       submission.reload
     end
   end
+  trait :failed_with_attachment do
+    status { :failed }
+    after :create do |submission|
+      submission.result.attach(io: File.open('spec/fixtures/test_result_failed.json'),
+                               filename: "#{submission.id}.json",
+                               content_type: 'application/json',
+                               key: "submission/result/#{submission.id}")
+      submission.reload
+    end
+  end
 end

@@ -44,17 +44,17 @@ module Api
       private
 
       def return_status
-        if completed_but_no_attachment?
-          :internal_server_error
-        elsif completed_with_attachment?
-          :ok
-        elsif !submission.status.eql?('completed')
-          :accepted
-        end
+        @return_status ||= if completed_but_no_attachment?
+                             :internal_server_error
+                           elsif completed_with_attachment? || submission.status.eql?('failed')
+                             :ok
+                           elsif !submission.status.eql?('completed')
+                             :accepted
+                           end
       end
 
       def return_body
-        if completed_with_attachment?
+        if return_status.eql?(:ok)
           attachment.blob.download
         elsif completed_but_no_attachment?
           { code: 'INCOMPLETE_SUBMISSION', message: 'Process complete but no result available' }
