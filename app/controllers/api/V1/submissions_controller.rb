@@ -104,10 +104,6 @@ module Api
         submission.status.eql?('completed') && attachment.nil?
       end
 
-      # def result_or_status
-      #   submission.status.eql?('completed') ? 'result' : 'status'
-      # end
-
       def authorised_application?
         submission.oauth_application == doorkeeper_token.application
       end
