@@ -67,7 +67,7 @@ RSpec.describe 'GET submission', type: :request, swagger_doc: 'v1/swagger.yaml' 
             expect(response.media_type).to eq('application/json')
             expect(response.body).to match(/id/)
             expect(response.body).to match(/_links/)
-            expect(JSON.parse(response.body)['_links'].first['href']).to match(%r{http://www.example.com/api/v1/submission/status/})
+            expect(JSON.parse(response.body)['_links'].first['href']).to match(%r{http://www.example.com/api/v1/submission/result/})
           end
         end
 
@@ -123,84 +123,6 @@ RSpec.describe 'GET submission', type: :request, swagger_doc: 'v1/swagger.yaml' 
             run_test! do |response|
               expect(response.media_type).to eq('application/json')
               expect(response.body).to match(/Unauthorised use case/)
-            end
-          end
-        end
-      end
-    end
-  end
-
-  context 'status' do
-    let(:application) { dk_application }
-    let(:submission) { create :submission, :processing, oauth_application: application }
-    let(:id) { submission.id }
-
-    path '/api/v1/submission/status/{id}' do
-      get 'Retrieves the status of a submission' do
-        tags 'Submissions'
-        produces 'application/json'
-        consumes 'application/json'
-        security [{ oAuth: [] }]
-        parameter name: :id, in: :path, type: :string
-
-        context 'when the submission has not completed' do
-          response 202, 'Submission still processing' do
-            let(:expected_response) do
-              {
-                submission: id,
-                status: 'processing',
-                _links: [
-                  href: "http://www.example.com/api/v1/submission/status/#{id}"
-                ]
-              }
-            end
-            run_test! do |response|
-              expect(response.media_type).to eq('application/json')
-              expect(JSON.parse(response.body, symbolize_names: true)).to eq(expected_response)
-            end
-          end
-        end
-
-        context 'when the submission has completed' do
-          let!(:submission) { create :submission, :completed, :with_attachment, oauth_application: application }
-          response 200, 'Submission complete' do
-            let(:expected_response) do
-              {
-                submission: id,
-                status: 'completed',
-                _links: [
-                  href: "http://www.example.com/api/v1/submission/result/#{id}"
-                ]
-              }
-            end
-            run_test! do |response|
-              expect(response.media_type).to eq('application/json')
-              expect(JSON.parse(response.body, symbolize_names: true)).to eq(expected_response)
-            end
-          end
-        end
-
-        response 404, 'Submission not found' do
-          let(:id) { '1234' }
-          run_test!
-        end
-
-        response(401, 'Error: Unauthorized') do
-          let(:Authorization) { nil }
-
-          run_test!
-        end
-
-        context 'when application is not the application that created the submission' do
-          response(400, 'Bad request') do
-            let(:submitting_application) { dk_application }
-            let(:submission) do
-              create :submission, :processing, oauth_application: submitting_application
-            end
-
-            run_test! do |response|
-              expect(response.media_type).to eq('application/json')
-              expect(response.body).to match(/Unauthorised application/)
             end
           end
         end

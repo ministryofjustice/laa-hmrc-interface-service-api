@@ -22,17 +22,6 @@ module Api
         end
       end
 
-      def status
-        raise UnauthorisedApplicationError, 'Unauthorised application' unless authorised_application?
-
-        render json: { submission: submission.id,
-                       status: submission.status,
-                       _links: [href: "#{request.base_url}/api/v1/submission/#{result_or_status}/#{submission.id}"] },
-               status: return_status
-      rescue ActiveRecord::RecordNotFound
-        render status: :not_found
-      end
-
       def result
         raise UnauthorisedApplicationError, 'Unauthorised application' unless authorised_application?
 
@@ -103,7 +92,7 @@ module Api
       def process_submission(id)
         SubmissionProcessWorker.perform_async(id)
         render json: { id: id,
-                       _links: [href: "#{request.base_url}/api/v1/submission/status/#{id}"] },
+                       _links: [href: "#{request.base_url}/api/v1/submission/result/#{id}"] },
                status: :accepted
       end
 
@@ -113,10 +102,6 @@ module Api
 
       def completed_but_no_attachment?
         submission.status.eql?('completed') && attachment.nil?
-      end
-
-      def result_or_status
-        submission.status.eql?('completed') ? 'result' : 'status'
       end
 
       def authorised_application?
