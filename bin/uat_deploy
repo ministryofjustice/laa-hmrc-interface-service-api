@@ -5,7 +5,7 @@ deploy() {
   RELEASE_NAME=$(echo $CIRCLE_BRANCH | sed 's:^\w*\/::' | tr -s ' _/[]().' '-' | cut -c1-30 | sed 's/-$//')
   RELEASE_HOST="$RELEASE_NAME-laa-hmrc-interface-uat.apps.live-1.cloud-platform.service.justice.gov.uk"
   BRANCH_NAME=$(echo $CIRCLE_BRANCH | tr -s ' _/[]().' '-')
-  IDENTIFIER="$RELEASE_NAME-laa-hmrc-interface-laa-hmrc-interface-uat-blue"
+  IDENTIFIER="$RELEASE_NAME-laa-hmrc-interface-service-api-laa-hmrc-interface-uat-blue"
   if [[ $(echo $BRANCH_NAME | awk -F/ '{print NF-1}')  != '0' ]]
   then
     BRANCH_NAME="$(echo $BRANCH_NAME | awk -F/ '{print $1}')-$(echo $BRANCH_NAME | awk -F/ '{print $NF}')"
