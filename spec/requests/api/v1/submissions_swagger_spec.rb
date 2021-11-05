@@ -199,6 +199,8 @@ RSpec.describe 'GET submission', type: :request, swagger_doc: 'v1/swagger.yaml' 
           let!(:submission) { create :submission, :completed, oauth_application: application }
           let(:expected_response) do
             {
+              submission: id,
+              status: 'completed',
               code: 'INCOMPLETE_SUBMISSION',
               message: 'Process complete but no result available'
             }

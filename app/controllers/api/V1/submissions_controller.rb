@@ -43,14 +43,14 @@ module Api
       end
 
       def return_body
-        if return_status.eql?(:ok)
-          attachment.blob.download
-        elsif completed_but_no_attachment?
-          { code: 'INCOMPLETE_SUBMISSION', message: 'Process complete but no result available' }
-        else
-          { submission: submission.id, status: submission.status,
-            _links: [href: "#{request.base_url}/api/v1/submission/status/#{submission.id}"] }
-        end
+        data_hash = if return_status.eql?(:ok)
+                      JSON.parse(attachment.blob.download, symbolize_names: true)
+                    elsif completed_but_no_attachment?
+                      { code: 'INCOMPLETE_SUBMISSION', message: 'Process complete but no result available' }
+                    else
+                      { _links: [href: "#{request.base_url}/api/v1/submission/status/#{submission.id}"] }
+                    end
+        { submission: submission.id, status: submission.status }.merge(data_hash)
       end
 
       def unauthorised_use_case

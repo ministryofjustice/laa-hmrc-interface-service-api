@@ -16,7 +16,7 @@ class SubmissionService
 
   def call(correlation_id: SecureRandom.uuid)
     @correlation_id = correlation_id
-    @result = { data: [{ correlation_id: @correlation_id }] }
+    @result = { data: [{ correlation_id: @correlation_id, use_case: @use_case.use_case }] }
     data = request_and_extract_data(request_match_id)
     process_next_steps(data)
   rescue Errors::CitizenDetailsMismatchError
