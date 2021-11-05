@@ -1,8 +1,8 @@
 {
   "submission": "test-guid",
-  "status": "completed",
+  "status": "failed",
   "data": [
     { "correlation_id": "test-guid", "use_case": "use_case_two" },
-    { "test_key": "test value" }
+    { "error": "submitted client details could not be found in HMRC service" }
   ]
 }
