@@ -250,9 +250,6 @@ jobs:
       - run:
           name: Delete UAT release
           command: ./bin/uat_delete_release NOT_A_DRY_RUN
-      - run:
-          name: Delete UAT database
-          command: ./bin/uat_full_db_delete
   delete_uat_branch_live:
     executor: cloud-platform-executor
     steps:
