@@ -62,6 +62,15 @@ references:
         kubectl config set-credentials circleci --token=${K8S_TOKEN}
         kubectl config set-context ${K8S_CLUSTER_NAME} --cluster=${K8S_CLUSTER_NAME} --user=circleci --namespace=${K8S_NAMESPACE}
         kubectl config use-context ${K8S_CLUSTER_NAME}
+  authenticate_k8s_live: &authenticate_k8s_live
+    run:
+      name: Authenticate with Live cluster
+      command: |
+        echo -n ${K8S_CLUSTER_CERT_LIVE} | base64 -d > ./ca.crt
+        kubectl config set-cluster ${K8S_CLUSTER_NAME_LIVE} --certificate-authority=./ca.crt --server=https://${K8S_CLUSTER_NAME_LIVE}
+        kubectl config set-credentials circleci --token=${K8S_TOKEN_LIVE}
+        kubectl config set-context ${K8S_CLUSTER_NAME_LIVE} --cluster=${K8S_CLUSTER_NAME_LIVE} --user=circleci --namespace=${K8S_NAMESPACE}
+        kubectl config use-context ${K8S_CLUSTER_NAME_LIVE}
   decrypt_secrets: &decrypt_secrets
     run:
       name: Decrypt secrets file
@@ -211,8 +220,24 @@ jobs:
       - slack/notify:
           event: fail
           template: basic_fail_1
+  deploy_uat_live: &deploy_uat_live
+    executor: cloud-platform-executor
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - *decrypt_secrets
+      - *authenticate_k8s_live
+      - deploy:
+          name: Helm deployment to UAT
+          command: ./bin/uat_deploy_to_live
+      - slack/notify:
+          event: fail
+          template: basic_fail_1
   deploy_main_uat:
     <<: *deploy_uat
+  deploy_main_uat_live:
+    <<: *deploy_uat_live
   delete_uat_branch:
     executor: cloud-platform-executor
     steps:
@@ -225,8 +250,20 @@ jobs:
       - run:
           name: Delete UAT release
           command: ./bin/uat_delete_release NOT_A_DRY_RUN
+  delete_uat_branch_live:
+    executor: cloud-platform-executor
+    steps:
+      - checkout
+      - setup_remote_docker
+      - *authenticate_k8s_live
       - run:
-          name: Delete UAT database
+          name: Setup gems required
+          command: gem install rest-client
+      - run:
+          name: Delete UAT release from Live cluster
+          command: ./bin/uat_delete_release NOT_A_DRY_RUN
+      - run:
+          name: Delete UAT database from Live cluster
           command: ./bin/uat_full_db_delete
   deploy_staging:
     executor: cloud-platform-executor
@@ -291,6 +328,12 @@ workflows:
             - lint_checks
             - unit_tests
             - build_and_push
+      - deploy_uat_live:
+          context: laa-hmrc-interface-uat
+          requires:
+            - lint_checks
+            - unit_tests
+            - build_and_push
 
   merge_pr:
     jobs:
@@ -310,7 +353,15 @@ workflows:
           context: laa-hmrc-interface-uat
           requires:
             - build_and_push
+      - deploy_main_uat_live:
+          context: laa-hmrc-interface-uat
+          requires:
+            - build_and_push
       - delete_uat_branch:
+          context: laa-hmrc-interface-uat
+          requires:
+            - build_and_push
+      - delete_uat_branch_live:
           context: laa-hmrc-interface-uat
           requires:
             - build_and_push
