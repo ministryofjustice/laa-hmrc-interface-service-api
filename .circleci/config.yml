@@ -206,7 +206,7 @@ jobs:
       - *decrypt_secrets
       - *build_docker_image
       - *push_to_ecr
-  deploy_uat_live: &deploy_uat_live
+  deploy_uat: &deploy_uat
     executor: cloud-platform-executor
     steps:
       - checkout
@@ -216,13 +216,13 @@ jobs:
       - *authenticate_k8s_live
       - deploy:
           name: Helm deployment to UAT
-          command: ./bin/uat_deploy_to_live
+          command: ./bin/uat_deploy
       - slack/notify:
           event: fail
           template: basic_fail_1
-  deploy_main_uat_live:
-    <<: *deploy_uat_live
-  delete_uat_branch_live:
+  deploy_main_uat:
+    <<: *deploy_uat
+  delete_uat_branch:
     executor: cloud-platform-executor
     steps:
       - checkout
@@ -232,10 +232,10 @@ jobs:
           name: Setup gems required
           command: gem install rest-client
       - run:
-          name: Delete UAT release from Live cluster
+          name: Delete UAT release
           command: ./bin/uat_delete_release NOT_A_DRY_RUN
       - run:
-          name: Delete UAT database from Live cluster
+          name: Delete UAT database
           command: ./bin/uat_full_db_delete
   deploy_staging:
     executor: cloud-platform-executor
@@ -294,7 +294,7 @@ workflows:
           filters:
             branches:
               ignore: main
-      - deploy_uat_live:
+      - deploy_uat:
           context: laa-hmrc-interface-uat
           requires:
             - lint_checks
@@ -315,19 +315,19 @@ workflows:
           requires:
             - lint_checks
             - unit_tests
-      - deploy_main_uat_live:
+      - deploy_main_uat:
           context: laa-hmrc-interface-uat
           requires:
             - build_and_push
-      - delete_uat_branch_live:
+      - delete_uat_branch:
           context: laa-hmrc-interface-uat
           requires:
             - build_and_push
       - deploy_staging:
           context: laa-hmrc-interface-staging
           requires:
-            - deploy_main_uat_live
-            - delete_uat_branch_live
+            - deploy_main_uat
+            - delete_uat_branch
       - slack/on-hold:
           requires:
             - deploy_staging
