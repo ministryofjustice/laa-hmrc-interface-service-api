@@ -330,10 +330,10 @@ workflows:
             - build_and_push
       - deploy_uat_live:
           context: laa-hmrc-interface-uat
-          requires:
-            - lint_checks
-            - unit_tests
-            - build_and_push
+          # requires:
+          #   - lint_checks
+          #   - unit_tests
+          #   - build_and_push
 
   merge_pr:
     jobs:
