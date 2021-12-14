@@ -67,3 +67,5 @@ smoke_test:
     start_date: 'store actual value as SETTINGS__SMOKE_TEST__USE_CASE_FOUR__START_DATE'
     end_date: 'store actual value as SETTINGS__SMOKE_TEST__USE_CASE_FOUR__END_DATE'
     correlation_id: 'store actual value as SETTINGS__SMOKE_TEST__USE_CASE_FOUR__CORRELATION_ID'
+
+delay: 0.15

@@ -31,3 +31,5 @@ sidekiq:
 
 sentry:
   environment: 'test'
+
+delay: 0
