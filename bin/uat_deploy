@@ -23,7 +23,7 @@ deploy() {
                 --set ingress.hosts="{$RELEASE_HOST}" \
                 --set ingress.annotations."external-dns\.alpha\.kubernetes\.io/set-identifier"="$IDENTIFIER" \
                 --set branch.name="$BRANCH_NAME" \
-                --set sidekiq.queue_name="$BRANCH_NAME-submissions"
+                --set sidekiq.queue_name="$BRANCH_NAME-"
 }
 
 deploy
