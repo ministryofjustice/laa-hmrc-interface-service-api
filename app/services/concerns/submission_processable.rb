@@ -11,6 +11,7 @@ module SubmissionProcessable
   end
 
   def request_and_extract_data(uri)
+    sleep(Settings.delay) # Having a fraction of a second pause reduces the instances of rate limiting that occur
     parsed_uri = build_uri(uri)
     data = request_endpoint(parsed_uri.for_calling)
     extract_data_from(data, parsed_uri)
