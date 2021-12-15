@@ -1,3 +1,4 @@
+environment: 'non-live'
 status:
   build_date: <%= ENV['BUILD_DATE'] || 'Not Available' %>
   build_tag: <%= ENV['BUILD_TAG'] || 'Not Available' %>
