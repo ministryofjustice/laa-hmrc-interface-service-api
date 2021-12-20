@@ -1,12 +1,11 @@
 class SubmissionService
-  attr_reader :data
+  attr_reader :submission
 
   include SubmissionProcessable
 
   def initialize(use_case, submission)
     @use_case = UseCase.new(use_case)
     @submission = submission
-    @data = OpenStruct.new(@submission.as_json.except('use_case'))
   end
 
   def self.call(submission)
