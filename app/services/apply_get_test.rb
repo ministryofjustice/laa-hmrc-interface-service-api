@@ -1,6 +1,6 @@
 # :nocov:
 class ApplyGetTest
-  attr_reader :data
+  attr_reader :submission
 
   include SubmissionProcessable
 
@@ -8,14 +8,14 @@ class ApplyGetTest
     return unless args.keys.difference(%i[first_name last_name nino dob start_date end_date]).empty?
 
     @use_case = UseCase.new(use_case)
-    @data = JSON.parse({
+    @submission = JSON.parse({
       first_name: args[:first_name],
       last_name: args[:last_name],
       nino: args[:nino],
       dob: args[:dob],
       start_date: args[:start_date],
       end_date: args[:end_date]
-    }.to_json, object_class: OpenStruct)
+    }.to_json, object_class: Submission)
   end
 
   def self.call(use_case, **args)
