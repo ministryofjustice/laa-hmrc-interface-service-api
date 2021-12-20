@@ -83,7 +83,12 @@ module SubmissionProcessable
   end
 
   def request_payload
-    { firstName: data.first_name, lastName: data.last_name, nino: data.nino, dateOfBirth: data.dob }.to_json
+    {
+      firstName: submission.first_name,
+      lastName: submission.last_name,
+      nino: submission.nino,
+      dateOfBirth: submission.dob
+    }.to_json
   end
 
   def extract_next_links(data)
@@ -91,7 +96,7 @@ module SubmissionProcessable
   end
 
   def build_uri(uri)
-    Endpoint::Uri.new(uri, use_case: @use_case.use_case, from_date: data.start_date, to_date: data.end_date)
+    Endpoint::Uri.new(uri, use_case: @use_case.use_case, from_date: submission.start_date, to_date: submission.end_date)
   end
 
   def build_headers(uri)
