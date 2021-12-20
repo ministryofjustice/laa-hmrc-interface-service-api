@@ -77,7 +77,7 @@ module SubmissionProcessable
   def request_match_id
     uri = '/individuals/matching'
     response = RestClient.post("#{host}#{uri}", request_payload, build_headers(uri))
-    JSON.parse(response, object_class: OpenStruct)._links.individual.href
+    JSON.parse(response).dig('_links', 'individual', 'href')
   rescue RestClient::ExceptionWithResponse => e
     raise Errors::CitizenDetailsMismatchError, 'User details not matched' if response_code(e, 'MATCHING_FAILED')
   end
