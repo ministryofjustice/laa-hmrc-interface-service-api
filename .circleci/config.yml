@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  slack: circleci/slack@4.4.4
+  slack: circleci/slack@4.5.2
 executors:
   basic-executor:
     docker:
@@ -98,7 +98,7 @@ references:
       name: Install System packages needed for testing
       command: |
         sudo apt-get update
-        sudo apt-get install -y postgresql-client 
+        sudo apt-get install -y postgresql-client
         sudo apt-get install -y git-crypt
   setup_database: &setup_database
     run:
