@@ -258,23 +258,6 @@ jobs:
                           --values ./deploy/helm/values-staging.yaml \
                           --set image.repository="$ECR_ENDPOINT/laa-apply-for-legal-aid/laa-hmrc-interface-uat-ecr" \
                           --set image.tag="${CIRCLE_SHA1}"
-  deploy_staging_legacy:
-    executor: cloud-platform-executor
-    steps:
-      - checkout
-      - setup_remote_docker:
-          docker_layer_caching: true
-      - *decrypt_secrets
-      - *authenticate_k8s
-      - deploy:
-          name: Helm deployment to staging
-          command: |
-            helm upgrade laa-hmrc-interface ./deploy/helm/. \
-                          --install --wait \
-                          --namespace=${K8S_NAMESPACE} \
-                          --values ./deploy/helm/values-staging-legacy.yaml \
-                          --set image.repository="$ECR_ENDPOINT/laa-apply-for-legal-aid/laa-hmrc-interface-uat-ecr" \
-                          --set image.tag="${CIRCLE_SHA1}"
   deploy_production:
     executor: cloud-platform-executor
     steps:
@@ -345,11 +328,6 @@ workflows:
           requires:
             - build_and_push
       - deploy_staging:
-          context: laa-hmrc-interface-staging
-          requires:
-            - deploy_main_uat
-            - delete_uat_branch
-      - deploy_staging_legacy:
           context: laa-hmrc-interface-staging
           requires:
             - deploy_main_uat
