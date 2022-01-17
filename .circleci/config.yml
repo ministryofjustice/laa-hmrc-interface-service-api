@@ -53,15 +53,6 @@ references:
           docker tag app "${ECR_ENDPOINT}/laa-apply-for-legal-aid/laa-hmrc-interface-uat-ecr:latest"
           docker push "${ECR_ENDPOINT}/laa-apply-for-legal-aid/laa-hmrc-interface-uat-ecr:latest"
         fi
-  authenticate_k8s: &authenticate_k8s
-    run:
-      name: Authenticate with cluster
-      command: |
-        echo -n ${K8S_CLUSTER_CERT} | base64 -d > ./ca.crt
-        kubectl config set-cluster ${K8S_CLUSTER_NAME} --certificate-authority=./ca.crt --server=https://api.${K8S_CLUSTER_NAME}
-        kubectl config set-credentials circleci --token=${K8S_TOKEN}
-        kubectl config set-context ${K8S_CLUSTER_NAME} --cluster=${K8S_CLUSTER_NAME} --user=circleci --namespace=${K8S_NAMESPACE}
-        kubectl config use-context ${K8S_CLUSTER_NAME}
   authenticate_k8s_live: &authenticate_k8s_live
     run:
       name: Authenticate with Live cluster
@@ -265,7 +256,7 @@ jobs:
       - setup_remote_docker:
           docker_layer_caching: true
       - *decrypt_secrets
-      - *authenticate_k8s
+      - *authenticate_k8s_live
       - deploy:
           name: Helm deployment to production
           command: |
