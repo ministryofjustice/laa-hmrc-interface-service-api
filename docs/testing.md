@@ -32,7 +32,7 @@ SmokeTest.call(:two)
 
 By design, this will only output true or false, so as not to leak any sandbox data
 
-Successful results are stored for 1 hour, to ensure that stale successes don;t get reported, and a summary is accessible at
+Successful results are stored for 1 hour, to ensure that stale successes don't get reported, and a summary is accessible at
 ```http request
 https://HOST/smoke-test
 ```
