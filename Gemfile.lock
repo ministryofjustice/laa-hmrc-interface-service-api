@@ -225,7 +225,7 @@ GEM
     minitest (5.15.0)
     mock_redis (0.29.0)
       ruby2_keywords
-    msgpack (1.4.2)
+    msgpack (1.4.3)
     multi_json (1.15.0)
     multipart-post (2.1.1)
     nenv (0.3.0)
