@@ -108,6 +108,6 @@ module SubmissionProcessable
   end
 
   def response_code(error, text)
-    JSON.parse(error.response.body)['code'].match /#{text}/
+    JSON.parse(error.response.body)['code'].match(/#{text}/)
   end
 end
