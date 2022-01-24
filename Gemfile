@@ -8,7 +8,7 @@ gem 'bootsnap', '>= 1.4.4', require: false
 gem 'config'
 gem 'doorkeeper'
 gem 'dotenv-rails'
-gem 'pg', '~> 1.1'
+gem 'pg', '~> 1.3'
 gem 'puma', '~> 5.5'
 gem 'rails', '~> 6.1.4'
 gem 'redis'
