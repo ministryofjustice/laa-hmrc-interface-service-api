@@ -1,41 +1,14 @@
 require:
   - rubocop-performance
-  - rubocop-rails
 
 inherit_from: .rubocop_todo.yml
 
-AllCops:
-  TargetRubyVersion: 3.0
-  NewCops: enable
-  SuggestExtensions: false
-  Exclude:
-    - 'db/migrate/*'
-    - 'db/schema.rb'
-    - 'log/**/*'
-    - 'tmp/**/*'
-    - 'vendor/**/*'
-    - 'node_modules/**/*'
-    - 'bin/bundle'
+inherit_gem:
+  rubocop-govuk:
+    - config/default.yml
+    - config/rails.yml
+    - config/rspec.yml
 
-Style/FrozenStringLiteralComment:
-  Enabled: false
-
-Style/Documentation:
-  Enabled: false
-
-Metrics/BlockLength:
-  Exclude:
-    - 'config/routes.rb'
-    - 'spec/**/*'
-
-Performance/MapCompact:
-  Exclude:
-    - 'bin/uat_delete_release' # the circle container is running 2.6.3 and does not include filter_map
-
-Naming/InclusiveLanguage:
-  Exclude:
-    - 'config/initializers/doorkeeper.rb'
-  FlaggedTerms:
-    master:
-      AllowedRegex:
-        - !ruby/regexp "/master.key/i"
+inherit_mode:
+  merge:
+    - Exclude

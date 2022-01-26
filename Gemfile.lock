@@ -319,6 +319,12 @@ GEM
       unicode-display_width (>= 1.4.0, < 3.0)
     rubocop-ast (1.15.1)
       parser (>= 3.0.1.1)
+    rubocop-govuk (4.3.0)
+      rubocop (= 1.25.0)
+      rubocop-ast (= 1.15.1)
+      rubocop-rails (= 2.13.2)
+      rubocop-rake (= 0.6.0)
+      rubocop-rspec (= 2.7.0)
     rubocop-performance (1.13.2)
       rubocop (>= 1.7.0, < 2.0)
       rubocop-ast (>= 0.4.0)
@@ -326,6 +332,10 @@ GEM
       activesupport (>= 4.2.0)
       rack (>= 1.1)
       rubocop (>= 1.7.0, < 2.0)
+    rubocop-rake (0.6.0)
+      rubocop (~> 1.0)
+    rubocop-rspec (2.7.0)
+      rubocop (~> 1.19)
     ruby-progressbar (1.11.0)
     ruby2_keywords (0.0.5)
     sentry-rails (5.0.1)
@@ -420,9 +430,8 @@ DEPENDENCIES
   rswag-api
   rswag-specs
   rswag-ui
-  rubocop
+  rubocop-govuk
   rubocop-performance
-  rubocop-rails
   sentry-rails
   sentry-ruby
   shoulda-matchers
