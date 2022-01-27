@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Endpoint::Uri do
-  subject(:use_case) { described_class.new(href, use_case: 'use_case_one', from_date: from_date, to_date: to_date) }
+  subject(:use_case) { described_class.new(href, use_case: 'use_case_one', from_date:, to_date:) }
   let(:href) { '/root/type/sub?matchID=123456' }
   let(:from_date) { '2021-01-01' }
   let(:to_date) { '2021-03-31' }
