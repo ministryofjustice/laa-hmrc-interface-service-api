@@ -197,7 +197,7 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker:
-          version: 19.03.13
+          version: 20.10.7
       - *decrypt_secrets
       - *build_docker_image
       - *push_to_ecr
