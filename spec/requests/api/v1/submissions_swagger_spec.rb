@@ -79,7 +79,7 @@ RSpec.describe 'GET submission', type: :request, swagger_doc: 'v1/swagger.yaml' 
 
         context 'when use_case is bad' do
           response(400, 'Bad request') do
-            let(:application) { dk_application(['use_case_three']) }
+            let(:application) { dk_application(%w[use_case_three]) }
 
             run_test! do |response|
               expect(response.media_type).to eq('application/json')
