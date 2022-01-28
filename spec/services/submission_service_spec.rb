@@ -26,9 +26,7 @@ RSpec.describe SubmissionService, vcr: { cassette_name: 'use_case_one_success' }
     end
 
     it 'adds a result attachment to the submission' do
-      expect do
-        subject
-      end.to change(ActiveStorage::Attachment, :count).by(1)
+      expect { subject }.to change(ActiveStorage::Attachment, :count).by(1)
     end
 
     it 'gives the submission result attachment the a filename' do
@@ -98,9 +96,7 @@ RSpec.describe SubmissionService, vcr: { cassette_name: 'use_case_one_success' }
       end
 
       it 'adds a result attachment to the submission' do
-        expect do
-          subject
-        end.to change(ActiveStorage::Attachment, :count).by(1)
+        expect { subject }.to change(ActiveStorage::Attachment, :count).by(1)
       end
 
       it 'does not add a result attachment detailing an error' do

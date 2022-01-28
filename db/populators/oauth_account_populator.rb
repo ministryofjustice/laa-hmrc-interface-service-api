@@ -18,7 +18,7 @@ class OauthAccountPopulator
       name:,
       scopes:,
       uid:,
-      secret:
+      secret:,
     )
   end
 
