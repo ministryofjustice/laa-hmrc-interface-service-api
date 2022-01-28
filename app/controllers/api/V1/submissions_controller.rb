@@ -62,9 +62,10 @@ module Api
       end
 
       def authorised_use_case?
-        doorkeeper_token.application.scopes.to_a.map do |scope|
+        scopes_match_use_case = doorkeeper_token.application.scopes.to_a.map do |scope|
           scope.ends_with? use_case_param
-        end.any?
+        end
+        scopes_match_use_case.any?
       end
 
       def use_case_param

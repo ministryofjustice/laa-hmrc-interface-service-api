@@ -219,12 +219,6 @@ Style/BlockDelimiters:
     - 'app/controllers/api/V1/submissions_controller.rb'
     - 'spec/services/submission_service_spec.rb'
 
-# Offense count: 3
-Style/MethodCalledOnDoEndBlock:
-  Exclude:
-    - 'app/controllers/api/V1/submissions_controller.rb'
-    - 'spec/services/submission_service_spec.rb'
-
 # Offense count: 855
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, ConsistentQuotesInMultiline.
