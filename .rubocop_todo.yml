@@ -241,16 +241,6 @@ Style/SymbolArray:
     - 'db/migrate/20210831075846_create_active_storage_tables.active_storage.rb'
     - 'db/migrate/20210916154020_change_active_storage_ids_to_uuid.rb'
 
-# Offense count: 4
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyleForMultiline.
-# SupportedStylesForMultiline: comma, consistent_comma, no_comma
-Style/TrailingCommaInArguments:
-  Exclude:
-    - 'config/spring.rb'
-    - 'db/migrate/20210901112748_create_doorkeeper_tables.rb'
-    - 'db/populators/oauth_account_populator.rb'
-
 # Offense count: 75
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyleForMultiline.
