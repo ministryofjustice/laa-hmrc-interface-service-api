@@ -11,7 +11,7 @@ class ApplicationController < ActionController::API
   # in a controller yet, but it should be!
   ERROR_MAPPINGS.each do |klass, status|
     rescue_from klass do |error|
-      render json: { error: error }, status: status
+      render json: { error: }, status: status
     end
   end
   # :nocov:

@@ -13,12 +13,12 @@ class OauthAccountPopulator
 
   def populate(seed_row)
     name, scopes, uid, secret = seed_row
-    record = Doorkeeper::Application.find_by(name: name) || Doorkeeper::Application.new
+    record = Doorkeeper::Application.find_by(name:) || Doorkeeper::Application.new
     record.update!(
-      name: name,
-      scopes: scopes,
-      uid: uid,
-      secret: secret
+      name:,
+      scopes:,
+      uid:,
+      secret:
     )
   end
 

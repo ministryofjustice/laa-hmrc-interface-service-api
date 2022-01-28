@@ -10,7 +10,7 @@ class StatusController < ApplicationController
     }
 
     status = :bad_gateway unless checks.except(:sidekiq_queue).values.all?
-    render status: status, json: { checks: checks }
+    render status: status, json: { checks: }
   end
 
   def ping

@@ -1,13 +1,16 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.0.2'
+ruby '3.1.0'
 
 gem 'aws-sdk-s3', require: false
 gem 'bootsnap', '>= 1.4.4', require: false
 gem 'config'
 gem 'doorkeeper'
 gem 'dotenv-rails'
+gem 'net-imap'
+gem 'net-pop'
+gem 'net-smtp'
 gem 'pg', '~> 1.3'
 gem 'puma', '~> 5.6'
 gem 'rails', '~> 6.1.4'

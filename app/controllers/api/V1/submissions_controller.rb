@@ -91,8 +91,8 @@ module Api
 
       def process_submission(id)
         queue = "uc-#{Submission.find(id).use_case}-#{QueueNameService.call}"
-        SubmissionProcessWorker.set(queue: queue).perform_async(id)
-        render json: { id: id,
+        SubmissionProcessWorker.set(queue:).perform_async(id)
+        render json: { id:,
                        _links: [href: "#{request.base_url}/api/v1/submission/result/#{id}"] },
                status: :accepted
       end

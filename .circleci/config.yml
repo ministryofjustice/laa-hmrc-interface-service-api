@@ -14,13 +14,13 @@ executors:
           TZ: Europe/London
   linting-executor:
     docker:
-      - image: cimg/ruby:3.0.2-node
+      - image: cimg/ruby:3.1.0-node
         environment:
           - RAILS_ENV=test
           - TZ: "Europe/London"
   test-executor:
     docker:
-      - image: cimg/ruby:3.0.2-node
+      - image: cimg/ruby:3.1.0-node
         environment:
           - RAILS_ENV=test
           - PGHOST=localhost
@@ -197,7 +197,7 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker:
-          version: 19.03.13
+          version: 20.10.7
       - *decrypt_secrets
       - *build_docker_image
       - *push_to_ecr
