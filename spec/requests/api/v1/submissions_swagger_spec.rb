@@ -150,7 +150,7 @@ RSpec.describe 'GET submission', type: :request, swagger_doc: 'v1/swagger.yaml' 
               status: 'completed',
               data: [
                 { correlation_id: 'test-guid', use_case: 'use_case_two' },
-                { test_key: 'test value' }
+                { test_key: 'test value' },
               ]
             }
           end
@@ -168,7 +168,7 @@ RSpec.describe 'GET submission', type: :request, swagger_doc: 'v1/swagger.yaml' 
               status: 'failed',
               data: [
                 { correlation_id: 'test-guid', use_case: 'use_case_two' },
-                { error: 'submitted client details could not be found in HMRC service' }
+                { error: 'submitted client details could not be found in HMRC service' },
               ]
             }
           end
@@ -184,9 +184,7 @@ RSpec.describe 'GET submission', type: :request, swagger_doc: 'v1/swagger.yaml' 
             {
               submission: id,
               status: 'processing',
-              _links: [
-                href: "http://www.example.com/api/v1/submission/status/#{id}"
-              ]
+              _links: [href: "http://www.example.com/api/v1/submission/status/#{id}"]
             }
           end
           run_test! do |response|

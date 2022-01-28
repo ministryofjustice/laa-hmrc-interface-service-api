@@ -55,7 +55,7 @@ guard :rspec, cmd: 'bundle exec rspec', all_on_start: false do
       rspec.spec.call("requests/#{m[1]}_controller"),
       rspec.spec.call("routing/#{m[1]}_routing"),
       rspec.spec.call("controllers/#{m[1]}_controller"),
-      rspec.spec.call("acceptance/#{m[1]}")
+      rspec.spec.call("acceptance/#{m[1]}"),
     ]
   end
 

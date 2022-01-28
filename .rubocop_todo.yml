@@ -251,15 +251,6 @@ Style/TrailingCommaInArguments:
     - 'db/migrate/20210901112748_create_doorkeeper_tables.rb'
     - 'db/populators/oauth_account_populator.rb'
 
-# Offense count: 4
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyleForMultiline.
-# SupportedStylesForMultiline: comma, consistent_comma, no_comma
-Style/TrailingCommaInArrayLiteral:
-  Exclude:
-    - 'Guardfile'
-    - 'spec/requests/api/v1/submissions_swagger_spec.rb'
-
 # Offense count: 75
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyleForMultiline.
