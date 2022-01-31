@@ -37,12 +37,6 @@ RSpec/EmptyExampleGroup:
     - 'spec/requests/api/v1/use_case_swagger_spec.rb'
     - 'spec/requests/smoke_test_swagger_spec.rb'
 
-# Offense count: 1
-# Cop supports --auto-correct.
-RSpec/EmptyLineAfterExampleGroup:
-  Exclude:
-    - 'spec/services/hmrc/sandbox/create_test_data_spec.rb'
-
 # Offense count: 7
 # Cop supports --auto-correct.
 RSpec/EmptyLineAfterFinalLet:
@@ -50,7 +44,6 @@ RSpec/EmptyLineAfterFinalLet:
     - 'spec/requests/api/v1/submissions_swagger_spec.rb'
     - 'spec/services/bearer_token_spec.rb'
     - 'spec/services/endpoint/uri_spec.rb'
-    - 'spec/services/hmrc/sandbox/create_test_data_spec.rb'
 
 # Offense count: 23
 # Cop supports --auto-correct.
@@ -69,7 +62,6 @@ RSpec/EmptyLineAfterSubject:
     - 'spec/services/bearer_token_spec.rb'
     - 'spec/services/endpoint/headers_spec.rb'
     - 'spec/services/endpoint/uri_spec.rb'
-    - 'spec/services/hmrc/sandbox/create_test_data_spec.rb'
     - 'spec/services/smoke_test_spec.rb'
     - 'spec/services/submission_service_spec.rb'
     - 'spec/services/use_case_spec.rb'
@@ -96,7 +88,6 @@ RSpec/NamedSubject:
   Exclude:
     - 'spec/models/submission_spec.rb'
     - 'spec/services/bearer_token_spec.rb'
-    - 'spec/services/hmrc/sandbox/create_test_data_spec.rb'
     - 'spec/services/submission_service_spec.rb'
     - 'spec/services/use_case_spec.rb'
     - 'spec/workers/submission_process_worker_spec.rb'
