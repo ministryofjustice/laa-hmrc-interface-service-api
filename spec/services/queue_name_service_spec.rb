@@ -9,7 +9,7 @@ RSpec.describe QueueNameService do
         Settings.sentry.environment = 'uat'
         Settings.status.app_branch = 'this-is/a.test-branch'
       end
-      it 'should prefix the submission queue name with the branch name' do
+      it 'prefixes the submission queue name with the branch name' do
         expect(call).to eq 'this-is-a-test-branch-submissions'
       end
     end

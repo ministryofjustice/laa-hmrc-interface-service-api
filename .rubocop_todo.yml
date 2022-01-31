@@ -102,13 +102,6 @@ RSpec/EmptyLineAfterSubject:
 
 # Offense count: 1
 # Cop supports --auto-correct.
-# Configuration parameters: CustomTransform, IgnoredWords.
-RSpec/ExampleWording:
-  Exclude:
-    - 'spec/services/queue_name_service_spec.rb'
-
-# Offense count: 1
-# Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle.
 # SupportedStyles: implicit, each, example
 RSpec/HookArgument:
