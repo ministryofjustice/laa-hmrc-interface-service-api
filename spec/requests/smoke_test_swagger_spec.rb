@@ -4,8 +4,13 @@ RSpec.describe 'smoke_test', type: :request, swagger_doc: 'v1/swagger.yaml' do
   let(:use_case) { 'one' }
 
   path '/smoke-test/{use_case}' do
-    before { allow_any_instance_of(SmokeTest).to receive(:call).and_return(success) }
+    let(:smoke_test) { instance_double(SmokeTest) }
     let(:success) { true }
+
+    before do
+      allow(SmokeTest).to receive(:new).and_return(smoke_test)
+      allow(smoke_test).to receive(:call).and_return(success)
+    end
 
     get('individual use_case smoke-test') do
       description 'Run a smoke test for chosen use_case'
