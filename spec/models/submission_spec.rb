@@ -18,7 +18,7 @@ RSpec.describe Submission, type: :model do
   end
 
   it {
-    is_expected.to validate_inclusion_of(:use_case).in_array(%w[one two three four]).with_message(/Invalid use case/)
+    expect(submission).to validate_inclusion_of(:use_case).in_array(%w[one two three four]).with_message(/Invalid use case/)
   }
 
   describe '.as_json' do
