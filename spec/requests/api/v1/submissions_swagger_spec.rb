@@ -23,6 +23,7 @@ RSpec.describe 'GET submission', type: :request, swagger_doc: 'v1/swagger.yaml' 
         }
       }
     end
+
     path '/api/v1/submission/create/{use_case}' do
       post('Create new submission') do
         tags 'Submissions'

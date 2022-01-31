@@ -18,6 +18,7 @@ describe BearerToken do
 
   context 'and UseCase one is passed' do
     let(:use_case) { 'use_case_one' }
+
     before do
       stub_request(:post, %r{\A#{Settings.credentials.use_case_one.host}/oauth/token\z})
         .to_return(status: 200, body: fake_data)
@@ -37,6 +38,7 @@ describe BearerToken do
 
   context 'and UseCase two is passed' do
     let(:use_case) { 'use_case_two' }
+
     before do
       stub_request(:post, %r{\A#{Settings.credentials.use_case_two.host}/oauth/token\z})
         .to_return(status: 200, body: fake_data)
@@ -51,6 +53,7 @@ describe BearerToken do
 
   context 'and UseCase three is passed' do
     let(:use_case) { 'use_case_three' }
+
     before do
       stub_request(:post, %r{\A#{Settings.credentials.use_case_three.host}/oauth/token\z})
         .to_return(status: 200, body: fake_data)
@@ -65,6 +68,7 @@ describe BearerToken do
 
   context 'and UseCase four is passed' do
     let(:use_case) { 'use_case_four' }
+
     before do
       stub_request(:post, %r{\A#{Settings.credentials.use_case_four.host}/oauth/token\z})
         .to_return(status: 200, body: fake_data)

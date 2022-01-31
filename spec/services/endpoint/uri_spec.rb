@@ -5,6 +5,7 @@ RSpec.describe Endpoint::Uri do
   let(:href) { '/root/type/sub?matchID=123456' }
   let(:from_date) { '2021-01-01' }
   let(:to_date) { '2021-03-31' }
+
   it { is_expected.to be_a described_class }
 
   describe '.for_calling' do
