@@ -106,7 +106,7 @@ RSpec.describe StatusController, type: :request do
         }.to_json
       end
 
-      context 'dead set exists' do
+      context 'and dead set exists' do
         before do
           allow(Sidekiq::DeadSet).to receive(:new).and_return(instance_double(Sidekiq::DeadSet, size: 1))
           get '/health_check'
@@ -121,7 +121,7 @@ RSpec.describe StatusController, type: :request do
         end
       end
 
-      context 'retry set exists' do
+      context 'and retry set exists' do
         before do
           allow(Sidekiq::RetrySet).to receive(:new).and_return(instance_double(Sidekiq::RetrySet, size: 1))
           get '/health_check'
