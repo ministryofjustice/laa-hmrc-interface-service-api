@@ -7,7 +7,7 @@ RSpec.describe 'GET submission', type: :request, swagger_doc: 'v1/swagger.yaml' 
   let(:token) { application.access_tokens.create! }
   let(:Authorization) { "Bearer #{token.token}" }
 
-  context 'create' do
+  context 'when create is called' do
     let(:application) { dk_application }
     let(:use_case) { 'one' }
     let(:submission) do
@@ -130,7 +130,7 @@ RSpec.describe 'GET submission', type: :request, swagger_doc: 'v1/swagger.yaml' 
     end
   end
 
-  context 'result' do
+  context 'when result is called' do
     let(:application) { dk_application }
     let(:id) { submission.id }
 

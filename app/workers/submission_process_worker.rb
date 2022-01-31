@@ -24,7 +24,7 @@ class SubmissionProcessWorker
     raise Errors::SentryIgnoresThisSidekiqFailError, retry_error_message(submission_id)
   end
 
-  private
+private
 
   def retry_error_message(submission_id)
     "Retry #{@retry_count.to_i} for SubmissionProcessWorker: #{submission_id}"

@@ -21,7 +21,7 @@ module Endpoint
       Rack::Utils.parse_query(@href).keys[0].gsub(/\?.*/, '').split('/')[range].join('/')
     end
 
-    private
+  private
 
     def tax_years_from
       TaxYearsFor.call(Date.parse(@options[:from_date]))

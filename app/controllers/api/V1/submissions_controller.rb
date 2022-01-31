@@ -30,7 +30,7 @@ module Api
         render status: :not_found
       end
 
-      private
+    private
 
       def return_status
         @return_status ||= if completed_but_no_attachment?

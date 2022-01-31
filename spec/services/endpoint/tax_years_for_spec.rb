@@ -7,7 +7,7 @@ RSpec.describe Endpoint::TaxYearsFor do
     let(:date) { Date.new(2021, 4, 3) }
 
     it 'returns the previous year to the current year' do
-      is_expected.to eql '2020-21'
+      expect(tax_year).to eql '2020-21'
     end
   end
 
@@ -15,7 +15,7 @@ RSpec.describe Endpoint::TaxYearsFor do
     let(:date) { Date.new(2021, 5, 3) }
 
     it 'returns the current year to next year' do
-      is_expected.to eql '2021-22'
+      expect(tax_year).to eql '2021-22'
     end
   end
 end

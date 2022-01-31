@@ -16,7 +16,7 @@ class BearerToken
     parsed_json['access_token']
   end
 
-  private
+private
 
   def payload
     {

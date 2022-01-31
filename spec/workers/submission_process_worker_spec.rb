@@ -3,11 +3,11 @@ require 'rails_helper'
 RSpec.describe SubmissionProcessWorker do
   include AuthorisedRequestHelper
 
+  subject { worker.perform(submission.id) }
+
   let(:worker) { described_class.new }
   let(:application) { dk_application }
   let(:submission) { create :submission, oauth_application: application }
-
-  subject { worker.perform(submission.id) }
 
   before do
     allow(Submission).to receive(:find).with(submission.id).and_return(submission)
@@ -63,7 +63,7 @@ RSpec.describe SubmissionProcessWorker do
           end
 
           it 'notifies sentry of the deadset addition' do
-            SubmissionProcessWorker.within_sidekiq_retries_exhausted_block do
+            described_class.within_sidekiq_retries_exhausted_block do
               expect(Sentry).to receive(:capture_message).with(expected_message)
             end
           end

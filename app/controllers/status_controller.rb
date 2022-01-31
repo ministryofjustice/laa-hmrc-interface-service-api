@@ -21,7 +21,7 @@ class StatusController < ApplicationController
     }
   end
 
-  private
+private
 
   def database_alive?
     ActiveRecord::Base.connection.active?

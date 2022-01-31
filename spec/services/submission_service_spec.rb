@@ -65,7 +65,7 @@ RSpec.describe SubmissionService, vcr: { cassette_name: 'use_case_one_success' }
       end
     end
 
-    context 'RestClient::InternalServerError' do
+    context 'when the call fails with RestClient::InternalServerError' do
       before do
         allow(RestClient).to receive(:get).with(any_args).and_raise(RestClient::InternalServerError)
       end
@@ -76,7 +76,7 @@ RSpec.describe SubmissionService, vcr: { cassette_name: 'use_case_one_success' }
       end
     end
 
-    context 'RestClient::TooManyRequests' do
+    context 'when the call fails with RestClient::TooManyRequests' do
       before do
         call_count = 0
         allow(RestClient).to receive(:get).with(any_args) do

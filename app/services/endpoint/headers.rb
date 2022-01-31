@@ -17,7 +17,7 @@ module Endpoint
       new(href, correlation_id, token).call
     end
 
-    private
+  private
 
     def base_headers
       {

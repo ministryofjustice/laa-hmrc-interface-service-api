@@ -6,13 +6,6 @@
 # Note that changes in the inspected code, or installation of new
 # versions of RuboCop, may require this file to be generated again.
 
-# Offense count: 14
-# Cop supports --auto-correct.
-# Configuration parameters: IndentationWidth.
-# SupportedStyles: outdent, indent
-Layout/AccessModifierIndentation:
-  EnforcedStyle: indent
-
 # Offense count: 12
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, EnforcedStyleForEmptyBrackets.
@@ -31,29 +24,10 @@ Layout/SpaceInsidePercentLiteralDelimiters:
     - 'db/migrate/20210916154020_change_active_storage_ids_to_uuid.rb'
 
 # Offense count: 1
-RSpec/AnyInstance:
-  Exclude:
-    - 'spec/requests/smoke_test_swagger_spec.rb'
-
-# Offense count: 11
 # Configuration parameters: Prefixes.
 # Prefixes: when, with, without
 RSpec/ContextWording:
   Exclude:
-    - 'spec/requests/api/v1/submissions_swagger_spec.rb'
-    - 'spec/requests/status_controller_spec.rb'
-    - 'spec/services/bearer_token_spec.rb'
-    - 'spec/services/submission_service_spec.rb'
-    - 'spec/workers/submission_process_worker_spec.rb'
-
-# Offense count: 16
-# Cop supports --auto-correct.
-# Configuration parameters: SkipBlocks, EnforcedStyle.
-# SupportedStyles: described_class, explicit
-RSpec/DescribedClass:
-  Exclude:
-    - 'spec/models/submission_spec.rb'
-    - 'spec/services/endpoint/uri_spec.rb'
     - 'spec/workers/submission_process_worker_spec.rb'
 
 # Offense count: 6
@@ -102,35 +76,11 @@ RSpec/EmptyLineAfterSubject:
 
 # Offense count: 1
 # Cop supports --auto-correct.
-# Configuration parameters: CustomTransform, IgnoredWords.
-RSpec/ExampleWording:
-  Exclude:
-    - 'spec/services/queue_name_service_spec.rb'
-
-# Offense count: 14
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: method_call, block
-RSpec/ExpectChange:
-  Exclude:
-    - 'spec/models/submission_spec.rb'
-
-# Offense count: 1
-# Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle.
 # SupportedStyles: implicit, each, example
 RSpec/HookArgument:
   Exclude:
     - 'spec/spec_helper.rb'
-
-# Offense count: 3
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: single_line_only, single_statement_only, disallow
-RSpec/ImplicitSubject:
-  Exclude:
-    - 'spec/models/submission_spec.rb'
-    - 'spec/services/endpoint/tax_years_for_spec.rb'
 
 # Offense count: 6
 # Configuration parameters: AssignmentOnly.
@@ -139,12 +89,6 @@ RSpec/InstanceVariable:
     - 'spec/requests/api/v1/use_case_swagger_spec.rb'
     - 'spec/services/hmrc/sandbox/create_test_data_spec.rb'
     - 'spec/services/submission_service_spec.rb'
-
-# Offense count: 1
-# Cop supports --auto-correct.
-RSpec/LeadingSubject:
-  Exclude:
-    - 'spec/workers/submission_process_worker_spec.rb'
 
 # Offense count: 62
 # Configuration parameters: IgnoreSharedExamples.
@@ -157,24 +101,11 @@ RSpec/NamedSubject:
     - 'spec/services/use_case_spec.rb'
     - 'spec/workers/submission_process_worker_spec.rb'
 
-# Offense count: 1
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: not_to, to_not
-RSpec/NotToNot:
-  Exclude:
-    - 'spec/models/submission_spec.rb'
-
 # Offense count: 14
 RSpec/ScatteredSetup:
   Exclude:
     - 'spec/requests/api/v1/use_case_swagger_spec.rb'
     - 'spec/requests/smoke_test_swagger_spec.rb'
-
-# Offense count: 1
-RSpec/StubbedMock:
-  Exclude:
-    - 'spec/services/use_case_spec.rb'
 
 # Offense count: 15
 # Configuration parameters: IgnoredPatterns.
@@ -184,12 +115,6 @@ RSpec/VariableName:
   Exclude:
     - 'spec/requests/api/v1/submissions_swagger_spec.rb'
     - 'spec/requests/api/v1/use_case_swagger_spec.rb'
-
-# Offense count: 1
-# Configuration parameters: IgnoreNameless, IgnoreSymbolicNames.
-RSpec/VerifiedDoubles:
-  Exclude:
-    - 'spec/requests/status_controller_spec.rb'
 
 # Offense count: 1
 # Configuration parameters: Include.
@@ -206,18 +131,6 @@ Rails/SaveBang:
     - 'app/controllers/api/V1/submissions_controller.rb'
     - 'app/controllers/api/V1/use_case_controller.rb'
     - 'spec/models/submission_spec.rb'
-
-# Offense count: 3
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, ProceduralMethods, FunctionalMethods, IgnoredMethods, AllowBracesOnProceduralOneLiners, BracesRequiredMethods.
-# SupportedStyles: line_count_based, semantic, braces_for_chaining, always_braces
-# ProceduralMethods: benchmark, bm, bmbm, create, each_with_object, measure, new, realtime, tap, with_object
-# FunctionalMethods: let, let!, subject, watch
-# IgnoredMethods: lambda, proc, it
-Style/BlockDelimiters:
-  Exclude:
-    - 'app/controllers/api/V1/submissions_controller.rb'
-    - 'spec/services/submission_service_spec.rb'
 
 # Offense count: 855
 # Cop supports --auto-correct.

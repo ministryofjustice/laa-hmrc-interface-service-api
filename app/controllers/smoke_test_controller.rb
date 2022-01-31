@@ -12,7 +12,7 @@ class SmokeTestController < ApplicationController
     render status: status, json: { smoke_test_result: results }
   end
 
-  private
+private
 
   def run_tests
     {

@@ -1,7 +1,7 @@
 module SubmissionProcessable
   extend ActiveSupport::Concern
 
-  private
+private
 
   def process_next_steps(data)
     return if data.to_s.eql?('INTERNAL_SERVER_ERROR')
