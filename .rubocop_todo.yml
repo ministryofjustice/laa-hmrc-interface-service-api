@@ -38,17 +38,6 @@ RSpec/EmptyExampleGroup:
     - 'spec/requests/api/v1/use_case_swagger_spec.rb'
     - 'spec/requests/smoke_test_swagger_spec.rb'
 
-# Offense count: 8
-# Cop supports --auto-correct.
-RSpec/EmptyLineAfterSubject:
-  Exclude:
-    - 'spec/services/bearer_token_spec.rb'
-    - 'spec/services/endpoint/headers_spec.rb'
-    - 'spec/services/endpoint/uri_spec.rb'
-    - 'spec/services/smoke_test_spec.rb'
-    - 'spec/services/submission_service_spec.rb'
-    - 'spec/services/use_case_spec.rb'
-
 # Offense count: 1
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle.

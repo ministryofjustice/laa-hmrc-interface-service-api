@@ -28,6 +28,7 @@ RSpec.describe UseCase do
 
   describe '.host' do
     subject(:host) { use_case.host }
+
     before do
       REDIS.set('use_case_one_bearer_token', 'fake_token_value')
       subject
