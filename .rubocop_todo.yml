@@ -186,12 +186,6 @@ RSpec/VariableName:
     - 'spec/requests/api/v1/use_case_swagger_spec.rb'
 
 # Offense count: 1
-# Configuration parameters: IgnoreNameless, IgnoreSymbolicNames.
-RSpec/VerifiedDoubles:
-  Exclude:
-    - 'spec/requests/status_controller_spec.rb'
-
-# Offense count: 1
 # Configuration parameters: Include.
 # Include: db/migrate/*.rb
 Rails/CreateTableWithTimestamps:
