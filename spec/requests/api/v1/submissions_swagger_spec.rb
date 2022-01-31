@@ -64,6 +64,7 @@ RSpec.describe 'GET submission', type: :request, swagger_doc: 'v1/swagger.yaml' 
               }
             }
           end
+
           run_test! do |response|
             expect(response.media_type).to eq('application/json')
             expect(response.body).to match(/id/)

@@ -42,6 +42,7 @@ RSpec.describe 'smoke_test', type: :request, swagger_doc: 'v1/swagger.yaml' do
       allow(REDIS).to receive(:get).with('smoke-test-three').and_return(true)
       allow(REDIS).to receive(:get).with('smoke-test-four').and_return(true)
     end
+
     let(:test_one_result) { true }
 
     get('call smoke_test') do

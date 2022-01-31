@@ -38,16 +38,6 @@ RSpec/EmptyExampleGroup:
     - 'spec/requests/api/v1/use_case_swagger_spec.rb'
     - 'spec/requests/smoke_test_swagger_spec.rb'
 
-# Offense count: 23
-# Cop supports --auto-correct.
-RSpec/EmptyLineAfterHook:
-  Exclude:
-    - 'spec/models/submission_spec.rb'
-    - 'spec/requests/api/v1/submissions_swagger_spec.rb'
-    - 'spec/requests/api/v1/use_case_swagger_spec.rb'
-    - 'spec/requests/smoke_test_swagger_spec.rb'
-    - 'spec/services/queue_name_service_spec.rb'
-
 # Offense count: 8
 # Cop supports --auto-correct.
 RSpec/EmptyLineAfterSubject:
