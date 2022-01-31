@@ -157,11 +157,6 @@ RSpec/ScatteredSetup:
     - 'spec/requests/api/v1/use_case_swagger_spec.rb'
     - 'spec/requests/smoke_test_swagger_spec.rb'
 
-# Offense count: 1
-RSpec/StubbedMock:
-  Exclude:
-    - 'spec/services/use_case_spec.rb'
-
 # Offense count: 15
 # Configuration parameters: IgnoredPatterns.
 # SupportedStyles: snake_case, camelCase

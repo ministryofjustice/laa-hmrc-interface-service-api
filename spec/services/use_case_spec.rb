@@ -16,8 +16,9 @@ RSpec.describe UseCase do
     end
 
     context 'when a valid bearer_token is not available' do
+      before { allow(BearerToken).to receive(:call).with('use_case_one').and_return('new_fake_token_value') }
+
       it 'calls BearerToken and stores the value in redis' do
-        expect(BearerToken).to receive(:call).with('use_case_one').and_return('new_fake_token_value')
         expect(REDIS.get('use_case_one_bearer_token')).to be nil
         subject
         expect(REDIS.get('use_case_one_bearer_token')).to eql 'new_fake_token_value'
