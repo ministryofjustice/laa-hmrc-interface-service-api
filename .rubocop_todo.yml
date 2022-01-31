@@ -30,13 +30,6 @@ RSpec/ContextWording:
   Exclude:
     - 'spec/workers/submission_process_worker_spec.rb'
 
-# Offense count: 5
-# leaving this in play for now - Swagger does not trip the expected structure for Rspec
-RSpec/EmptyExampleGroup:
-  Exclude:
-    - 'spec/requests/api/v1/submissions_swagger_spec.rb'
-    - 'spec/requests/smoke_test_swagger_spec.rb'
-
 # Offense count: 1
 # Cop supports --auto-correct.
 RSpec/EmptyLineAfterExampleGroup:
@@ -91,11 +84,6 @@ RSpec/NamedSubject:
     - 'spec/services/submission_service_spec.rb'
     - 'spec/services/use_case_spec.rb'
     - 'spec/workers/submission_process_worker_spec.rb'
-
-# Offense count: 2
-RSpec/ScatteredSetup:
-  Exclude:
-    - 'spec/requests/smoke_test_swagger_spec.rb'
 
 # Offense count: 3
 # Configuration parameters: IgnoredPatterns.
