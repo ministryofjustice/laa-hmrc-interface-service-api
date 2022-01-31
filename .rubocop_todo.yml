@@ -30,16 +30,6 @@ RSpec/ContextWording:
   Exclude:
     - 'spec/workers/submission_process_worker_spec.rb'
 
-# Offense count: 16
-# Cop supports --auto-correct.
-# Configuration parameters: SkipBlocks, EnforcedStyle.
-# SupportedStyles: described_class, explicit
-RSpec/DescribedClass:
-  Exclude:
-    - 'spec/models/submission_spec.rb'
-    - 'spec/services/endpoint/uri_spec.rb'
-    - 'spec/workers/submission_process_worker_spec.rb'
-
 # Offense count: 6
 RSpec/EmptyExampleGroup:
   Exclude:

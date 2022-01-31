@@ -63,7 +63,7 @@ RSpec.describe SubmissionProcessWorker do
           end
 
           it 'notifies sentry of the deadset addition' do
-            SubmissionProcessWorker.within_sidekiq_retries_exhausted_block do
+            described_class.within_sidekiq_retries_exhausted_block do
               expect(Sentry).to receive(:capture_message).with(expected_message)
             end
           end
