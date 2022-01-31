@@ -140,12 +140,6 @@ RSpec/InstanceVariable:
     - 'spec/services/hmrc/sandbox/create_test_data_spec.rb'
     - 'spec/services/submission_service_spec.rb'
 
-# Offense count: 1
-# Cop supports --auto-correct.
-RSpec/LeadingSubject:
-  Exclude:
-    - 'spec/workers/submission_process_worker_spec.rb'
-
 # Offense count: 62
 # Configuration parameters: IgnoreSharedExamples.
 RSpec/NamedSubject:

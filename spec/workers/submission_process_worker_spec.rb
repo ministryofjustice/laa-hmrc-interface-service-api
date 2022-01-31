@@ -3,11 +3,11 @@ require 'rails_helper'
 RSpec.describe SubmissionProcessWorker do
   include AuthorisedRequestHelper
 
+  subject { worker.perform(submission.id) }
+
   let(:worker) { described_class.new }
   let(:application) { dk_application }
   let(:submission) { create :submission, oauth_application: application }
-
-  subject { worker.perform(submission.id) }
 
   before do
     allow(Submission).to receive(:find).with(submission.id).and_return(submission)
