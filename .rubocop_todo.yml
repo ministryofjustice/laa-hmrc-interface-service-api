@@ -38,14 +38,6 @@ RSpec/EmptyExampleGroup:
     - 'spec/requests/api/v1/use_case_swagger_spec.rb'
     - 'spec/requests/smoke_test_swagger_spec.rb'
 
-# Offense count: 1
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: implicit, each, example
-RSpec/HookArgument:
-  Exclude:
-    - 'spec/spec_helper.rb'
-
 # Offense count: 6
 # Configuration parameters: AssignmentOnly.
 RSpec/InstanceVariable:
