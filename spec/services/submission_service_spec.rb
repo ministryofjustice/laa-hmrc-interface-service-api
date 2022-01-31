@@ -27,21 +27,21 @@ RSpec.describe SubmissionService, vcr: { cassette_name: 'use_case_one_success' }
     end
 
     it 'adds a result attachment to the submission' do
-      expect { subject }.to change(ActiveStorage::Attachment, :count).by(1)
+      expect { call }.to change(ActiveStorage::Attachment, :count).by(1)
     end
 
     it 'gives the submission result attachment the a filename' do
-      subject
+      call
       expect(submission.result.filename).to eq "#{submission.id}.json"
     end
 
     it 'gives the submission result attachment a key' do
-      subject
+      call
       expect(submission.result.key).to eq "submission/result/#{submission.id}"
     end
 
     it 'gives the submission result attachment a content type' do
-      subject
+      call
       expect(submission.result.content_type).to eq 'application/json'
     end
 
@@ -61,7 +61,7 @@ RSpec.describe SubmissionService, vcr: { cassette_name: 'use_case_one_success' }
       end
 
       it 'raises an error and records the error in the result' do
-        expect { subject }.to raise_error Errors::CitizenDetailsMismatchError, 'User details not matched'
+        expect { call }.to raise_error Errors::CitizenDetailsMismatchError, 'User details not matched'
         expect(submission.result.blob.download).to match(/submitted client details could not be found in HMRC service/)
       end
     end
@@ -72,7 +72,7 @@ RSpec.describe SubmissionService, vcr: { cassette_name: 'use_case_one_success' }
       end
 
       it 'adds a result attachment detailing the error' do
-        subject
+        call
         expect(submission.result.blob.download).to match(/returned INTERNAL_SERVER_ERROR/)
       end
     end
@@ -92,16 +92,16 @@ RSpec.describe SubmissionService, vcr: { cassette_name: 'use_case_one_success' }
 
       it 'logs that rate limiting occurred' do
         allow(Rails.logger).to receive(:info).at_least(:once)
-        subject
+        call
         expect(Rails.logger).to have_received(:info).with(/Rate limited while calling/).once
       end
 
       it 'adds a result attachment to the submission' do
-        expect { subject }.to change(ActiveStorage::Attachment, :count).by(1)
+        expect { call }.to change(ActiveStorage::Attachment, :count).by(1)
       end
 
       it 'does not add a result attachment detailing an error' do
-        subject
+        call
         expect(submission.result.blob.download).not_to match(/ERROR/)
       end
     end

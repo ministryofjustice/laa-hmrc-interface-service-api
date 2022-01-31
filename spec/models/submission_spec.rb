@@ -38,12 +38,12 @@ RSpec.describe Submission, type: :model do
       before { params.delete(:first_name) }
 
       it 'does not persist model' do
-        expect { subject.save }.not_to(change(described_class, :count))
+        expect { submission.save }.not_to(change(described_class, :count))
       end
 
       it 'raises an error' do
-        subject.save
-        expect(subject.errors.full_messages).to include("First name can't be blank")
+        submission.save
+        expect(submission.errors.full_messages).to include("First name can't be blank")
       end
     end
 
@@ -51,12 +51,12 @@ RSpec.describe Submission, type: :model do
       before { params.delete(:last_name) }
 
       it 'does not persist model' do
-        expect { subject.save }.not_to(change(described_class, :count))
+        expect { submission.save }.not_to(change(described_class, :count))
       end
 
       it 'raises an error' do
-        subject.save
-        expect(subject.errors.full_messages).to include("Last name can't be blank")
+        submission.save
+        expect(submission.errors.full_messages).to include("Last name can't be blank")
       end
     end
 
@@ -65,12 +65,12 @@ RSpec.describe Submission, type: :model do
         before { params.delete(:nino) }
 
         it 'does not persist model' do
-          expect { subject.save }.not_to(change(described_class, :count))
+          expect { submission.save }.not_to(change(described_class, :count))
         end
 
         it 'raises an error' do
-          subject.save
-          expect(subject.errors.full_messages).to include('Nino is not valid')
+          submission.save
+          expect(submission.errors.full_messages).to include('Nino is not valid')
         end
       end
 
@@ -78,12 +78,12 @@ RSpec.describe Submission, type: :model do
         before { params[:nino] = 'invalid_nino' }
 
         it 'does not persist model' do
-          expect { subject.save }.not_to(change(described_class, :count))
+          expect { submission.save }.not_to(change(described_class, :count))
         end
 
         it 'raises an error' do
-          subject.save
-          expect(subject.errors.full_messages).to include('Nino is not valid')
+          submission.save
+          expect(submission.errors.full_messages).to include('Nino is not valid')
         end
       end
     end
@@ -93,12 +93,12 @@ RSpec.describe Submission, type: :model do
         before { params.delete(:dob) }
 
         it 'does not persist model' do
-          expect { subject.save }.not_to(change(described_class, :count))
+          expect { submission.save }.not_to(change(described_class, :count))
         end
 
         it 'raises an error' do
-          subject.save
-          expect(subject.errors.full_messages).to include('Dob is not a valid date')
+          submission.save
+          expect(submission.errors.full_messages).to include('Dob is not a valid date')
         end
       end
 
@@ -106,12 +106,12 @@ RSpec.describe Submission, type: :model do
         before { params[:dob] = 'date' }
 
         it 'does not persist model' do
-          expect { subject.save }.not_to(change(described_class, :count))
+          expect { submission.save }.not_to(change(described_class, :count))
         end
 
         it 'raises an error' do
-          subject.save
-          expect(subject.errors.full_messages).to include('Dob is not a valid date')
+          submission.save
+          expect(submission.errors.full_messages).to include('Dob is not a valid date')
         end
       end
 
@@ -119,12 +119,12 @@ RSpec.describe Submission, type: :model do
         before { params[:dob] = Time.zone.today + 1 }
 
         it 'does not persist model' do
-          expect { subject.save }.not_to(change(described_class, :count))
+          expect { submission.save }.not_to(change(described_class, :count))
         end
 
         it 'raises an error' do
-          subject.save
-          expect(subject.errors.full_messages).to include('Dob is not a valid date')
+          submission.save
+          expect(submission.errors.full_messages).to include('Dob is not a valid date')
         end
       end
     end
@@ -134,12 +134,12 @@ RSpec.describe Submission, type: :model do
         before { params.delete(:start_date) }
 
         it 'does not persist model' do
-          expect { subject.save }.not_to(change(described_class, :count))
+          expect { submission.save }.not_to(change(described_class, :count))
         end
 
         it 'raises an error' do
-          subject.save
-          expect(subject.errors.full_messages).to include('Start date is not a valid date')
+          submission.save
+          expect(submission.errors.full_messages).to include('Start date is not a valid date')
         end
       end
 
@@ -147,12 +147,12 @@ RSpec.describe Submission, type: :model do
         before { params[:start_date] = 'date' }
 
         it 'does not persist model' do
-          expect { subject.save }.not_to(change(described_class, :count))
+          expect { submission.save }.not_to(change(described_class, :count))
         end
 
         it 'raises an error' do
-          subject.save
-          expect(subject.errors.full_messages).to include('Start date is not a valid date')
+          submission.save
+          expect(submission.errors.full_messages).to include('Start date is not a valid date')
         end
       end
 
@@ -160,12 +160,12 @@ RSpec.describe Submission, type: :model do
         before { params[:start_date] = Time.zone.today + 1 }
 
         it 'does not persist model' do
-          expect { subject.save }.not_to(change(described_class, :count))
+          expect { submission.save }.not_to(change(described_class, :count))
         end
 
         it 'raises an error' do
-          subject.save
-          expect(subject.errors.full_messages).to include('Start date is not a valid date')
+          submission.save
+          expect(submission.errors.full_messages).to include('Start date is not a valid date')
         end
       end
     end
@@ -175,12 +175,12 @@ RSpec.describe Submission, type: :model do
         before { params.delete(:end_date) }
 
         it 'does not persist model' do
-          expect { subject.save }.not_to(change(described_class, :count))
+          expect { submission.save }.not_to(change(described_class, :count))
         end
 
         it 'raises an error' do
-          subject.save
-          expect(subject.errors.full_messages).to include('End date is not a valid date')
+          submission.save
+          expect(submission.errors.full_messages).to include('End date is not a valid date')
         end
       end
 
@@ -188,12 +188,12 @@ RSpec.describe Submission, type: :model do
         before { params[:end_date] = 'date' }
 
         it 'does not persist model' do
-          expect { subject.save }.not_to(change(described_class, :count))
+          expect { submission.save }.not_to(change(described_class, :count))
         end
 
         it 'raises an error' do
-          subject.save
-          expect(subject.errors.full_messages).to include('End date is not a valid date')
+          submission.save
+          expect(submission.errors.full_messages).to include('End date is not a valid date')
         end
       end
 
@@ -201,12 +201,12 @@ RSpec.describe Submission, type: :model do
         before { params[:end_date] = Time.zone.today + 1 }
 
         it 'does not persist model' do
-          expect { subject.save }.not_to(change(described_class, :count))
+          expect { submission.save }.not_to(change(described_class, :count))
         end
 
         it 'raises an error' do
-          subject.save
-          expect(subject.errors.full_messages).to include('End date is not a valid date')
+          submission.save
+          expect(submission.errors.full_messages).to include('End date is not a valid date')
         end
       end
 
@@ -217,13 +217,13 @@ RSpec.describe Submission, type: :model do
         end
 
         it 'does not persist model' do
-          expect { subject.save }.not_to(change(described_class, :count))
+          expect { submission.save }.not_to(change(described_class, :count))
         end
 
         it 'raises an error' do
-          subject.save
-          expect(subject.errors.full_messages).to include('Start date is not a valid date',
-                                                          'End date is not a valid date')
+          submission.save
+          expect(submission.errors.full_messages).to include('Start date is not a valid date',
+                                                             'End date is not a valid date')
         end
       end
     end

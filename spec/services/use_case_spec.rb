@@ -7,7 +7,7 @@ RSpec.describe UseCase do
     context 'when a valid bearer_token is available' do
       before do
         REDIS.set('use_case_one_bearer_token', 'fake_token_value')
-        subject
+        use_case
       end
 
       it 'does not call the bearer_token generator' do
@@ -20,7 +20,7 @@ RSpec.describe UseCase do
 
       it 'calls BearerToken and stores the value in redis' do
         expect(REDIS.get('use_case_one_bearer_token')).to be nil
-        subject
+        use_case
         expect(REDIS.get('use_case_one_bearer_token')).to eql 'new_fake_token_value'
       end
     end
@@ -31,7 +31,7 @@ RSpec.describe UseCase do
 
     before do
       REDIS.set('use_case_one_bearer_token', 'fake_token_value')
-      subject
+      host
     end
 
     it { is_expected.to eql Settings.credentials.use_case_one.host }

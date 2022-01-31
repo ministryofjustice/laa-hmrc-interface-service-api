@@ -14,7 +14,7 @@ describe BearerToken do
   context 'when called with an invalid use_case' do
     subject(:bearer_token) { described_class.new('not_a_use_case') }
 
-    it { expect { subject }.to raise_error 'Unsupported UseCase' }
+    it { expect { bearer_token }.to raise_error 'Unsupported UseCase' }
   end
 
   context 'and UseCase one is passed' do
