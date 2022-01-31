@@ -1,5 +1,4 @@
-# :nocov:
-class ApplyGetTest
+class TestSubmission
   attr_reader :submission
 
   include SubmissionProcessable
@@ -36,4 +35,3 @@ class ApplyGetTest
     @result.to_json
   end
 end
-# :nocov:
