@@ -157,14 +157,6 @@ RSpec/NamedSubject:
     - 'spec/services/use_case_spec.rb'
     - 'spec/workers/submission_process_worker_spec.rb'
 
-# Offense count: 1
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: not_to, to_not
-RSpec/NotToNot:
-  Exclude:
-    - 'spec/models/submission_spec.rb'
-
 # Offense count: 14
 RSpec/ScatteredSetup:
   Exclude:

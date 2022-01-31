@@ -29,7 +29,7 @@ RSpec.describe Submission, type: :model do
     end
 
     it 'does not include standard model values' do
-      expect(as_json.keys).to_not include %w[id status created_at updated_at]
+      expect(as_json.keys).not_to include %w[id status created_at updated_at]
     end
   end
 
