@@ -31,6 +31,7 @@ RSpec/ContextWording:
     - 'spec/workers/submission_process_worker_spec.rb'
 
 # Offense count: 6
+# leaving this in play for now - Swagger does not trip the expected structure for Rspec
 RSpec/EmptyExampleGroup:
   Exclude:
     - 'spec/requests/api/v1/submissions_swagger_spec.rb'
