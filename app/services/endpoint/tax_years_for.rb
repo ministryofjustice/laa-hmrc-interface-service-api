@@ -17,7 +17,7 @@ module Endpoint
       "#{financial_year_start.year}-#{(financial_year_start + 1.year).strftime('%y')}"
     end
 
-    private
+  private
 
     def date_is_pre_april_6th
       date.month < 4 || (date.month.eql?(4) && date.day < 6)

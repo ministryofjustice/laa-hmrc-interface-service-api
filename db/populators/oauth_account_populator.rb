@@ -9,7 +9,7 @@ class OauthAccountPopulator
     seed_data.each { |seed_row| populate(seed_row) }.freeze unless Settings.environment.eql?('live')
   end
 
-  private
+private
 
   def populate(seed_row)
     name, scopes, uid, secret = seed_row

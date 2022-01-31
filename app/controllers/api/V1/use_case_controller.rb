@@ -26,7 +26,7 @@ module Api
         render json: result
       end
 
-      private
+    private
 
       def filtered_params
         params.require(:filter).permit(:use_case,

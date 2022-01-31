@@ -12,7 +12,7 @@ class UseCase
     @host ||= Settings.credentials.send(@use_case).host
   end
 
-  private
+private
 
   def check_bearer_token
     generate_new_token if current_token.nil?

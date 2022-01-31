@@ -27,7 +27,7 @@ module HMRC
         response.code.eql?(201)
       end
 
-      private
+    private
 
       def build_dates
         if @dates == []

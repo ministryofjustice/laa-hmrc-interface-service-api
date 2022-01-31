@@ -16,7 +16,7 @@ class SmokeTest
     result
   end
 
-  private
+private
 
   def expected_response
     @expected_response ||= File.read("./spec/fixtures/smoke_tests/use_case_#{@use_case}.json")
