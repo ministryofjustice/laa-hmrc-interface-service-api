@@ -107,14 +107,6 @@ RSpec/ExampleWording:
   Exclude:
     - 'spec/services/queue_name_service_spec.rb'
 
-# Offense count: 14
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: method_call, block
-RSpec/ExpectChange:
-  Exclude:
-    - 'spec/models/submission_spec.rb'
-
 # Offense count: 1
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle.

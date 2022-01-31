@@ -37,7 +37,7 @@ RSpec.describe Submission, type: :model do
     context 'with first name missing' do
       before { params.delete(:first_name) }
       it 'does not persist model' do
-        expect { subject.save }.not_to(change { Submission.count })
+        expect { subject.save }.not_to(change(Submission, :count))
       end
 
       it 'raises an error' do
@@ -49,7 +49,7 @@ RSpec.describe Submission, type: :model do
     context 'with last name missing' do
       before { params.delete(:last_name) }
       it 'does not persist model' do
-        expect { subject.save }.not_to(change { Submission.count })
+        expect { subject.save }.not_to(change(Submission, :count))
       end
 
       it 'raises an error' do
@@ -62,7 +62,7 @@ RSpec.describe Submission, type: :model do
       context 'with nino missing' do
         before { params.delete(:nino) }
         it 'does not persist model' do
-          expect { subject.save }.not_to(change { Submission.count })
+          expect { subject.save }.not_to(change(Submission, :count))
         end
 
         it 'raises an error' do
@@ -74,7 +74,7 @@ RSpec.describe Submission, type: :model do
       context 'with an invalid nino' do
         before { params[:nino] = 'invalid_nino' }
         it 'does not persist model' do
-          expect { subject.save }.not_to(change { Submission.count })
+          expect { subject.save }.not_to(change(Submission, :count))
         end
 
         it 'raises an error' do
@@ -88,7 +88,7 @@ RSpec.describe Submission, type: :model do
       context 'with dob missing' do
         before { params.delete(:dob) }
         it 'does not persist model' do
-          expect { subject.save }.not_to(change { Submission.count })
+          expect { subject.save }.not_to(change(Submission, :count))
         end
 
         it 'raises an error' do
@@ -100,7 +100,7 @@ RSpec.describe Submission, type: :model do
       context 'with a badly formatted dob' do
         before { params[:dob] = 'date' }
         it 'does not persist model' do
-          expect { subject.save }.not_to(change { Submission.count })
+          expect { subject.save }.not_to(change(Submission, :count))
         end
 
         it 'raises an error' do
@@ -112,7 +112,7 @@ RSpec.describe Submission, type: :model do
       context 'with a dob in the future' do
         before { params[:dob] = Time.zone.today + 1 }
         it 'does not persist model' do
-          expect { subject.save }.not_to(change { Submission.count })
+          expect { subject.save }.not_to(change(Submission, :count))
         end
 
         it 'raises an error' do
@@ -126,7 +126,7 @@ RSpec.describe Submission, type: :model do
       context 'with start_date missing' do
         before { params.delete(:start_date) }
         it 'does not persist model' do
-          expect { subject.save }.not_to(change { Submission.count })
+          expect { subject.save }.not_to(change(Submission, :count))
         end
 
         it 'raises an error' do
@@ -138,7 +138,7 @@ RSpec.describe Submission, type: :model do
       context 'with a badly formatted start_date' do
         before { params[:start_date] = 'date' }
         it 'does not persist model' do
-          expect { subject.save }.not_to(change { Submission.count })
+          expect { subject.save }.not_to(change(Submission, :count))
         end
 
         it 'raises an error' do
@@ -150,7 +150,7 @@ RSpec.describe Submission, type: :model do
       context 'with a start_date in the future' do
         before { params[:start_date] = Time.zone.today + 1 }
         it 'does not persist model' do
-          expect { subject.save }.not_to(change { Submission.count })
+          expect { subject.save }.not_to(change(Submission, :count))
         end
 
         it 'raises an error' do
@@ -164,7 +164,7 @@ RSpec.describe Submission, type: :model do
       context 'with end_date missing' do
         before { params.delete(:end_date) }
         it 'does not persist model' do
-          expect { subject.save }.not_to(change { Submission.count })
+          expect { subject.save }.not_to(change(Submission, :count))
         end
 
         it 'raises an error' do
@@ -176,7 +176,7 @@ RSpec.describe Submission, type: :model do
       context 'with a badly formatted end_date' do
         before { params[:end_date] = 'date' }
         it 'does not persist model' do
-          expect { subject.save }.not_to(change { Submission.count })
+          expect { subject.save }.not_to(change(Submission, :count))
         end
 
         it 'raises an error' do
@@ -188,7 +188,7 @@ RSpec.describe Submission, type: :model do
       context 'with an end_date in the future' do
         before { params[:end_date] = Time.zone.today + 1 }
         it 'does not persist model' do
-          expect { subject.save }.not_to(change { Submission.count })
+          expect { subject.save }.not_to(change(Submission, :count))
         end
 
         it 'raises an error' do
@@ -203,7 +203,7 @@ RSpec.describe Submission, type: :model do
           params[:end_date] = Time.zone.today - 10
         end
         it 'does not persist model' do
-          expect { subject.save }.not_to(change { Submission.count })
+          expect { subject.save }.not_to(change(Submission, :count))
         end
 
         it 'raises an error' do
