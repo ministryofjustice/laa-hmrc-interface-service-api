@@ -65,7 +65,7 @@ RSpec.configure do |config|
     @hmrc_stub_requests = stub_request(:post, %r{\A#{Settings.credentials.host}/.*\z}).to_return(status: 200, body: '')
   end
 
-  config.before(:each) do
+  config.before do
     REDIS.flushdb
   end
 

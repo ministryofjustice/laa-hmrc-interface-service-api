@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe SubmissionProcessWorker do
   include AuthorisedRequestHelper
 
-  subject { worker.perform(submission.id) }
+  subject(:submission_process_worker) { worker.perform(submission.id) }
 
   let(:worker) { described_class.new }
   let(:application) { dk_application }
@@ -17,11 +17,11 @@ RSpec.describe SubmissionProcessWorker do
   describe '.perform' do
     it 'calls SubmissionService' do
       expect(SubmissionService).to receive(:call)
-      subject
+      submission_process_worker
     end
 
     it 'updates the submission status' do
-      subject
+      submission_process_worker
       expect(submission.status).to eq('completed')
     end
 
@@ -33,7 +33,7 @@ RSpec.describe SubmissionProcessWorker do
         end
 
         it 'updates the submission status amd records the error ' do
-          subject
+          submission_process_worker
           expect(submission.status).to eq('failed')
         end
       end
@@ -47,7 +47,7 @@ RSpec.describe SubmissionProcessWorker do
           before { worker.retry_count = 2 }
 
           it 'raises a not tracked error and leaves the status' do
-            expect { subject }.to raise_error Errors::SentryIgnoresThisSidekiqFailError
+            expect { submission_process_worker }.to raise_error Errors::SentryIgnoresThisSidekiqFailError
             expect(submission.status).to eq 'processing'
           end
         end
@@ -58,7 +58,7 @@ RSpec.describe SubmissionProcessWorker do
           before { worker.retry_count = 3 }
 
           it 'updates the submission status' do
-            expect { subject }.to raise_error StandardError, 'A problem occurred'
+            expect { submission_process_worker }.to raise_error StandardError, 'A problem occurred'
             expect(submission.status).to eq('failed')
           end
 

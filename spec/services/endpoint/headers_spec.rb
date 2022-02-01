@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Endpoint::Headers do
   subject(:headers) { described_class.new(href, correlation_id, token) }
+
   let(:correlation_id) { 'fake-correlation_id' }
   let(:token) { 'fake_bearer_token' }
 
