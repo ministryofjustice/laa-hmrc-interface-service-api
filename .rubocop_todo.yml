@@ -26,14 +26,6 @@ RSpec/InstanceVariable:
 RSpec/VariableName:
   EnforcedStyle: snake_case
 
-# Offense count: 15
-# Cop supports --auto-correct.
-# Configuration parameters: AllowImplicitReturn, AllowedReceivers.
-Rails/SaveBang:
-  Exclude:
-    - 'app/controllers/api/V1/submissions_controller.rb'
-    - 'spec/models/submission_spec.rb'
-
 # Offense count: 746
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, ConsistentQuotesInMultiline.

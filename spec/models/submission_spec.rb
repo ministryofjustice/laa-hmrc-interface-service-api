@@ -42,7 +42,7 @@ RSpec.describe Submission, type: :model do
       end
 
       it 'raises an error' do
-        submission.save
+        expect { submission.save! }.to raise_error(ActiveRecord::RecordInvalid)
         expect(submission.errors.full_messages).to include("First name can't be blank")
       end
     end
@@ -55,7 +55,7 @@ RSpec.describe Submission, type: :model do
       end
 
       it 'raises an error' do
-        submission.save
+        expect { submission.save! }.to raise_error(ActiveRecord::RecordInvalid)
         expect(submission.errors.full_messages).to include("Last name can't be blank")
       end
     end
@@ -69,7 +69,7 @@ RSpec.describe Submission, type: :model do
         end
 
         it 'raises an error' do
-          submission.save
+          expect { submission.save! }.to raise_error(ActiveRecord::RecordInvalid)
           expect(submission.errors.full_messages).to include('Nino is not valid')
         end
       end
@@ -82,7 +82,7 @@ RSpec.describe Submission, type: :model do
         end
 
         it 'raises an error' do
-          submission.save
+          expect { submission.save! }.to raise_error(ActiveRecord::RecordInvalid)
           expect(submission.errors.full_messages).to include('Nino is not valid')
         end
       end
@@ -97,7 +97,7 @@ RSpec.describe Submission, type: :model do
         end
 
         it 'raises an error' do
-          submission.save
+          expect { submission.save! }.to raise_error(ActiveRecord::RecordInvalid)
           expect(submission.errors.full_messages).to include('Dob is not a valid date')
         end
       end
@@ -110,7 +110,7 @@ RSpec.describe Submission, type: :model do
         end
 
         it 'raises an error' do
-          submission.save
+          expect { submission.save! }.to raise_error(ActiveRecord::RecordInvalid)
           expect(submission.errors.full_messages).to include('Dob is not a valid date')
         end
       end
@@ -123,7 +123,7 @@ RSpec.describe Submission, type: :model do
         end
 
         it 'raises an error' do
-          submission.save
+          expect { submission.save! }.to raise_error(ActiveRecord::RecordInvalid)
           expect(submission.errors.full_messages).to include('Dob is not a valid date')
         end
       end
@@ -138,7 +138,7 @@ RSpec.describe Submission, type: :model do
         end
 
         it 'raises an error' do
-          submission.save
+          expect { submission.save! }.to raise_error(ActiveRecord::RecordInvalid)
           expect(submission.errors.full_messages).to include('Start date is not a valid date')
         end
       end
@@ -151,7 +151,7 @@ RSpec.describe Submission, type: :model do
         end
 
         it 'raises an error' do
-          submission.save
+          expect { submission.save! }.to raise_error(ActiveRecord::RecordInvalid)
           expect(submission.errors.full_messages).to include('Start date is not a valid date')
         end
       end
@@ -164,7 +164,7 @@ RSpec.describe Submission, type: :model do
         end
 
         it 'raises an error' do
-          submission.save
+          expect { submission.save! }.to raise_error(ActiveRecord::RecordInvalid)
           expect(submission.errors.full_messages).to include('Start date is not a valid date')
         end
       end
@@ -179,7 +179,7 @@ RSpec.describe Submission, type: :model do
         end
 
         it 'raises an error' do
-          submission.save
+          expect { submission.save! }.to raise_error(ActiveRecord::RecordInvalid)
           expect(submission.errors.full_messages).to include('End date is not a valid date')
         end
       end
@@ -192,7 +192,7 @@ RSpec.describe Submission, type: :model do
         end
 
         it 'raises an error' do
-          submission.save
+          expect { submission.save! }.to raise_error(ActiveRecord::RecordInvalid)
           expect(submission.errors.full_messages).to include('End date is not a valid date')
         end
       end
@@ -205,7 +205,7 @@ RSpec.describe Submission, type: :model do
         end
 
         it 'raises an error' do
-          submission.save
+          expect { submission.save! }.to raise_error(ActiveRecord::RecordInvalid)
           expect(submission.errors.full_messages).to include('End date is not a valid date')
         end
       end
@@ -221,7 +221,7 @@ RSpec.describe Submission, type: :model do
         end
 
         it 'raises an error' do
-          submission.save
+          expect { submission.save! }.to raise_error(ActiveRecord::RecordInvalid)
           expect(submission.errors.full_messages).to include('Start date is not a valid date',
                                                              'End date is not a valid date')
         end
