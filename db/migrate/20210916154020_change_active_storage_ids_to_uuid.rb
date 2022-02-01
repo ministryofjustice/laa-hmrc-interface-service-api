@@ -15,7 +15,7 @@ class ChangeActiveStorageIdsToUuid < ActiveRecord::Migration[6.1]
       t.belongs_to :blob, null: false, index: false
       t.string :variation_digest, null: false
 
-      t.index %i[ blob_id variation_digest ], name: "index_active_storage_variant_records_uniqueness", unique: true
+      t.index %i[blob_id variation_digest], name: "index_active_storage_variant_records_uniqueness", unique: true
       t.foreign_key :active_storage_blobs, column: :blob_id
     end
 
@@ -29,7 +29,7 @@ class ChangeActiveStorageIdsToUuid < ActiveRecord::Migration[6.1]
       t.string   :checksum,     null: false
       t.datetime :created_at,   null: false
 
-      t.index [ :key ], unique: true
+      t.index [:key], unique: true
     end
 
     create_table :active_storage_blobs, id: :uuid do |t|
@@ -42,7 +42,7 @@ class ChangeActiveStorageIdsToUuid < ActiveRecord::Migration[6.1]
       t.string   :checksum,     null: false
       t.datetime :created_at,   null: false
 
-      t.index [ :key ], unique: true
+      t.index [:key], unique: true
     end
 
     create_table :active_storage_attachments, id: :uuid do |t|
@@ -60,7 +60,7 @@ class ChangeActiveStorageIdsToUuid < ActiveRecord::Migration[6.1]
       t.belongs_to :blob, null: false, index: false, type: :uuid
       t.string :variation_digest, null: false
 
-      t.index %i[ blob_id variation_digest ], name: "index_active_storage_variant_records_uniqueness", unique: true
+      t.index %i[blob_id variation_digest], name: "index_active_storage_variant_records_uniqueness", unique: true
       t.foreign_key :active_storage_blobs, column: :blob_id, type: :uuid
     end
   end
