@@ -62,7 +62,9 @@ RSpec.configure do |config|
 
   # set up default stub for the host, this can be overwritten in individual stubs if needed
   config.before do
-    @hmrc_stub_requests = stub_request(:post, %r{\A#{Settings.credentials.host}/.*\z}).to_return(status: 200, body: "")
+    def hmrc_stub_requests
+      stub_request(:post, %r{\A#{Settings.credentials.host}/.*\z}).to_return(status: 200, body: "")
+    end
   end
 
   config.before do
