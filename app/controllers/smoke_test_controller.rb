@@ -16,10 +16,10 @@ private
 
   def run_tests
     {
-      use_case_one: REDIS.get('smoke-test-one'),
-      use_case_two: REDIS.get('smoke-test-two'),
-      use_case_three: REDIS.get('smoke-test-three'),
-      use_case_four: REDIS.get('smoke-test-four')
+      use_case_one: REDIS.get("smoke-test-one"),
+      use_case_two: REDIS.get("smoke-test-two"),
+      use_case_three: REDIS.get("smoke-test-three"),
+      use_case_four: REDIS.get("smoke-test-four")
     }
   end
 

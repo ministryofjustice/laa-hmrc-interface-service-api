@@ -15,9 +15,9 @@ class StatusController < ApplicationController
 
   def ping
     render json: {
-      'build_date' => Settings.status.build_date,
-      'build_tag' => Settings.status.build_tag,
-      'app_branch' => Settings.status.app_branch
+      "build_date" => Settings.status.build_date,
+      "build_tag" => Settings.status.build_tag,
+      "app_branch" => Settings.status.app_branch
     }
   end
 
@@ -30,7 +30,7 @@ private
   end
 
   def redis_alive?
-    REDIS.ping.eql?('PONG')
+    REDIS.ping.eql?("PONG")
   rescue StandardError
     false
   end

@@ -23,7 +23,7 @@ class TestSubmission
 
   def self.call_with(submission)
     use_case = submission.use_case.to_sym
-    values = submission.as_json.except('use_case').symbolize_keys
+    values = submission.as_json.except("use_case").symbolize_keys
     new(use_case, **values).call(correlation_id: submission.id)
   end
 

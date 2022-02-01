@@ -12,14 +12,14 @@ class SubmissionProcessWorker
 
   def perform(submission_id)
     submission = Submission.find(submission_id)
-    submission.update!(status: 'processing')
+    submission.update!(status: "processing")
 
     SubmissionService.call(submission)
-    submission.update!(status: 'completed')
+    submission.update!(status: "completed")
   rescue Errors::CitizenDetailsMismatchError
-    submission.update!(status: 'failed')
+    submission.update!(status: "failed")
   rescue StandardError
-    submission.update!(status: 'failed') && raise if @retry_count >= MAX_RETRIES
+    submission.update!(status: "failed") && raise if @retry_count >= MAX_RETRIES
 
     raise Errors::SentryIgnoresThisSidekiqFailError, retry_error_message(submission_id)
   end

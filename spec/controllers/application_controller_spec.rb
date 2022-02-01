@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe ApplicationController, type: :controller do
   include AuthorisedRequestHelper
@@ -9,5 +9,5 @@ RSpec.describe ApplicationController, type: :controller do
     end
   end
 
-  it_behaves_like 'an unauthorised request'
+  it_behaves_like "an unauthorised request"
 end

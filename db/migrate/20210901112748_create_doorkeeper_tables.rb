@@ -12,7 +12,7 @@ class CreateDoorkeeperTables < ActiveRecord::Migration[6.1]
       # like Client Credentials flow or Resource Owner Password.
       t.text    :redirect_uri
       t.boolean :confidential, null: false, default: true
-      t.string  :scopes,       null: false, default: ''
+      t.string  :scopes,       null: false, default: ""
       t.timestamps             null: false
     end
 
@@ -24,7 +24,7 @@ class CreateDoorkeeperTables < ActiveRecord::Migration[6.1]
       t.string   :token,             null: false
       t.integer  :expires_in,        null: false
       t.text     :redirect_uri,      null: false
-      t.string   :scopes,            null: false, default: ''
+      t.string   :scopes,            null: false, default: ""
       t.datetime :created_at,        null: false
       t.datetime :revoked_at
     end
@@ -70,7 +70,7 @@ class CreateDoorkeeperTables < ActiveRecord::Migration[6.1]
       #
       # Comment out this line if you want refresh tokens to be instantly
       # revoked after use.
-      t.string   :previous_refresh_token, null: false, default: ''
+      t.string   :previous_refresh_token, null: false, default: ""
     end
 
     add_index :oauth_access_tokens, :token, unique: true

@@ -1,4 +1,4 @@
-guard 'livereload' do
+guard "livereload" do
   extensions = {
     js: :js,
     html: :html,
@@ -32,8 +32,8 @@ guard 'livereload' do
   watch(%r{config/locales/.+\.yml})
 end
 
-guard :rspec, cmd: 'bundle exec rspec', all_on_start: false do
-  require 'guard/rspec/dsl'
+guard :rspec, cmd: "bundle exec rspec", all_on_start: false do
+  require "guard/rspec/dsl"
   dsl = Guard::RSpec::Dsl.new(self)
 
   rspec = dsl.rspec

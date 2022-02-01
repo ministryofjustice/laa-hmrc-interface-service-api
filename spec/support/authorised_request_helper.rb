@@ -8,6 +8,6 @@ module AuthorisedRequestHelper
   end
 
   def dk_application(scopes = %w[use_case_one use_case_two use_case_three use_case_four])
-    Doorkeeper::Application.create!(name: 'test', scopes:)
+    Doorkeeper::Application.create!(name: "test", scopes:)
   end
 end

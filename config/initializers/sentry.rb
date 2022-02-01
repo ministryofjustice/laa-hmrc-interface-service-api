@@ -1,5 +1,5 @@
 Sentry.init do |config|
-  config.dsn = Settings.sentry.dsn unless Settings.sentry.environment.eql?('test')
+  config.dsn = Settings.sentry.dsn unless Settings.sentry.environment.eql?("test")
   config.breadcrumbs_logger = %i[active_support_logger http_logger]
   config.environment = Settings.sentry.environment
   config.excluded_exceptions += %w[
