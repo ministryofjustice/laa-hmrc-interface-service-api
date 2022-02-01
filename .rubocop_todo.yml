@@ -93,13 +93,6 @@ RSpec/VariableName:
   Exclude:
     - 'spec/requests/api/v1/submissions_swagger_spec.rb'
 
-# Offense count: 1
-# Configuration parameters: Include.
-# Include: db/migrate/*.rb
-Rails/CreateTableWithTimestamps:
-  Exclude:
-    - 'db/migrate/20210916154020_change_active_storage_ids_to_uuid.rb'
-
 # Offense count: 15
 # Cop supports --auto-correct.
 # Configuration parameters: AllowImplicitReturn, AllowedReceivers.

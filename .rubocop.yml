@@ -13,6 +13,17 @@ inherit_mode:
   merge:
     - Exclude
 
+# General exclusions
+# ==================
+
+# this file was created before we added the rubocop-govuk gem, as the table has
+# created before the gem was implemented, even if we added a subsequent table update
+# this file would always be broken - therefore we must ignore it for ever more!
+Rails/CreateTableWithTimestamps:
+  Exclude:
+    - 'db/migrate/20210916154020_change_active_storage_ids_to_uuid.rb'
+
+
 # Swagger exclusions
 # ==================
 # because swagger does not use the standard RSpec layout, e.g.
