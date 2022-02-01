@@ -4,15 +4,15 @@ class QueueNameService
   end
 
   def call
-    if Settings.sentry.environment == 'uat'
+    if Settings.sentry.environment == "uat"
       "#{uat_queue_name}-submissions"
     else
-      'submissions'
+      "submissions"
     end
   end
 
   def uat_queue_name
     branch_name = Settings.status.app_branch
-    branch_name.tr(' _/[]().', '-')
+    branch_name.tr(" _/[]().", "-")
   end
 end

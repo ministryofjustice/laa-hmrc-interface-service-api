@@ -14,24 +14,24 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 
-require 'simplecov'
-require 'highline/import'
-require 'webmock'
-require 'webmock/rspec'
+require "simplecov"
+require "highline/import"
+require "webmock"
+require "webmock/rspec"
 WebMock.disable_net_connect!
-require 'redis'
-require 'mock_redis'
+require "redis"
+require "mock_redis"
 REDIS = MockRedis.new
-require 'rspec-sidekiq'
-require 'sidekiq/testing'
+require "rspec-sidekiq"
+require "sidekiq/testing"
 
 SimpleCov.minimum_coverage 100
-unless ENV['NOCOVERAGE']
+unless ENV["NOCOVERAGE"]
   SimpleCov.start do
-    add_filter 'spec/'
-    add_filter 'initializers/config.rb'
-    add_filter 'initializers/sidekiq_middleware.rb'
-    add_filter 'services/smoke_test.rb'
+    add_filter "spec/"
+    add_filter "initializers/config.rb"
+    add_filter "initializers/sidekiq_middleware.rb"
+    add_filter "services/smoke_test.rb"
   end
 
   SimpleCov.at_exit do
@@ -46,13 +46,13 @@ RSpec::Sidekiq.configure do |config|
   config.warn_when_jobs_not_processed_by_sidekiq = false # default => true
 end
 
-require 'vcr'
+require "vcr"
 
 VCR.configure do |vcr_config|
-  vcr_config.cassette_library_dir = 'spec/cassettes'
+  vcr_config.cassette_library_dir = "spec/cassettes"
   vcr_config.hook_into :webmock
   vcr_config.configure_rspec_metadata!
-  vcr_config.filter_sensitive_data('<SETTINGS__CREDENTIALS__HOST>') do
+  vcr_config.filter_sensitive_data("<SETTINGS__CREDENTIALS__HOST>") do
     Settings.credentials.host
   end
 end
@@ -62,7 +62,7 @@ RSpec.configure do |config|
 
   # set up default stub for the host, this can be overwritten in individual stubs if needed
   config.before do
-    @hmrc_stub_requests = stub_request(:post, %r{\A#{Settings.credentials.host}/.*\z}).to_return(status: 200, body: '')
+    @hmrc_stub_requests = stub_request(:post, %r{\A#{Settings.credentials.host}/.*\z}).to_return(status: 200, body: "")
   end
 
   config.before do

@@ -8,8 +8,8 @@ class SmokeTest
   end
 
   def call
-    actual = JSON.parse(actual_response)['data']
-    expected = JSON.parse(expected_response)['data']
+    actual = JSON.parse(actual_response)["data"]
+    expected = JSON.parse(expected_response)["data"]
     diff = (actual - expected) + (expected - actual)
     result = diff.empty?
     REDIS.setex("smoke-test-#{@use_case}", 3600, result)

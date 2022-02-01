@@ -1,11 +1,11 @@
-guard 'livereload' do
+guard "livereload" do
   extensions = {
     js: :js,
     html: :html,
     png: :png,
     gif: :gif,
     jpg: :jpg,
-    jpeg: :jpeg
+    jpeg: :jpeg,
   }
 
   rails_view_exts = %w[erb haml slim]
@@ -32,8 +32,8 @@ guard 'livereload' do
   watch(%r{config/locales/.+\.yml})
 end
 
-guard :rspec, cmd: 'bundle exec rspec', all_on_start: false do
-  require 'guard/rspec/dsl'
+guard :rspec, cmd: "bundle exec rspec", all_on_start: false do
+  require "guard/rspec/dsl"
   dsl = Guard::RSpec::Dsl.new(self)
 
   rspec = dsl.rspec

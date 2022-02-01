@@ -19,10 +19,10 @@ class SubmissionService
     data = request_and_extract_data(request_match_id)
     process_next_steps(data)
   rescue Errors::CitizenDetailsMismatchError
-    @result[:data] << { error: 'submitted client details could not be found in HMRC service' }
+    @result[:data] << { error: "submitted client details could not be found in HMRC service" }
     raise
   ensure
     @submission.result.attach(io: StringIO.new(@result.to_json), filename: "#{@submission.id}.json",
-                              content_type: 'application/json', key: "submission/result/#{@submission.id}")
+                              content_type: "application/json", key: "submission/result/#{@submission.id}")
   end
 end

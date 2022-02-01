@@ -8,17 +8,17 @@ module Endpoint
     def for_calling
       case @href
       when /{&fromDate,toDate}/
-        @href.gsub!('{&fromDate,toDate}', "&fromDate=#{@options[:from_date]}&toDate=#{@options[:to_date]}")
+        @href.gsub!("{&fromDate,toDate}", "&fromDate=#{@options[:from_date]}&toDate=#{@options[:to_date]}")
       when /{&fromTaxYear,toTaxYear}/
-        @href.gsub!('{&fromTaxYear,toTaxYear}', "&fromTaxYear=#{tax_years_from}&toTaxYear=#{tax_years_to}")
+        @href.gsub!("{&fromTaxYear,toTaxYear}", "&fromTaxYear=#{tax_years_from}&toTaxYear=#{tax_years_to}")
       else
         @href
       end
     end
 
     def for_displaying
-      range = @href.include?('matching') ? (1..2) : (2...)
-      Rack::Utils.parse_query(@href).keys[0].gsub(/\?.*/, '').split('/')[range].join('/')
+      range = @href.include?("matching") ? (1..2) : (2...)
+      Rack::Utils.parse_query(@href).keys[0].gsub(/\?.*/, "").split("/")[range].join("/")
     end
 
   private

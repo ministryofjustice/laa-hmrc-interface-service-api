@@ -27,17 +27,3 @@ RSpec/VariableName:
   EnforcedStyle: snake_case
   Exclude:
     - 'spec/requests/api/v1/submissions_swagger_spec.rb'
-
-# Offense count: 746
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, ConsistentQuotesInMultiline.
-# SupportedStyles: single_quotes, double_quotes
-Style/StringLiterals:
-  Enabled: false
-
-# Offense count: 67
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyleForMultiline.
-# SupportedStylesForMultiline: comma, consistent_comma, no_comma
-Style/TrailingCommaInHashLiteral:
-  Enabled: false

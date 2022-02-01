@@ -3,7 +3,7 @@ class ApplicationController < ActionController::API
 
   ERROR_MAPPINGS = {
     ActionController::ParameterMissing => :bad_request,
-    Errors::ContractError => :unprocessable_entity
+    Errors::ContractError => :unprocessable_entity,
   }.freeze
 
   # :nocov:

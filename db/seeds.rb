@@ -9,10 +9,10 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 Rails.logger.debug "Seeding the database...\n"
-Dir[Rails.root.join('db/populators/*.rb')].each do |seed_file|
+Dir[Rails.root.join("db/populators/*.rb")].each do |seed_file|
   load seed_file
 end
 
 OauthAccountPopulator.call
 
-Rails.logger.debug 'Seeding complete.'
+Rails.logger.debug "Seeding complete."

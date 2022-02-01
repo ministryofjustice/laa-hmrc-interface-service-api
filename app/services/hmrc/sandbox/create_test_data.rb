@@ -7,13 +7,13 @@ module HMRC
       TYPES = %i[employment paye].freeze
 
       def initialize(type, *dates)
-        raise HMRC::Sandbox::ProductionError, 'Cannot run from production' if Settings.environment.eql?('production')
-        raise HMRC::Sandbox::TypeError, 'Type must be :employment or :paye' unless type.in?(TYPES)
+        raise HMRC::Sandbox::ProductionError, "Cannot run from production" if Settings.environment.eql?("production")
+        raise HMRC::Sandbox::TypeError, "Type must be :employment or :paye" unless type.in?(TYPES)
 
         @type = type
         @dates = dates
         build_dates
-        @app = 'apply'
+        @app = "apply"
         @token = UseCase.new(:one).bearer_token
       end
 
@@ -49,8 +49,8 @@ module HMRC
 
       def path
         {
-          employment: '/employment',
-          paye: '/income/paye'
+          employment: "/employment",
+          paye: "/income/paye",
         }[@type.to_sym]
       end
 
@@ -64,27 +64,27 @@ module HMRC
 
       def use_case
         {
-          apply: 'LAA-C1',
-          gross_income: 'LAA-C2',
-          fraud: 'LAA-C3',
-          debt: 'LAA-C4'
+          apply: "LAA-C1",
+          gross_income: "LAA-C2",
+          fraud: "LAA-C3",
+          debt: "LAA-C4",
         }[@app.to_sym]
       end
 
       def headers
         {
-          'Content-Type' => 'application/json',
-          'Accept' => 'application/vnd.hmrc.1.0+json',
-          'Authorization' => "Bearer #{@token}"
+          "Content-Type" => "application/json",
+          "Accept" => "application/vnd.hmrc.1.0+json",
+          "Authorization" => "Bearer #{@token}",
         }
       end
 
       def paye_data
-        JSON.parse(File.read('spec/fixtures/test_data/paye.json'))
+        JSON.parse(File.read("spec/fixtures/test_data/paye.json"))
       end
 
       def employment_data
-        JSON.parse(File.read('spec/fixtures/test_data/employment.json'))
+        JSON.parse(File.read("spec/fixtures/test_data/employment.json"))
       end
     end
   end
