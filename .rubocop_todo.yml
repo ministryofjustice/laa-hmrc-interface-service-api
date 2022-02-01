@@ -25,6 +25,8 @@ RSpec/InstanceVariable:
 # SupportedStyles: snake_case, camelCase
 RSpec/VariableName:
   EnforcedStyle: snake_case
+  Exclude:
+    - 'spec/requests/api/v1/submissions_swagger_spec.rb'
 
 # Offense count: 746
 # Cop supports --auto-correct.
