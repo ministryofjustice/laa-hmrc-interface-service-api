@@ -13,13 +13,10 @@ module Api
         submission = Submission.new(filtered_params.merge(use_case: use_case_param,
                                                           status: 'created',
                                                           oauth_application: doorkeeper_token.application))
-        submission.save
-
-        if submission.errors.empty?
-          process_submission(submission.id)
-        else
-          render json: submission.errors&.to_json, status: :bad_request
-        end
+        submission.save!
+        process_submission(submission.id)
+      rescue ActiveRecord::RecordInvalid
+        render json: submission.errors&.to_json, status: :bad_request
       end
 
       def result
