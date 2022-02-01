@@ -1,10 +1,12 @@
 # Testing
 ## Stand-alone test
 
-A test script has been added to run a single test on use_case one
+A method exists to run a single test on a given use_case, it is used internally by the smoke tests
+
 It can be run from a rails console with
 ```ruby
-ApplyGetTest.call(
+TestSubmission.call(
+  'one', # required use_case
   first_name: 'first',
   last_name: 'name',
   nino: 'QQ123456C',
@@ -14,8 +16,6 @@ ApplyGetTest.call(
 )
 ```
 As long as the current dev/uat environment has the correct use case one configuration in settings a series of calls will be made to obtain, format and display the pre-created sandbox data
->### *Deprecation warning*
-> ApplyGetTest will be removed or renamed shortly as it no longer matches the original use
 
 ## Smoke tests
 There are endpoints available for each of the use_cases on non-live environments e.g.
