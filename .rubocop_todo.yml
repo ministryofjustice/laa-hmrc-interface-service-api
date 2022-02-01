@@ -6,13 +6,6 @@
 # Note that changes in the inspected code, or installation of new
 # versions of RuboCop, may require this file to be generated again.
 
-# Offense count: 1
-# Configuration parameters: Prefixes.
-# Prefixes: when, with, without
-RSpec/ContextWording:
-  Exclude:
-    - 'spec/workers/submission_process_worker_spec.rb'
-
 # Offense count: 2
 # Configuration parameters: AssignmentOnly.
 RSpec/InstanceVariable:
