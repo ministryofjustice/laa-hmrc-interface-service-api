@@ -22,7 +22,7 @@ private
     {
       grant_type: "client_credentials",
       client_secret: "#{totp.now}#{@credentials.hmrc_client_secret}",
-      client_id: @credentials.hmrc_client_id
+      client_id: @credentials.hmrc_client_id,
     }
   end
 

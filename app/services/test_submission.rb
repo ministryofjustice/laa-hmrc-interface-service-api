@@ -13,7 +13,7 @@ class TestSubmission
       nino: args[:nino],
       dob: args[:dob],
       start_date: args[:start_date],
-      end_date: args[:end_date]
+      end_date: args[:end_date],
     }.to_json, object_class: Submission)
   end
 

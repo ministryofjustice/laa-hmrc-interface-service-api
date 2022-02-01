@@ -21,8 +21,8 @@ RSpec.describe StatusController, type: :request do
             database: false,
             redis: true,
             sidekiq: true,
-            sidekiq_queue: true
-          }
+            sidekiq_queue: true,
+          },
         }.to_json
       end
 
@@ -48,8 +48,8 @@ RSpec.describe StatusController, type: :request do
             database: true,
             redis: false,
             sidekiq: true,
-            sidekiq_queue: true
-          }
+            sidekiq_queue: true,
+          },
         }.to_json
       end
 
@@ -80,8 +80,8 @@ RSpec.describe StatusController, type: :request do
             database: true,
             redis: false,
             sidekiq: false,
-            sidekiq_queue: true
-          }
+            sidekiq_queue: true,
+          },
         }.to_json
       end
 
@@ -101,8 +101,8 @@ RSpec.describe StatusController, type: :request do
             database: true,
             redis: true,
             sidekiq: true,
-            sidekiq_queue: false
-          }
+            sidekiq_queue: false,
+          },
         }.to_json
       end
 
@@ -150,8 +150,8 @@ RSpec.describe StatusController, type: :request do
             database: true,
             redis: true,
             sidekiq: false,
-            sidekiq_queue: true
-          }
+            sidekiq_queue: true,
+          },
         }.to_json
       end
 
@@ -177,8 +177,8 @@ RSpec.describe StatusController, type: :request do
             database: true,
             redis: true,
             sidekiq: true,
-            sidekiq_queue: false
-          }
+            sidekiq_queue: false,
+          },
         }.to_json
       end
 
@@ -205,8 +205,8 @@ RSpec.describe StatusController, type: :request do
             database: true,
             redis: true,
             sidekiq: true,
-            sidekiq_queue: true
-          }
+            sidekiq_queue: true,
+          },
         }.to_json
       end
 
@@ -228,7 +228,7 @@ RSpec.describe StatusController, type: :request do
         {
           "build_date" => "20150721",
           "build_tag" => "test",
-          "app_branch" => "test_branch"
+          "app_branch" => "test_branch",
         }
       end
 

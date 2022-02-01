@@ -6,7 +6,7 @@ class StatusController < ApplicationController
       database: database_alive?,
       redis: redis_alive?,
       sidekiq: sidekiq_alive?,
-      sidekiq_queue: sidekiq_queue_healthy?
+      sidekiq_queue: sidekiq_queue_healthy?,
     }
 
     status = :bad_gateway unless checks.except(:sidekiq_queue).values.all?
@@ -17,7 +17,7 @@ class StatusController < ApplicationController
     render json: {
       "build_date" => Settings.status.build_date,
       "build_tag" => Settings.status.build_tag,
-      "app_branch" => Settings.status.app_branch
+      "app_branch" => Settings.status.app_branch,
     }
   end
 

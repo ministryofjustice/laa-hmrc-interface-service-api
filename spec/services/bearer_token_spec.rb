@@ -6,7 +6,7 @@ describe BearerToken do
   let(:fake_data) do
     {
       access_token: "zz00000z00z0z00000z0z0z0000z0000",
-      token_type: "bearer"
+      token_type: "bearer",
       # real response has other returns but out of scope of this test
     }.to_json
   end

@@ -87,7 +87,7 @@ private
       firstName: submission.first_name,
       lastName: submission.last_name,
       nino: submission.nino,
-      dateOfBirth: submission.dob
+      dateOfBirth: submission.dob,
     }.to_json
   end
 

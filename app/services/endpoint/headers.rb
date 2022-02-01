@@ -22,7 +22,7 @@ module Endpoint
     def base_headers
       {
         correlationId: @correlation_id.to_s,
-        Authorization: "Bearer #{@token}"
+        Authorization: "Bearer #{@token}",
       }
     end
 

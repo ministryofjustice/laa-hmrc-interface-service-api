@@ -20,7 +20,7 @@ RSpec.describe "smoke_test", type: :request, swagger_doc: "v1/swagger.yaml" do
       parameter name: :use_case, in: :path, type: :string
       response(200, "success") do
         examples "application/json" => {
-          smoke_test_one_result: true
+          smoke_test_one_result: true,
         }
         run_test!
       end
@@ -28,7 +28,7 @@ RSpec.describe "smoke_test", type: :request, swagger_doc: "v1/swagger.yaml" do
         let(:success) { false }
 
         examples "application/json" => {
-          smoke_test_one_result: false
+          smoke_test_one_result: false,
         }
         run_test!
       end
@@ -57,8 +57,8 @@ RSpec.describe "smoke_test", type: :request, swagger_doc: "v1/swagger.yaml" do
               use_case_one: true,
               use_case_two: true,
               use_case_three: true,
-              use_case_four: true
-            }
+              use_case_four: true,
+            },
         }
         run_test!
       end
@@ -71,8 +71,8 @@ RSpec.describe "smoke_test", type: :request, swagger_doc: "v1/swagger.yaml" do
               use_case_one: false,
               use_case_two: true,
               use_case_three: true,
-              use_case_four: true
-            }
+              use_case_four: true,
+            },
         }
         run_test!
       end

@@ -13,7 +13,7 @@ RSpec.describe "sidekiq WEB UI", type: :request do
         username = Settings.sidekiq.username
         password = Settings.sidekiq.web_ui_password
         get sidekiq_web_path, headers: {
-          "HTTP_AUTHORIZATION" => ActionController::HttpAuthentication::Basic.encode_credentials(username, password)
+          "HTTP_AUTHORIZATION" => ActionController::HttpAuthentication::Basic.encode_credentials(username, password),
         }
         expect(response).to have_http_status(:ok)
       end

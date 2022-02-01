@@ -20,7 +20,7 @@ RSpec.configure do |config|
       info: {
         title: "LAA HMRC Interface Service",
         description: "This Service facilitates the HMRC API access for the LAA Use Cases",
-        version: "v1"
+        version: "v1",
       },
       paths: {},
       components: {
@@ -31,13 +31,13 @@ RSpec.configure do |config|
             description: "OAuth2 client credentials flow",
             flows: {
               clientCredentials: {
-                tokenUrl: "/oauth/token"
-              }
-            }
-          }
-        }
-      }
-    }
+                tokenUrl: "/oauth/token",
+              },
+            },
+          },
+        },
+      },
+    },
   }
 
   # Specify the format of the output Swagger file when running 'rswag:specs:swaggerize'.

@@ -50,7 +50,7 @@ module HMRC
       def path
         {
           employment: "/employment",
-          paye: "/income/paye"
+          paye: "/income/paye",
         }[@type.to_sym]
       end
 
@@ -67,7 +67,7 @@ module HMRC
           apply: "LAA-C1",
           gross_income: "LAA-C2",
           fraud: "LAA-C3",
-          debt: "LAA-C4"
+          debt: "LAA-C4",
         }[@app.to_sym]
       end
 
@@ -75,7 +75,7 @@ module HMRC
         {
           "Content-Type" => "application/json",
           "Accept" => "application/vnd.hmrc.1.0+json",
-          "Authorization" => "Bearer #{@token}"
+          "Authorization" => "Bearer #{@token}",
         }
       end
 

@@ -16,7 +16,7 @@ RSpec.describe Endpoint::Headers do
           accept: "application/vnd.hmrc.2.0+json",
           content_type: "application/json",
           correlationId: "fake-correlation_id",
-          Authorization: "Bearer fake_bearer_token"
+          Authorization: "Bearer fake_bearer_token",
         }
       end
 
@@ -34,7 +34,7 @@ RSpec.describe Endpoint::Headers do
           accept: "application/vnd.hmrc.2.0+json",
           content_type: "application/json",
           correlationId: "fake-correlation_id",
-          Authorization: "Bearer fake_bearer_token"
+          Authorization: "Bearer fake_bearer_token",
         }
       end
 
@@ -47,7 +47,7 @@ RSpec.describe Endpoint::Headers do
         {
           accept: "application/vnd.hmrc.2.0+json",
           correlationId: "fake-correlation_id",
-          Authorization: "Bearer fake_bearer_token"
+          Authorization: "Bearer fake_bearer_token",
         }
       end
 
@@ -60,7 +60,7 @@ RSpec.describe Endpoint::Headers do
         {
           accept: "application/vnd.hmrc.1.0+json",
           correlationId: "fake-correlation_id",
-          Authorization: "Bearer fake_bearer_token"
+          Authorization: "Bearer fake_bearer_token",
         }
       end
 
@@ -73,7 +73,7 @@ RSpec.describe Endpoint::Headers do
         {
           accept: "application/vnd.hmrc.2.0+json",
           correlationId: "fake-correlation_id",
-          Authorization: "Bearer fake_bearer_token"
+          Authorization: "Bearer fake_bearer_token",
         }
       end
 

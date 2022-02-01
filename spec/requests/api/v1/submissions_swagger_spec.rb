@@ -19,8 +19,8 @@ RSpec.describe "GET submission", type: :request, swagger_doc: "v1/swagger.yaml" 
           nino: "MN212451D",
           dob: "1992-07-22",
           start_date: "2020-08-01",
-          end_date: "2020-10-01"
-        }
+          end_date: "2020-10-01",
+        },
       }
     end
 
@@ -50,18 +50,18 @@ RSpec.describe "GET submission", type: :request, swagger_doc: "v1/swagger.yaml" 
                           nino: { type: String, example: "MN212451D" },
                           dob: { type: Date, example: "1992-07-22" },
                           start_date: { type: Date, example: "2020-08-01" },
-                          end_date: { type: Date, example: "2020-10-01" }
-                        }
-                      }
-                    }
+                          end_date: { type: Date, example: "2020-10-01" },
+                        },
+                      },
+                    },
                   }
         response(202, "Accepted") do
           description "Create a submission record and start the HMRC process asynchronously"
           after do |example|
             example.metadata[:response][:content] = {
               "application/json" => {
-                example: JSON.parse(response.body, symbolize_names: true)
-              }
+                example: JSON.parse(response.body, symbolize_names: true),
+              },
             }
           end
 
@@ -100,8 +100,8 @@ RSpec.describe "GET submission", type: :request, swagger_doc: "v1/swagger.yaml" 
                   nino: "abc123",
                   dob: "1234",
                   start_date: nil,
-                  end_date: nil
-                }
+                  end_date: nil,
+                },
               }
             end
             run_test! do |response|
@@ -153,7 +153,7 @@ RSpec.describe "GET submission", type: :request, swagger_doc: "v1/swagger.yaml" 
               data: [
                 { correlation_id: "test-guid", use_case: "use_case_two" },
                 { test_key: "test value" },
-              ]
+              ],
             }
           end
           run_test! do |response|
@@ -171,7 +171,7 @@ RSpec.describe "GET submission", type: :request, swagger_doc: "v1/swagger.yaml" 
               data: [
                 { correlation_id: "test-guid", use_case: "use_case_two" },
                 { error: "submitted client details could not be found in HMRC service" },
-              ]
+              ],
             }
           end
           run_test! do |response|
@@ -186,7 +186,7 @@ RSpec.describe "GET submission", type: :request, swagger_doc: "v1/swagger.yaml" 
             {
               submission: id,
               status: "processing",
-              _links: [href: "http://www.example.com/api/v1/submission/status/#{id}"]
+              _links: [href: "http://www.example.com/api/v1/submission/status/#{id}"],
             }
           end
           run_test! do |response|
@@ -202,7 +202,7 @@ RSpec.describe "GET submission", type: :request, swagger_doc: "v1/swagger.yaml" 
               submission: id,
               status: "completed",
               code: "INCOMPLETE_SUBMISSION",
-              message: "Process complete but no result available"
+              message: "Process complete but no result available",
             }
           end
           run_test! do
