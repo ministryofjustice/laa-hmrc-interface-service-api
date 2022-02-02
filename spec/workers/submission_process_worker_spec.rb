@@ -43,7 +43,7 @@ RSpec.describe SubmissionProcessWorker do
           allow(SubmissionService).to receive(:call).and_raise(StandardError, "A problem occurred")
         end
 
-        context "before the final retry" do
+        context "when before the final retry" do
           before { worker.retry_count = 2 }
 
           it "raises a not tracked error and leaves the status" do
