@@ -282,7 +282,7 @@ GEM
     redis (4.6.0)
     redis-namespace (1.8.1)
       redis (>= 3.0.4)
-    regexp_parser (2.2.0)
+    regexp_parser (2.2.1)
     rest-client (2.1.0)
       http-accept (>= 1.7.0, < 2.0)
       http-cookie (>= 1.0.2, < 2.0)
