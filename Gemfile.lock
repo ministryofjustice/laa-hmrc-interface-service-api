@@ -202,7 +202,7 @@ GEM
     mime-types-data (3.2022.0105)
     mini_mime (1.1.2)
     minitest (5.15.0)
-    mock_redis (0.29.0)
+    mock_redis (0.30.0)
       ruby2_keywords
     msgpack (1.4.5)
     multi_json (1.15.0)
