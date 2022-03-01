@@ -19,10 +19,9 @@ RUN adduser --disabled-password apply -u 1001
 COPY Gemfile /app/Gemfile
 COPY Gemfile.lock /app/Gemfile.lock
 
-RUN gem install bundler -v 2.3.7 \
-&& bundle config build.nokogiri --use-system-libraries \
-&& bundle config --global without test:development \
-&& bundle install
+RUN gem update --system
+RUN bundle config set --local without 'test development' && bundle install
+
 
 COPY . /app
 
