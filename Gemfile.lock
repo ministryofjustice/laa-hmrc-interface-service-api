@@ -401,9 +401,6 @@ GEM
       unf_ext
     unf_ext (0.0.8)
     unicode-display_width (2.1.0)
-    validates_timeliness (6.0.0.beta2)
-      activemodel (>= 6.0.0, < 7)
-      timeliness (>= 0.3.10, < 1)
     vcr (6.0.0)
     webmock (3.14.0)
       addressable (>= 2.8.0)
@@ -463,7 +460,6 @@ DEPENDENCIES
   spring
   timeliness-i18n
   tzinfo-data
-  validates_timeliness (~> 6.0.0.beta2)
   vcr
   webmock
 

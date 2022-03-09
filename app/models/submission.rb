@@ -12,9 +12,10 @@ class Submission < ApplicationRecord
   validates :first_name, presence: true
   validates :last_name, presence: true
   validate :validate_nino
-  validates_date :dob, on_or_before: :today
-  validates_date :start_date, on_or_before: :today
-  validates_date :end_date, on_or_before: :today, after: :start_date
+  validates :dob, date: { not_in_the_future: true }
+  validates :start_date, date: { not_in_the_future: true }
+  validates :end_date, date: { not_in_the_future: true }
+  validate :end_date_after_start_date
 
   def as_json(*)
     super.except("id", "status", "created_at", "updated_at", "oauth_application_id")
@@ -31,5 +32,14 @@ class Submission < ApplicationRecord
     return if NINO_REGEXP.match?(nino)
 
     errors.add(:nino, "is not valid")
+  end
+
+private
+
+  def end_date_after_start_date
+    return if end_date.blank? || start_date.blank?
+
+    errors.add(:start_date, :invalid_timeline) if end_date < start_date
+    errors.add(:end_date, :invalid_timeline) if end_date < start_date
   end
 end
