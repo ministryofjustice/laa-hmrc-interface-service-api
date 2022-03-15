@@ -1,0 +1,11 @@
+# This refers to the setting of the Authorization header - this is
+# expected to be be upper cased and conflicts with the snake_case
+# setting, so we are ignoring it for this specific pattern
+RSpec/VariableName:
+  EnforcedStyle: snake_case
+  IgnoredPatterns:
+    - ^Authorization
+
+# for some reason, this block fails when placed in the main
+# .rubocop.yml file, complaining about being in the wrong namespace,
+# but works fine in an inherited file
