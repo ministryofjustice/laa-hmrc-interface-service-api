@@ -1,13 +1,13 @@
 # Connecting to the hosted service
 
-There are 3 hosted services available, UAT, staging and production.  
-* UAT and staging talk to the HMRC sandbox and contain fake users and fake, uploaded by us, data.  
+There are 3 hosted services available, UAT, staging and production.
+* UAT and staging talk to the HMRC sandbox and contain fake users and fake, uploaded by us, data.
 * Production talks to the live HMRC APIs
 
 UAT is accessible from any computer, whereas staging and production require the use of the MOJ - DSD VPN to connect
 
 To request any/all of the following:
-* a set of credentials for any of these instances 
+* a set of credentials for any of these instances
 * the list of user values that will return data for the non-production hosted instances
 
 visit the #laa-hmrc-interface slack channel and drop us a message
@@ -35,7 +35,7 @@ Which should return a response like
 You should then submit a submission by POSTing to the `/api/v1/submission/create/{use_case}` endpoint
 with your requested data as escaped JSON in the body, e.g.
 ```shell
-curl  -X POST "http://localhost:4050/api/v1/submission/create/one" \ 
+curl  -X POST "http://localhost:4050/api/v1/submission/create/one" \
       -H  "accept: */*" \
       -H  "Authorization: Bearer <your-bearer-token-from-previous-step>" \
       -H  "Content-Type: application/json" \
@@ -54,3 +54,4 @@ Which, on success, should return:
 ```
 
 See the swagger docs for more detail and a testable interface
+
