@@ -5,13 +5,13 @@
 
 This Service facilitates the HMRC API access for the LAA Use Cases
 
-## Development 
+## Development
 ### Dependencies
 * Ruby 3
 * Rails 6.1.x API
 
 ### System Dependencies
-* postgres 
+* postgres
 * redis
 * sidekiq
 

@@ -1,7 +1,7 @@
 # Swagger
 ## Functional documentation
-To see the swagger implementation, you can access it on our 
-[staging environment](https://laa-hmrc-interface-staging.apps.live-1.cloud-platform.service.justice.gov.uk) 
+To see the swagger implementation, you can access it on our
+[staging environment](https://laa-hmrc-interface-staging.cloud-platform.service.justice.gov.uk)
 when you have the MOJ VPN turned on
 
 ## API Documentation
