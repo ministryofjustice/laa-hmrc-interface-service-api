@@ -13,7 +13,7 @@ gem "net-pop"
 gem "net-smtp"
 gem "pg", "~> 1.3"
 gem "puma", "~> 5.6"
-gem "rails", "~> 7.0.2"
+gem "rails", "~> 7.0.2", ">= 7.0.2.3"
 gem "redis"
 gem "redis-namespace"
 gem "rest-client"
@@ -27,7 +27,7 @@ gem "timeliness-i18n"
 
 group :development, :test do
   gem "byebug"
-  gem "factory_bot_rails", ">= 5.2.0"
+  gem "factory_bot_rails", ">= 6.2.0"
   gem "faker", ">=1.9.1"
   gem "guard-livereload"
   gem "guard-rspec"
@@ -42,7 +42,7 @@ end
 
 group :test do
   gem "mock_redis"
-  gem "rspec-rails", "~> 5.1"
+  gem "rspec-rails", "~> 5.1", ">= 5.1.1"
   gem "rspec-sidekiq"
   gem "shoulda-matchers"
   gem "simplecov", require: false
