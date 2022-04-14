@@ -245,7 +245,7 @@ GEM
     pry-byebug (3.9.0)
       byebug (~> 11.0)
       pry (~> 0.13.0)
-    public_suffix (4.0.6)
+    public_suffix (4.0.7)
     puma (5.6.4)
       nio4r (~> 2.0)
     racc (1.6.0)
@@ -421,7 +421,7 @@ DEPENDENCIES
   config
   doorkeeper
   dotenv-rails
-  factory_bot_rails (>= 5.2.0)
+  factory_bot_rails (>= 6.2.0)
   faker (>= 1.9.1)
   guard-livereload
   guard-rspec
@@ -435,12 +435,12 @@ DEPENDENCIES
   pg (~> 1.3)
   pry-byebug
   puma (~> 5.6)
-  rails (~> 7.0.2)
+  rails (~> 7.0.2, >= 7.0.2.3)
   redis
   redis-namespace
   rest-client
   rotp
-  rspec-rails (~> 5.1)
+  rspec-rails (~> 5.1, >= 5.1.1)
   rspec-sidekiq
   rspec_junit_formatter
   rswag-api
