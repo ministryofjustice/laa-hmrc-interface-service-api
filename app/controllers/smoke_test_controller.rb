@@ -9,7 +9,7 @@ class SmokeTestController < ApplicationController
   def health_check
     results = run_tests
     status = results.values.all?(true) ? 200 : 500
-    render status: status, json: { smoke_test_result: results }
+    render status:, json: { smoke_test_result: results }
   end
 
 private
