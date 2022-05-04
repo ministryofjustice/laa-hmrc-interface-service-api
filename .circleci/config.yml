@@ -14,13 +14,13 @@ executors:
           TZ: Europe/London
   linting-executor:
     docker:
-      - image: cimg/ruby:3.1.1-node
+      - image: cimg/ruby:3.1.2-node
         environment:
           - RAILS_ENV=test
           - TZ: "Europe/London"
   test-executor:
     docker:
-      - image: cimg/ruby:3.1.1-node
+      - image: cimg/ruby:3.1.2-node
         environment:
           - RAILS_ENV=test
           - PGHOST=localhost
