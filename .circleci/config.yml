@@ -272,6 +272,16 @@ jobs:
       - slack/notify:
           event: pass
           template: success_tagged_deploy_1
+  delete_dependabot_deployment:
+    executor: cloud-platform-executor
+    steps:
+      - checkout
+      - setup_remote_docker
+      - *authenticate_k8s_live
+      - run:
+          name: Delete dependabot deployment
+          command: |
+            ./bin/delete_dependabot_deployment
 
 workflows:
   version: 2
@@ -295,6 +305,14 @@ workflows:
             - lint_checks
             - unit_tests
             - build_and_push
+      - delete_dependabot_deployment:
+          context: laa-hmrc-interface-uat
+          filters:
+            branches:
+              only:
+                - /dependabot.*/
+          requires:
+            - deploy_uat
 
   merge_pr:
     jobs:

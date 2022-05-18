@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+RELEASE_BRANCH=$(echo $CIRCLE_BRANCH | tr '[:upper:]' '[:lower:]' | sed 's:^\w*\/::' | tr -s ' _/[]().' '-' | cut -c1-30 | sed 's/-$//')
+echo "Attempting to delete HMRC UAT dependabot release"
+echo "$RELEASE_BRANCH"
+
+
+UAT_RELEASES=$(helm list --namespace=${K8S_NAMESPACE} --all)
+echo "Current HMRC UAT releases:"
+echo "$UAT_RELEASES"
+
+if [[ $UAT_RELEASES == *"$RELEASE_BRANCH"* ]]
+then
+  helm delete $RELEASE_BRANCH --namespace=${K8S_NAMESPACE}
+  echo "Deleted HMRC UAT dependabot release $RELEASE_BRANCH"
+else
+  echo "UAT dependabot release $RELEASE_BRANCH was not found"
+fi
