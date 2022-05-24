@@ -440,7 +440,7 @@ DEPENDENCIES
   redis-namespace
   rest-client
   rotp
-  rspec-rails (~> 5.1)
+  rspec-rails (~> 5.1, >= 5.1.2)
   rspec-sidekiq
   rspec_junit_formatter
   rswag-api
