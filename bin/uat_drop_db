@@ -4,7 +4,7 @@ function _uat_drop_db() {
   usage="uat_drop_db -- drop an rds instance with same name as that specified
   Usage: bin/uat_drop_db <uat-branch-name>
   Example:
-    # deploy image for current commit to dev
+    # drop postgres database connected to the UAT RDS instance with a name matching "my-uat-branch-name"
     bin/uat_drop_db my-uat-branch-name
     "
 
@@ -22,12 +22,9 @@ function _uat_drop_db() {
     UAT_RELEASE=$1
   fi
 
-  # Set in github action secrets
-  K8S_CLUSTER=$K8S_GHA_UAT_CLUSTER_NAME
-  K8S_CLUSTER_CERT=$K8S_GHA_UAT_CLUSTER_CERT
-  K8S_NAMESPACE=$K8S_GHA_UAT_NAMESPACE
-  K8S_TOKEN=$K8S_GHA_UAT_TOKEN
+  echo "TEST: Dropping DB named ${UAT_RELEASE}..."
 
+  # Set in github action secrets
   if [[ -z "${K8S_CLUSTER}" ]] || \
       [[ -z "${K8S_CLUSTER_CERT}" ]] || \
       [[ -z "${K8S_NAMESPACE}" ]] || \
