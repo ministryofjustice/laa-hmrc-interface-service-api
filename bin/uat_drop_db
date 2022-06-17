@@ -1,0 +1,114 @@
+#!/bin/bash
+
+function _uat_drop_db() {
+  usage="uat_drop_db -- drop an rds instance with same name as that specified
+  Usage: bin/uat_drop_db <uat-branch-name>
+  Example:
+    # deploy image for current commit to dev
+    bin/uat_drop_db my-uat-branch-name
+    "
+
+  # exit when any command fails, keep track of the last for output
+  # https://intoli.com/blog/exit-on-errors-in-bash-scripts/
+  set -e
+  trap 'last_command=$current_command; current_command=$BASH_COMMAND' DEBUG
+  trap 'echo "\"${last_command}\" command completed with exit code $?."' EXIT
+
+  if [ $# -ne 1 ]
+  then
+    echo "$usage"
+    return 0
+  else
+    UAT_RELEASE=$1
+  fi
+
+  # Set in github action secrets
+  K8S_CLUSTER=$K8S_GHA_UAT_CLUSTER_NAME
+  K8S_CLUSTER_CERT=$K8S_GHA_UAT_CLUSTER_CERT
+  K8S_NAMESPACE=$K8S_GHA_UAT_NAMESPACE
+  K8S_TOKEN=$K8S_GHA_UAT_TOKEN
+
+  if [[ -z "${K8S_CLUSTER}" ]] || \
+      [[ -z "${K8S_CLUSTER_CERT}" ]] || \
+      [[ -z "${K8S_NAMESPACE}" ]] || \
+      [[ -z "${K8S_TOKEN}" ]]
+  then
+    echo "Missing environment vars: only run this via github actions with all relevant environment variables"
+    return 1
+  fi
+
+  echo "Authenticate to the cluster"
+  echo "${K8S_CLUSTER_CERT}" > ./ca.crt
+  kubectl config set-cluster ${K8S_CLUSTER} --certificate-authority=./ca.crt --server=https://${K8S_CLUSTER}
+  kubectl config set-credentials github-action --token=${K8S_TOKEN}
+  kubectl config set-context ${K8S_CLUSTER} --cluster=${K8S_CLUSTER} --user=github-action --namespace=${K8S_NAMESPACE}
+  kubectl config use-context ${K8S_CLUSTER}
+
+  echo 'Retrieve RDS credentials'
+  HOST=$(kubectl -n "${K8S_NAMESPACE}" get secret rds-instance-output -o jsonpath="{.data.rds_instance_address}" | base64 --decode)
+  DB_NAME=$(kubectl -n "${K8S_NAMESPACE}" get secret rds-instance-output -o jsonpath="{.data.database_name}" | base64 --decode)
+  DB_USER=$(kubectl -n "${K8S_NAMESPACE}" get secret rds-instance-output -o jsonpath="{.data.database_username}" | base64 --decode)
+  DB_PWD=$(kubectl -n "${K8S_NAMESPACE}" get secret rds-instance-output -o jsonpath="{.data.database_password}" | base64 --decode)
+
+  echo "Ensuring port-forward-pod exists"
+  FORWADING_POD=$(kubectl -n "${K8S_NAMESPACE}" get pods | grep -m4 port-forward-pod | head -n1 | cut -d' ' -f 1)
+  if [ -z "$FORWADING_POD" ]; then
+    echo 'Creating new port-forward-pod'
+    kubectl -n "${K8S_NAMESPACE}" run port-forward-pod \
+      --image=ministryofjustice/port-forward \
+      --port=5432 \
+      --env="REMOTE_HOST=${HOST}" \
+      --env="LOCAL_PORT=5432" \
+      --env="REMOTE_PORT=5432"
+  fi
+
+  echo 'Waiting for port-forward-pod to be ready'
+  kubectl -n "${K8S_NAMESPACE}" wait --for=condition=ready pod port-forward-pod --timeout=32s
+
+  echo 'starting port-forwarding as a background job'
+  kubectl -n "${K8S_NAMESPACE}" port-forward port-forward-pod 5433:5432 &
+
+  # TODO : check we are merging or closing (not really needed here for github actions IMO)
+  # GIT_MESSAGE=$(git log --format=%B -n 1 $CIRCLE_SHA1)
+  # echo "git message is: $GIT_MESSAGE"
+  # if [[ $GIT_MESSAGE != "Merge pull request #"* ]]; then
+  #   exit 1
+  # fi
+
+  # Retrieve name of database/datname to DROP
+  # this is relying on the commit message of a merge commit to include the name of the branch
+  # but why not just get the branch name like $CIRCLE_BRANCH (in circleci) or equivalent in GHA
+  # MERGED_BRANCH=$(echo $GIT_MESSAGE | sed -n "s/^.*from ministryofjustice\/\s*\(\S*\).*$/\1/p")
+  # UAT_RELEASE=$(echo $MERGED_BRANCH | sed 's:^\w*\/::' | tr -s ' _/[]().' '-' | cut -c1-30 | sed 's/-$//')
+
+  echo "Attempting to delete UAT database for: $UAT_RELEASE"
+
+  # Check App/web pods deleted, as open connections to DB can cause problems
+  APP_POD=$(kubectl -n "${K8S_NAMESPACE}" get pods | grep -m4 "${UAT_RELEASE}" | head -n1 | cut -d' ' -f 1)
+  if [ -z "$APP_POD" ]; then
+    echo "Ensuring ${UAT_RELEASE} pod has terminated"
+    kubectl -n "${K8S_NAMESPACE}" wait --for=delete pod/"${UAT_RELEASE}" --timeout=32s
+  fi
+
+  echo 'Sending RDS delete command'
+  OUTPUT=""
+  for i in {1..3}; do
+    sleep 3
+    echo "Attempt: $i"
+    GET_QUERY="SELECT datname FROM pg_database WHERE datname ILIKE '${UAT_RELEASE}%'"
+    DATABASE_TO_DROP=$(psql postgres://"${DB_USER}":"${DB_PWD}"@localhost:5433/"${DB_NAME}" -qtc "${GET_QUERY};" | xargs) # xargs trims the spaces around the psql output of names
+    echo $DATABASE_TO_DROP
+    # CLOSE_CONN_QUERY="SELECT pg_terminate_backend(pid)  FROM pg_stat_activity WHERE datname = '${DATABASE}'"
+    # CLOSE_CONNECTIONS=$(psql postgres://"${DB_USER}":"${DB_PWD}"@localhost:5433/"${DB_NAME}" -qtc "${CLOSE_CONN_QUERY};" | xargs)
+    # OUTPUT=$(psql postgres://"${DB_USER}":"${DB_PWD}"@localhost:5433/"${DB_NAME}" -c "DROP DATABASE \"${DATABASE}\";")
+    # [ $(echo "$OUTPUT" | grep -c 'DROP DATABASE') = 1 ] && break
+  done
+
+  echo 'Killing port-forwarding background job'
+  kill $!
+
+  echo 'Deleting port-forwarding pod'
+  kubectl -n "${K8S_NAMESPACE}" delete pod port-forward-pod --wait=false
+}
+
+_uat_drop_db $@
