@@ -28,6 +28,17 @@ jobs:
           K8S_TOKEN: ${{ secrets.K8S_GHA_UAT_TOKEN }}
         run: bin/uat_drop_db ${{ steps.delete_uat.outputs.release-name }}
 
+      - uses: actions/checkout@v3
+      - name: Setup tmate session
+        if: ${{ failure() }}
+        uses: mxschmitt/action-tmate@v3
+        env:
+          K8S_CLUSTER: ${{ secrets.K8S_GHA_UAT_CLUSTER_NAME }}
+          K8S_NAMESPACE: $${{ secrets.K8S_GHA_UAT_NAMESPACE }}
+        timeout-minutes: 15
+        with:
+          limit-access-to-actor: true
+
       - name: Result
         shell: bash
         run: echo ${{ steps.delete_uat.outputs.delete-message }}
