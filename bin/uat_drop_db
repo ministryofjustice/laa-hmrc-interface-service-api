@@ -35,9 +35,9 @@ function _uat_drop_db() {
   fi
 
   echo "Authenticate to the cluster"
-  echo -n ${K8S_CLUSTER_CERT} | base64 -d > ./ca.crt
+  echo "${K8S_CLUSTER_CERT}" > ./ca.crt
   kubectl config set-cluster ${K8S_CLUSTER} --certificate-authority=./ca.crt --server=https://${K8S_CLUSTER}
-  kubectl config set-credentials circleci --token=$(echo -n ${K8S_TOKEN} | base64 -d)
+  kubectl config set-credentials github-action --token=${K8S_TOKEN}
   kubectl config set-context ${K8S_CLUSTER} --cluster=${K8S_CLUSTER} --user=github-action --namespace=${K8S_NAMESPACE}
   kubectl config use-context ${K8S_CLUSTER}
   kubectl --namespace=${K8S_NAMESPACE} get pods
