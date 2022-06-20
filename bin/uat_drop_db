@@ -14,10 +14,11 @@ function _uat_drop_db() {
   trap 'last_command=$current_command; current_command=$BASH_COMMAND' DEBUG
   trap 'echo "\"${last_command}\" command completed with exit code $?."' EXIT
 
-  if [[ ! "${K8S_NAMESPACE}" =~ -uat$ ]]
+  current_namespace=$(kubectl config view --minify --output 'jsonpath={..namespace}'; echo)
+  if [[ ! $current_namespace =~ -uat$ ]]
   then
     echo "namespace must be UAT!"
-    return 0
+    return 1
   fi
 
   if [[ $# -ne 1 ]]
@@ -79,7 +80,7 @@ function _uat_drop_db() {
 
     if [[ $OUTPUT =~ "DROP DATABASE" ]]
     then
-      RESULT="${DATABASE_TO_DROP} to be dropped"
+      RESULT="${DATABASE_TO_DROP} dropped!"
     else
       RESULT="${DATABASE_TO_DROP} not dropped!"
     fi
