@@ -1,8 +1,16 @@
 #!/bin/bash
+# NOTE: uses current authentication, context and namespace but errors
+# unless namespace ends with UAT.
+#
+# Assuming RDS secret name is the same this could
+# work for other UAT namespaces.
+#
 
 function _uat_drop_db() {
   usage="uat_drop_db -- drop an rds instance with same name as that specified
-  Usage: bin/uat_drop_db <uat-branch-name>
+  Usage: bin/uat_drop_db <uat-release-name>
+  DANGER: This will use the current authentication, context and namespace but checks the
+          the namespace ends with "-uat"
   Example:
     # drop postgres database connected to the UAT RDS instance with a name matching "my-uat-branch-name"
     bin/uat_drop_db my-uat-branch-name
@@ -24,22 +32,22 @@ function _uat_drop_db() {
   if [[ $# -ne 1 ]]
   then
     echo "$usage"
-    return 0
+    return 1
   else
     UAT_RELEASE=$1
   fi
 
   echo 'Retrieve RDS credentials'
-  DB_HOST=$(kubectl -n "${K8S_NAMESPACE}" get secret rds-instance-output -o jsonpath="{.data.rds_instance_address}" | base64 --decode)
-  DB_NAME=$(kubectl -n "${K8S_NAMESPACE}" get secret rds-instance-output -o jsonpath="{.data.database_name}" | base64 --decode)
-  DB_USER=$(kubectl -n "${K8S_NAMESPACE}" get secret rds-instance-output -o jsonpath="{.data.database_username}" | base64 --decode)
-  DB_PWD=$(kubectl -n "${K8S_NAMESPACE}" get secret rds-instance-output -o jsonpath="{.data.database_password}" | base64 --decode)
+  DB_HOST=$(kubectl get secret rds-instance-output -o jsonpath="{.data.rds_instance_address}" | base64 --decode)
+  DB_NAME=$(kubectl get secret rds-instance-output -o jsonpath="{.data.database_name}" | base64 --decode)
+  DB_USER=$(kubectl get secret rds-instance-output -o jsonpath="{.data.database_username}" | base64 --decode)
+  DB_PWD=$(kubectl get secret rds-instance-output -o jsonpath="{.data.database_password}" | base64 --decode)
 
-  echo "Ensuring port-forward-pod exists"
-  FORWADING_POD=$(kubectl -n "${K8S_NAMESPACE}" get pods | grep -m4 port-forward-pod | head -n1 | cut -d' ' -f 1)
-  if [ -z "$FORWADING_POD" ]; then
-    echo 'Creating new port-forward-pod'
-    kubectl -n "${K8S_NAMESPACE}" run port-forward-pod \
+  echo "Checking if port-forward-pod exists"
+  FORWADING_POD=$(kubectl get pods | grep -m4 port-forward-pod | head -n1 | cut -d' ' -f 1)
+  if [[ -z "$FORWADING_POD" ]]; then
+    echo 'Creating new port-forward-pod...'
+    kubectl run port-forward-pod \
       --image=ministryofjustice/port-forward \
       --port=5432 \
       --env="REMOTE_HOST=${DB_HOST}" \
@@ -48,16 +56,16 @@ function _uat_drop_db() {
   fi
 
   echo 'Waiting for port-forward-pod to be ready...'
-  kubectl -n "${K8S_NAMESPACE}" wait --for=condition=ready pod port-forward-pod --timeout=32s
+  kubectl wait --for=condition=ready pod port-forward-pod --timeout=32s
 
   echo 'Starting port-forwarding as a background job'
-  kubectl -n "${K8S_NAMESPACE}" port-forward port-forward-pod 5433:5432 &
+  kubectl port-forward port-forward-pod 5433:5432 &
 
   # Check App/web pods deleted, as open connections to DB can cause problems
-  APP_POD=$(kubectl -n "${K8S_NAMESPACE}" get pods | grep -m4 "${UAT_RELEASE}" | head -n1 | cut -d' ' -f 1)
-  if [ -z "$APP_POD" ]; then
-    echo "Ensuring ${UAT_RELEASE} pod has terminated"
-    kubectl -n "${K8S_NAMESPACE}" wait --for=delete pod/"${UAT_RELEASE}" --timeout=32s
+  APP_POD=$(kubectl get pods | grep -m4 "${UAT_RELEASE}" | head -n1 | cut -d' ' -f 1)
+  if [[ ! -z "$APP_POD" ]]; then
+    echo "Terminating pod named ${UAT_RELEASE}..."
+    kubectl wait --for=delete pod/"${UAT_RELEASE}" --timeout=32s
   fi
 
   echo 'Sending RDS delete command...'
@@ -66,7 +74,7 @@ function _uat_drop_db() {
     echo "Attempt: $i"
     GET_QUERY="SELECT datname FROM pg_database WHERE datname ILIKE '${UAT_RELEASE}%'"
     DATABASE_TO_DROP=$(psql postgres://"${DB_USER}":"${DB_PWD}"@localhost:5433/"${DB_NAME}" -qtc "${GET_QUERY};" | xargs) # xargs trims the spaces around the psql output of names
-    echo "Found ${DATABASE_TO_DROP} to be dropped"
+    [[ -z "${DATABASE_TO_DROP}" ]] && echo "DATABASE NOT FOUND \"${UAT_RELEASE}\"!" && break
 
     ALTER_CONN_LIMIT="ALTER DATABASE \"${DATABASE_TO_DROP}\" CONNECTION LIMIT 0;"
     ALTER_CONNECTIONS_OUTPUT=$(psql postgres://"${DB_USER}":"${DB_PWD}"@localhost:5433/"${DB_NAME}" -qtc "${ALTER_CONN_LIMIT};")
@@ -93,7 +101,7 @@ function _uat_drop_db() {
   kill $!
 
   echo 'Deleting port-forwarding pod'
-  kubectl -n "${K8S_NAMESPACE}" delete pod port-forward-pod --wait=false
+  kubectl delete pod port-forward-pod --wait=false
 }
 
 _uat_drop_db $@

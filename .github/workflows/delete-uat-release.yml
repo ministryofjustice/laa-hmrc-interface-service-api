@@ -22,6 +22,11 @@ jobs:
       - name: Delete UAT RDS database
         shell: bash
         id: delete_uat_db
+        Description: |
+          Deletes an RDS instance database with a name
+          matching the branch/release. Note that it will
+          use a previous steps kubernetes authentication,
+          context and namespace.
         run: |
           bin/uat_drop_db ${{ steps.delete_uat.outputs.release-name }}
 
