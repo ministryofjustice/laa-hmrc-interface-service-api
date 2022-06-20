@@ -61,8 +61,6 @@ function _uat_drop_db() {
   fi
 
   echo 'Sending RDS delete command...'
-  OUTPUT=""
-
   for i in {1..3}; do
     sleep 3
     echo "Attempt: $i"
@@ -90,7 +88,7 @@ function _uat_drop_db() {
     fi
 
     echo "##[set-output name=drop-commmand-result;]$(echo "${DROP_DATABASE_RESULT}")"
-    [[ $DROPPED == 1 ]]] && break
+    [[ $DROPPED == 1 ]] && break
   done
 
   echo 'Killing port-forwarding background job'
