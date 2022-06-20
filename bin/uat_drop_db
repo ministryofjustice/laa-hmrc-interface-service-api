@@ -61,6 +61,7 @@ function _uat_drop_db() {
 
   echo 'Sending RDS delete command...'
   OUTPUT=""
+
   for i in {1..3}; do
     sleep 3
     echo "Attempt: $i"
@@ -78,10 +79,12 @@ function _uat_drop_db() {
 
     if [[ $OUTPUT =~ "DROP DATABASE" ]]
     then
-
+      RESULT="${DATABASE_TO_DROP} to be dropped"
+    else
+      RESULT="${DATABASE_TO_DROP} not dropped!"
     fi
 
-    echo "##[set-output name=drop-commmand-result;]$(echo "${OUTPUT}")"
+    echo "##[set-output name=drop-commmand-result;]$(echo "${RESULT}")"
     [ $(echo "$OUTPUT" | grep -c 'DROP DATABASE') = 1 ] && break
   done
 
