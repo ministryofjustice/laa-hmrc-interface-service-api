@@ -14,7 +14,13 @@ function _uat_drop_db() {
   trap 'last_command=$current_command; current_command=$BASH_COMMAND' DEBUG
   trap 'echo "\"${last_command}\" command completed with exit code $?."' EXIT
 
-  if [ $# -ne 1 ]
+  if [[ ! "${K8S_NAMESPACE}" =~ -uat$ ]]
+  then
+    echo "namespace must be UAT!"
+    return 0
+  fi
+
+  if [[ $# -ne 1 ]]
   then
     echo "$usage"
     return 0
@@ -23,7 +29,7 @@ function _uat_drop_db() {
   fi
 
   echo 'Retrieve RDS credentials'
-  HOST=$(kubectl -n "${K8S_NAMESPACE}" get secret rds-instance-output -o jsonpath="{.data.rds_instance_address}" | base64 --decode)
+  DB_HOST=$(kubectl -n "${K8S_NAMESPACE}" get secret rds-instance-output -o jsonpath="{.data.rds_instance_address}" | base64 --decode)
   DB_NAME=$(kubectl -n "${K8S_NAMESPACE}" get secret rds-instance-output -o jsonpath="{.data.database_name}" | base64 --decode)
   DB_USER=$(kubectl -n "${K8S_NAMESPACE}" get secret rds-instance-output -o jsonpath="{.data.database_username}" | base64 --decode)
   DB_PWD=$(kubectl -n "${K8S_NAMESPACE}" get secret rds-instance-output -o jsonpath="{.data.database_password}" | base64 --decode)
@@ -35,7 +41,7 @@ function _uat_drop_db() {
     kubectl -n "${K8S_NAMESPACE}" run port-forward-pod \
       --image=ministryofjustice/port-forward \
       --port=5432 \
-      --env="REMOTE_HOST=${HOST}" \
+      --env="REMOTE_HOST=${DB_HOST}" \
       --env="LOCAL_PORT=5432" \
       --env="REMOTE_PORT=5432"
   fi
@@ -43,7 +49,7 @@ function _uat_drop_db() {
   echo 'Waiting for port-forward-pod to be ready...'
   kubectl -n "${K8S_NAMESPACE}" wait --for=condition=ready pod port-forward-pod --timeout=32s
 
-  echo 'starting port-forwarding as a background job'
+  echo 'Starting port-forwarding as a background job'
   kubectl -n "${K8S_NAMESPACE}" port-forward port-forward-pod 5433:5432 &
 
   # Check App/web pods deleted, as open connections to DB can cause problems
@@ -61,10 +67,20 @@ function _uat_drop_db() {
     GET_QUERY="SELECT datname FROM pg_database WHERE datname ILIKE '${UAT_RELEASE}%'"
     DATABASE_TO_DROP=$(psql postgres://"${DB_USER}":"${DB_PWD}"@localhost:5433/"${DB_NAME}" -qtc "${GET_QUERY};" | xargs) # xargs trims the spaces around the psql output of names
     echo "Found ${DATABASE_TO_DROP} to be dropped"
+
+    ALTER_CONN_LIMIT="ALTER DATABASE ${DATABASE_TO_DROP} CONNECTION LIMIT 0;"
+    ALTER_CONNECTIONS=$(psql postgres://"${DB_USER}":"${DB_PWD}"@localhost:5433/"${DB_NAME}" -qtc "${ALTER_CONN_LIMIT};" | xargs)
+
     CLOSE_CONN_QUERY="SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE datname = '${DATABASE_TO_DROP}'"
     CLOSE_CONNECTIONS=$(psql postgres://"${DB_USER}":"${DB_PWD}"@localhost:5433/"${DB_NAME}" -qtc "${CLOSE_CONN_QUERY};" | xargs)
-    OUTPUT=$(psql postgres://"${DB_USER}":"${DB_PWD}"@localhost:5433/"${DB_NAME}" -c "DROP DATABASE \"${DATABASE_TO_DROP}\";")
-    echo "DROP command output ${OUTPUT}"
+
+    OUTPUT=$(psql postgres://"${DB_USER}":"${DB_PWD}"@localhost:5433/"${DB_NAME}" -c "DROP DATABASE \"${DATABASE_TO_DROP}\" IF EXISTS \"${DATABASE_TO_DROP}\";")
+
+    if [[ $OUTPUT =~ "DROP DATABASE" ]]
+    then
+
+    fi
+
     echo "##[set-output name=drop-commmand-result;]$(echo "${OUTPUT}")"
     [ $(echo "$OUTPUT" | grep -c 'DROP DATABASE') = 1 ] && break
   done
