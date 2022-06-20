@@ -71,13 +71,15 @@ function _uat_drop_db() {
     echo "Found ${DATABASE_TO_DROP} to be dropped"
 
     ALTER_CONN_LIMIT="ALTER DATABASE \"${DATABASE_TO_DROP}\" CONNECTION LIMIT 0;"
-    ALTER_CONNECTIONS=$(psql postgres://"${DB_USER}":"${DB_PWD}"@localhost:5433/"${DB_NAME}" -qtc "${ALTER_CONN_LIMIT};")
+    ALTER_CONNECTIONS_OUTPUT=$(psql postgres://"${DB_USER}":"${DB_PWD}"@localhost:5433/"${DB_NAME}" -qtc "${ALTER_CONN_LIMIT};")
+    echo "Alter connections: ${ALTER_CONNECTIONS_OUTPUT}"
 
     CLOSE_CONN_QUERY="SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE datname = '${DATABASE_TO_DROP}'"
-    CLOSE_CONNECTIONS=$(psql postgres://"${DB_USER}":"${DB_PWD}"@localhost:5433/"${DB_NAME}" -qtc "${CLOSE_CONN_QUERY};" | xargs)
+    CLOSE_CONNECTIONS_OUTPUT=$(psql postgres://"${DB_USER}":"${DB_PWD}"@localhost:5433/"${DB_NAME}" -qtc "${CLOSE_CONN_QUERY};" | xargs)
+    echo "Close connections: ${CLOSE_CONNECTIONS_OUTPUT}"
 
     DROP_DATABASE_CMD="DROP DATABASE \"${DATABASE_TO_DROP}\";"
-    OUTPUT=$(psql postgres://"${DB_USER}":"${DB_PWD}"@localhost:5433/"${DB_NAME}" -c "${DROP_DATABASE_CMD};")
+    DROP_DATABASE_OUTPUT=$(psql postgres://"${DB_USER}":"${DB_PWD}"@localhost:5433/"${DB_NAME}" -c "${DROP_DATABASE_CMD};")
 
     if [[ $DROP_DATABASE_OUTPUT =~ "DROP DATABASE" ]]
     then
