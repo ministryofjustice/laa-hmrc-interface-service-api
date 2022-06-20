@@ -70,23 +70,24 @@ function _uat_drop_db() {
     DATABASE_TO_DROP=$(psql postgres://"${DB_USER}":"${DB_PWD}"@localhost:5433/"${DB_NAME}" -qtc "${GET_QUERY};" | xargs) # xargs trims the spaces around the psql output of names
     echo "Found ${DATABASE_TO_DROP} to be dropped"
 
-    ALTER_CONN_LIMIT="ALTER DATABASE ${DATABASE_TO_DROP} CONNECTION LIMIT 0;"
-    ALTER_CONNECTIONS=$(psql postgres://"${DB_USER}":"${DB_PWD}"@localhost:5433/"${DB_NAME}" -qtc "${ALTER_CONN_LIMIT};" | xargs)
+    ALTER_CONN_LIMIT="ALTER DATABASE \"${DATABASE_TO_DROP}\" CONNECTION LIMIT 0;"
+    ALTER_CONNECTIONS=$(psql postgres://"${DB_USER}":"${DB_PWD}"@localhost:5433/"${DB_NAME}" -qtc "${ALTER_CONN_LIMIT};")
 
     CLOSE_CONN_QUERY="SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE datname = '${DATABASE_TO_DROP}'"
     CLOSE_CONNECTIONS=$(psql postgres://"${DB_USER}":"${DB_PWD}"@localhost:5433/"${DB_NAME}" -qtc "${CLOSE_CONN_QUERY};" | xargs)
 
-    OUTPUT=$(psql postgres://"${DB_USER}":"${DB_PWD}"@localhost:5433/"${DB_NAME}" -c "DROP DATABASE \"${DATABASE_TO_DROP}\" IF EXISTS \"${DATABASE_TO_DROP}\";")
+    DROP_DATABASE_CMD="DROP DATABASE \"${DATABASE_TO_DROP}\";"
+    OUTPUT=$(psql postgres://"${DB_USER}":"${DB_PWD}"@localhost:5433/"${DB_NAME}" -c "${DROP_DATABASE_CMD};")
 
-    if [[ $OUTPUT =~ "DROP DATABASE" ]]
+    if [[ $DROP_DATABASE_OUTPUT =~ "DROP DATABASE" ]]
     then
-      RESULT="${DATABASE_TO_DROP} dropped!"
+      DROP_DATABASE_RESULT="${DATABASE_TO_DROP} dropped!"
     else
-      RESULT="${DATABASE_TO_DROP} not dropped!"
+      DROP_DATABASE_RESULT="${DATABASE_TO_DROP} not dropped!"
     fi
 
-    echo "##[set-output name=drop-commmand-result;]$(echo "${RESULT}")"
-    [ $(echo "$OUTPUT" | grep -c 'DROP DATABASE') = 1 ] && break
+    echo "##[set-output name=drop-commmand-result;]$(echo "${DROP_DATABASE_RESULT}")"
+    [ $(echo "$DROP_DATABASE_OUTPUT" | grep -c 'DROP DATABASE') = 1 ] && break
   done
 
   echo 'Killing port-forwarding background job'
