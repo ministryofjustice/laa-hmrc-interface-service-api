@@ -21,9 +21,12 @@ jobs:
 
       - name: Delete UAT RDS database
         shell: bash
+        id: delete_uat_db
         run: |
           bin/uat_drop_db ${{ steps.delete_uat.outputs.release-name }}
 
       - name: Result
         shell: bash
-        run: echo ${{ steps.delete_uat.outputs.delete-message }}
+        run: |
+          echo ${{ steps.delete_uat.outputs.delete-message }}
+          echo ${{ steps.delete_uat_db.outputs.drop-commmand-result }}
