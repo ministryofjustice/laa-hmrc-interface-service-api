@@ -75,10 +75,10 @@ function _uat_drop_db() {
     echo "Attempt: $i"
     GET_QUERY="SELECT datname FROM pg_database WHERE datname ILIKE '${UAT_RELEASE}%'"
     DATABASE_TO_DROP=$(psql postgres://"${DB_USER}":"${DB_PWD}"@localhost:5433/"${DB_NAME}" -qtc "${GET_QUERY};" | xargs) # xargs trims the spaces around the psql output of names
-    echo $DATABASE_TO_DROP
+    echo "Found ${DATABASE_TO_DROP} to be dropped"
     CLOSE_CONN_QUERY="SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE datname = '${DATABASE_TO_DROP}'"
     CLOSE_CONNECTIONS=$(psql postgres://"${DB_USER}":"${DB_PWD}"@localhost:5433/"${DB_NAME}" -qtc "${CLOSE_CONN_QUERY};" | xargs)
-    OUTPUT=$(psql postgres://"${DB_USER}":"${DB_PWD}"@localhost:5433/"${DB_NAME}" -c "DROP DATABASE \"${DATABASE}\";")
+    OUTPUT=$(psql postgres://"${DB_USER}":"${DB_PWD}"@localhost:5433/"${DB_NAME}" -c "DROP DATABASE \"${DATABASE_TO_DROP}\";")
     [ $(echo "$OUTPUT" | grep -c 'DROP DATABASE') = 1 ] && break
   done
 
