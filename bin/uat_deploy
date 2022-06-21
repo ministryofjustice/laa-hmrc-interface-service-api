@@ -22,7 +22,7 @@ deploy() {
                 --set image.tag="$CIRCLE_SHA1" \
                 --set ingress.hosts="{$RELEASE_HOST}" \
                 --set ingress.annotations."external-dns\.alpha\.kubernetes\.io/set-identifier"="$IDENTIFIER" \
-                --set branch.name="$BRANCH_NAME" \
+                --set database.name="$RELEASE_NAME" \
                 --set sidekiq.queue_name="$BRANCH_NAME-"
 }
 
