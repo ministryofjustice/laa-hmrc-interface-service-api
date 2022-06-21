@@ -25,12 +25,11 @@ function _uat_drop_db() {
   current_namespace=$(kubectl config view --minify --output 'jsonpath={..namespace}'; echo)
   if [[ ! $current_namespace =~ -uat$ ]]
   then
-    echo "namespace must be UAT!"
+    echo "namespace must be UAT!" >&2
     return 1
   fi
 
-  if [[ $# -ne 1 ]]
-  then
+  if [[ $# -ne 1 ]]; then
     echo "$usage"
     return 1
   else
@@ -42,6 +41,15 @@ function _uat_drop_db() {
   DB_NAME=$(kubectl get secret rds-instance-output -o jsonpath="{.data.database_name}" | base64 --decode)
   DB_USER=$(kubectl get secret rds-instance-output -o jsonpath="{.data.database_username}" | base64 --decode)
   DB_PWD=$(kubectl get secret rds-instance-output -o jsonpath="{.data.database_password}" | base64 --decode)
+
+  case "$1" in
+    rdsadmin | template0 | template1 | postgres | main | $DB_NAME)
+      echo "you should not drop the DB named \"$1\" ...aborting!" >&2
+      return 1
+      ;;
+    *)
+      ;;
+  esac
 
   echo "Checking if port-forward-pod exists"
   FORWADING_POD=$(kubectl get pods | grep -m4 port-forward-pod | head -n1 | cut -d' ' -f 1)
