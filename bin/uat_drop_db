@@ -82,7 +82,12 @@ function _uat_drop_db() {
     echo "Attempt: $i"
     GET_QUERY="SELECT datname FROM pg_database WHERE datname = '${UAT_RELEASE}'"
     DATABASE_TO_DROP=$(psql postgres://"${DB_USER}":"${DB_PWD}"@localhost:5433/"${DB_NAME}" -qtc "${GET_QUERY};" | xargs) # xargs trims the spaces around the psql output of names
-    [[ -z "${DATABASE_TO_DROP}" ]] && echo "DATABASE NOT FOUND \"${UAT_RELEASE}\"!" && break
+    if [[ -z "${DATABASE_TO_DROP}" ]]; then
+      echo "DATABASE NOT FOUND \"${UAT_RELEASE}\"!"
+      break
+    else
+      echo "DATABASE FOUND \"${DATABASE_TO_DROP}\"!"
+    fi
 
     ALTER_CONN_LIMIT="ALTER DATABASE \"${DATABASE_TO_DROP}\" CONNECTION LIMIT 0;"
     ALTER_CONNECTIONS_OUTPUT=$(psql postgres://"${DB_USER}":"${DB_PWD}"@localhost:5433/"${DB_NAME}" -qtc "${ALTER_CONN_LIMIT};")
