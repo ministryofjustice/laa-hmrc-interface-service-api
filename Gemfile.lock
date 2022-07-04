@@ -209,7 +209,7 @@ GEM
     minitest (5.16.1)
     mock_redis (0.32.0)
       ruby2_keywords
-    msgpack (1.5.2)
+    msgpack (1.5.3)
     multi_json (1.15.0)
     nenv (0.3.0)
     net-imap (0.2.3)
