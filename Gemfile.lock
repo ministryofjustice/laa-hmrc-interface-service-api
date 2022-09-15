@@ -420,7 +420,7 @@ DEPENDENCIES
   bootsnap (>= 1.4.4)
   byebug
   config
-  doorkeeper
+  doorkeeper (~> 5.5.4)
   dotenv-rails
   factory_bot_rails (>= 6.2.0)
   faker (>= 1.9.1)
