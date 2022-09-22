@@ -104,7 +104,7 @@ GEM
     docile (1.4.0)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
-    doorkeeper (5.5.4)
+    doorkeeper (5.6.0)
       railties (>= 5)
     dotenv (2.8.1)
     dotenv-rails (2.8.1)
@@ -420,7 +420,7 @@ DEPENDENCIES
   bootsnap (>= 1.4.4)
   byebug
   config
-  doorkeeper (~> 5.5.4, < 5.6)
+  doorkeeper (~> 5.6.0)
   dotenv-rails
   factory_bot_rails (>= 6.2.0)
   faker (>= 1.9.1)
