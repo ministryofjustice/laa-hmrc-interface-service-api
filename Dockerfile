@@ -9,6 +9,7 @@ RUN set -ex
 RUN apk --no-cache add --virtual build-dependencies \
                     build-base \
                     postgresql-dev \
+                    "zlib>1.2.12-r2" \
 && apk --no-cache add postgresql-client
 
 RUN mkdir /app
