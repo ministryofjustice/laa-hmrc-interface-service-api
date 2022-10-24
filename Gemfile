@@ -6,7 +6,7 @@ ruby "3.1.2"
 gem "aws-sdk-s3", require: false
 gem "bootsnap", ">= 1.4.4", require: false
 gem "config"
-gem "doorkeeper", "~> 5.5.4", "< 5.6"
+gem "doorkeeper", "~> 5.5.4"
 gem "dotenv-rails"
 gem "net-imap"
 gem "net-pop"
@@ -42,7 +42,7 @@ end
 
 group :test do
   gem "mock_redis"
-  gem "rspec-rails", "~> 6.0"
+  gem "rspec-rails", "~> 6.0", ">= 6.0.1"
   gem "rspec-sidekiq"
   gem "shoulda-matchers"
   gem "simplecov", require: false
