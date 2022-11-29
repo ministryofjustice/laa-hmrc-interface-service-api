@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_22_134149) do
-
+ActiveRecord::Schema[7.0].define(version: 2021_09_22_134149) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -81,8 +80,8 @@ ActiveRecord::Schema.define(version: 2021_09_22_134149) do
     t.text "redirect_uri"
     t.boolean "confidential", default: true, null: false
     t.string "scopes", default: "", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["uid"], name: "index_oauth_applications_on_uid", unique: true
   end
 
@@ -95,8 +94,8 @@ ActiveRecord::Schema.define(version: 2021_09_22_134149) do
     t.string "start_date"
     t.string "end_date"
     t.string "status"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.uuid "oauth_application_id"
     t.index ["oauth_application_id"], name: "index_submissions_on_oauth_application_id"
   end
