@@ -3,7 +3,7 @@
 # setting, so we are ignoring it for this specific pattern
 RSpec/VariableName:
   EnforcedStyle: snake_case
-  IgnoredPatterns:
+  AllowedPatterns:
     - ^Authorization
 
 # for some reason, this block fails when placed in the main
