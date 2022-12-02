@@ -7,13 +7,28 @@ This Service facilitates the HMRC API access for the LAA Use Cases
 
 ## Development
 ### Dependencies
-* Ruby 3
-* Rails 6.1.x API
+* Ruby 3.1.x
+* Rails 7.0.x API
 
 ### System Dependencies
 * postgres
 * redis
-* sidekiq
+
+### Setup
+1. Retrieve the `GIT_CRYPT_KEY` from LastPass
+1. Unlock encrypted secrets
+
+```sh
+git-crypt unlock <path-to-git-crypt-key>
+```
+
+1. Copy the `.env` file from LastPass
+
+1. Run the setup binstub
+
+```sh
+bin/setup
+```
 
 ### Further reading
 * Developer looking to use the API? - [Click here](docs/development.md)
