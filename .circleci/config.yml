@@ -14,13 +14,13 @@ executors:
           TZ: Europe/London
   linting-executor:
     docker:
-      - image: cimg/ruby:3.1.2-node
+      - image: cimg/ruby:3.1.3-node
         environment:
           - RAILS_ENV=test
           - TZ: "Europe/London"
   test-executor:
     docker:
-      - image: cimg/ruby:3.1.2-node
+      - image: cimg/ruby:3.1.3-node
         environment:
           - RAILS_ENV=test
           - PGHOST=localhost
@@ -71,8 +71,7 @@ references:
   restore_gems_cache: &restore_gems_cache
     restore_cache:
       keys:
-        - laa-hmrc-interface-{{ checksum "Gemfile.lock" }}
-        - laa-hmrc-interface
+        - laa-hmrc-interface-{{ checksum "Gemfile.lock" }}-v3.1.3
   install_gems: &install_gems
     run:
       name: Install ruby gems
@@ -81,7 +80,7 @@ references:
         bundle install --path=vendor/bundle --jobs=4 && bundle clean
   save_gems_cache: &save_gems_cache
     save_cache:
-      key: laa-hmrc-interface-{{ checksum "Gemfile.lock" }}
+      key: laa-hmrc-interface-{{ checksum "Gemfile.lock" }}-v3.1.3
       paths:
         - vendor/bundle
   install_packages_for_testing: &install_packages_for_testing
