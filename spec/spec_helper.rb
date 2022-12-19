@@ -32,6 +32,7 @@ unless ENV["NOCOVERAGE"]
     add_filter "initializers/config.rb"
     add_filter "initializers/sidekiq_middleware.rb"
     add_filter "services/smoke_test.rb"
+    add_filter "services/test_submission.rb"
   end
 
   SimpleCov.at_exit do
