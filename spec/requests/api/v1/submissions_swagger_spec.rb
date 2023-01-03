@@ -69,7 +69,9 @@ RSpec.describe "GET submission", type: :request, swagger_doc: "v1/swagger.yaml" 
             expect(response.media_type).to eq("application/json")
             expect(response.body).to match(/id/)
             expect(response.body).to match(/_links/)
-            expect(JSON.parse(response.body)["_links"].first["href"]).to match(%r{http://www.example.com/api/v1/submission/result/})
+            json_response = JSON.parse(response.body)
+
+            expect(json_response["_links"].first["href"]).to eq "http://www.example.com/api/v1/submission/result/#{json_response['id']}"
           end
         end
 
