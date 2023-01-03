@@ -106,7 +106,7 @@ function _uat_drop_db() {
       DROP_DATABASE_RESULT="UAT database, ${DATABASE_TO_DROP} not dropped!"
     fi
 
-    echo "##[set-output name=drop-commmand-result;]$(echo "${DROP_DATABASE_RESULT}")"
+    echo "drop-commmand-result=${DROP_DATABASE_RESULT}" >> $GITHUB_OUTPUT
     [[ $DROPPED == 1 ]] && break
   done
 
