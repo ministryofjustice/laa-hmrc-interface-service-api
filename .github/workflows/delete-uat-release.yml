@@ -27,7 +27,7 @@ jobs:
         shell: bash
         id: delete_uat_db
         run: |
-          bin/uat_drop_db ${{ steps.delete_uat.outputs.release_name }}
+          bin/uat_drop_db ${{ steps.delete_uat.outputs.release-name }}
 
       - name: Result
         shell: bash
