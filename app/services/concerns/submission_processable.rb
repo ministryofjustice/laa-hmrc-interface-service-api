@@ -71,7 +71,7 @@ private
     sleep(0.33)
     request_endpoint(uri)
   rescue RestClient::InternalServerError, RestClient::NotFound
-    "INTERNAL_SERVER_ERROR" # TODO: improve this, hard to do currently as only the live service fails
+    "INTERNAL_SERVER_ERROR"
   end
 
   def request_match_id
