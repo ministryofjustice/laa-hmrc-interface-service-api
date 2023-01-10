@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2021_09_22_134149) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_10_132824) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -104,5 +104,5 @@ ActiveRecord::Schema[7.0].define(version: 2021_09_22_134149) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "oauth_access_grants", "oauth_applications", column: "application_id"
   add_foreign_key "oauth_access_tokens", "oauth_applications", column: "application_id"
-  add_foreign_key "submissions", "oauth_applications"
+  add_foreign_key "submissions", "oauth_applications", on_delete: :nullify
 end
