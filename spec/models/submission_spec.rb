@@ -228,4 +228,25 @@ RSpec.describe Submission, type: :model do
       end
     end
   end
+
+  context "with oauth_application" do
+    let(:params) do
+      {
+        use_case: "one",
+        first_name: "Langley",
+        last_name: "Yorke",
+        nino: "MN212451D",
+        dob: "1992-07-22",
+        start_date: "2020-08-01",
+        end_date: "2020-10-01",
+        oauth_application_id: oauth_application.id,
+      }
+    end
+
+    let(:oauth_application) { create(:oauth_application) }
+
+    it "nullifies oauth_application_id when it is destroyed" do
+      expect { oauth_application.destroy }.to change { submission.reload.oauth_application_id }.from(a_kind_of(String)).to(nil)
+    end
+  end
 end
