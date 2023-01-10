@@ -192,7 +192,7 @@ GEM
     json (2.6.3)
     json-schema (3.0.0)
       addressable (>= 2.8)
-    listen (3.7.1)
+    listen (3.8.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
     loofah (2.19.1)
@@ -418,7 +418,7 @@ DEPENDENCIES
   guard-rspec
   guard-rubocop
   highline
-  listen (~> 3.7)
+  listen (~> 3.8)
   mock_redis
   net-imap
   net-pop
