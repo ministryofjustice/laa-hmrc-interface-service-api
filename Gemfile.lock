@@ -377,7 +377,7 @@ GEM
     simplecov-rcov (0.3.1)
       simplecov (>= 0.4.1)
     simplecov_json_formatter (0.1.4)
-    spring (4.1.0)
+    spring (4.1.1)
     thor (1.2.1)
     timeliness (0.4.4)
     timeliness-i18n (0.12.0)
