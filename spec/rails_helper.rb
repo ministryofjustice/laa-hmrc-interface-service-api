@@ -74,3 +74,7 @@ RSpec.configure do |config|
   # remove the need to prefix every create or build with FactoryBot
   config.include FactoryBot::Syntax::Methods
 end
+
+def parsed_response
+  JSON.parse(response.body, symbolize_names: true)
+end

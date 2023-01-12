@@ -81,19 +81,26 @@ RSpec.describe "GET submission", type: :request, swagger_doc: "v1/swagger.yaml" 
           run_test!
         end
 
-        context "when use_case is bad" do
-          response(400, "Bad request") do
+        response(400, "Error: Bad request") do
+          context "when use_case is bad" do
             let(:application) { dk_application(%w[use_case_three]) }
+
+            expected_response = { "error": "Unauthorised use case" }
+
+            example "application/json",
+                    :bad_use_case,
+                    expected_response,
+                    "User requests invalid use_case",
+                    "Applications are created with a limited set of scopes and this error will be returned if they request a disallowed scope"
 
             run_test! do |response|
               expect(response.media_type).to eq("application/json")
-              expect(response.body).to match(/Unauthorised use case/)
+              expect(response).to have_http_status(:bad_request)
+              expect(parsed_response).to eq expected_response
             end
           end
-        end
 
-        context "when data is bad" do
-          response(400, "Bad request") do
+          context "when data is bad" do
             let(:submission) do
               {
                 filter: {
@@ -106,27 +113,45 @@ RSpec.describe "GET submission", type: :request, swagger_doc: "v1/swagger.yaml" 
                 },
               }
             end
+
+            expected_response = {
+              "first_name": ["can't be blank"],
+              "last_name": ["can't be blank"],
+              "nino": ["is not valid"],
+              "dob": ["is not a valid date"],
+              "start_date": ["is not a valid date"],
+              "end_date": ["is not a valid date"],
+            }
+
+            example "application/json",
+                    :missing_data,
+                    expected_response,
+                    "User submits invalid data",
+                    "If an Application submits a creation request with missing data"
+
             run_test! do |response|
-              errors = JSON.parse(response.body)
               expect(response.media_type).to eq("application/json")
-              expect(errors["first_name"]).to eq(["can't be blank"])
-              expect(errors["last_name"]).to eq(["can't be blank"])
-              expect(errors["nino"]).to eq(["is not valid"])
-              expect(errors["dob"]).to eq(["is not a valid date"])
-              expect(errors["start_date"]).to eq(["is not a valid date"])
-              expect(errors["end_date"]).to eq(["is not a valid date"])
+              expect(response).to have_http_status(:bad_request)
+              expect(parsed_response).to eq expected_response
             end
           end
-        end
 
-        context "when scope is invalid" do
-          response(400, "Bad request") do
-            let(:use_case) { "three" }
+          context "when scope is invalid" do
+            let(:use_case) { "seven" }
             let(:application) { dk_application(%w[use_case_one use_case_two]) }
+
+            expected_response = { "error": "Unauthorised use case" }
+
+            example "application/json",
+                    :fake_use_case,
+                    expected_response,
+                    "User requests non-existent use_case",
+                    "The system only accepts a limited set of scopes and this error will be returned if a user tries to request a scope that is not defined"
 
             run_test! do |response|
               expect(response.media_type).to eq("application/json")
-              expect(response.body).to match(/Unauthorised use case/)
+              expect(response).to have_http_status(:bad_request)
+              expect(parsed_response).to eq expected_response
             end
           end
         end
