@@ -7,10 +7,10 @@ Doorkeeper.configure do
   # For more information go to
   # https://github.com/doorkeeper-gem/doorkeeper/wiki/Using-Scopes
   # https://doorkeeper.gitbook.io/guides/ruby-on-rails/scopes
-  # default_scopes
+  default_scopes :use_case_one, :use_case_two, :use_case_three, :use_case_four
 
   # other available scopes
-  optional_scopes :use_case_one, :use_case_two, :use_case_three, :use_case_four
+  # optional_scopes
 
   # ensures applications can only ask for configured scopes defined in default_scopes and optional_scopes
   # seems to me this would prevent different scopes being entered to try and escalate privilege or something
