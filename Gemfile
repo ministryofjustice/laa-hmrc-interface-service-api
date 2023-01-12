@@ -6,7 +6,7 @@ ruby "3.2.2"
 gem "aws-sdk-s3", require: false
 gem "bootsnap", ">= 1.4.4", require: false
 gem "config"
-gem "doorkeeper", "~> 5.5.4", "< 5.6"
+gem "doorkeeper"
 gem "dotenv-rails"
 gem "net-imap"
 gem "net-pop"
