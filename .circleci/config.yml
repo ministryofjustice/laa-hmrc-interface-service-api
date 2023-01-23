@@ -26,8 +26,8 @@ executors:
           PGHOST: localhost
           PGUSER: user
           TZ: "Europe/London"
-      - image: cimg/redis:5.0
-      - image: cimg/postgres:10.18
+      - image: cimg/redis:6.2
+      - image: cimg/postgres:11.16
         environment:
           POSTGRES_USER: user
           POSTGRES_DB: laa_hmrc_interface_service_api_test
