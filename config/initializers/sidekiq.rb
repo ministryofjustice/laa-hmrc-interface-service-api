@@ -1,1 +1,3 @@
-Sidekiq.logger = Rails.logger
+Sidekiq.configure_server do |cfg|
+  cfg.logger = Rails.logger
+end
