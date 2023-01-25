@@ -25,6 +25,10 @@ credentials:
     hmrc_client_id: 'NotAClientID'
     hmrc_totp_secret: 'AlsoNotASecret'
 
+smoke_test:
+  use_case_one:
+    nino: 'XX123456X'
+
 sidekiq:
   username: 'fake_username'
   web_ui_password: 'fake_testing_password'
