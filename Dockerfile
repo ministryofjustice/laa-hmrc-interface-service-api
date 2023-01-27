@@ -1,4 +1,4 @@
-FROM ruby:3.1.3-alpine3.17
+FROM ruby:3.2.0-alpine3.17
 
 MAINTAINER Apply for legal aid team
 
