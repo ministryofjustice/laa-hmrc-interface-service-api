@@ -69,3 +69,38 @@ SmokeTest.call(:one)
 => false # <-- failure
 ```
 
+
+### How to fix a failing smoke test
+Smoke tests can fail if HMRC change data in their sandbox, including that created by us. To fix you can either create new data (not discussed here) or extract the data from the sandbox and update our tests to expect it.
+
+
+> **NOTE**
+> The data in the sandbox is only as realistic as we make it. It merely returns whatever data we have created following [their guides](https://developer.service.hmrc.gov.uk/).
+
+#### Extract actual response received from the HMRC sandbox for an existing smoke test
+
+ - setup the repo to run locally using UAT secrets (see [Local setup](#local-setup))
+ - amend the `SmokeTest.call` method to `puts` the response (puts generates minified JSON)
+
+```ruby
+  def call
+    puts actual_response # <-- add this line
+    actual = JSON.parse(actual_response)["data"]
+    expected = JSON.parse(expected_response)["data"]
+    ...
+```
+
+ - run a rails console and exeute the smoke test
+ ```ruby
+ $ rails console
+ > SmokeTest.call(:one)
+ =>
+ {"some_minified_json":"values"}
+ false
+ ```
+
+ - copy the output to the relevant `spec/fixtures/smoke_tests/use_case_<number>.json` file.
+
+ - rerunning the smoke test in the console should now pass (return true)
+
+ - remove the `puts` command, commit, push and open a PR
