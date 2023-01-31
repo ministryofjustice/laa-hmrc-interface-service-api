@@ -336,10 +336,10 @@ workflows:
   smoke-tests:
     triggers:
       - schedule:
-          cron: "30 7 * * 1-5" # 1-5 is Mon-Fri
+          cron: "0,10,20,30,40,50 * * * *" # At every 10th minute
           filters:
             branches:
-              only: main
+              only: test-smoke-test-on-schedule
     jobs:
       - smoke_tests:
           name: smoke-test-one
