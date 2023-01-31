@@ -19,9 +19,10 @@ As long as the current dev/uat environment has the correct use case one configur
 
 ## Smoke tests
 There are endpoints available for each of the use_cases on non-live environments e.g.
-```http request
+```http
 http://localhost:3000/smoke-test/one
 ```
+
 that will run a smoke test against the sandbox environment
 
 You can also trigger them manually from a rails console using
@@ -33,7 +34,38 @@ SmokeTest.call(:two)
 By design, this will only output true or false, so as not to leak any sandbox data
 
 Successful results are stored for 1 hour, to ensure that stale successes don't get reported, and a summary is accessible at
-```http request
+```http
 https://HOST/smoke-test
 ```
 That will echo the recently successful test outcomes
+
+
+## Test HMRC Sandbox data
+
+
+### Local setup
+
+- copy `.env.sample` to `.env.development`. It will be gitignored!
+
+```shell
+cp .env.sample .env.development
+```
+
+- Place the SETTINGS for secrets required for each use case in `.env.development`. *see `values-uat.yml`!*
+
+> **WARNING**
+> Do not use production secrets as this could/would breach our memorandum of understanding!
+
+
+### Execute a test
+
+Each use case's endpoint can be called using the rails console
+
+```ruby
+
+SmokeTest.call(:one)
+=> true  # <-- success
+SmokeTest.call(:one)
+=> false # <-- failure
+```
+
