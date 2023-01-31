@@ -17,6 +17,7 @@
 .env.*
 .env
 !.env.test
+!.env.sample
 
 # Ignore pidfiles, but keep the directory.
 /tmp/pids/*
