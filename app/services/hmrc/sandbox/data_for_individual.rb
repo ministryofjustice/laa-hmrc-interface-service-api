@@ -17,7 +17,7 @@
 # data_for_individual.retrieve <-- you should see the appended paye
 # data_for_individual.append_employment
 # data_for_individual.retrieve <-- you should see the appended employment
-#```
+# ```
 #
 # NOTE: For paye "the `paymentDate` value provided in the POST body will be used to determine if
 # the PAYE data sits within the date range provided in the query parameters,
@@ -37,13 +37,13 @@ module HMRC
       end
 
       def append_paye
-        creator = TestDataCreator.new(nino: individual.nino, use_case: use_case)
-        creator.create!(endpoint: :paye, start_date: start_date, end_date: end_date)
+        creator = TestDataCreator.new(nino: individual.nino, use_case:)
+        creator.create!(endpoint: :paye, start_date:, end_date:)
       end
 
       def append_employment
-        creator = TestDataCreator.new(nino: individual.nino, use_case: use_case)
-        creator.create!(endpoint: :employment, start_date: start_date, end_date: end_date)
+        creator = TestDataCreator.new(nino: individual.nino, use_case:)
+        creator.create!(endpoint: :employment, start_date:, end_date:)
       end
 
       def retrieve
@@ -52,8 +52,8 @@ module HMRC
                                        last_name: individual.last_name,
                                        nino: individual.nino,
                                        dob: individual.dob,
-                                       start_date: start_date,
-                                       end_date: end_date)
+                                       start_date:,
+                                       end_date:)
 
         result = submitter.call
         JSON.parse(result)

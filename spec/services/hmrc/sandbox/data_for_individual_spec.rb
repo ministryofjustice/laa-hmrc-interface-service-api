@@ -1,12 +1,12 @@
 require "rails_helper"
 
 RSpec.describe HMRC::Sandbox::DataForIndividual do
-  subject(:instance) { described_class.new(individual:, use_case:, start_date:, end_date:)}
+  subject(:instance) { described_class.new(individual:, use_case:, start_date:, end_date:) }
 
   let(:individual) { HMRC::Sandbox::Individual.new("Jim", "Bob", "1951-01-02", "XX123456X") }
   let(:use_case) { :one }
-  let(:start_date) { '2022-10-01'.to_date }
-  let(:end_date) { '2022-12-31'.to_date }
+  let(:start_date) { "2022-10-01".to_date }
+  let(:end_date) { "2022-12-31".to_date }
 
   describe "#retrieve" do
     subject(:retrieve) { instance.retrieve }
@@ -38,8 +38,8 @@ RSpec.describe HMRC::Sandbox::DataForIndividual do
       expect(
         a_request(
           :post,
-          /\Ahttps:\/\/fake.api\/individuals\/integration-framework-test-support\/individuals\/income\/paye\/nino\/XX123456X\?endDate=2022-12-31&startDate=2022-10-01&useCase=LAA-C1\z/
-        )
+          /\Ahttps:\/\/fake.api\/individuals\/integration-framework-test-support\/individuals\/income\/paye\/nino\/XX123456X\?endDate=2022-12-31&startDate=2022-10-01&useCase=LAA-C1\z/,
+        ),
       ).to have_been_made.times(1)
     end
   end
@@ -58,8 +58,8 @@ RSpec.describe HMRC::Sandbox::DataForIndividual do
       expect(
         a_request(
           :post,
-          /\Ahttps:\/\/fake.api\/individuals\/integration-framework-test-support\/individuals\/employment\/nino\/XX123456X\?endDate=2022-12-31&startDate=2022-10-01&useCase=LAA-C1\z/
-        )
+          /\Ahttps:\/\/fake.api\/individuals\/integration-framework-test-support\/individuals\/employment\/nino\/XX123456X\?endDate=2022-12-31&startDate=2022-10-01&useCase=LAA-C1\z/,
+        ),
       ).to have_been_made.times(1)
     end
   end
