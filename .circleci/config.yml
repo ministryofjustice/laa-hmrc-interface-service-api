@@ -177,7 +177,7 @@ jobs:
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": ":nope: Smoke test of use case << parameters.use_case >> on sandbox failed!"
+                    "text": ":nope-9607: Smoke test of use case << parameters.use_case >> on sandbox failed!"
                   }
                 }
               ]
