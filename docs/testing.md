@@ -69,7 +69,6 @@ SmokeTest.call(:one)
 => false # <-- failure
 ```
 
-
 ### How to fix a failing smoke test
 Smoke tests can fail if HMRC change data in their sandbox, including that created by us. To fix you can either create new data (not discussed here) or extract the data from the sandbox and update our tests to expect it.
 
@@ -104,3 +103,30 @@ Smoke tests can fail if HMRC change data in their sandbox, including that create
  - rerunning the smoke test in the console should now pass (return true)
 
  - remove the `puts` command, commit, push and open a PR
+
+### How to add new HMRC data for smoke tests
+
+#### Create new test user or use existing one
+
+The existing HMRC sandbox test user used in the smoke tests has their details in specified in the `values-uat-yaml` file. Alternatively you can create a new HMRC sandbox test "individual" using the [HMRC developer hub API or UI](https://developer.service.hmrc.gov.uk/api-test-user) - see [Creating HMRC sandbox test data](https://dsdmoj.atlassian.net/wiki/spaces/ATPPB/pages/4295328084/Creating+HMRC+sandbox+test+data) for more.
+
+ Once you have a test individual you can retrieve their details, append paye income and append paye employments using the convenience classes namespaced to `HMRC::Sandbox::`. You will need to follow [Local setup](#local-setup) steps first!
+
+
+```ruby
+# retrieve and append data to existing sandbox user
+jimbob = HMRC::Sandbox::Individual.new("Jim", "Bob", "1951-01-02", "XX123456X")
+data_for_individual = HMRC::Sandbox::DataForIndividual.new(individual: jimbob, use_case: :one, start_date: "2022-10-01".to_date, end_date: "2022-12-31".to_date)
+data_for_individual.retrieve
+data_for_individual.append_paye
+data_for_individual.retrieve # <-- you should see the appended paye
+data_for_individual.append_employment
+data_for_individual.retrieve # <-- you should see the appended employment
+```
+
+#### Notes on data creation
+- For paye please note the HMRC developer hub comment
+ > the `paymentDate` value provided in the POST body will be used to determine if
+the PAYE data sits within the date range provided in the query parameters,
+if they do not then the PAYE data will not be returned" HMRC developer documentation
+- When adding employments please not that they are per individual and therefore are retrieved in payloads irrespective of date ranges. Therefore adding employment will change payloads returned using any endpoint (use case one to four) for that individual and so may break smoke tests.
