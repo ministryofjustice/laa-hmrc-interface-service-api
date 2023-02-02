@@ -13,6 +13,9 @@ inherit_mode:
   merge:
     - Exclude
 
+Style/ZeroLengthPredicate:
+  Exclude:
+    - app/controllers/status_controller.rb
 # General exclusions
 # ==================
 
