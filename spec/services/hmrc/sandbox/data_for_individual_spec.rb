@@ -38,7 +38,7 @@ RSpec.describe HMRC::Sandbox::DataForIndividual do
       expect(
         a_request(
           :post,
-          /\Ahttps:\/\/fake.api\/individuals\/integration-framework-test-support\/individuals\/income\/paye\/nino\/XX123456X\?endDate=2022-12-31&startDate=2022-10-01&useCase=LAA-C1\z/,
+          /\Ahttps:\/\/fake.test.api\/individuals\/integration-framework-test-support\/individuals\/income\/paye\/nino\/XX123456X\?endDate=2022-12-31&startDate=2022-10-01&useCase=LAA-C1\z/,
         ),
       ).to have_been_made.times(1)
     end
@@ -58,7 +58,7 @@ RSpec.describe HMRC::Sandbox::DataForIndividual do
       expect(
         a_request(
           :post,
-          /\Ahttps:\/\/fake.api\/individuals\/integration-framework-test-support\/individuals\/employment\/nino\/XX123456X\?endDate=2022-12-31&startDate=2022-10-01&useCase=LAA-C1\z/,
+          /\Ahttps:\/\/fake.test.api\/individuals\/integration-framework-test-support\/individuals\/employment\/nino\/XX123456X\?endDate=2022-12-31&startDate=2022-10-01&useCase=LAA-C1\z/,
         ),
       ).to have_been_made.times(1)
     end

@@ -14,13 +14,32 @@ RSpec.describe HMRC::Sandbox::TestDataCreator do
     stub_request(:post, /\A#{Settings.credentials.host}.*\z/).to_return(status: 201, body: "", headers: {})
   end
 
-  context "when called on production" do
-    before { allow(Settings).to receive(:environment).and_return("production") }
+  context "when called on environment not configured to use HMRC Sandbox host" do
+    # rubocop:disable RSpec/VerifiedDoubles
+    before do
+      fake_live_host = "https://fake-live-host.gov.uk"
+      fake_use_case = double("use case", host: fake_live_host)
+      creds = double("credentials",
+                     host: fake_live_host,
+                     use_case_one: fake_use_case,
+                     use_case_two: fake_use_case,
+                     use_case_three: fake_use_case,
+                     use_case_four: fake_use_case)
 
-    it { expect { instance }.to raise_error HMRC::Sandbox::ProductionError }
+      allow(Settings).to receive(:credentials).and_return(creds)
+    end
+    # rubocop:enable RSpec/VerifiedDoubles
+
+    it { expect { instance }.to raise_error HMRC::Sandbox::HostError }
   end
 
-  context "when the use is invalid" do
+  context "when called on live environment" do
+    before { allow(Settings).to receive(:environment).and_return("live") }
+
+    it { expect { instance }.to raise_error HMRC::Sandbox::LiveError }
+  end
+
+  context "when the use case is invalid" do
     let(:use_case) { :five }
 
     it { expect { instance }.to raise_error HMRC::Sandbox::UseCaseError }
@@ -38,7 +57,7 @@ RSpec.describe HMRC::Sandbox::TestDataCreator do
         expect(
           a_request(
             :post,
-            /\Ahttps:\/\/fake.api\/individuals\/integration-framework-test-support\/individuals\/income\/paye\/nino\/JA123456D\?endDate=2022-12-31&startDate=2022-10-01&useCase=LAA-C1\z/,
+            /\Ahttps:\/\/fake.test.api\/individuals\/integration-framework-test-support\/individuals\/income\/paye\/nino\/JA123456D\?endDate=2022-12-31&startDate=2022-10-01&useCase=LAA-C1\z/,
           ),
         ).to have_been_made.times(1)
       end
@@ -53,7 +72,7 @@ RSpec.describe HMRC::Sandbox::TestDataCreator do
         expect(
           a_request(
             :post,
-            /\Ahttps:\/\/fake.api\/individuals\/integration-framework-test-support\/individuals\/employment\/nino\/JA123456D\?endDate=2022-12-31&startDate=2022-10-01&useCase=LAA-C1\z/,
+            /\Ahttps:\/\/fake.test.api\/individuals\/integration-framework-test-support\/individuals\/employment\/nino\/JA123456D\?endDate=2022-12-31&startDate=2022-10-01&useCase=LAA-C1\z/,
           ),
         ).to have_been_made.times(1)
       end
