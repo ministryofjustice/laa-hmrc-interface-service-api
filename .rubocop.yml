@@ -39,8 +39,12 @@ Rails/CreateTableWithTimestamps:
 RSpec/EmptyExampleGroup:
   Exclude:
     - 'spec/requests/api/v1/submissions_swagger_spec.rb'
-    - 'spec/requests/smoke_test_swagger_spec.rb'
+    - 'spec/requests/api/v1/smoke_test_swagger_spec.rb'
+
+RSpec/SharedContext:
+    Exclude:
+    - 'spec/requests/api/v1/submissions_swagger_spec.rb'
 
 RSpec/ScatteredSetup:
   Exclude:
-    - 'spec/requests/smoke_test_swagger_spec.rb'
+    - 'spec/requests/api/v1/smoke_test_swagger_spec.rb'
