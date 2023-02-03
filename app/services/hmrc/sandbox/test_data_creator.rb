@@ -17,7 +17,8 @@
 #
 module HMRC
   module Sandbox
-    class ProductionError < StandardError; end
+    class HostError < StandardError; end
+    class LiveError < StandardError; end
     class EndpointError < StandardError; end
     class UseCaseError < StandardError; end
 
@@ -26,7 +27,8 @@ module HMRC
       USE_CASES = %i[one two three four].freeze
 
       def initialize(nino:, use_case:)
-        raise ProductionError, "Cannot run from production" if Settings.environment.eql?("production")
+        raise HostError, "Cannot run using non-test HMRC API host" unless using_test_host_credentials?
+        raise LiveError, "Cannot run from live" unless Settings.environment.eql?("non-live")
         raise UseCaseError, "use_case must be :one to :four" unless use_case.in?(USE_CASES)
 
         @nino = nino
@@ -46,6 +48,14 @@ module HMRC
       end
 
     private
+
+      def using_test_host_credentials?
+        Settings.credentials.host.match?("test") &&
+          Settings.credentials.use_case_one.host.match?("test") &&
+          Settings.credentials.use_case_two.host.match?("test") &&
+          Settings.credentials.use_case_three.host.match?("test") &&
+          Settings.credentials.use_case_four.host.match?("test")
+      end
 
       def url
         "#{base_url}#{path}#{nino}#{query_params}"

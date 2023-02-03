@@ -1,5 +1,5 @@
 credentials:
-  host: &host 'https://fake.api'
+  host: &host 'https://fake.test.api'
   use_case_one:
     host: *host
     description: 'This is fake'
