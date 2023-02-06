@@ -38,6 +38,30 @@ RSpec.configure do |config|
         },
       },
     },
+
+    "v1/live/swagger.yaml" => {
+      openapi: "3.0.1",
+      info: {
+        title: "LAA HMRC Interface Service",
+        description: "This Service facilitates the HMRC API access for the LAA Use Cases",
+        version: "v1/live",
+      },
+      paths: {},
+      components: {
+        securitySchemes: {
+          oAuth: {
+            in: :header,
+            type: :oauth2,
+            description: "OAuth2 client credentials flow",
+            flows: {
+              clientCredentials: {
+                tokenUrl: "/oauth/token",
+              },
+            },
+          },
+        },
+      },
+    },
   }
 
   # Specify the format of the output Swagger file when running 'rswag:specs:swaggerize'.
