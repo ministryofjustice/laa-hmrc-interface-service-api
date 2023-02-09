@@ -6,7 +6,7 @@ RSpec.describe UseCase do
   describe "initializing" do
     context "when a valid bearer_token is available" do
       before do
-        REDIS.set("use_case_one_bearer_token", "fake_token_value")
+        SIDEKIQ_REDIS.set("use_case_one_bearer_token", "fake_token_value")
         use_case
       end
 
@@ -19,9 +19,9 @@ RSpec.describe UseCase do
       before { allow(BearerToken).to receive(:call).with("use_case_one").and_return("new_fake_token_value") }
 
       it "calls BearerToken and stores the value in redis" do
-        expect(REDIS.get("use_case_one_bearer_token")).to be_nil
+        expect(SIDEKIQ_REDIS.get("use_case_one_bearer_token")).to be nil
         use_case
-        expect(REDIS.get("use_case_one_bearer_token")).to eql "new_fake_token_value"
+        expect(SIDEKIQ_REDIS.get("use_case_one_bearer_token")).to eql "new_fake_token_value"
       end
     end
   end
@@ -30,7 +30,7 @@ RSpec.describe UseCase do
     subject(:host) { use_case.host }
 
     before do
-      REDIS.set("use_case_one_bearer_token", "fake_token_value")
+      SIDEKIQ_REDIS.set("use_case_one_bearer_token", "fake_token_value")
       host
     end
 

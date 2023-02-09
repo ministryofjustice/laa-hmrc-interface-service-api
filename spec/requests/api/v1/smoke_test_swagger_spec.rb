@@ -37,10 +37,12 @@ RSpec.describe "Generate smoke_test swagger docs", swagger_doc: "v1/swagger.yaml
 
   path "/smoke-test" do
     before do
-      allow(REDIS).to receive(:get).with("smoke-test-one").and_return(test_one_result)
-      allow(REDIS).to receive(:get).with("smoke-test-two").and_return(true)
-      allow(REDIS).to receive(:get).with("smoke-test-three").and_return(true)
-      allow(REDIS).to receive(:get).with("smoke-test-four").and_return(true)
+      redis = MockRedis.new
+      allow(Sidekiq).to receive(:redis).and_yield(redis)
+      allow(redis).to receive(:get).with("smoke-test-one").and_return(test_one_result)
+      allow(redis).to receive(:get).with("smoke-test-two").and_return(true)
+      allow(redis).to receive(:get).with("smoke-test-three").and_return(true)
+      allow(redis).to receive(:get).with("smoke-test-four").and_return(true)
     end
 
     let(:test_one_result) { true }

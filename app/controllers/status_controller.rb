@@ -30,7 +30,7 @@ private
   end
 
   def redis_alive?
-    REDIS.ping.eql?("PONG")
+    Sidekiq.redis(&:ping).eql?("PONG")
   rescue StandardError
     false
   end

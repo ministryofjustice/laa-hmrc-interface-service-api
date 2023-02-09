@@ -20,7 +20,7 @@ require "webmock"
 require "webmock/rspec"
 WebMock.disable_net_connect!
 require "mock_redis"
-REDIS = MockRedis.new
+# REDIS = MockRedis.new
 require "rspec-sidekiq"
 require "sidekiq/testing"
 
@@ -81,7 +81,7 @@ RSpec.configure do |config|
   end
 
   config.before do
-    REDIS.flushdb
+    Sidekiq.redis(&:flushdb)
   end
 
   config.expect_with :rspec do |expectations|

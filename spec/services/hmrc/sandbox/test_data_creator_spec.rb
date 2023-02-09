@@ -10,7 +10,7 @@ RSpec.describe HMRC::Sandbox::TestDataCreator do
 
   before do
     remove_request_stub(hmrc_stub_requests)
-    allow(REDIS).to receive(:get).with("use_case_one_bearer_token").and_return("dummy_bearer_token")
+    allow(SIDEKIQ_REDIS).to receive(:get).with("use_case_one_bearer_token").and_return("dummy_bearer_token")
     stub_request(:post, /\A#{Settings.credentials.host}.*\z/).to_return(status: 201, body: "", headers: {})
   end
 

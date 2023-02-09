@@ -12,7 +12,7 @@ class SmokeTest
     expected = JSON.parse(expected_response)["data"]
     diff = (actual - expected) + (expected - actual)
     result = diff.empty?
-    REDIS.setex("smoke-test-#{@use_case}", 3600, result)
+    Sidekiq.redis { |r| r.setex("smoke-test-#{@use_case}", 3600, result.to_s) }
     result
   end
 

@@ -28,7 +28,7 @@ RSpec.describe HMRC::Sandbox::DataForIndividual do
     subject(:append_paye) { instance.append_paye }
 
     before do
-      allow(REDIS).to receive(:get).with("use_case_one_bearer_token").and_return("dummy_bearer_token")
+      allow(SIDEKIQ_REDIS).to receive(:get).with("use_case_one_bearer_token").and_return("dummy_bearer_token")
       stub_request(:post, /\A#{Settings.credentials.host}.*\z/).to_return(status: 201, body: "", headers: {})
     end
 
@@ -48,7 +48,7 @@ RSpec.describe HMRC::Sandbox::DataForIndividual do
     subject(:append_employment) { instance.append_employment }
 
     before do
-      allow(REDIS).to receive(:get).with("use_case_one_bearer_token").and_return("dummy_bearer_token")
+      allow(SIDEKIQ_REDIS).to receive(:get).with("use_case_one_bearer_token").and_return("dummy_bearer_token")
       stub_request(:post, /\A#{Settings.credentials.host}.*\z/).to_return(status: 201, body: "", headers: {})
     end
 

@@ -23,7 +23,7 @@ RSpec.describe SubmissionService, vcr: { cassette_name: "use_case_one_success" }
 
     before do
       remove_request_stub(hmrc_stub_requests)
-      allow(REDIS).to receive(:get).with("use_case_one_bearer_token").and_return("dummy_bearer_token")
+      allow(SIDEKIQ_REDIS).to receive(:get).with("use_case_one_bearer_token").and_return("dummy_bearer_token")
     end
 
     it "adds a result attachment to the submission" do

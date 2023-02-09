@@ -21,10 +21,10 @@ private
 
   def generate_new_token
     new_token = BearerToken.call(@use_case)
-    REDIS.setex("#{@use_case}_bearer_token", FOUR_HOURS, new_token)
+    Sidekiq.redis { |r| r.setex("#{@use_case}_bearer_token", FOUR_HOURS, new_token) }
   end
 
   def current_token
-    REDIS.get("#{@use_case}_bearer_token")
+    Sidekiq.redis { |r| r.get("#{@use_case}_bearer_token") }
   end
 end

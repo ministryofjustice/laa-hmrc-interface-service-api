@@ -37,7 +37,7 @@ RSpec.describe StatusController do
 
     context "when a redis problem exists" do
       before do
-        allow(REDIS).to receive(:ping).and_raise(RedisClient::CannotConnectError)
+        allow(SIDEKIQ_REDIS).to receive(:ping).and_raise(RedisClient::CannotConnectError)
 
         get "/health_check"
       end
@@ -64,7 +64,9 @@ RSpec.describe StatusController do
 
     context "when a sidekiq problem exists" do
       before do
-        allow(REDIS).to receive(:ping).and_raise(RedisClient::CannotConnectError)
+        redis = MockRedis.new
+        allow(Sidekiq).to receive(:redis).and_yield(redis)
+        allow(redis).to receive(:ping).and_raise(RedisClient::CannotConnectError)
         allow(Sidekiq::ProcessSet).to receive(:new).and_return(instance_double(Sidekiq::ProcessSet, size: 0))
 
         connection = instance_double("connection")
