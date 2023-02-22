@@ -41,3 +41,7 @@ config/environments/*.local.yml
 
 # ignore legacy script outputs
 user_data/**.*
+
+# Ignore Redis binary dump (dump.rdb) files
+*.rdb
+
