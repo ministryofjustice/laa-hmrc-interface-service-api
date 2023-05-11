@@ -147,39 +147,45 @@ RSpec.shared_examples "GET submission" do
           security [{ oAuth: [] }]
           parameter name: :id, in: :path, type: :string
 
-          response 200, "Submission complete" do
-            let!(:submission) { create :submission, :completed, :with_attachment, oauth_application: application }
-            let(:expected_response) do
-              {
-                submission: "test-guid",
-                status: "completed",
-                data: [
-                  { correlation_id: "test-guid", use_case: "use_case_two" },
-                  { test_key: "test value" },
-                ],
-              }
-            end
-            run_test! do |response|
-              expect(response.media_type).to eq("application/json")
-              expect(JSON.parse(response.body).deep_symbolize_keys).to eq(expected_response)
-            end
-          end
+          response 200, "Submission completed or failed" do
+            context "when completed with attachment" do
+              let(:submission) { create :submission, :completed, :with_attachment, oauth_application: application }
 
-          response 200, "Submission failed" do
-            let!(:submission) { create :submission, :failed_with_attachment, oauth_application: application }
-            let(:expected_response) do
-              {
-                submission: "test-guid",
-                status: "failed",
-                data: [
-                  { correlation_id: "test-guid", use_case: "use_case_two" },
-                  { error: "submitted client details could not be found in HMRC service" },
-                ],
-              }
+              let(:expected_response) do
+                {
+                  submission: "test-guid",
+                  status: "completed",
+                  data: [
+                    { correlation_id: "test-guid", use_case: "use_case_two" },
+                    { test_key: "test value" },
+                  ],
+                }
+              end
+
+              run_test! do |response|
+                expect(response.media_type).to eq("application/json")
+                expect(JSON.parse(response.body).deep_symbolize_keys).to eq(expected_response)
+              end
             end
-            run_test! do |response|
-              expect(response.media_type).to eq("application/json")
-              expect(JSON.parse(response.body).deep_symbolize_keys).to eq(expected_response)
+
+            context "when failed with attachment" do
+              let(:submission) { create :submission, :failed_with_attachment, oauth_application: application }
+
+              let(:expected_response) do
+                {
+                  submission: "test-guid",
+                  status: "failed",
+                  data: [
+                    { correlation_id: "test-guid", use_case: "use_case_two" },
+                    { error: "submitted client details could not be found in HMRC service" },
+                  ],
+                }
+              end
+
+              run_test! do |response|
+                expect(response.media_type).to eq("application/json")
+                expect(JSON.parse(response.body).deep_symbolize_keys).to eq(expected_response)
+              end
             end
           end
 
