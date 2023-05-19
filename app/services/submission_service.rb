@@ -22,7 +22,9 @@ class SubmissionService
     @result[:data] << { error: "submitted client details could not be found in HMRC service" }
     raise
   ensure
-    @submission.result.attach(io: StringIO.new(@result.to_json), filename: "#{@submission.id}.json",
-                              content_type: "application/json", key: "submission/result/#{@submission.id}")
+    @submission.result.attach(io: StringIO.new(@result.to_json),
+                              filename: "#{@submission.id}.json",
+                              content_type: "application/json",
+                              key: "submission/result/#{@submission.id}-attached-at-#{Time.current.to_i}")
   end
 end

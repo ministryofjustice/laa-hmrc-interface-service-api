@@ -45,8 +45,7 @@ RSpec.describe SubmissionService, vcr: { cassette_name: "use_case_one_success" }
       expect(submission.result.content_type).to eq "application/json"
     end
 
-    context "when the details are complete but not found on the calling service",
-            vcr: { cassette_name: "use_case_one_fail" } do
+    context "when the details are complete but not found on the calling service", vcr: { cassette_name: "use_case_one_fail" } do
       let(:data) do
         {
           use_case: "one",
