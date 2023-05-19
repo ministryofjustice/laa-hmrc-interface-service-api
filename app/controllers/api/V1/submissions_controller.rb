@@ -45,7 +45,7 @@ module Api
                     elsif completed_but_no_attachment?
                       { code: "INCOMPLETE_SUBMISSION", message: "Process complete but no result available" }
                     else
-                      { _links: [href: "#{request.base_url}/api/v1/submission/status/#{submission.id}"] }
+                      { _links: [href: "#{request.base_url}/api/v1/submission/result/#{submission.id}"] }
                     end
         { submission: submission.id, status: submission.status }.merge(data_hash)
       end

@@ -195,7 +195,7 @@ RSpec.shared_examples "GET submission" do
               {
                 submission: id,
                 status: "processing",
-                _links: [href: "http://www.example.com/api/v1/submission/status/#{id}"],
+                _links: [href: "http://www.example.com/api/v1/submission/result/#{id}"],
               }
             end
             run_test! do |response|
