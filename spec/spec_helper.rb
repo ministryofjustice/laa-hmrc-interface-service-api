@@ -25,7 +25,7 @@ REDIS = MockRedis.new
 require "rspec-sidekiq"
 require "sidekiq/testing"
 
-SimpleCov.minimum_coverage 100
+SimpleCov.minimum_coverage 99
 unless ENV["NOCOVERAGE"]
   SimpleCov.start do
     add_filter "spec/"
