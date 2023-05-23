@@ -1,0 +1,7 @@
+web: unset PORT && bin/rails server -p 4032
+sidekiq-default: bundle exec sidekiq -c 5 -q default
+sidekiq-uc1: bundle exec sidekiq -c 1 -q uc-one-submissions
+sidekiq-uc2: bundle exec sidekiq -c 1 -q uc-two-submissions
+sidekiq-uc3: bundle exec sidekiq -c 1 -q uc-three-submissions
+sidekiq-uc4: bundle exec sidekiq -c 1 -q uc-four-submissions
+redis: redis-server --port 6380
