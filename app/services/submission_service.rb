@@ -25,6 +25,6 @@ class SubmissionService
     @submission.result.attach(io: StringIO.new(@result.to_json),
                               filename: "#{@submission.id}.json",
                               content_type: "application/json",
-                              key: "submission/result/#{@submission.id}-attached-at-#{Time.current.to_i}")
+                              key: "submission/result/#{@submission.id}-attached-at-#{Time.current.to_f}")
   end
 end
