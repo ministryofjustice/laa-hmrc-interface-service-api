@@ -35,9 +35,12 @@ RSpec.describe SubmissionService, vcr: { cassette_name: "use_case_one_success" }
       expect(submission.result.filename).to eq "#{submission.id}.json"
     end
 
-    it "gives the submission result attachment a key" do
-      call
-      expect(submission.result.key).to eq "submission/result/#{submission.id}"
+    it "gives the submission result attachment a unique key with prefix" do
+      freeze_time do
+        timestamp = Time.current.to_f
+        call
+        expect(submission.result.key).to eql("submission/result/#{submission.id}-attached-at-#{timestamp}")
+      end
     end
 
     it "gives the submission result attachment a content type" do
@@ -45,8 +48,7 @@ RSpec.describe SubmissionService, vcr: { cassette_name: "use_case_one_success" }
       expect(submission.result.content_type).to eq "application/json"
     end
 
-    context "when the details are complete but not found on the calling service",
-            vcr: { cassette_name: "use_case_one_fail" } do
+    context "when the details are complete but not found on the calling service", vcr: { cassette_name: "use_case_one_fail" } do
       let(:data) do
         {
           use_case: "one",
