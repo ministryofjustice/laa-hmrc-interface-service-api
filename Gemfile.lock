@@ -245,7 +245,7 @@ GEM
       byebug (~> 11.0)
       pry (>= 0.13, < 0.15)
     public_suffix (5.0.1)
-    puma (6.2.2)
+    puma (6.3.0)
       nio4r (~> 2.0)
     racc (1.6.2)
     rack (2.2.7)
@@ -436,7 +436,7 @@ DEPENDENCIES
   net-smtp
   pg (~> 1.5)
   pry-byebug
-  puma (~> 6.2)
+  puma (~> 6.3)
   rails (~> 7.0.5)
   redis-namespace
   rest-client
