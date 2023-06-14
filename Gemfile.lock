@@ -290,7 +290,7 @@ GEM
       connection_pool
     redis-namespace (1.11.0)
       redis (>= 4)
-    regexp_parser (2.8.0)
+    regexp_parser (2.8.1)
     rest-client (2.1.0)
       http-accept (>= 1.7.0, < 2.0)
       http-cookie (>= 1.0.2, < 2.0)
