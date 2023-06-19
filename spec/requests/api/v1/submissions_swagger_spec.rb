@@ -5,7 +5,7 @@ RSpec.shared_examples "GET submission" do
   describe "GET submission", type: :request do
     include AuthorisedRequestHelper
 
-    let(:token) { application.access_tokens.create! }
+    let(:token) { application.access_tokens.create!(scopes: application.scopes) }
     let(:Authorization) { "Bearer #{token.token}" }
 
     context "when create is called" do
