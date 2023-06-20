@@ -9,7 +9,10 @@
 * Run `git-crypt unlock ~/path/to/symmetric_key`
 * Run `rake db:reset`, this will create, migrate and seed the database
 * Run the tests with `bundle exec rspec`
-* Run the server with `bundle exec rails s`
+* Run the server with `bundle exec rails s` \*
+
+
+\* _Alternatively you can run the server with `bin/dev` which will set the web server port to 4032 and the redis server to 6380 (using non-default database number, 5) and mimic production-like queues and concurrency._
 
 ## Applications
 
