@@ -28,6 +28,26 @@ Which should return a response like
   "access_token":"BSj8EmiuxwI1Z699CBY5_qnPxH6wq_nw1M3ZGK_wImg",
   "token_type":"Bearer",
   "expires_in":7200,
+  "scopes": "use_case_one use_case_two",
+  "created_at":1635240555
+}
+```
+The scopes response will include only the scopes that have been allocated to the client credentials you provided
+
+You can requested specific scopes using
+```shell
+curl -F grant_type=client_credentials \
+-F client_id=10000000-0000-0000-0000-000000000001 \
+-F client_secret=00000000-1111-2222-3333-000000000000 \
+-X POST http://localhost:4050/oauth/token&scopes=use_case_one
+```
+This will return a token that will work only for your requested scope, as long as the credentials have access to it!
+```json
+{
+  "access_token":"BSj8EmiuxwI1Z699CBY5_qnPxH6wq_nw1M3ZGK_wImg",
+  "token_type":"Bearer",
+  "expires_in":7200,
+  "scopes": "use_case_one",
   "created_at":1635240555
 }
 ```
