@@ -10,6 +10,3 @@ updates:
     timezone: Europe/London
   open-pull-requests-limit: 5
   target-branch: main
-  ignore:
-    - dependency-name: "doorkeeper"
-      versions: ["~> 5.5.4"]
