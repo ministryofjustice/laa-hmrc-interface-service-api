@@ -395,7 +395,7 @@ GEM
     timeliness-i18n (0.12.1)
       railties
       timeliness
-    timeout (0.3.2)
+    timeout (0.4.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     tzinfo-data (1.2023.3)
