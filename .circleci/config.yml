@@ -1,7 +1,9 @@
 version: 2.1
 
 orbs:
+  aws-cli: circleci/aws-cli@4.0.0
   slack: circleci/slack@4.5.2
+
 executors:
   basic-executor:
     docker:
@@ -31,6 +33,7 @@ executors:
         environment:
           POSTGRES_USER: user
           POSTGRES_DB: laa_hmrc_interface_service_api_test
+
 references:
   build_docker_image: &build_docker_image
     run:
@@ -98,6 +101,11 @@ references:
         bundle exec rake db:migrate
 
 commands:
+  aws-cli-setup:
+    steps:
+     - aws-cli/setup:
+        role_arn: $ECR_ROLE_TO_ASSUME
+        region: $ECR_REGION
   run-smoke-test:
     parameters:
       use_case:
@@ -105,6 +113,7 @@ commands:
         default: expect_fail
     steps:
       - run: ./bin/smoke_tests << parameters.use_case >>
+
 jobs:
   lint_checks:
     executor: linting-executor
@@ -199,6 +208,7 @@ jobs:
           version: 20.10.7
       - *decrypt_secrets
       - *build_docker_image
+      - aws-cli-setup
       - *push_to_ecr
   deploy_uat: &deploy_uat
     executor: cloud-platform-executor
