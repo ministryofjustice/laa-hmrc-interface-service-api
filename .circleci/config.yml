@@ -48,13 +48,13 @@ references:
     run:
       name: Push image to ecr repo
       command: |
-        aws ecr get-login-password --region eu-west-2 | docker login --username AWS --password-stdin ${ECR_ENDPOINT}
-        docker tag app "${ECR_ENDPOINT}/laa-apply-for-legal-aid/laa-hmrc-interface-uat-ecr:${CIRCLE_SHA1}"
-        docker push "${ECR_ENDPOINT}/laa-apply-for-legal-aid/laa-hmrc-interface-uat-ecr:${CIRCLE_SHA1}"
+        aws ecr get-login-password --region $ECR_REGION | docker login --username AWS --password-stdin ${ECR_REGISTRY}
+        docker tag app "${ECR_REGISTRY}/${ECR_REPOSITORY}:${CIRCLE_SHA1}"
+        docker push "${ECR_REGISTRY}/${ECR_REPOSITORY}:${CIRCLE_SHA1}"
 
         if [ "${CIRCLE_BRANCH}" == "main" ]; then
-          docker tag app "${ECR_ENDPOINT}/laa-apply-for-legal-aid/laa-hmrc-interface-uat-ecr:latest"
-          docker push "${ECR_ENDPOINT}/laa-apply-for-legal-aid/laa-hmrc-interface-uat-ecr:latest"
+          docker tag app "${ECR_REGISTRY}/${ECR_REPOSITORY}:latest"
+          docker push "${ECR_REGISTRY}/${ECR_REPOSITORY}:latest"
         fi
   authenticate_k8s_live: &authenticate_k8s_live
     run:
@@ -241,7 +241,7 @@ jobs:
                           --install --wait \
                           --namespace=${K8S_NAMESPACE} \
                           --values ./deploy/helm/values-staging.yaml \
-                          --set image.repository="$ECR_ENDPOINT/laa-apply-for-legal-aid/laa-hmrc-interface-uat-ecr" \
+                          --set image.repository="${ECR_REGISTRY}/${ECR_REPOSITORY}" \
                           --set image.tag="${CIRCLE_SHA1}"
   deploy_production:
     executor: cloud-platform-executor
@@ -258,7 +258,7 @@ jobs:
                         --install --wait \
                         --namespace=${K8S_NAMESPACE} \
                         --values ./deploy/helm/values-production.yaml \
-                        --set image.repository="$ECR_ENDPOINT/laa-apply-for-legal-aid/laa-hmrc-interface-uat-ecr" \
+                        --set image.repository="${ECR_REGISTRY}/${ECR_REPOSITORY}" \
                         --set image.tag="${CIRCLE_SHA1}"
       - slack/notify:
           event: fail
