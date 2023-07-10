@@ -7,7 +7,7 @@ RSpec.describe SubmissionProcessWorker do
 
   let(:worker) { described_class.new }
   let(:application) { dk_application }
-  let(:submission) { create :submission, oauth_application: application }
+  let(:submission) { create(:submission, oauth_application: application) }
 
   before do
     allow(Submission).to receive(:find).with(submission.id).and_return(submission)

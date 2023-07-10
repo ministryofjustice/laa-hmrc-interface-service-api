@@ -149,7 +149,7 @@ RSpec.shared_examples "GET submission" do
 
           response 200, "Submission completed or failed" do
             context "when completed with attachment" do
-              let(:submission) { create :submission, :completed, :with_attachment, oauth_application: application }
+              let(:submission) { create(:submission, :completed, :with_attachment, oauth_application: application) }
 
               let(:expected_response) do
                 {
@@ -169,7 +169,7 @@ RSpec.shared_examples "GET submission" do
             end
 
             context "when failed with attachment" do
-              let(:submission) { create :submission, :failed_with_attachment, oauth_application: application }
+              let(:submission) { create(:submission, :failed_with_attachment, oauth_application: application) }
 
               let(:expected_response) do
                 {
@@ -190,7 +190,7 @@ RSpec.shared_examples "GET submission" do
           end
 
           response 202, "Submission still processing" do
-            let!(:submission) { create :submission, :processing, oauth_application: application }
+            let!(:submission) { create(:submission, :processing, oauth_application: application) }
             let(:expected_response) do
               {
                 submission: id,
@@ -205,7 +205,7 @@ RSpec.shared_examples "GET submission" do
           end
 
           response 500, "Submission complete but no result object is present" do
-            let!(:submission) { create :submission, :completed, oauth_application: application }
+            let!(:submission) { create(:submission, :completed, oauth_application: application) }
             let(:expected_response) do
               {
                 submission: id,
@@ -235,7 +235,7 @@ RSpec.shared_examples "GET submission" do
             response(400, "Bad request") do
               let(:submitting_application) { dk_application }
               let(:submission) do
-                create :submission, :processing, oauth_application: submitting_application
+                create(:submission, :processing, oauth_application: submitting_application)
               end
 
               run_test! do |response|
