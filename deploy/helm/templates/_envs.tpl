@@ -32,16 +32,6 @@ env:
         name: rds-instance-output
         key: database_name
   {{ end }}
-  - name: AWS_ACCESS_KEY_ID
-    valueFrom:
-      secretKeyRef:
-        name: s3
-        key: access_key_id
-  - name: AWS_SECRET_ACCESS_KEY
-    valueFrom:
-      secretKeyRef:
-        name: s3
-        key: secret_access_key
   - name: AWS_BUCKET
     valueFrom:
       secretKeyRef:
