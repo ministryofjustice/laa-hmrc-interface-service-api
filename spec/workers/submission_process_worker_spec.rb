@@ -32,7 +32,7 @@ RSpec.describe SubmissionProcessWorker do
           worker.retry_count = 0
         end
 
-        it "updates the submission status amd records the error " do
+        it "updates the submission status amd records the error" do
           submission_process_worker
           expect(submission.status).to eq("failed")
         end
