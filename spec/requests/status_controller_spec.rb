@@ -212,7 +212,7 @@ RSpec.describe StatusController do
 
       it "returns HTTP success" do
         get "/health_check"
-        expect(response.status).to eq(200)
+        expect(response).to have_http_status(200)
       end
 
       it "returns the expected response report" do
