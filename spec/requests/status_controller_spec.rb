@@ -67,7 +67,7 @@ RSpec.describe StatusController do
         allow(REDIS).to receive(:ping).and_raise(Redis::CannotConnectError)
         allow(Sidekiq::ProcessSet).to receive(:new).and_return(instance_double(Sidekiq::ProcessSet, size: 0))
 
-        connection = instance_double("connection")
+        connection = instance_double(Sidekiq::RedisClientAdapter::CompatClient)
         allow(connection).to receive(:info).and_raise(Redis::CannotConnectError)
         allow(Sidekiq).to receive(:redis).and_yield(connection)
 
