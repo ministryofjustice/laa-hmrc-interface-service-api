@@ -2,7 +2,7 @@ require "rails_helper"
 require "swagger_helper"
 
 RSpec.shared_examples "GET submission" do
-  describe "GET submission", type: :request do
+  describe "GET submission" do
     include AuthorisedRequestHelper
 
     let(:token) { application.access_tokens.create!(scopes: application.scopes) }
@@ -255,11 +255,11 @@ end
 # version, staging and UAT shows the "v1/swagger.yaml" version
 #
 RSpec.describe "Generate submission swagger docs" do
-  context "with API V1 Docs", type: :request, swagger_doc: "v1/live/swagger.yaml" do
+  context "with API V1 Docs", swagger_doc: "v1/live/swagger.yaml" do
     include_examples "GET submission"
   end
 
-  context "with API V1 Docs (incl. smoke tests)", type: :request, swagger_doc: "v1/swagger.yaml" do
+  context "with API V1 Docs (incl. smoke tests)", swagger_doc: "v1/swagger.yaml" do
     include_examples "GET submission"
   end
 end

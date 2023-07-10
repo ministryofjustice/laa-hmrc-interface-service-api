@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe MainController, type: :request do
+describe MainController do
   describe "GET /main" do
     subject(:get_main) { get main_path }
 
