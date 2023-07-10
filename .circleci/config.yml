@@ -191,15 +191,7 @@ jobs:
                 }
               ]
             }
-  clean_up_ecr:
-    executor: cloud-platform-executor
-    steps:
-      - checkout
-      - setup_remote_docker
-      - run:
-          name: Delete old images from ecr repo
-          command: |
-            ./bin/delete_ecr_images
+
   build_and_push:
     executor: cloud-platform-executor
     steps:
@@ -365,13 +357,3 @@ workflows:
           name: smoke-test-four
           use_case: four
           context: laa-hmrc-interface-uat
-
-  nightly:
-    triggers:
-      - schedule:
-          cron: "0 2 * * *"
-          filters:
-            branches:
-              only: main
-    jobs:
-      - clean_up_ecr
