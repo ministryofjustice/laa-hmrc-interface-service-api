@@ -11,6 +11,6 @@ RSpec.describe SmokeTest, :smoke_test do
 
   it "returns the expected output" do
     expect(use_case).to be true
-    expect(REDIS.get("smoke-test-one")).not_to be nil
+    expect(REDIS.get("smoke-test-one")).not_to be_nil
   end
 end
