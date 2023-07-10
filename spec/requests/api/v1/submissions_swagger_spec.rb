@@ -216,7 +216,7 @@ RSpec.shared_examples "GET submission" do
             end
             run_test! do
               expect(response.media_type).to eq("application/json")
-              expect(JSON.parse(response.body).symbolize_keys).to eq(expected_response)
+              expect(response.parsed_body.symbolize_keys).to eq(expected_response)
             end
           end
 
