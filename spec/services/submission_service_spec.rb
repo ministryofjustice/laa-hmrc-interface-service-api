@@ -6,7 +6,7 @@ RSpec.describe SubmissionService, vcr: { cassette_name: "use_case_one_success" }
   describe ".call" do
     subject(:call) { described_class.call(submission) }
 
-    let(:submission) { create :submission, data }
+    let(:submission) { create(:submission, data) }
     let(:application) { dk_application }
     let(:data) do
       {

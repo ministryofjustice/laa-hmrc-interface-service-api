@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe Submission, type: :model do
+RSpec.describe Submission do
   subject(:submission) { described_class.create(params) }
 
   let(:params) do

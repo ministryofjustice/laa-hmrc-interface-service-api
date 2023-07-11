@@ -7,7 +7,7 @@ RSpec.describe SubmissionProcessWorker do
 
   let(:worker) { described_class.new }
   let(:application) { dk_application }
-  let(:submission) { create :submission, oauth_application: application }
+  let(:submission) { create(:submission, oauth_application: application) }
 
   before do
     allow(Submission).to receive(:find).with(submission.id).and_return(submission)
@@ -32,7 +32,7 @@ RSpec.describe SubmissionProcessWorker do
           worker.retry_count = 0
         end
 
-        it "updates the submission status amd records the error " do
+        it "updates the submission status amd records the error" do
           submission_process_worker
           expect(submission.status).to eq("failed")
         end

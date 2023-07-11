@@ -1,6 +1,6 @@
 require "swagger_helper"
 
-RSpec.describe "Generate smoke_test swagger docs", type: :request, swagger_doc: "v1/swagger.yaml" do
+RSpec.describe "Generate smoke_test swagger docs", swagger_doc: "v1/swagger.yaml" do
   let(:use_case) { "one" }
 
   path "/smoke-test/{use_case}" do

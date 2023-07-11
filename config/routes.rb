@@ -42,5 +42,5 @@ Rails.application.routes.draw do
 end
 
 def secure_compare(passed, stored)
-  Rack::Utils.secure_compare(::Digest::SHA256.hexdigest(passed), ::Digest::SHA256.hexdigest(stored))
+  Rack::Utils.secure_compare(Digest::SHA256.hexdigest(passed), Digest::SHA256.hexdigest(stored))
 end

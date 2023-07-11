@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe StatusController, type: :request do
+RSpec.describe StatusController do
   describe "#healthcheck" do
     before do
       allow(Sidekiq::ProcessSet).to receive(:new).and_return(instance_double(Sidekiq::ProcessSet, size: 1))
@@ -67,7 +67,7 @@ RSpec.describe StatusController, type: :request do
         allow(REDIS).to receive(:ping).and_raise(Redis::CannotConnectError)
         allow(Sidekiq::ProcessSet).to receive(:new).and_return(instance_double(Sidekiq::ProcessSet, size: 0))
 
-        connection = instance_double("connection")
+        connection = instance_double(Sidekiq::RedisClientAdapter::CompatClient)
         allow(connection).to receive(:info).and_raise(Redis::CannotConnectError)
         allow(Sidekiq).to receive(:redis).and_yield(connection)
 
@@ -212,7 +212,7 @@ RSpec.describe StatusController, type: :request do
 
       it "returns HTTP success" do
         get "/health_check"
-        expect(response.status).to eq(200)
+        expect(response).to have_http_status(:ok)
       end
 
       it "returns the expected response report" do
@@ -241,7 +241,7 @@ RSpec.describe StatusController, type: :request do
       end
 
       it "returns JSON with app information" do
-        expect(JSON.parse(response.body)).to eq(expected_json)
+        expect(response.parsed_body).to eq(expected_json)
       end
     end
 
@@ -255,7 +255,7 @@ RSpec.describe StatusController, type: :request do
       end
 
       it 'returns "Not Available"' do
-        expect(JSON.parse(response.body).values).to be_all("Not Available")
+        expect(response.parsed_body.values).to be_all("Not Available")
       end
     end
   end

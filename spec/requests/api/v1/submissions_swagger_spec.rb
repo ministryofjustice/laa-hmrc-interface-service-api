@@ -2,7 +2,7 @@ require "rails_helper"
 require "swagger_helper"
 
 RSpec.shared_examples "GET submission" do
-  describe "GET submission", type: :request do
+  describe "GET submission" do
     include AuthorisedRequestHelper
 
     let(:token) { application.access_tokens.create!(scopes: application.scopes) }
@@ -149,7 +149,7 @@ RSpec.shared_examples "GET submission" do
 
           response 200, "Submission completed or failed" do
             context "when completed with attachment" do
-              let(:submission) { create :submission, :completed, :with_attachment, oauth_application: application }
+              let(:submission) { create(:submission, :completed, :with_attachment, oauth_application: application) }
 
               let(:expected_response) do
                 {
@@ -169,7 +169,7 @@ RSpec.shared_examples "GET submission" do
             end
 
             context "when failed with attachment" do
-              let(:submission) { create :submission, :failed_with_attachment, oauth_application: application }
+              let(:submission) { create(:submission, :failed_with_attachment, oauth_application: application) }
 
               let(:expected_response) do
                 {
@@ -190,7 +190,7 @@ RSpec.shared_examples "GET submission" do
           end
 
           response 202, "Submission still processing" do
-            let!(:submission) { create :submission, :processing, oauth_application: application }
+            let!(:submission) { create(:submission, :processing, oauth_application: application) }
             let(:expected_response) do
               {
                 submission: id,
@@ -205,7 +205,7 @@ RSpec.shared_examples "GET submission" do
           end
 
           response 500, "Submission complete but no result object is present" do
-            let!(:submission) { create :submission, :completed, oauth_application: application }
+            let!(:submission) { create(:submission, :completed, oauth_application: application) }
             let(:expected_response) do
               {
                 submission: id,
@@ -216,7 +216,7 @@ RSpec.shared_examples "GET submission" do
             end
             run_test! do
               expect(response.media_type).to eq("application/json")
-              expect(JSON.parse(response.body).symbolize_keys).to eq(expected_response)
+              expect(response.parsed_body.symbolize_keys).to eq(expected_response)
             end
           end
 
@@ -235,7 +235,7 @@ RSpec.shared_examples "GET submission" do
             response(400, "Bad request") do
               let(:submitting_application) { dk_application }
               let(:submission) do
-                create :submission, :processing, oauth_application: submitting_application
+                create(:submission, :processing, oauth_application: submitting_application)
               end
 
               run_test! do |response|
@@ -255,11 +255,11 @@ end
 # version, staging and UAT shows the "v1/swagger.yaml" version
 #
 RSpec.describe "Generate submission swagger docs" do
-  context "with API V1 Docs", type: :request, swagger_doc: "v1/live/swagger.yaml" do
+  context "with API V1 Docs", swagger_doc: "v1/live/swagger.yaml" do
     include_examples "GET submission"
   end
 
-  context "with API V1 Docs (incl. smoke tests)", type: :request, swagger_doc: "v1/swagger.yaml" do
+  context "with API V1 Docs (incl. smoke tests)", swagger_doc: "v1/swagger.yaml" do
     include_examples "GET submission"
   end
 end

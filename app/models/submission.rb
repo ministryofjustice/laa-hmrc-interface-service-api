@@ -8,7 +8,7 @@ class Submission < ApplicationRecord
 
   before_validation :normalise_nino
 
-  validates :use_case, presence: true, inclusion: { in: USE_CASES, message: "Invalid use case" }
+  validates :use_case, presence: true, inclusion: { in: USE_CASES }
   validates :first_name, presence: true
   validates :last_name, presence: true
   validate :validate_nino
