@@ -15,3 +15,5 @@ en:
               date_not_valid: is not a valid date
               date_is_in_the_future: is not a valid date
               invalid_timeline: is not a valid date
+            use_case:
+              inclusion: Invalid use case
