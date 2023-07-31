@@ -17,8 +17,8 @@ class TestSubmission
     }.to_json, object_class: Submission)
   end
 
-  def self.call(use_case, **args)
-    new(use_case, **args).call
+  def self.call(use_case, **)
+    new(use_case, **).call
   end
 
   def self.call_with(submission)
