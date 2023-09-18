@@ -27,7 +27,7 @@ private
     params.require(:use_case)
   end
 
-  def redis(*args)
+  def redis(*_args)
     Sidekiq.redis { |r| return r }
   end
 end
