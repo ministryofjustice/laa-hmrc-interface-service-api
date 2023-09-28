@@ -289,8 +289,6 @@ GEM
       redis-client (>= 0.9.0)
     redis-client (0.17.0)
       connection_pool
-    redis-namespace (1.11.0)
-      redis (>= 4)
     regexp_parser (2.8.1)
     rest-client (2.1.0)
       http-accept (>= 1.7.0, < 2.0)
@@ -445,7 +443,7 @@ DEPENDENCIES
   pry-byebug
   puma (~> 6.4)
   rails (~> 7.0.8)
-  redis-namespace
+  redis
   rest-client
   rotp
   rspec-rails (~> 6.0)
