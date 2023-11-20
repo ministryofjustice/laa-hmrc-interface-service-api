@@ -1,6 +1,5 @@
 FactoryBot.define do
   factory :submission do
-    id { SecureRandom.uuid }
     status { :created }
     use_case { %i[one two three four].sample }
     first_name { Faker::Name.first_name }
