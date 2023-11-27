@@ -10,3 +10,7 @@ updates:
     timezone: Europe/London
   open-pull-requests-limit: 5
   target-branch: main
+  groups:
+    rswag-gems:
+      patterns:
+        - "rswag-*"
