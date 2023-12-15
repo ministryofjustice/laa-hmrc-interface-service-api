@@ -192,7 +192,7 @@ GEM
     guard-rubocop (1.5.0)
       guard (~> 2.0)
       rubocop (< 2.0)
-    hashdiff (1.0.1)
+    hashdiff (1.1.0)
     highline (2.1.0)
     http-accept (1.7.0)
     http-cookie (1.0.5)
