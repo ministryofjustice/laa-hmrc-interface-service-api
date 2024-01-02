@@ -233,9 +233,7 @@ RSpec.describe StatusController do
       end
 
       before do
-        allow(Settings.status).to receive(:build_date).and_return("20150721")
-        allow(Settings.status).to receive(:build_tag).and_return("test")
-        allow(Settings.status).to receive(:app_branch).and_return("test_branch")
+        allow(Settings.status).to receive_messages(build_date: "20150721", build_tag: "test", app_branch: "test_branch")
 
         get("/ping")
       end
@@ -247,9 +245,7 @@ RSpec.describe StatusController do
 
     context "when environment variables not set" do
       before do
-        allow(Settings.status).to receive(:build_date).and_return("Not Available")
-        allow(Settings.status).to receive(:build_tag).and_return("Not Available")
-        allow(Settings.status).to receive(:app_branch).and_return("Not Available")
+        allow(Settings.status).to receive_messages(build_date: "Not Available", build_tag: "Not Available", app_branch: "Not Available")
 
         get "/ping"
       end
