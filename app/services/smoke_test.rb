@@ -34,6 +34,6 @@ private
   end
 
   def smoke_test_settings
-    @smoke_test_settings ||= Settings.smoke_test.send("use_case_#{@use_case}")
+    @smoke_test_settings ||= Settings.smoke_test.send(:"use_case_#{@use_case}")
   end
 end
