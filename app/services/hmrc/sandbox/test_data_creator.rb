@@ -42,7 +42,7 @@ module HMRC
         @start_date = start_date
         @end_date = end_date
 
-        payload = send("#{@endpoint}_data").to_json
+        payload = send(:"#{@endpoint}_data").to_json
         response = RestClient.post(url, payload, headers)
         response.code.eql?(201)
       end
