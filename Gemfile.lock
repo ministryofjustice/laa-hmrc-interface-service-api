@@ -117,10 +117,7 @@ GEM
     domain_name (0.6.20240107)
     doorkeeper (5.6.6)
       railties (>= 5)
-    dotenv (2.8.1)
-    dotenv-rails (2.8.1)
-      dotenv (= 2.8.1)
-      railties (>= 3.2)
+    dotenv (3.0.0)
     drb (2.2.0)
       ruby2_keywords
     dry-configurable (1.1.0)
@@ -460,7 +457,7 @@ DEPENDENCIES
   byebug
   config
   doorkeeper
-  dotenv-rails
+  dotenv
   factory_bot_rails (>= 6.2.0)
   faker (>= 1.9.1)
   guard-livereload

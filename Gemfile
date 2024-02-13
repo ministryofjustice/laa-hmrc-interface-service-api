@@ -7,7 +7,7 @@ gem "aws-sdk-s3", require: false
 gem "bootsnap", ">= 1.4.4", require: false
 gem "config"
 gem "doorkeeper"
-gem "dotenv-rails"
+gem "dotenv"
 gem "net-imap"
 gem "net-pop"
 gem "net-smtp"
