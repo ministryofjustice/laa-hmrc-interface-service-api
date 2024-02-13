@@ -20,7 +20,7 @@ require "action_cable/engine"
 Bundler.require(*Rails.groups)
 
 # load `.env` earlier in boot sequence for use in settings.yml
-Dotenv::Railtie.load
+Dotenv::Rails.load
 
 module LaaHmrcInterfaceServiceApi
   class Application < Rails::Application
