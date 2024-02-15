@@ -45,6 +45,13 @@ spec:
               command: ['bin/sidekiq_health_check']
             initialDelaySeconds: 35
             timeoutSeconds: 5
+          securityContext:
+            runAsNonRoot: true
+            allowPrivilegeEscalation: false
+            seccompProfile:
+              type: RuntimeDefault
+            capabilities:
+              drop: [ "ALL" ]
 {{ include "app.envs" . | nindent 10 }}
         - name: sidekiq-uc2
           image: '{{ .Values.image.repository }}:{{ .Values.image.tag }}'
@@ -70,6 +77,13 @@ spec:
               command: ['bin/sidekiq_health_check']
             initialDelaySeconds: 35
             timeoutSeconds: 5
+          securityContext:
+            runAsNonRoot: true
+            allowPrivilegeEscalation: false
+            seccompProfile:
+              type: RuntimeDefault
+            capabilities:
+              drop: [ "ALL" ]
 {{ include "app.envs" . | nindent 10 }}
         - name: sidekiq-uc3
           image: '{{ .Values.image.repository }}:{{ .Values.image.tag }}'
@@ -95,6 +109,13 @@ spec:
               command: ['bin/sidekiq_health_check']
             initialDelaySeconds: 35
             timeoutSeconds: 5
+          securityContext:
+            runAsNonRoot: true
+            allowPrivilegeEscalation: false
+            seccompProfile:
+              type: RuntimeDefault
+            capabilities:
+              drop: [ "ALL" ]
 {{ include "app.envs" . | nindent 10 }}
         - name: sidekiq-uc4
           image: '{{ .Values.image.repository }}:{{ .Values.image.tag }}'
@@ -120,6 +141,13 @@ spec:
               command: ['bin/sidekiq_health_check']
             initialDelaySeconds: 35
             timeoutSeconds: 5
+          securityContext:
+            runAsNonRoot: true
+            allowPrivilegeEscalation: false
+            seccompProfile:
+              type: RuntimeDefault
+            capabilities:
+              drop: [ "ALL" ]
 {{ include "app.envs" . | nindent 10 }}
         - name: sidekiq-default
           image: '{{ .Values.image.repository }}:{{ .Values.image.tag }}'
@@ -146,4 +174,11 @@ spec:
               command: ['bin/sidekiq_health_check']
             initialDelaySeconds: 35
             timeoutSeconds: 5
+          securityContext:
+            allowPrivilegeEscalation: false
+            runAsNonRoot: true
+            seccompProfile:
+              type: RuntimeDefault
+            capabilities:
+              drop: [ "ALL" ]
       terminationGracePeriodSeconds: 60
