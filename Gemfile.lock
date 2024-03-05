@@ -118,8 +118,7 @@ GEM
     doorkeeper (5.6.6)
       railties (>= 5)
     dotenv (3.1.0)
-    drb (2.2.0)
-      ruby2_keywords
+    drb (2.2.1)
     dry-configurable (1.1.0)
       dry-core (~> 1.0, < 2)
       zeitwerk (~> 2.6)
@@ -402,7 +401,6 @@ GEM
       rubocop-capybara (~> 2.17)
       rubocop-factory_bot (~> 2.22)
     ruby-progressbar (1.13.0)
-    ruby2_keywords (0.0.5)
     sentry-rails (5.16.1)
       railties (>= 5.0)
       sentry-ruby (~> 5.16.1)
