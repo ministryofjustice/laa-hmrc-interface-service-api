@@ -3,6 +3,7 @@ class Submission < ApplicationRecord
   has_one_attached :result
 
   NINO_REGEXP = /^[A-CEGHJ-PR-TW-Z]{1}[A-CEGHJ-NPR-TW-Z]{1}[0-9]{6}[A-DFM]{1}$/
+  NO_NUMBER_REGEXP = /^([^0-9]*)$/
 
   USE_CASES = %w[one two three four].freeze
 
@@ -10,7 +11,7 @@ class Submission < ApplicationRecord
 
   validates :use_case, presence: true, inclusion: { in: USE_CASES }
   validates :first_name, presence: true
-  validates :last_name, presence: true
+  validate :validate_last_name
   validate :validate_nino
   validates :dob, date: { not_in_the_future: true }
   validates :start_date, date: { not_in_the_future: true }
@@ -19,6 +20,23 @@ class Submission < ApplicationRecord
 
   def as_json(*)
     super.except("id", "status", "created_at", "updated_at", "oauth_application_id")
+  end
+
+  def validate_last_name
+    validate_last_name_presence
+    validate_last_name_no_number
+  end
+
+  def validate_last_name_presence
+    return if last_name.present?
+
+    errors.add(:last_name, "can't be blank")
+  end
+
+  def validate_last_name_no_number
+    return if NO_NUMBER_REGEXP.match?(last_name)
+
+    errors.add(:last_name, "can't contain a number")
   end
 
   def normalise_nino
