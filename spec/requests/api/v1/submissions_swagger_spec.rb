@@ -111,11 +111,33 @@ RSpec.shared_examples "GET submission" do
                 errors = JSON.parse(response.body)
                 expect(response.media_type).to eq("application/json")
                 expect(errors["first_name"]).to eq(["can't be blank"])
-                expect(errors["last_name"]).to eq(["can't be blank"])
+                expect(errors["last_name"]).to include("can't be blank")
                 expect(errors["nino"]).to eq(["is not valid"])
                 expect(errors["dob"]).to eq(["is not a valid date"])
                 expect(errors["start_date"]).to eq(["is not a valid date"])
                 expect(errors["end_date"]).to eq(["is not a valid date"])
+              end
+            end
+          end
+
+          context "when last_name contains a number" do
+            response(400, "Bad request") do
+              let(:submission) do
+                {
+                  filter: {
+                    last_name: "Yorke1",
+                    first_name: "Langley",
+                    nino: "MN212451D",
+                    dob: "1992-07-22",
+                    start_date: "2020-08-01",
+                    end_date: "2020-10-01",
+                  },
+                }
+              end
+              run_test! do |response|
+                errors = JSON.parse(response.body)
+                expect(response.media_type).to eq("application/json")
+                expect(errors["last_name"]).to eq(["can't contain a number"])
               end
             end
           end

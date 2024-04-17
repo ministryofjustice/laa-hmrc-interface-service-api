@@ -47,16 +47,31 @@ RSpec.describe Submission do
       end
     end
 
-    context "with last name missing" do
-      before { params.delete(:last_name) }
+    context "with last name errors" do
+      context "with last name missing" do
+        before { params.delete(:last_name) }
 
-      it "does not persist model" do
-        expect { submission.save }.not_to(change(described_class, :count))
+        it "does not persist model" do
+          expect { submission.save }.not_to(change(described_class, :count))
+        end
+
+        it "raises an error" do
+          expect { submission.save! }.to raise_error(ActiveRecord::RecordInvalid)
+          expect(submission.errors.full_messages).to include("Last name can't be blank")
+        end
       end
 
-      it "raises an error" do
-        expect { submission.save! }.to raise_error(ActiveRecord::RecordInvalid)
-        expect(submission.errors.full_messages).to include("Last name can't be blank")
+      context "with last name containing a number" do
+        before { params[:last_name] = "Yorke1" }
+
+        it "does not persist model" do
+          expect { submission.save }.not_to(change(described_class, :count))
+        end
+
+        it "raises an error" do
+          expect { submission.save! }.to raise_error(ActiveRecord::RecordInvalid)
+          expect(submission.errors.full_messages).to include("Last name can't contain a number")
+        end
       end
     end
 
