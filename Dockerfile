@@ -1,4 +1,4 @@
-FROM ruby:3.3.0-alpine3.19
+FROM ruby:3.3.1-alpine3.19
 
 MAINTAINER Apply for legal aid team
 
@@ -18,6 +18,7 @@ RUN adduser --disabled-password apply -u 1001
 
 COPY Gemfile /app/Gemfile
 COPY Gemfile.lock /app/Gemfile.lock
+COPY .ruby-version /app/.ruby-version
 
 RUN gem update --system
 RUN bundle config set --local without 'test development' && bundle install
