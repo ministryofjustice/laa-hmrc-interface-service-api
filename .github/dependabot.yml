@@ -14,3 +14,9 @@ updates:
     rswag-gems:
       patterns:
         - "rswag-*"
+    aws-gems:
+      patterns:
+        - "aws-*"
+    rubocop-gems:
+      patterns:
+        - "rubocop-*"
