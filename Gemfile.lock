@@ -121,7 +121,7 @@ GEM
     em-websocket (0.5.3)
       eventmachine (>= 0.12.9)
       http_parser.rb (~> 0)
-    erubi (1.12.0)
+    erubi (1.13.0)
     eventmachine (1.2.7)
     factory_bot (6.4.6)
       activesupport (>= 5.0.0)
