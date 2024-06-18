@@ -318,18 +318,19 @@ workflows:
       - deploy_staging:
           context: laa-hmrc-interface-staging
           requires:
-            - deploy_main_uat
+            - build_and_push
       - slack/on-hold:
           requires:
+            - deploy_main_uat
             - deploy_staging
       - hold_production:
           type: approval
           requires:
+            - deploy_main_uat
             - deploy_staging
       - deploy_production:
           context: laa-hmrc-interface-production
           requires:
-            - slack/on-hold
             - hold_production
 
   smoke-tests:
