@@ -159,7 +159,7 @@ GEM
     hashdiff (1.1.0)
     highline (3.0.1)
     http-accept (1.7.0)
-    http-cookie (1.0.5)
+    http-cookie (1.0.6)
       domain_name (~> 0.5)
     http_parser.rb (0.8.0)
     i18n (1.14.5)
