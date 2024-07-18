@@ -207,7 +207,7 @@ jobs:
           docker_layer_caching: true
       - *decrypt_secrets
       - *authenticate_k8s_live
-      - deploy:
+      - run:
           name: Helm deployment to UAT
           command: ./bin/uat_deploy
       - slack/notify:
@@ -223,7 +223,7 @@ jobs:
           docker_layer_caching: true
       - *decrypt_secrets
       - *authenticate_k8s_live
-      - deploy:
+      - run:
           name: Helm deployment to staging
           command: |
             helm upgrade laa-hmrc-interface ./deploy/helm/. \
@@ -240,7 +240,7 @@ jobs:
           docker_layer_caching: true
       - *decrypt_secrets
       - *authenticate_k8s_live
-      - deploy:
+      - run:
           name: Helm deployment to production
           command: |
             helm upgrade laa-hmrc-interface ./deploy/helm/. \
