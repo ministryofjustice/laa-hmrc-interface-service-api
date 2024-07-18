@@ -267,7 +267,6 @@ jobs:
             ./bin/delete_dependabot_deployment
 
 workflows:
-  version: 2
   open_pr:
     jobs:
       - lint_checks:
