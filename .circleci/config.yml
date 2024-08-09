@@ -164,20 +164,6 @@ jobs:
       - run-smoke-test:
           use_case: << parameters.use_case >>
       - slack/notify:
-          event: pass
-          custom: |
-            {
-              "blocks": [
-                {
-                  "type": "section",
-                  "text": {
-                    "type": "mrkdwn",
-                    "text": ":yep: Smoke test of use case << parameters.use_case >> on sandbox successful!"
-                  }
-                }
-              ]
-            }
-      - slack/notify:
           event: fail
           custom: |
             {
@@ -210,9 +196,6 @@ jobs:
       - run:
           name: Helm deployment to UAT
           command: ./bin/uat_deploy
-      - slack/notify:
-          event: fail
-          template: basic_fail_1
   deploy_main_uat:
     <<: *deploy_uat
   deploy_staging:
@@ -249,12 +232,6 @@ jobs:
                         --values ./deploy/helm/values-production.yaml \
                         --set image.repository="${ECR_REGISTRY}/${ECR_REPOSITORY}" \
                         --set image.tag="${CIRCLE_SHA1}"
-      - slack/notify:
-          event: fail
-          template: basic_fail_1
-      - slack/notify:
-          event: pass
-          template: success_tagged_deploy_1
   delete_dependabot_deployment:
     executor: cloud-platform-executor
     steps:
@@ -266,6 +243,14 @@ jobs:
           command: |
             ./bin/delete_dependabot_deployment
 
+
+generic-slack-fail-post-step: &generic-slack-fail-post-step
+  post-steps:
+    - slack/notify:
+        event: fail
+        template: basic_fail_1
+
+
 workflows:
   open_pr:
     jobs:
@@ -273,20 +258,24 @@ workflows:
           filters:
             branches:
               ignore: main
+          <<: *generic-slack-fail-post-step
       - unit_tests:
           filters:
             branches:
               ignore: main
+          <<: *generic-slack-fail-post-step
       - build_and_push:
           filters:
             branches:
               ignore: main
+          <<: *generic-slack-fail-post-step
       - deploy_uat:
           context: laa-hmrc-interface-uat
           requires:
             - lint_checks
             - unit_tests
             - build_and_push
+          <<: *generic-slack-fail-post-step
       - delete_dependabot_deployment:
           context: laa-hmrc-interface-uat
           filters:
@@ -295,6 +284,7 @@ workflows:
                 - /dependabot.*/
           requires:
             - deploy_uat
+          <<: *generic-slack-fail-post-step
 
   merge_pr:
     jobs:
@@ -302,23 +292,66 @@ workflows:
           filters:
             branches:
               only: main
+          <<: *generic-slack-fail-post-step
       - unit_tests:
           filters:
             branches:
               only: main
+          <<: *generic-slack-fail-post-step
       - build_and_push:
           requires:
             - lint_checks
             - unit_tests
+          <<: *generic-slack-fail-post-step
       - deploy_main_uat:
           context: laa-hmrc-interface-uat
           requires:
             - build_and_push
+          <<: *generic-slack-fail-post-step
       - deploy_staging:
           context: laa-hmrc-interface-staging
           requires:
             - build_and_push
+          <<: *generic-slack-fail-post-step
       - slack/on-hold:
+          custom: |
+            {
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "plain_text",
+                    "text": ":circleci: $CIRCLE_USERNAME has a pending production approval for $CIRCLE_BRANCH"
+                  }
+                },
+                {
+                  "type": "section",
+                  "fields": [
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Project*: $CIRCLE_PROJECT_REPONAME"
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Pull Request*: $CIRCLE_PULL_REQUEST"
+                    }
+                  ]
+                },
+                {
+                  "type": "actions",
+                  "elements": [
+                    {
+                      "type": "button",
+                      "text": {
+                        "type": "plain_text",
+                        "text": "View Workflow"
+                      },
+                      "url": "https://circleci.com/workflow-run/${CIRCLE_WORKFLOW_ID}"
+                    }
+                  ]
+                }
+              ]
+            }
           requires:
             - deploy_main_uat
             - deploy_staging
@@ -331,7 +364,7 @@ workflows:
           context: laa-hmrc-interface-production
           requires:
             - hold_production
-
+          <<: *generic-slack-fail-post-step
   smoke-tests:
     triggers:
       - schedule:
