@@ -41,7 +41,7 @@ end
 
 group :test do
   gem "mock_redis"
-  gem "rspec-rails", "~> 6.1"
+  gem "rspec-rails", "~> 7.0"
   gem "rspec-sidekiq"
   gem "shoulda-matchers"
   gem "simplecov", require: false
