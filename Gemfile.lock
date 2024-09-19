@@ -112,7 +112,7 @@ GEM
     domain_name (0.6.20240107)
     doorkeeper (5.7.1)
       railties (>= 5)
-    dotenv (3.1.2)
+    dotenv (3.1.4)
     drb (2.2.1)
     em-websocket (0.5.3)
       eventmachine (>= 0.12.9)
