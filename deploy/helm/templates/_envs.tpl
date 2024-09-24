@@ -47,11 +47,6 @@ env:
       secretKeyRef:
         name: hmrc-interface-secrets
         key: settings__sentry__dsn
-  - name: SETTINGS__SENTRY__ENVIRONMENT
-    valueFrom:
-      secretKeyRef:
-        name: {{ template "app.fullname" . }}
-        key: settings__sentry__environment
   - name: SETTINGS__SIDEKIQ__USERNAME
     valueFrom:
       secretKeyRef:
@@ -62,11 +57,7 @@ env:
       secretKeyRef:
         name: hmrc-interface-secrets
         key: settings__sidekiq__web_ui_password
-  - name: SETTINGS__ENVIRONMENT
-    valueFrom:
-      secretKeyRef:
-        name: {{ template "app.fullname" . }}
-        key: settings__environment
+
   - name: SETTINGS__CREDENTIALS__USE_CASE_ONE__DESCRIPTION
     valueFrom:
       secretKeyRef:
@@ -318,6 +309,10 @@ env:
     value: production
   - name: RAILS_LOG_TO_STDOUT
     value: 'true'
+  - name: SETTINGS__SENTRY__ENVIRONMENT
+    value: {{ .Values.deploy.settings__sentry__environment | quote }}
+  - name: SETTINGS__ENVIRONMENT
+    value: {{ .Values.deploy.settings__environment | quote }}
   - name: HOST
     valueFrom:
       secretKeyRef:
