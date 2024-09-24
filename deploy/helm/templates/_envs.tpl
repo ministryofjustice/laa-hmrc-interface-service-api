@@ -40,12 +40,12 @@ env:
   - name: SECRET_KEY_BASE
     valueFrom:
       secretKeyRef:
-        name: {{ template "app.fullname" . }}
+        name: hmrc-interface-secrets
         key: secretKeyBase
   - name: SETTINGS__SENTRY__DSN
     valueFrom:
       secretKeyRef:
-        name: {{ template "app.fullname" . }}
+        name: hmrc-interface-secrets
         key: settings__sentry__dsn
   - name: SETTINGS__SENTRY__ENVIRONMENT
     valueFrom:
@@ -55,12 +55,12 @@ env:
   - name: SETTINGS__SIDEKIQ__USERNAME
     valueFrom:
       secretKeyRef:
-        name: {{ template "app.fullname" . }}
+        name: hmrc-interface-secrets
         key: settings__sidekiq__username
   - name: SETTINGS__SIDEKIQ__WEB_UI_PASSWORD
     valueFrom:
       secretKeyRef:
-        name: {{ template "app.fullname" . }}
+        name: hmrc-interface-secrets
         key: settings__sidekiq__web_ui_password
   - name: SETTINGS__ENVIRONMENT
     valueFrom:
@@ -70,102 +70,102 @@ env:
   - name: SETTINGS__CREDENTIALS__USE_CASE_ONE__DESCRIPTION
     valueFrom:
       secretKeyRef:
-        name: {{ template "app.fullname" . }}
+        name: hmrc-interface-secrets
         key: settings__credentials__use_case_one__description
   - name: SETTINGS__CREDENTIALS__USE_CASE_ONE__HOST
     valueFrom:
       secretKeyRef:
-        name: {{ template "app.fullname" . }}
+        name: hmrc-interface-secrets
         key: settings__credentials__use_case_one__host
   - name: SETTINGS__CREDENTIALS__USE_CASE_ONE__HMRC_CLIENT_SECRET
     valueFrom:
       secretKeyRef:
-        name: {{ template "app.fullname" . }}
+        name: hmrc-interface-secrets
         key: settings__credentials__use_case_one__hmrc_client_secret
   - name: SETTINGS__CREDENTIALS__USE_CASE_ONE__HMRC_CLIENT_ID
     valueFrom:
       secretKeyRef:
-        name: {{ template "app.fullname" . }}
+        name: hmrc-interface-secrets
         key: settings__credentials__use_case_one__hmrc_client_id
   - name: SETTINGS__CREDENTIALS__USE_CASE_ONE__HMRC_TOTP_SECRET
     valueFrom:
       secretKeyRef:
-        name: {{ template "app.fullname" . }}
+        name: hmrc-interface-secrets
         key: settings__credentials__use_case_one__hmrc_totp_secret
   - name: SETTINGS__CREDENTIALS__USE_CASE_TWO__DESCRIPTION
     valueFrom:
       secretKeyRef:
-        name: {{ template "app.fullname" . }}
+        name: hmrc-interface-secrets
         key: settings__credentials__use_case_two__description
   - name: SETTINGS__CREDENTIALS__USE_CASE_TWO__HOST
     valueFrom:
       secretKeyRef:
-        name: {{ template "app.fullname" . }}
+        name: hmrc-interface-secrets
         key: settings__credentials__use_case_two__host
   - name: SETTINGS__CREDENTIALS__USE_CASE_TWO__HMRC_CLIENT_SECRET
     valueFrom:
       secretKeyRef:
-        name: {{ template "app.fullname" . }}
+        name: hmrc-interface-secrets
         key: settings__credentials__use_case_two__hmrc_client_secret
   - name: SETTINGS__CREDENTIALS__USE_CASE_TWO__HMRC_CLIENT_ID
     valueFrom:
       secretKeyRef:
-        name: {{ template "app.fullname" . }}
+        name: hmrc-interface-secrets
         key: settings__credentials__use_case_two__hmrc_client_id
   - name: SETTINGS__CREDENTIALS__USE_CASE_TWO__HMRC_TOTP_SECRET
     valueFrom:
       secretKeyRef:
-        name: {{ template "app.fullname" . }}
+        name: hmrc-interface-secrets
         key: settings__credentials__use_case_two__hmrc_totp_secret
   - name: SETTINGS__CREDENTIALS__USE_CASE_THREE__DESCRIPTION
     valueFrom:
       secretKeyRef:
-        name: {{ template "app.fullname" . }}
+        name: hmrc-interface-secrets
         key: settings__credentials__use_case_three__description
   - name: SETTINGS__CREDENTIALS__USE_CASE_THREE__HOST
     valueFrom:
       secretKeyRef:
-        name: {{ template "app.fullname" . }}
+        name: hmrc-interface-secrets
         key: settings__credentials__use_case_three__host
   - name: SETTINGS__CREDENTIALS__USE_CASE_THREE__HMRC_CLIENT_SECRET
     valueFrom:
       secretKeyRef:
-        name: {{ template "app.fullname" . }}
+        name: hmrc-interface-secrets
         key: settings__credentials__use_case_three__hmrc_client_secret
   - name: SETTINGS__CREDENTIALS__USE_CASE_THREE__HMRC_CLIENT_ID
     valueFrom:
       secretKeyRef:
-        name: {{ template "app.fullname" . }}
+        name: hmrc-interface-secrets
         key: settings__credentials__use_case_three__hmrc_client_id
   - name: SETTINGS__CREDENTIALS__USE_CASE_THREE__HMRC_TOTP_SECRET
     valueFrom:
       secretKeyRef:
-        name: {{ template "app.fullname" . }}
+        name: hmrc-interface-secrets
         key: settings__credentials__use_case_three__hmrc_totp_secret
   - name: SETTINGS__CREDENTIALS__USE_CASE_FOUR__DESCRIPTION
     valueFrom:
       secretKeyRef:
-        name: {{ template "app.fullname" . }}
+        name: hmrc-interface-secrets
         key: settings__credentials__use_case_four__description
   - name: SETTINGS__CREDENTIALS__USE_CASE_FOUR__HOST
     valueFrom:
       secretKeyRef:
-        name: {{ template "app.fullname" . }}
+        name: hmrc-interface-secrets
         key: settings__credentials__use_case_four__host
   - name: SETTINGS__CREDENTIALS__USE_CASE_FOUR__HMRC_CLIENT_SECRET
     valueFrom:
       secretKeyRef:
-        name: {{ template "app.fullname" . }}
+        name: hmrc-interface-secrets
         key: settings__credentials__use_case_four__hmrc_client_secret
   - name: SETTINGS__CREDENTIALS__USE_CASE_FOUR__HMRC_CLIENT_ID
     valueFrom:
       secretKeyRef:
-        name: {{ template "app.fullname" . }}
+        name: hmrc-interface-secrets
         key: settings__credentials__use_case_four__hmrc_client_id
   - name: SETTINGS__CREDENTIALS__USE_CASE_FOUR__HMRC_TOTP_SECRET
     valueFrom:
       secretKeyRef:
-        name: {{ template "app.fullname" . }}
+        name: hmrc-interface-secrets
         key: settings__credentials__use_case_four__hmrc_totp_secret
   {{- if eq .Values.deploy.settings__environment "non-live" }}
   - name: SETTINGS__SMOKE_TEST__USE_CASE_ONE__FIRST_NAME
