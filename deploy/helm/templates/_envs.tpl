@@ -156,145 +156,61 @@ env:
         key: settings__credentials__use_case_four__hmrc_totp_secret
   {{- if eq .Values.deploy.settings__environment "non-live" }}
   - name: SETTINGS__SMOKE_TEST__USE_CASE_ONE__FIRST_NAME
-    valueFrom:
-      secretKeyRef:
-        name: {{ template "app.fullname" . }}
-        key: settings__smoke_test__use_case_one__first_name
+    value: {{ .Values.smoke_test.use_case_one.first_name | quote }}
   - name: SETTINGS__SMOKE_TEST__USE_CASE_ONE__LAST_NAME
-    valueFrom:
-      secretKeyRef:
-        name: {{ template "app.fullname" . }}
-        key: settings__smoke_test__use_case_one__last_name
+    value: {{ .Values.smoke_test.use_case_one.last_name | quote }}
   - name: SETTINGS__SMOKE_TEST__USE_CASE_ONE__NINO
-    valueFrom:
-      secretKeyRef:
-        name: {{ template "app.fullname" . }}
-        key: settings__smoke_test__use_case_one__nino
+    value: {{ .Values.smoke_test.use_case_one.nino | quote }}
   - name: SETTINGS__SMOKE_TEST__USE_CASE_ONE__DOB
-    valueFrom:
-      secretKeyRef:
-        name: {{ template "app.fullname" . }}
-        key: settings__smoke_test__use_case_one__dob
+    value: {{ .Values.smoke_test.use_case_one.dob | quote }}
   - name: SETTINGS__SMOKE_TEST__USE_CASE_ONE__START_DATE
-    valueFrom:
-      secretKeyRef:
-        name: {{ template "app.fullname" . }}
-        key: settings__smoke_test__use_case_one__start_date
+    value: {{ .Values.smoke_test.use_case_one.start_date | quote }}
   - name: SETTINGS__SMOKE_TEST__USE_CASE_ONE__END_DATE
-    valueFrom:
-      secretKeyRef:
-        name: {{ template "app.fullname" . }}
-        key: settings__smoke_test__use_case_one__end_date
+    value: {{ .Values.smoke_test.use_case_one.end_date | quote }}
   - name: SETTINGS__SMOKE_TEST__USE_CASE_ONE__CORRELATION_ID
-    valueFrom:
-      secretKeyRef:
-        name: {{ template "app.fullname" . }}
-        key: settings__smoke_test__use_case_one__correlation_id
+    value: {{ .Values.smoke_test.use_case_one.correlation_id | quote }}
   - name: SETTINGS__SMOKE_TEST__USE_CASE_TWO__FIRST_NAME
-    valueFrom:
-      secretKeyRef:
-        name: {{ template "app.fullname" . }}
-        key: settings__smoke_test__use_case_two__first_name
+    value: {{ .Values.smoke_test.use_case_two.first_name | quote }}
   - name: SETTINGS__SMOKE_TEST__USE_CASE_TWO__LAST_NAME
-    valueFrom:
-      secretKeyRef:
-        name: {{ template "app.fullname" . }}
-        key: settings__smoke_test__use_case_two__last_name
+    value: {{ .Values.smoke_test.use_case_two.last_name | quote }}
   - name: SETTINGS__SMOKE_TEST__USE_CASE_TWO__NINO
-    valueFrom:
-      secretKeyRef:
-        name: {{ template "app.fullname" . }}
-        key: settings__smoke_test__use_case_two__nino
+    value: {{ .Values.smoke_test.use_case_two.nino | quote }}
   - name: SETTINGS__SMOKE_TEST__USE_CASE_TWO__DOB
-    valueFrom:
-      secretKeyRef:
-        name: {{ template "app.fullname" . }}
-        key: settings__smoke_test__use_case_two__dob
+    value: {{ .Values.smoke_test.use_case_two.dob | quote }}
   - name: SETTINGS__SMOKE_TEST__USE_CASE_TWO__START_DATE
-    valueFrom:
-      secretKeyRef:
-        name: {{ template "app.fullname" . }}
-        key: settings__smoke_test__use_case_two__start_date
+    value: {{ .Values.smoke_test.use_case_two.start_date | quote }}
   - name: SETTINGS__SMOKE_TEST__USE_CASE_TWO__END_DATE
-    valueFrom:
-      secretKeyRef:
-        name: {{ template "app.fullname" . }}
-        key: settings__smoke_test__use_case_two__end_date
+    value: {{ .Values.smoke_test.use_case_two.end_date | quote }}
   - name: SETTINGS__SMOKE_TEST__USE_CASE_TWO__CORRELATION_ID
-    valueFrom:
-      secretKeyRef:
-        name: {{ template "app.fullname" . }}
-        key: settings__smoke_test__use_case_two__correlation_id
+    value: {{ .Values.smoke_test.use_case_two.correlation_id | quote }}
   - name: SETTINGS__SMOKE_TEST__USE_CASE_THREE__FIRST_NAME
-    valueFrom:
-      secretKeyRef:
-        name: {{ template "app.fullname" . }}
-        key: settings__smoke_test__use_case_three__first_name
+    value: {{ .Values.smoke_test.use_case_three.first_name | quote }}
   - name: SETTINGS__SMOKE_TEST__USE_CASE_THREE__LAST_NAME
-    valueFrom:
-      secretKeyRef:
-        name: {{ template "app.fullname" . }}
-        key: settings__smoke_test__use_case_three__last_name
+    value: {{ .Values.smoke_test.use_case_three.last_name | quote }}
   - name: SETTINGS__SMOKE_TEST__USE_CASE_THREE__NINO
-    valueFrom:
-      secretKeyRef:
-        name: {{ template "app.fullname" . }}
-        key: settings__smoke_test__use_case_three__nino
+    value: {{ .Values.smoke_test.use_case_three.nino | quote }}
   - name: SETTINGS__SMOKE_TEST__USE_CASE_THREE__DOB
-    valueFrom:
-      secretKeyRef:
-        name: {{ template "app.fullname" . }}
-        key: settings__smoke_test__use_case_three__dob
+    value: {{ .Values.smoke_test.use_case_three.dob | quote }}
   - name: SETTINGS__SMOKE_TEST__USE_CASE_THREE__START_DATE
-    valueFrom:
-      secretKeyRef:
-        name: {{ template "app.fullname" . }}
-        key: settings__smoke_test__use_case_three__start_date
+    value: {{ .Values.smoke_test.use_case_three.start_date | quote }}
   - name: SETTINGS__SMOKE_TEST__USE_CASE_THREE__END_DATE
-    valueFrom:
-      secretKeyRef:
-        name: {{ template "app.fullname" . }}
-        key: settings__smoke_test__use_case_three__end_date
+    value: {{ .Values.smoke_test.use_case_three.end_date | quote }}
   - name: SETTINGS__SMOKE_TEST__USE_CASE_THREE__CORRELATION_ID
-    valueFrom:
-      secretKeyRef:
-        name: {{ template "app.fullname" . }}
-        key: settings__smoke_test__use_case_three__correlation_id
+    value: {{ .Values.smoke_test.use_case_three.correlation_id | quote }}
   - name: SETTINGS__SMOKE_TEST__USE_CASE_FOUR__FIRST_NAME
-    valueFrom:
-      secretKeyRef:
-        name: {{ template "app.fullname" . }}
-        key: settings__smoke_test__use_case_four__first_name
+    value: {{ .Values.smoke_test.use_case_four.first_name | quote }}
   - name: SETTINGS__SMOKE_TEST__USE_CASE_FOUR__LAST_NAME
-    valueFrom:
-      secretKeyRef:
-        name: {{ template "app.fullname" . }}
-        key: settings__smoke_test__use_case_four__last_name
+    value: {{ .Values.smoke_test.use_case_four.last_name | quote }}
   - name: SETTINGS__SMOKE_TEST__USE_CASE_FOUR__NINO
-    valueFrom:
-      secretKeyRef:
-        name: {{ template "app.fullname" . }}
-        key: settings__smoke_test__use_case_four__nino
+    value: {{ .Values.smoke_test.use_case_four.nino | quote }}
   - name: SETTINGS__SMOKE_TEST__USE_CASE_FOUR__DOB
-    valueFrom:
-      secretKeyRef:
-        name: {{ template "app.fullname" . }}
-        key: settings__smoke_test__use_case_four__dob
+    value: {{ .Values.smoke_test.use_case_four.dob | quote }}
   - name: SETTINGS__SMOKE_TEST__USE_CASE_FOUR__START_DATE
-    valueFrom:
-      secretKeyRef:
-        name: {{ template "app.fullname" . }}
-        key: settings__smoke_test__use_case_four__start_date
+    value: {{ .Values.smoke_test.use_case_four.start_date | quote }}
   - name: SETTINGS__SMOKE_TEST__USE_CASE_FOUR__END_DATE
-    valueFrom:
-      secretKeyRef:
-        name: {{ template "app.fullname" . }}
-        key: settings__smoke_test__use_case_four__end_date
+    value: {{ .Values.smoke_test.use_case_four.end_date | quote }}
   - name: SETTINGS__SMOKE_TEST__USE_CASE_FOUR__CORRELATION_ID
-    valueFrom:
-      secretKeyRef:
-        name: {{ template "app.fullname" . }}
-        key: settings__smoke_test__use_case_four__correlation_id
+    value: {{ .Values.smoke_test.use_case_four.correlation_id | quote }}
   {{ end }}
   - name: REDIS_URL
     valueFrom:
