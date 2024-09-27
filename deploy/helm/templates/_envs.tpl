@@ -310,8 +310,5 @@ env:
   - name: SETTINGS__SENTRY__ENVIRONMENT
     value: {{ .Values.deploy.settings__sentry__environment | quote }}
   - name: HOST
-    valueFrom:
-      secretKeyRef:
-        name: {{ template "app.fullname" . }}
-        key: deployHost
+    value: {{ .Values.deploy.host | quote }}
 {{- end }}
