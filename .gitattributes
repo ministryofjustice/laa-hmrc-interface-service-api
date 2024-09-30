@@ -1,5 +1,3 @@
 deploy/helm/values-*.y*ml filter=git-crypt diff=git-crypt
 spec/fixtures/smoke_tests/**/*.json filter=git-crypt diff=git-crypt
 spec/fixtures/test_data/**/*.json filter=git-crypt diff=git-crypt
-db/seed_data/test_oauth_accounts.yml filter=git-crypt diff=git-crypt
-deploy/helm/templates/ingress.yaml filter=git-crypt diff=git-crypt
