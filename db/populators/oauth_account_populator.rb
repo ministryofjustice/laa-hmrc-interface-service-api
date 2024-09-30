@@ -1,6 +1,4 @@
 class OauthAccountPopulator
-  DATA_FILE = Rails.root.join("db/seed_data/test_oauth_accounts.yml").freeze
-
   def self.call
     new.call
   end
@@ -12,17 +10,21 @@ class OauthAccountPopulator
 private
 
   def populate(seed_row)
-    name, scopes, uid, secret = seed_row
-    record = Doorkeeper::Application.find_by(name:) || Doorkeeper::Application.new
+    record = Doorkeeper::Application.find_by(name: seed_row["name"]) || Doorkeeper::Application.new
+
     record.update!(
-      name:,
-      scopes:,
-      uid:,
-      secret:,
+      name: seed_row["name"],
+      scopes: seed_row["scopes"],
+      uid: seed_row["uid"],
+      secret: seed_row["secret"],
     )
   end
 
   def seed_data
-    @seed_data ||= YAML.load_file(DATA_FILE)
+    @seed_data ||= JSON.parse(test_oauth_accounts_json)
+  end
+
+  def test_oauth_accounts_json
+    @test_oauth_accounts_json ||= ENV.fetch("TEST_OAUTH_ACCOUNTS_JSON", nil)
   end
 end

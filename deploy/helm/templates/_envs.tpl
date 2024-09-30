@@ -211,6 +211,11 @@ env:
     value: {{ .Values.smoke_test.use_case_four.end_date | quote }}
   - name: SETTINGS__SMOKE_TEST__USE_CASE_FOUR__CORRELATION_ID
     value: {{ .Values.smoke_test.use_case_four.correlation_id | quote }}
+  - name: TEST_OAUTH_ACCOUNTS_JSON
+    valueFrom:
+      secretKeyRef:
+        name: hmrc-interface-secrets
+        key: test_oauth_accounts_json
   {{ end }}
   - name: REDIS_URL
     valueFrom:
