@@ -11,7 +11,7 @@
 # creator.create!(endpoint: :employment, start_date: start_date, end_date: end_date)
 # ```
 #
-# NOTE: the payload is taken from fixture files that are git-crypted. In addition, the income/paye
+# NOTE: the payload is taken from fixture files. In addition, the income/paye
 # `paymentDate` in the payload must be within the range defined by start_date and end_date or data
 # creation will fail.
 #

@@ -44,12 +44,6 @@ references:
         kubectl config set-credentials circleci --token=${K8S_TOKEN_LIVE}
         kubectl config set-context ${K8S_CLUSTER_NAME_LIVE} --cluster=${K8S_CLUSTER_NAME_LIVE} --user=circleci --namespace=${K8S_NAMESPACE}
         kubectl config use-context ${K8S_CLUSTER_NAME_LIVE}
-  decrypt_secrets: &decrypt_secrets
-    run:
-      name: Decrypt secrets file
-      command: |
-        echo "${GIT_CRYPT_KEY}" | base64 -d > git-crypt.key
-        git-crypt unlock git-crypt.key
   restore_gems_cache: &restore_gems_cache
     restore_cache:
       keys:
@@ -71,7 +65,6 @@ references:
       command: |
         sudo apt-get update
         sudo apt-get install -y postgresql-client
-        sudo apt-get install -y git-crypt
   setup_database: &setup_database
     run:
       name: Database Setup
@@ -130,7 +123,6 @@ jobs:
     steps:
       - checkout
       - *install_packages_for_testing
-      - *decrypt_secrets
       - *restore_gems_cache
       - *install_gems
       - *save_gems_cache
@@ -183,7 +175,6 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
-      - *decrypt_secrets
       - build-and-push-to-ecr
   deploy_uat: &deploy_uat
     executor: cloud-platform-executor
@@ -191,7 +182,6 @@ jobs:
       - checkout
       - setup_remote_docker:
           docker_layer_caching: true
-      - *decrypt_secrets
       - *authenticate_k8s_live
       - run:
           name: Helm deployment to UAT
@@ -204,7 +194,6 @@ jobs:
       - checkout
       - setup_remote_docker:
           docker_layer_caching: true
-      - *decrypt_secrets
       - *authenticate_k8s_live
       - run:
           name: Helm deployment to staging
@@ -221,7 +210,6 @@ jobs:
       - checkout
       - setup_remote_docker:
           docker_layer_caching: true
-      - *decrypt_secrets
       - *authenticate_k8s_live
       - run:
           name: Helm deployment to production
