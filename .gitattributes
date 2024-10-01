@@ -1,1 +1,1 @@
-deploy/helm/values-*.y*ml filter=git-crypt diff=git-crypt
+
