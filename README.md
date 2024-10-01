@@ -15,13 +15,6 @@ This Service facilitates the HMRC API access for the LAA Use Cases
 * redis
 
 ### Setup
-1. Retrieve the `GIT_CRYPT_KEY` from 1Password (hint: search `hmrc interface key`)
-1. Unlock encrypted secrets
-
-```sh
-git-crypt unlock <path-to-git-crypt-key>
-```
-
 1. Copy the `.env` file from 1Password (hint: search `hmrc interface env`) and paste them into a new file called `.env.development`
 
 1. Run the setup binstub
