@@ -5,8 +5,6 @@
 * Copy the `.env` values from 1Password (hint: search `hmrc interface env`)
 * Paste the `.env` values from 1Password into a new file called `.env.development`
 * Run `bundle install`
-* Copy the symmetric key from 1Password (hint: search `hmrc interface key`)
-* Run `git-crypt unlock ~/path/to/symmetric_key`
 * Run `rake db:reset`, this will create, migrate and seed the database
 * Run the tests with `bundle exec rspec`
 * Run the server with `bundle exec rails s` \*
