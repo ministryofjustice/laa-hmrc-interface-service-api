@@ -55,7 +55,7 @@ VCR.configure do |vcr_config|
   vcr_config.hook_into :webmock
   vcr_config.configure_rspec_metadata!
   vcr_config.filter_sensitive_data("<SETTINGS__CREDENTIALS__HOST>") do
-    Settings.credentials.host
+    Settings.credentials.hmrc_host
   end
 end
 
@@ -77,7 +77,7 @@ RSpec.configure do |config|
   # set up default stub for the host, this can be overwritten in individual stubs if needed
   config.before do
     def hmrc_stub_requests
-      stub_request(:post, %r{\A#{Settings.credentials.host}/.*\z}).to_return(status: 200, body: "")
+      stub_request(:post, %r{\A#{Settings.credentials.hmrc_host}/.*\z}).to_return(status: 200, body: "")
     end
   end
 
