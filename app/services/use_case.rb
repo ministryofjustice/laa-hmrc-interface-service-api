@@ -8,10 +8,6 @@ class UseCase
     @bearer_token = check_bearer_token
   end
 
-  def host
-    @host ||= Settings.credentials.send(@use_case).host
-  end
-
 private
 
   def check_bearer_token
