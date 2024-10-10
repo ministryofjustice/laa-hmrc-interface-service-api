@@ -54,16 +54,16 @@ env:
       secretKeyRef:
         name: hmrc-interface-secrets
         key: settings__sidekiq__web_ui_password
+  - name: SETTINGS__CREDENTIALS__HMRC_HOST
+    valueFrom:
+      secretKeyRef:
+        name: hmrc-interface-secrets
+        key: settings__credentials__hmrc_host
   - name: SETTINGS__CREDENTIALS__USE_CASE_ONE__DESCRIPTION
     valueFrom:
       secretKeyRef:
         name: hmrc-interface-secrets
         key: settings__credentials__use_case_one__description
-  - name: SETTINGS__CREDENTIALS__USE_CASE_ONE__HOST
-    valueFrom:
-      secretKeyRef:
-        name: hmrc-interface-secrets
-        key: settings__credentials__use_case_one__host
   - name: SETTINGS__CREDENTIALS__USE_CASE_ONE__HMRC_CLIENT_SECRET
     valueFrom:
       secretKeyRef:
@@ -84,11 +84,6 @@ env:
       secretKeyRef:
         name: hmrc-interface-secrets
         key: settings__credentials__use_case_two__description
-  - name: SETTINGS__CREDENTIALS__USE_CASE_TWO__HOST
-    valueFrom:
-      secretKeyRef:
-        name: hmrc-interface-secrets
-        key: settings__credentials__use_case_two__host
   - name: SETTINGS__CREDENTIALS__USE_CASE_TWO__HMRC_CLIENT_SECRET
     valueFrom:
       secretKeyRef:
@@ -109,11 +104,6 @@ env:
       secretKeyRef:
         name: hmrc-interface-secrets
         key: settings__credentials__use_case_three__description
-  - name: SETTINGS__CREDENTIALS__USE_CASE_THREE__HOST
-    valueFrom:
-      secretKeyRef:
-        name: hmrc-interface-secrets
-        key: settings__credentials__use_case_three__host
   - name: SETTINGS__CREDENTIALS__USE_CASE_THREE__HMRC_CLIENT_SECRET
     valueFrom:
       secretKeyRef:
@@ -134,11 +124,6 @@ env:
       secretKeyRef:
         name: hmrc-interface-secrets
         key: settings__credentials__use_case_four__description
-  - name: SETTINGS__CREDENTIALS__USE_CASE_FOUR__HOST
-    valueFrom:
-      secretKeyRef:
-        name: hmrc-interface-secrets
-        key: settings__credentials__use_case_four__host
   - name: SETTINGS__CREDENTIALS__USE_CASE_FOUR__HMRC_CLIENT_SECRET
     valueFrom:
       secretKeyRef:
