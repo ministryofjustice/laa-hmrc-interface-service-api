@@ -50,11 +50,7 @@ module HMRC
     private
 
       def using_test_host_credentials?
-        Settings.credentials.host.match?("test") &&
-          Settings.credentials.use_case_one.host.match?("test") &&
-          Settings.credentials.use_case_two.host.match?("test") &&
-          Settings.credentials.use_case_three.host.match?("test") &&
-          Settings.credentials.use_case_four.host.match?("test")
+        Settings.credentials.host.match?("test")
       end
 
       def url
