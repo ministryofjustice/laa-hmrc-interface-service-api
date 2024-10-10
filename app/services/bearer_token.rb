@@ -34,6 +34,6 @@ private
   end
 
   def url
-    "#{@credentials.host}/oauth/token"
+    "#{Settings.credentials.hmrc_host}/oauth/token"
   end
 end
