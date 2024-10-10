@@ -104,7 +104,7 @@ private
   end
 
   def host
-    @host ||= @use_case.host
+    @host ||= Settings.credentials.host
   end
 
   def response_code(error, text)
