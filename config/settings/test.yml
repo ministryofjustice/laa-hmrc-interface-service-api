@@ -1,25 +1,21 @@
 credentials:
-  host: &host 'https://fake.test.api'
+  hmrc_host: 'https://fake.test.api'
   use_case_one:
-    host: *host
     description: 'This is fake'
     hmrc_client_secret: 'NotASecret'
     hmrc_client_id: 'NotAClientID'
     hmrc_totp_secret: 'AlsoNotASecret'
   use_case_two:
-    host: *host
     description: 'This is fake'
     hmrc_client_secret: 'NotASecret'
     hmrc_client_id: 'NotAClientID'
     hmrc_totp_secret: 'AlsoNotASecret'
   use_case_three:
-    host: *host
     description: 'This is fake'
     hmrc_client_secret: 'NotASecret'
     hmrc_client_id: 'NotAClientID'
     hmrc_totp_secret: 'AlsoNotASecret'
   use_case_four:
-    host: *host
     description: 'This is fake'
     hmrc_client_secret: 'NotASecret'
     hmrc_client_id: 'NotAClientID'

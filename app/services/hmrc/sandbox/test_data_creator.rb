@@ -50,11 +50,7 @@ module HMRC
     private
 
       def using_test_host_credentials?
-        Settings.credentials.host.match?("test") &&
-          Settings.credentials.use_case_one.host.match?("test") &&
-          Settings.credentials.use_case_two.host.match?("test") &&
-          Settings.credentials.use_case_three.host.match?("test") &&
-          Settings.credentials.use_case_four.host.match?("test")
+        Settings.credentials.hmrc_host.match?("test")
       end
 
       def url
@@ -62,7 +58,7 @@ module HMRC
       end
 
       def base_url
-        "#{Settings.credentials.host}/individuals/integration-framework-test-support/individuals"
+        "#{Settings.credentials.hmrc_host}/individuals/integration-framework-test-support/individuals"
       end
 
       def path

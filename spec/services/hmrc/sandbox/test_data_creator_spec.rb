@@ -11,20 +11,15 @@ RSpec.describe HMRC::Sandbox::TestDataCreator do
   before do
     remove_request_stub(hmrc_stub_requests)
     allow(REDIS).to receive(:get).with("use_case_one_bearer_token").and_return("dummy_bearer_token")
-    stub_request(:post, /\A#{Settings.credentials.host}.*\z/).to_return(status: 201, body: "", headers: {})
+    stub_request(:post, /\A#{Settings.credentials.hmrc_host}.*\z/).to_return(status: 201, body: "", headers: {})
   end
 
   context "when called on environment not configured to use HMRC Sandbox host" do
     # rubocop:disable RSpec/VerifiedDoubles
     before do
       fake_live_host = "https://fake-live-host.gov.uk"
-      fake_use_case = double("use case", host: fake_live_host)
       creds = double("credentials",
-                     host: fake_live_host,
-                     use_case_one: fake_use_case,
-                     use_case_two: fake_use_case,
-                     use_case_three: fake_use_case,
-                     use_case_four: fake_use_case)
+                     hmrc_host: fake_live_host)
 
       allow(Settings).to receive(:credentials).and_return(creds)
     end

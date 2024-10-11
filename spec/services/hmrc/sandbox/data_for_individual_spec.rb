@@ -29,7 +29,7 @@ RSpec.describe HMRC::Sandbox::DataForIndividual do
 
     before do
       allow(REDIS).to receive(:get).with("use_case_one_bearer_token").and_return("dummy_bearer_token")
-      stub_request(:post, /\A#{Settings.credentials.host}.*\z/).to_return(status: 201, body: "", headers: {})
+      stub_request(:post, /\A#{Settings.credentials.hmrc_host}.*\z/).to_return(status: 201, body: "", headers: {})
     end
 
     it "makes a single post to the expected endpoint" do
@@ -49,7 +49,7 @@ RSpec.describe HMRC::Sandbox::DataForIndividual do
 
     before do
       allow(REDIS).to receive(:get).with("use_case_one_bearer_token").and_return("dummy_bearer_token")
-      stub_request(:post, /\A#{Settings.credentials.host}.*\z/).to_return(status: 201, body: "", headers: {})
+      stub_request(:post, /\A#{Settings.credentials.hmrc_host}.*\z/).to_return(status: 201, body: "", headers: {})
     end
 
     it "makes a single post to the expected endpoint" do
