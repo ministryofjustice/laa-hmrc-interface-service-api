@@ -17,7 +17,9 @@ This Service facilitates the HMRC API access for the LAA Use Cases
 ### Setup
 1. Copy the `.env` file from 1Password (hint: search `hmrc interface env`) and paste them into a new file called `.env.development`
 
-1. Run the setup binstub
+2. Retrieve values for the .env file envvars from AWS console or k8s secrets. You will, at least, need the `TEST_OAUTH_ACCOUNTS_JSON` to seed your database with doorkeeper accounts.
+
+3. Run the setup binstub
 
 ```sh
 bin/setup
