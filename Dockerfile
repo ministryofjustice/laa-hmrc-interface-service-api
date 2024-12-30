@@ -1,6 +1,10 @@
 FROM ruby:3.4.1-alpine3.21
 
-MAINTAINER Apply for legal aid team
+LABEL org.opencontainers.image.vendor="Ministry of Justice" \
+      org.opencontainers.image.authors="Apply for civil legal aid team (apply-for-civil-legal-aid@digital.justice.gov.uk)" \
+      org.opencontainers.image.title="LAA HMRC Interface Service API" \
+      org.opencontainers.image.description="Wrapper API for accessing HRMC API for LAA use cases" \
+      org.opencontainers.image.url="https://github.com/ministryofjustice/laa-hmrc-interface-service-api"
 
 ENV RAILS_ENV production
 
