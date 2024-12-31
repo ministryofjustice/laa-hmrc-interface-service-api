@@ -1,9 +1,21 @@
 Sidekiq.configure_server do |config|
   config.logger = Rails.logger
   config.redis = { url: "redis://127.0.0.1:6380/5" } if Rails.env.development?
-  config.capsule("submission_capsules") do |cap|
+  config.capsule("use_case_one_capsule") do |cap|
     cap.concurrency = 1
-    cap.queues = %w[uc-one-submissions uc-two-submissions]
+    cap.queues = ["uc-one-#{QueueNameService.call}"]
+  end
+  config.capsule("use_case_two_capsule") do |cap|
+    cap.concurrency = 1
+    cap.queues = ["uc-two-#{QueueNameService.call}"]
+  end
+  config.capsule("use_case_three_capsule") do |cap|
+    cap.concurrency = 1
+    cap.queues = ["uc-three-#{QueueNameService.call}"]
+  end
+  config.capsule("use_case_four_capsule") do |cap|
+    cap.concurrency = 1
+    cap.queues = ["uc-four-#{QueueNameService.call}"]
   end
 end
 
