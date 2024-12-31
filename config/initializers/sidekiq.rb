@@ -1,3 +1,5 @@
+require "app/services/queue_name_service"
+
 Sidekiq.configure_server do |config|
   config.logger = Rails.logger
   config.redis = { url: "redis://127.0.0.1:6380/5" } if Rails.env.development?
