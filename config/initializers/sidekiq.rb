@@ -1,4 +1,4 @@
-require "app/services/queue_name_service"
+require_relative "../../app/services/queue_name_service"
 
 Sidekiq.configure_server do |config|
   config.logger = Rails.logger
