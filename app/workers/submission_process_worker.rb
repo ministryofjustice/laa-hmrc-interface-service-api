@@ -3,7 +3,7 @@ class SubmissionProcessWorker
   attr_accessor :retry_count
 
   MAX_RETRIES = 3
-  sidekiq_options queue: QueueNameService.call, retry: MAX_RETRIES
+  sidekiq_options retry: MAX_RETRIES
   sidekiq_retries_exhausted do |msg, _ex|
     Sentry.capture_message <<~ERROR
       Moving #{msg['class']}##{msg['args'].first} to dead set, it failed with: #{msg['error_class']}/#{msg['error_message']}
