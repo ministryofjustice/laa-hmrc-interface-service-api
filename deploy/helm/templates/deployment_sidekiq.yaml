@@ -21,10 +21,10 @@ spec:
     spec:
       serviceAccountName: "{{ .Values.service_account.name }}"
       containers:
-        - name: sidekiq-default
+        - name: sidekiq
           image: '{{ .Values.image.repository }}:{{ .Values.image.tag }}'
           imagePullPolicy: IfNotPresent
-          command: ['bundle', 'exec', 'sidekiq', '-q', 'default']
+          command: ['bundle', 'exec', 'sidekiq']
 {{ include "app.envs" . | nindent 10 }}
           resources:
             limits:
@@ -46,6 +46,10 @@ spec:
               command: ['bin/sidekiq_health_check']
             initialDelaySeconds: 35
             timeoutSeconds: 5
+          lifecycle:
+            preStop:
+              exec:
+                command: ['bundle', 'exec', 'sidekiqctl', 'quiet']
           securityContext:
             allowPrivilegeEscalation: false
             runAsNonRoot: true
