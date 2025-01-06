@@ -12,14 +12,13 @@ require "action_mailbox/engine"
 require "action_text/engine"
 require "action_view/railtie"
 require "action_cable/engine"
-# require "sprockets/railtie"
 # require "rails/test_unit/railtie"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-# load `.env` earlier in boot sequence for use in settings.yml
+# load `.env[.*]` earlier in boot sequence for use in settings.yml
 Dotenv::Rails.load
 
 module LaaHmrcInterfaceServiceApi
@@ -27,9 +26,10 @@ module LaaHmrcInterfaceServiceApi
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.1
 
-    config.generators do |g|
-      g.orm :active_record, primary_key_type: :uuid
-    end
+    # Please, add to the `ignore` list any other `lib` subdirectories that do
+    # not contain `.rb` files, or that should not be reloaded or eager loaded.
+    # Common ones are `templates`, `generators`, or `middleware`, for example.
+    config.autoload_lib(ignore: %w[assets tasks])
 
     # Configuration for the application, engines, and railties goes here.
     #
