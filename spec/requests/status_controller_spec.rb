@@ -10,7 +10,7 @@ RSpec.describe StatusController do
 
     context "when an postgres problem exists" do
       before do
-        allow(ActiveRecord::Base.connection).to receive(:active?).and_raise(PG::ConnectionBad, "Error")
+        allow(ActiveRecord::Base.connection).to receive(:database_exists?).and_return(false)
 
         get "/health_check"
       end
@@ -194,7 +194,7 @@ RSpec.describe StatusController do
 
     context "when everything is ok" do
       before do
-        allow(ActiveRecord::Base.connection).to receive(:active?).and_return(true)
+        allow(ActiveRecord::Base.connection).to receive(:database_exists?).and_return(true)
 
         get "/health_check"
       end
