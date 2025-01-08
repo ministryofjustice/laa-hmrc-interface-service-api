@@ -24,7 +24,7 @@ class StatusController < ApplicationController
 private
 
   def database_alive?
-    ActiveRecord::Base.connection.active?
+    ActiveRecord::Base.connection.verify!
   rescue PG::ConnectionBad
     false
   end
