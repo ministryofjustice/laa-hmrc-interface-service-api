@@ -70,13 +70,13 @@ module Api
       end
 
       def filtered_params
-        params.require(:filter).permit(:use_case,
-                                       :last_name,
-                                       :first_name,
-                                       :dob,
-                                       :nino,
-                                       :start_date,
-                                       :end_date)
+        params.expect(filter: %i[use_case
+                                 last_name
+                                 first_name
+                                 dob
+                                 nino
+                                 start_date
+                                 end_date])
       end
 
       def submission
