@@ -1,7 +1,7 @@
 AllCops:
   NewCops: enable
 
-require:
+plugins:
   - rubocop-performance
 
 inherit_from: .rubocop_rspec.yml
