@@ -53,7 +53,7 @@ RSpec.describe SubmissionProcessWorker do
         end
 
         context "when the retry is at the max retries" do
-          let(:expected_message) { "Moving SubmissionProcessWorker# to dead set, it failed with: /An error occured\n" }
+          let(:expected_message) { "Moving SubmissionProcessWorker# to dead set, it failed with: /An error occurred\n" }
 
           before { worker.retry_count = 3 }
 
