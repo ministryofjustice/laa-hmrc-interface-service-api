@@ -264,15 +264,6 @@ workflows:
             - unit_tests
             - build_and_push
           <<: *generic-slack-fail-post-step
-      - delete_dependabot_deployment:
-          context: laa-hmrc-interface-uat
-          filters:
-            branches:
-              only:
-                - /dependabot.*/
-          requires:
-            - deploy_uat
-          <<: *generic-slack-fail-post-step
 
   merge_pr:
     jobs:
