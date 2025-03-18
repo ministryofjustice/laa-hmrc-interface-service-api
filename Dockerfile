@@ -13,6 +13,7 @@ RUN set -ex
 RUN apk --no-cache add --virtual build-dependencies \
                     build-base \
                     postgresql-dev \
+                    yaml-dev \
 && apk --no-cache add postgresql-client
 
 RUN mkdir /app
