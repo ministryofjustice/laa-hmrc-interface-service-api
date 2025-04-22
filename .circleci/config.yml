@@ -29,7 +29,7 @@ executors:
           PGUSER: user
           TZ: "Europe/London"
       - image: cimg/redis:6.2
-      - image: cimg/postgres:14.10
+      - image: cimg/postgres:17.4
         environment:
           POSTGRES_USER: user
           POSTGRES_DB: laa_hmrc_interface_service_api_test
