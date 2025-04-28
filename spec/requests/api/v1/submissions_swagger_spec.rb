@@ -278,10 +278,10 @@ end
 #
 RSpec.describe "Generate submission swagger docs" do
   context "with API V1 Docs", swagger_doc: "v1/live/swagger.yaml" do
-    include_examples "GET submission"
+    it_behaves_like "GET submission"
   end
 
   context "with API V1 Docs (incl. smoke tests)", swagger_doc: "v1/swagger.yaml" do
-    include_examples "GET submission"
+    it_behaves_like "GET submission"
   end
 end
