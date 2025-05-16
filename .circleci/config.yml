@@ -52,7 +52,7 @@ references:
     run:
       name: Install ruby gems
       command: |
-        gem install bundler -v 2.3.7
+        gem install bundler -v 2.6.9
         bundle install --path=vendor/bundle --jobs=4 && bundle clean
   save_gems_cache: &save_gems_cache
     save_cache:
