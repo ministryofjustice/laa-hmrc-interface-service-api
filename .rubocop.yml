@@ -51,3 +51,7 @@ RSpec/SharedContext:
 RSpec/ScatteredSetup:
   Exclude:
     - 'spec/requests/api/v1/smoke_test_swagger_spec.rb'
+
+Naming/PredicateMethod:
+  Exclude:
+    - 'app/services/hmrc/sandbox/test_data_creator.rb'
