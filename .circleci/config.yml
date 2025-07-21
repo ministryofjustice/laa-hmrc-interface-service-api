@@ -133,11 +133,10 @@ jobs:
       - run:
           name: Run ruby tests
           command: |
-            bundle exec rspec
-#            ./tmp/cc-test-reporter before-build
-#            bundle exec rspec --format progress --format RspecJunitFormatter -o /tmp/test-results/rspec/rspec.xml
-#            ./tmp/cc-test-reporter format-coverage -t simplecov -o tmp/coverage/codeclimate.json
-#            ./tmp/cc-test-reporter upload-coverage -i tmp/coverage/codeclimate.json
+            ./tmp/cc-test-reporter before-build
+            bundle exec rspec --format progress --format RspecJunitFormatter -o /tmp/test-results/rspec/rspec.xml
+            ./tmp/cc-test-reporter format-coverage -t simplecov -o tmp/coverage/codeclimate.json
+            ./tmp/cc-test-reporter upload-coverage -i tmp/coverage/codeclimate.json
       - store_test_results:
           path: /tmp/test-results/rspec
       - store_artifacts:
