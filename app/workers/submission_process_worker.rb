@@ -1,5 +1,6 @@
 class SubmissionProcessWorker
   include Sidekiq::Worker
+
   attr_accessor :retry_count
 
   MAX_RETRIES = 3
