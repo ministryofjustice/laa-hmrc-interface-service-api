@@ -16,12 +16,12 @@ metadata:
 spec:
   ingressClassName: {{ .Values.publicIngress.className }}
   tls:
-  {{- range .Values.ingress.hosts }}
-  - hosts:
-    - {{ . }}
-  {{- end }}
+{{- range .Values.ingress.hosts }}
+    - hosts:
+      - {{ . }}
+{{- end }}
   rules:
-    {{- range .Values.ingress.hosts }}
+{{- range .Values.ingress.hosts }}
     - host: {{ . }}
       http:
         paths:
@@ -32,5 +32,5 @@ spec:
                 name: {{ $fullName }}
                 port:
                   name: http
-    {{- end }}
+{{- end }}
 {{- end }}

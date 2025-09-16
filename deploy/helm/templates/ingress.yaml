@@ -16,21 +16,21 @@ metadata:
 spec:
   ingressClassName: {{ .Values.ingress.className }}
   tls:
-  {{- range .Values.ingress.hosts }}
-  - hosts:
-      - {{ . }}
-  {{- end }}
+{{- range .Values.ingress.hosts }}
+    - hosts:
+        - {{ . }}
+{{- end }}
   rules:
-  {{- range .Values.ingress.hosts }}
-  - host: {{ . }}
-    http:
-      paths:
-        - path: /
-          pathType: ImplementationSpecific
-          backend:
-            service:
-              name: {{ $fullName }}
-              port:
-                name: http
-  {{- end }}
+{{- range .Values.ingress.hosts }}
+    - host: {{ . }}
+      http:
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: {{ $fullName }}
+                port:
+                  name: http
+{{- end }}
 {{- end }}
