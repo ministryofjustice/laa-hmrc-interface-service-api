@@ -5,6 +5,7 @@
 replicaCount: 4
 
 ingress:
+  enabled: false
   className: default
   hosts:
     - laa-hmrc-interface.cloud-platform.service.justice.gov.uk
