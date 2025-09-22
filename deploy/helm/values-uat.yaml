@@ -13,10 +13,18 @@ resources:
     memory: 125Mi
 
 ingress:
+  enabled: true
   className: default-non-prod
   annotations:
     external-dns.alpha.kubernetes.io/aws-weight: "100"
-    ingressClassName: nginx
+    nginx.ingress.kubernetes.io/server-snippet: |
+      if ($scheme = http) {
+        return 444;
+      }
+
+publicIngress:
+  enabled: false
+
 deploy:
   settings__environment: non-live
   settings__sentry__environment: uat
