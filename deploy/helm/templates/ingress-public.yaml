@@ -9,8 +9,8 @@ metadata:
     chart: {{ template "app.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
-  annotations:
 {{- with .Values.publicIngress.annotations }}
+  annotations:
 {{ toYaml . | indent 4 }}
 {{- end }}
 spec:
