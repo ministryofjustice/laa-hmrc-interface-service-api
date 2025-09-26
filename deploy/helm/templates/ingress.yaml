@@ -1,4 +1,3 @@
-{{- if .Values.ingress.enabled -}}
 {{- $fullName := include "app.fullname" . -}}
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -25,12 +24,11 @@ spec:
     - host: {{ . }}
       http:
         paths:
-          - path: /
-            pathType: ImplementationSpecific
+          - path: {{ $.Values.ingress.path }}
+            pathType: {{ $.Values.ingress.pathType }}
             backend:
               service:
                 name: {{ $fullName }}
                 port:
                   name: http
-{{- end }}
 {{- end }}
