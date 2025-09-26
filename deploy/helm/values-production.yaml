@@ -11,7 +11,7 @@ publicIngress:
   enabled: true
   hosts:
     - laa-hmrc-interface.cloud-platform.service.justice.gov.uk
-  className: default-prod
+  className: default
   whitelist:
     enabled: true
   annotations:
