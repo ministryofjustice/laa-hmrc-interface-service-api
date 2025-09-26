@@ -1,4 +1,3 @@
-{{- if .Values.ingress.enabled -}}
 {{- $fullName := include "app.fullname" . -}}
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -13,6 +12,7 @@ metadata:
   annotations:
 {{ toYaml . | indent 4 }}
 {{- end }}
+    nginx.ingress.kubernetes.io/whitelist-source-range: {{ $.Values.ipAllowlist }}
 spec:
   ingressClassName: {{ .Values.ingress.className }}
   tls:
@@ -25,12 +25,11 @@ spec:
     - host: {{ . }}
       http:
         paths:
-          - path: /
-            pathType: ImplementationSpecific
+          - path: {{ $.Values.ingress.path }}
+            pathType: {{ $.Values.ingress.pathType }}
             backend:
               service:
                 name: {{ $fullName }}
                 port:
                   name: http
-{{- end }}
 {{- end }}

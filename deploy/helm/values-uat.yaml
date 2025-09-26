@@ -13,7 +13,8 @@ resources:
     memory: 125Mi
 
 ingress:
-  enabled: true
+  path: "/"
+  pathType: ImplementationSpecific
   className: default-non-prod
   annotations:
     external-dns.alpha.kubernetes.io/aws-weight: "100"
