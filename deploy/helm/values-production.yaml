@@ -5,15 +5,11 @@
 replicaCount: 4
 
 ingress:
-  enabled: false
-
-publicIngress:
-  enabled: true
+  path: /ping
+  pathType: Exact
   hosts:
     - laa-hmrc-interface.cloud-platform.service.justice.gov.uk
   className: default
-  whitelist:
-    enabled: true
   annotations:
     external-dns.alpha.kubernetes.io/set-identifier: "laa-hmrc-interface-laa-hmrc-interface-service-api-public-laa-hmrc-interface-production-green"
     external-dns.alpha.kubernetes.io/aws-weight: "100"
