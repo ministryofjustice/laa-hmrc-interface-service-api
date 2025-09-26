@@ -97,6 +97,23 @@ commands:
               docker push "${ECR_REGISTRY}/${ECR_REPOSITORY}:latest"
             fi
 
+  deploy-to-environment:
+    description: Deploy image to the specified environment
+    parameters:
+      environment:
+        description: Name of environment to deploy to
+        type: string
+    steps:
+      - aws-cli/setup:
+          role_arn: $ECR_ROLE_TO_ASSUME
+          region: $ECR_REGION
+      - checkout
+      - *authenticate_k8s_live
+      - run:
+          name: Deploy to << parameters.environment >>
+          command: |
+            ./bin/deploy << parameters.environment >>
+
   run-smoke-test:
     parameters:
       use_case:
@@ -166,50 +183,28 @@ jobs:
       - checkout
       - setup_remote_docker
       - build-and-push-to-ecr
+
   deploy_uat: &deploy_uat
     executor: cloud-platform-executor
     steps:
-      - checkout
-      - setup_remote_docker:
-          docker_layer_caching: true
-      - *authenticate_k8s_live
-      - run:
-          name: Helm deployment to UAT
-          command: ./bin/uat_deploy
+      - deploy-to-environment:
+          environment: uat
+
   deploy_main_uat:
     <<: *deploy_uat
+
   deploy_staging:
     executor: cloud-platform-executor
     steps:
-      - checkout
-      - setup_remote_docker:
-          docker_layer_caching: true
-      - *authenticate_k8s_live
-      - run:
-          name: Helm deployment to staging
-          command: |
-            helm upgrade laa-hmrc-interface ./deploy/helm/. \
-                          --install --wait \
-                          --namespace=${K8S_NAMESPACE} \
-                          --values ./deploy/helm/values-staging.yaml \
-                          --set image.repository="${ECR_REGISTRY}/${ECR_REPOSITORY}" \
-                          --set image.tag="${CIRCLE_SHA1}"
+      - deploy-to-environment:
+          environment: staging
+
   deploy_production:
     executor: cloud-platform-executor
     steps:
-      - checkout
-      - setup_remote_docker:
-          docker_layer_caching: true
-      - *authenticate_k8s_live
-      - run:
-          name: Helm deployment to production
-          command: |
-            helm upgrade laa-hmrc-interface ./deploy/helm/. \
-                        --install --wait \
-                        --namespace=${K8S_NAMESPACE} \
-                        --values ./deploy/helm/values-production.yaml \
-                        --set image.repository="${ECR_REGISTRY}/${ECR_REPOSITORY}" \
-                        --set image.tag="${CIRCLE_SHA1}"
+      - deploy-to-environment:
+          environment: production
+
   delete_dependabot_deployment:
     executor: cloud-platform-executor
     steps:
