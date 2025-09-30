@@ -33,10 +33,10 @@ deploy_branch() {
 }
 
 deploy_main() {
-  helm upgrade apply-for-legal-aid ./helm_deploy/apply-for-legal-aid/. \
+  helm upgrade laa-hmrc-interface ./deploy/helm/. \
                 --install --wait \
                 --namespace=${K8S_NAMESPACE} \
-                --values ./helm_deploy/apply-for-legal-aid/values-"$ENVIRONMENT".yaml \
+                --values ./deploy/helm/values-"$ENVIRONMENT".yaml \
                 --set image.repository="${ECR_REGISTRY}/${ECR_REPOSITORY}" \
                 --set image.tag="${CIRCLE_SHA1}" \
                 --set-string ipAllowlist="$IP_ALLOWLIST"
