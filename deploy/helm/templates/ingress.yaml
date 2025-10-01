@@ -12,7 +12,9 @@ metadata:
   annotations:
 {{ toYaml . | indent 4 }}
 {{- end }}
+  {{- if .Values.ingress.allowlist.enabled }}
     nginx.ingress.kubernetes.io/whitelist-source-range: {{ $.Values.ipAllowlist }}
+  {{- end }}
 spec:
   ingressClassName: {{ .Values.ingress.className }}
   tls:

@@ -10,6 +10,8 @@ ingress:
   hosts:
     - laa-hmrc-interface.cloud-platform.service.justice.gov.uk
   className: default
+  allowlist:
+    enabled: true
   annotations:
     external-dns.alpha.kubernetes.io/set-identifier: "laa-hmrc-interface-laa-hmrc-interface-service-api-laa-hmrc-interface-production-green"
     external-dns.alpha.kubernetes.io/aws-weight: "100"
