@@ -16,6 +16,8 @@ ingress:
   path: "/"
   pathType: ImplementationSpecific
   className: default-non-prod
+  allowlist:
+    enabled: false
   annotations:
     external-dns.alpha.kubernetes.io/aws-weight: "100"
     nginx.ingress.kubernetes.io/server-snippet: |
