@@ -1,3 +1,5 @@
+[![Ministry of Justice Repository Compliance Badge](https://github-community.service.justice.gov.uk/repository-standards/api/laa-hmrc-interface-service-api/badge)](https://github-community.service.justice.gov.uk/repository-standards/laa-hmrc-interface-service-api) 
+
 # LAA-HMRC Interface Service API
 
 This Service facilitates the HMRC API access for the LAA Use Cases
