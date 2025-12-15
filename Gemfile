@@ -21,7 +21,7 @@ gem "rswag-api"
 gem "rswag-ui"
 gem "sentry-rails"
 gem "sentry-ruby"
-gem "sidekiq", "~> 8.0"
+gem "sidekiq", "~> 8.1"
 gem "timeliness-i18n"
 
 group :development, :test do
