@@ -29,7 +29,7 @@ executors:
           PGUSER: user
           TZ: "Europe/London"
       - image: cimg/redis:6.2
-      - image: cimg/postgres:17.4
+      - image: cimg/postgres:18.0
         environment:
           POSTGRES_USER: user
           POSTGRES_DB: laa_hmrc_interface_service_api_test
@@ -52,8 +52,10 @@ references:
     run:
       name: Install ruby gems
       command: |
-        gem install bundler -v 2.6.9
-        bundle install --path=vendor/bundle --jobs=4 && bundle clean
+        gem install bundler -v 4.0.4
+        bundle config set --local path 'vendor/bundle'
+        bundle config set --local without 'development'
+        bundle install --jobs=4 && bundle clean
   save_gems_cache: &save_gems_cache
     save_cache:
       key: laa-hmrc-interface-{{ checksum "Gemfile.lock" }}-v3.4.7
