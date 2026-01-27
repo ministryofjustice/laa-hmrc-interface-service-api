@@ -19,6 +19,9 @@ inherit_mode:
 Style/ZeroLengthPredicate:
   Exclude:
     - app/controllers/status_controller.rb
+RSpec/Output:
+  Enabled: false
+    
 # General exclusions
 # ==================
 
