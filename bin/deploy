@@ -8,7 +8,7 @@ IP_ALLOWLIST="${PINGDOM_IPS}\,${LAA_IP_RANGES}"
 
 deploy_branch() {
   RELEASE_NAME=$(echo $CIRCLE_BRANCH | tr '[:upper:]' '[:lower:]' | sed 's:^\w*\/::' | tr -s ' _/[]().' '-' | cut -c1-30 | sed 's/-$//')
-  RELEASE_HOST="$RELEASE_NAME-laa-hmrc-interface-uat.cloud-platform.service.justice.gov.uk"
+  RELEASE_HOST="$RELEASE_NAME-laa-hmrc-interface-uat.beta.cloud-platform.service.justice.gov.uk"
   BRANCH_NAME=$(echo $CIRCLE_BRANCH | tr -s ' _/[]().' '-')
   IDENTIFIER="$RELEASE_NAME-laa-hmrc-interface-service-api-laa-hmrc-interface-uat-green"
   if [[ $(echo $BRANCH_NAME | awk -F/ '{print NF-1}')  != '0' ]]
