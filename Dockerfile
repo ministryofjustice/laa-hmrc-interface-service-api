@@ -10,8 +10,13 @@ ENV RAILS_ENV production
 
 RUN set -ex
 
+# # zlib: upgrade zlib system libraries to address security vulnerability in ruby bundled zlib gem
+# # TODO: Can be removed once alpine image contains zlib version 1.3.2-r0
+RUN apk upgrade --no-cache zlib
+
 RUN apk --no-cache add --virtual build-dependencies \
                     build-base \
+                    zlib-dev \
                     postgresql-dev \
                     yaml-dev \
 && apk --no-cache add postgresql-client \

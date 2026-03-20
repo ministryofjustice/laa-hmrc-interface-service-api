@@ -454,6 +454,7 @@ GEM
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
     zeitwerk (2.7.5)
+    zlib (3.2.3)
 
 PLATFORMS
   arm64-darwin-25
@@ -503,6 +504,7 @@ DEPENDENCIES
   tzinfo-data
   vcr
   webmock
+  zlib (>= 3.2.3)
 
 RUBY VERSION
   ruby 4.0.1
