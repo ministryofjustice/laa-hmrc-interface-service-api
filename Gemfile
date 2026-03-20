@@ -24,6 +24,10 @@ gem "sentry-ruby"
 gem "sidekiq", "~> 8.1"
 gem "timeliness-i18n"
 
+# Temporary explicit gem bump to address security vulnerability in ruby bundled zlib gem.
+# see https://www.ruby-lang.org/en/news/2026/03/05/buffer-overflow-zlib-cve-2026-27820/,
+gem "zlib", ">= 3.2.3"
+
 group :development, :test do
   gem "byebug"
   gem "factory_bot_rails", ">= 6.2.0"
