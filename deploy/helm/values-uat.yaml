@@ -15,7 +15,7 @@ resources:
 ingress:
   path: "/"
   pathType: ImplementationSpecific
-  className: default-non-prod
+  className: beta
   allowlist:
     enabled: false
   annotations:
