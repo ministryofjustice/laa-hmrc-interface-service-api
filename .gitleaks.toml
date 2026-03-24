@@ -1,0 +1,9 @@
+title = "Custom Gitleaks configuration"
+
+[[allowlists]]
+paths = [
+  "./docs/connect.md",
+]
+stopwords = [
+  "BSj8EmiuxwI1Z699CBY5_qnPxH6wq_nw1M3ZGK_wImg",
+]
