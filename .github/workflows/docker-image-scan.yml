@@ -7,6 +7,9 @@ on:
 jobs:
   scan-docker-image:
     uses: ministryofjustice/laa-reusable-github-actions/.github/workflows/snyk.yml@main
+    permissions:
+      contents: read # for actions/checkout to fetch code
+      security-events: write # for github/codeql-action/upload-sarif to upload SARIF results
     with:
       tag: "laa-hmrc-interface-service-api"
     secrets:
