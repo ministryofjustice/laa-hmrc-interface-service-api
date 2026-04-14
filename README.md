@@ -1,4 +1,4 @@
-[![Ministry of Justice Repository Compliance Badge](https://github-community.service.justice.gov.uk/repository-standards/api/laa-hmrc-interface-service-api/badge)](https://github-community.service.justice.gov.uk/repository-standards/laa-hmrc-interface-service-api) 
+[![Ministry of Justice Repository Compliance Badge](https://github-community.service.justice.gov.uk/repository-standards/api/laa-hmrc-interface-service-api/badge)](https://github-community.service.justice.gov.uk/repository-standards/laa-hmrc-interface-service-api)
 
 # LAA-HMRC Interface Service API
 
@@ -27,6 +27,25 @@ This Service facilitates the HMRC API access for the LAA Use Cases
 ```sh
 bin/setup
 ```
+
+### Pre-commit hooks using DevSecOps
+
+We use the Ministry of Justice pre-commit hooks for scanning hardcoded secrets and credentials. More information can be found [here] (https://github.com/ministryofjustice/devsecops-hooks).
+
+To set-up locally:
+
+Install prek
+```shell
+brew install prek
+```
+
+Install the pre-commit hook
+```shell
+prek install
+```
+Launch Docker Desktop locally
+
+Now, when you commit, .pre-commit-config.yaml containing the pre-commit hook should run.
 
 ### Further reading
 
