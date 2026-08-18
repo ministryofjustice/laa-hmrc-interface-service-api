@@ -1,7 +1,8 @@
 environment: 'non-live'
 status:
-  build_date: <%= ENV['BUILD_DATE'] || 'Not Available' %>
-  build_tag: <%= ENV['BUILD_TAG'] || 'Not Available' %>
+  build_date: <%= ENV['BUILD_DATE'] || ENV['APP_BUILD_DATE'] || 'Not Available' %>
+  build_tag: <%= ENV['BUILD_TAG'] || ENV['APP_BUILD_TAG'] || 'Not Available' %>
+  app_git_commit: <%= ENV['APP_GIT_COMMIT'] || 'Not Available' %>
   app_branch: <%= ENV['APP_BRANCH'] || 'Not Available' %>
 
 credentials:
