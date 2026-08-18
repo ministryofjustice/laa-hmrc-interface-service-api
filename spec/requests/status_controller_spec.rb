@@ -228,12 +228,13 @@ RSpec.describe StatusController do
         {
           "build_date" => "20150721",
           "build_tag" => "test",
+          "app_git_commit" => "some-fake-git-commit-sha",
           "app_branch" => "test_branch",
         }
       end
 
       before do
-        allow(Settings.status).to receive_messages(build_date: "20150721", build_tag: "test", app_branch: "test_branch")
+        allow(Settings.status).to receive_messages(build_date: "20150721", build_tag: "test", app_git_commit: "some-fake-git-commit-sha", app_branch: "test_branch")
 
         get("/ping")
       end
@@ -245,7 +246,7 @@ RSpec.describe StatusController do
 
     context "when environment variables not set" do
       before do
-        allow(Settings.status).to receive_messages(build_date: "Not Available", build_tag: "Not Available", app_branch: "Not Available")
+        allow(Settings.status).to receive_messages(build_date: "Not Available", build_tag: "Not Available", app_git_commit: "Not Available", app_branch: "Not Available")
 
         get "/ping"
       end
