@@ -28,12 +28,12 @@ require "sidekiq/testing"
 SimpleCov.minimum_coverage 100
 unless ENV["NOCOVERAGE"]
   SimpleCov.start do
-    add_filter "spec/"
-    add_filter "initializers/config.rb"
-    add_filter "initializers/sidekiq.rb"
-    add_filter "initializers/sidekiq_middleware.rb"
-    add_filter "services/smoke_test.rb"
-    add_filter "services/test_submission.rb"
+    skip "spec/"
+    skip "initializers/config.rb"
+    skip "initializers/sidekiq.rb"
+    skip "initializers/sidekiq_middleware.rb"
+    skip "services/smoke_test.rb"
+    skip "services/test_submission.rb"
   end
 
   SimpleCov.at_exit do
