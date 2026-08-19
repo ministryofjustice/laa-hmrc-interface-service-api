@@ -1,0 +1,95 @@
+name: "Deploy"
+description: |
+  Deploy docker image to namespace.
+
+  The actual deployment requires ./bin/deploy to exist in the repository and be executable.
+
+  The inputs supplied can be used by helm or kubernetes to deploy branches or main/master to any environment.
+  The inputs are passed to ./bin/deploy as environment variables. This requires ./bin/deploy to be written to use
+  the environment variables as required. The inputs are also used to authenticate to the kubernetes
+  cluster and assume the ECR role.
+
+  Typically, the ./bin/deploy script called will differentiate whether to deploy to an ephemeral host based on
+  the app-environment variable supplied.
+
+  e.g. for ./bin/deploy script
+  #!/usr/bin/env bash
+
+  if [[ "$ENVIRONMENT" == "uat" ]]; then
+    deploy_branch
+  else
+    deploy_main
+  fi
+
+inputs:
+  ecr-registry:
+    description: "ECR registry"
+    required: true
+  ecr-repository:
+    description: "ECR repository"
+    required: true
+  ecr-region:
+    description: "ECR region"
+    required: true
+  ecr-role-to-assume:
+    description: "ECR role to assume"
+    required: true
+  kube-cert:
+    description: "Kubernetes cluster authentication certificate"
+    required: true
+  kube-token:
+    description: "Kubernetes cluster authentication token"
+    required: true
+  kube-cluster:
+    description: "Kubernetes cluster name"
+    required: true
+  kube-namespace:
+    description: "Kubernetes cluster namespace"
+    required: true
+  app-environment:
+    description: "Environment to which the app is being deployed [uat, staging, production]"
+    required: true
+  script-path:
+    description: "Path to the deploy script to run"
+    default: "./bin/deploy"
+    required: false
+  branch-name:
+    description: "Branch name, see helm deployment step for its use"
+    required: false
+  release-name:
+    description: "Release name, see helm deployment step for its use"
+    required: false
+
+runs:
+  using: "composite"
+  steps:
+    - name: Checkout
+      uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd #v6.0.2
+
+    - name: Authenticate to the cluster
+      uses: ministryofjustice/laa-reusable-github-actions/.github/actions/authenticate_to_cluster@2aa2676c3cd9876ec7037ee8b3d729d0306cb7c6
+      with:
+        kube-cert: ${{ inputs.kube-cert }}
+        kube-token: ${{ inputs.kube-token }}
+        kube-cluster: ${{ inputs.kube-cluster }}
+        kube-namespace: ${{ inputs.kube-namespace }}
+
+    - name: Assume role in Cloud Platform
+      uses: aws-actions/configure-aws-credentials@8df5847569e6427dd6c4fb1cf565c83acfa8afa7 #v6.0.0
+      with:
+        role-to-assume: ${{ inputs.ecr-role-to-assume }}
+        aws-region: ${{ inputs.ecr-region }}
+
+    - name: Deploy with script
+      shell: bash
+      env:
+        ECR_REPOSITORY: ${{ inputs.ecr-repository }}
+        ECR_REGISTRY: ${{ inputs.ecr-registry }}
+        GIT_SHA: ${{ github.sha }}
+        KUBE_NAMESPACE: ${{ inputs.kube-namespace }}
+        VALUES_FILE: ./deploy/helm/values-${{ inputs.app-environment }}.yaml
+        BRANCH_NAME: ${{ inputs.branch-name }}
+        RELEASE_NAME: ${{ inputs.release-name }}
+        ENVIRONMENT: ${{ inputs.app-environment }}
+      run: |
+        ${{ inputs.script-path }}
