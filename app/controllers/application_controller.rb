@@ -6,13 +6,13 @@ class ApplicationController < ActionController::API
     Errors::ContractError => :unprocessable_entity,
   }.freeze
 
-  # :nocov:
-  # TO DO: nocov added because this isn't implemented
+  # simplecov:disable
+  # TO DO: simplecov:disable added because this isn't implemented
   # in a controller yet, but it should be!
   ERROR_MAPPINGS.each do |klass, status|
     rescue_from klass do |error|
       render json: { error: }, status:
     end
   end
-  # :nocov:
+  # simplecov:enable
 end

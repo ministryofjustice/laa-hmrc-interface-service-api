@@ -51,11 +51,11 @@ private
     if data.is_a?(Hash)
       data[data.except("_links").keys.first]
     else
-      # :nocov:
+      # simplecov:disable
       # is this required? (it doesn't seem to be getting called,
       # I am not sure what sort of data structure it would apply to?)
       data[data.except("_links").keys.first].first
-      # :nocov:
+      # simplecov:enable
     end
   end
 

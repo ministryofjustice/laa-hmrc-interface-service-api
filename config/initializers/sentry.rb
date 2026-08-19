@@ -6,7 +6,7 @@ Sentry.init do |config|
     Errors::SentryIgnoresThisSidekiqFailError
   ]
   # Send 5% of non-ping transactions for performance monitoring
-  # :nocov:
+  # simplecov:disable
   config.traces_sampler = lambda do |sampling_context|
     # if this is the continuation of a trace, just use that decision (rate controlled by the caller)
     next sampling_context[:parent_sampled] unless sampling_context[:parent_sampled].nil?
@@ -34,6 +34,6 @@ Sentry.init do |config|
     else
       0.05
     end
-    # :nocov:
+    # simplecov:enable
   end
 end
