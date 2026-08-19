@@ -79,23 +79,6 @@ jobs:
           path: coverage
           retention-days: 7
 
-  smoke-tests:
-    runs-on: ubuntu-latest
-    env: *test-env
-
-    services:
-      postgres: *postgres-service
-
-    steps:
-      - *checkout-code
-      - *setup-ruby
-      - *prepare-database
-
-      - name: Run tests
-        run: |
-          echo "TODO: No smoke tests defined yet" >&2
-          exit 1
-
   build:
     if: github.actor != 'dependabot[bot]'
     needs: [rubocop, rspec]
