@@ -59,12 +59,44 @@ inputs:
   release-name:
     description: "Release name, see helm deployment step for its use"
     required: false
+  slack-notification-on-success:
+    description: 'Whether to send a Slack notification on success'
+    required: false
+    default: 'false'
+  slack-notification-on-failure:
+    description: 'Whether to send a Slack notification on failure'
+    required: false
+    default: 'false'
+  slack-access-token:
+    description: 'The Slack access token to use for notifications'
+    required: false
+  slack-channel-id:
+    description: 'The Slack channel ID to send notifications to'
+    required: false
 
 runs:
   using: "composite"
+
   steps:
     - name: Checkout
       uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd #v6.0.2
+
+    - name: Validate inputs
+      shell: bash
+      env:
+        SLACK_NOTIFICATION_ON_SUCCESS: ${{ inputs.slack-notification-on-success }}
+        SLACK_NOTIFICATION_ON_FAILURE: ${{ inputs.slack-notification-on-failure }}
+        SLACK_ACCESS_TOKEN: ${{ inputs.slack-access-token }}
+        SLACK_CHANNEL_ID: ${{ inputs.slack-channel-id }}
+      run: |
+        set -euo pipefail
+
+        if [[ "$SLACK_NOTIFICATION_ON_SUCCESS" == "true" || "$SLACK_NOTIFICATION_ON_FAILURE" == "true" ]]; then
+          if [[ -z "$SLACK_ACCESS_TOKEN" || -z "$SLACK_CHANNEL_ID" ]]; then
+            echo "slack-access-token and slack-channel-id are required when slack-notification-on-success or slack-notification-on-failure is true"
+            exit 1
+          fi
+        fi
 
     - name: Authenticate to the cluster
       uses: ministryofjustice/laa-reusable-github-actions/.github/actions/authenticate_to_cluster@2aa2676c3cd9876ec7037ee8b3d729d0306cb7c6
@@ -81,6 +113,7 @@ runs:
         aws-region: ${{ inputs.ecr-region }}
 
     - name: Deploy with script
+      id: deploy
       shell: bash
       env:
         ECR_REPOSITORY: ${{ inputs.ecr-repository }}
@@ -93,3 +126,33 @@ runs:
         ENVIRONMENT: ${{ inputs.app-environment }}
       run: |
         ${{ inputs.script-path }}
+
+    - name: Notify Slack of success
+      if: success() && steps.deploy.outcome == 'success' && inputs.slack-notification-on-success == 'true'
+      uses: slackapi/slack-github-action@dcb1066f776dd043e64d0e8ba94ca15cc7e1875d # V4.0.0
+      with:
+        method: chat.postMessage
+        token: ${{ inputs.slack-access-token }}
+        payload: |
+          channel: ${{ inputs.slack-channel-id }}
+          text: |
+            :green: Deployment succeeded
+
+            *Environment:* `${{ inputs.app-environment}}`
+            *Repository:* `${{ github.repository }}`
+            *Run:* ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
+    - name: Notify Slack of failure
+      if: failure() && steps.deploy.outcome == 'failure' && inputs.slack-notification-on-failure == 'true'
+      uses: slackapi/slack-github-action@dcb1066f776dd043e64d0e8ba94ca15cc7e1875d # V4.0.0
+      with:
+        method: chat.postMessage
+        token: ${{ inputs.slack-access-token }}
+        payload: |
+          channel: ${{ inputs.slack-channel-id }}
+          text: |
+            :nope-9607: Deployment failed
+
+            *Environment:* `${{ inputs.app-environment}}`
+            *Repository:* `${{ github.repository }}`
+            *Run:* ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}

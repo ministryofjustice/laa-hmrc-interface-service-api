@@ -128,6 +128,9 @@ jobs:
           branch-name: ${{ needs.build.outputs.branch-name }}
           release-name: ${{ needs.build.outputs.release-name }}
           app-environment: uat
+          slack-notification-on-failure: 'true'
+          slack-access-token: ${{ secrets.SLACK_ACCESS_TOKEN }}
+          slack-channel-id: ${{ secrets.SLACK_CHANNEL_ID }}
 
   deploy-staging:
     if: github.ref == 'refs/heads/main'
@@ -153,6 +156,9 @@ jobs:
           kube-cluster: ${{ secrets.K8S_GHA_STAGING_CLUSTER_NAME }}
           kube-namespace: ${{ secrets.K8S_GHA_STAGING_NAMESPACE }}
           app-environment: staging
+          slack-notification-on-failure: 'true'
+          slack-access-token: ${{ secrets.SLACK_ACCESS_TOKEN }}
+          slack-channel-id: ${{ secrets.SLACK_CHANNEL_ID }}
 
   deploy-production:
     if: github.ref == 'refs/heads/main'
@@ -178,3 +184,6 @@ jobs:
           kube-cluster: ${{ secrets.K8S_GHA_PRODUCTION_CLUSTER_NAME }}
           kube-namespace: ${{ secrets.K8S_GHA_PRODUCTION_NAMESPACE }}
           app-environment: production
+          slack-notification-on-failure: 'true'
+          slack-access-token: ${{ secrets.SLACK_ACCESS_TOKEN }}
+          slack-channel-id: ${{ secrets.SLACK_CHANNEL_ID }}
