@@ -115,7 +115,7 @@ jobs:
 
       - name: Deploy UAT branch
         id: deploy_uat_branch
-        uses: ./.github/actions/deploy
+        uses: ministryofjustice/laa-civil-apply-deploy@main
         with:
           ecr-region: ${{ vars.ECR_REGION }}
           ecr-role-to-assume: ${{ secrets.ECR_ROLE_TO_ASSUME }}
@@ -145,7 +145,7 @@ jobs:
 
       - name: Deploy Staging branch
         id: deploy_staging_branch
-        uses: ./.github/actions/deploy
+        uses: ministryofjustice/laa-civil-apply-deploy@main
         with:
           ecr-region: ${{ vars.ECR_REGION }}
           ecr-role-to-assume: ${{ secrets.ECR_ROLE_TO_ASSUME }}
@@ -173,7 +173,7 @@ jobs:
 
       - name: Deploy Production branch
         id: deploy_production_branch
-        uses: ./.github/actions/deploy
+        uses: ministryofjustice/laa-civil-apply-deploy@main
         with:
           ecr-region: ${{ vars.ECR_REGION }}
           ecr-role-to-assume: ${{ secrets.ECR_ROLE_TO_ASSUME }}
