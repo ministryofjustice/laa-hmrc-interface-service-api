@@ -97,7 +97,7 @@ jobs:
 
       - name: Build and push
         id: build_and_push
-        uses:  ministryofjustice/laa-civil-apply-build-and-push@main
+        uses:  ministryofjustice/laa-civil-apply-build-and-push@8a157dbc3ec3b1d2366d6a676272cc26a57e9439 # main as at 21/08/2026
         with:
           ecr-region: ${{ vars.ECR_REGION }}
           ecr-role-to-assume: ${{ secrets.ECR_ROLE_TO_ASSUME }}
@@ -115,7 +115,7 @@ jobs:
 
       - name: Deploy UAT branch
         id: deploy_uat_branch
-        uses: ministryofjustice/laa-civil-apply-deploy@main
+        uses: ministryofjustice/laa-civil-apply-deploy@505f9c7d9a232b8fa1d601344d6d91a67b961def # main as at 21/08/2026
         with:
           ecr-region: ${{ vars.ECR_REGION }}
           ecr-role-to-assume: ${{ secrets.ECR_ROLE_TO_ASSUME }}
@@ -146,7 +146,7 @@ jobs:
 
       - name: Deploy Staging branch
         id: deploy_staging_branch
-        uses: ministryofjustice/laa-civil-apply-deploy@main
+        uses: ministryofjustice/laa-civil-apply-deploy@505f9c7d9a232b8fa1d601344d6d91a67b961def # main as at 21/08/2026
         with:
           ecr-region: ${{ vars.ECR_REGION }}
           ecr-role-to-assume: ${{ secrets.ECR_ROLE_TO_ASSUME }}
@@ -204,7 +204,7 @@ jobs:
 
       - name: Deploy Production branch
         id: deploy_production_branch
-        uses: ministryofjustice/laa-civil-apply-deploy@main
+        uses: ministryofjustice/laa-civil-apply-deploy@505f9c7d9a232b8fa1d601344d6d91a67b961def # main as at 21/08/2026
         with:
           ecr-region: ${{ vars.ECR_REGION }}
           ecr-role-to-assume: ${{ secrets.ECR_ROLE_TO_ASSUME }}
