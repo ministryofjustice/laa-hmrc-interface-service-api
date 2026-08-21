@@ -1,0 +1,53 @@
+
+name: "Smoke test"
+description: 'Runs a smoke test for a specified "use case" against an HMRC Sandbox environment.'
+
+inputs:
+  use_case:
+    description: 'The use case to run the smoke test against'
+    required: true
+  smoke_test_uri:
+    description: 'The URI of the HMRC Sandbox environment to run the smoke test against'
+    required: true
+  slack_access_token:
+    description: 'The Slack access token to use for notifications'
+    required: true
+  slack_channel_id:
+    description: 'The Slack channel ID to send notifications to'
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: "Run smoke test"
+      shell: bash
+      id: smoke_test
+      run: |
+        STATUS=$(curl \
+          --silent \
+          --show-error \
+          --output /dev/null \
+          --write-out '%{http_code}' \
+          "https://${{ inputs.smoke_test_uri }}/smoke-test/${{ inputs.use_case }}")
+
+        echo "Smoke test for '${{ inputs.use_case }}' returned HTTP status code: $STATUS"
+
+        if [ "$STATUS" -ne 200 ]; then
+          echo "Smoke test failed for '${{ inputs.use_case }}' (HTTP $STATUS)" >&2
+          exit 1;
+        fi
+
+    - name: Notify Slack
+      if: failure() && steps.smoke_test.outcome == 'failure'
+      uses: slackapi/slack-github-action@dcb1066f776dd043e64d0e8ba94ca15cc7e1875d # V4.0.0
+      with:
+        method: chat.postMessage
+        token: ${{ inputs.slack_access_token }}
+        payload: |
+          channel: ${{ inputs.slack_channel_id }}
+          text: |            
+            :nope-9607: Smoke test against sandbox failed
+
+            *Use case:* `${{ inputs.use_case }}`
+            *Repository:* `${{ github.repository }}`
+            *Run:* ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}

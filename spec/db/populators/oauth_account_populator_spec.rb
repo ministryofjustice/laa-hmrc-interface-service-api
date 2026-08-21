@@ -6,7 +6,7 @@ RSpec.describe OauthAccountPopulator do
     subject(:call) { described_class.call }
 
     before do
-      allow(ENV).to receive(:fetch).with("TEST_OAUTH_ACCOUNTS_JSON", nil) { json_string_from_secret }
+      allow(ENV).to receive(:fetch).with("TEST_OAUTH_ACCOUNTS_JSON", "[]") { json_string_from_secret }
     end
 
     let(:json_string_from_secret) { "[{\"name\":\"name-one\",\"scopes\":[\"use_case_one\",\"use_case_two\"],\"uid\":\"uuid-001\",\"secret\":\"secret-001\"},{\"name\":\"name-two\",\"scopes\":[\"use_case_three\"],\"uid\":\"uuid-002\",\"secret\":\"secret-002\"}]" }

@@ -25,6 +25,6 @@ private
   end
 
   def test_oauth_accounts_json
-    @test_oauth_accounts_json ||= ENV.fetch("TEST_OAUTH_ACCOUNTS_JSON", nil)
+    @test_oauth_accounts_json ||= ENV.fetch("TEST_OAUTH_ACCOUNTS_JSON", "[]")
   end
 end
