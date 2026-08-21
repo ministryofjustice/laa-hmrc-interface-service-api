@@ -127,6 +127,7 @@ jobs:
           kube-namespace: ${{ secrets.K8S_GHA_UAT_NAMESPACE }}
           branch-name: ${{ needs.build.outputs.branch-name }}
           release-name: ${{ needs.build.outputs.release-name }}
+          script-path: ./bin/deploy
           app-environment: uat
           slack-notification-on-failure: 'true'
           slack-access-token: ${{ secrets.SLACK_ACCESS_TOKEN }}
@@ -155,6 +156,7 @@ jobs:
           kube-token: ${{ secrets.K8S_GHA_STAGING_TOKEN }}
           kube-cluster: ${{ secrets.K8S_GHA_STAGING_CLUSTER_NAME }}
           kube-namespace: ${{ secrets.K8S_GHA_STAGING_NAMESPACE }}
+          script-path: ./bin/deploy
           app-environment: staging
           slack-notification-on-failure: 'true'
           slack-access-token: ${{ secrets.SLACK_ACCESS_TOKEN }}
@@ -212,6 +214,7 @@ jobs:
           kube-token: ${{ secrets.K8S_GHA_PRODUCTION_TOKEN }}
           kube-cluster: ${{ secrets.K8S_GHA_PRODUCTION_CLUSTER_NAME }}
           kube-namespace: ${{ secrets.K8S_GHA_PRODUCTION_NAMESPACE }}
+          script-path: ./bin/deploy
           app-environment: production
           slack-notification-on-failure: 'true'
           slack-access-token: ${{ secrets.SLACK_ACCESS_TOKEN }}
