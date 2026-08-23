@@ -40,7 +40,6 @@ deploy_main() {
     --wait \
     --namespace "$KUBE_NAMESPACE" \
     --values "./deploy/helm/values-$ENVIRONMENT.yaml" \
-    --values "$VALUES_FILE" \
     --set "image.repository=$ECR_REGISTRY/$ECR_REPOSITORY" \
     --set "image.tag=$GIT_SHA" \
     --set-string "ipAllowlist=$IP_ALLOWLIST"
