@@ -1,0 +1,30 @@
+name: Smoke Tests
+on:
+  workflow_dispatch:
+  schedule:
+    - cron:  "30 7 * * 1-5"
+
+permissions: {}
+
+jobs:
+  smoke-tests:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        use_case:
+          - one
+          - two
+          - three
+          - four
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+
+      - name: Run smoke test for ${{ matrix.use_case }}
+        uses: ./.github/actions/smoke-test
+        with:
+          use_case: ${{ matrix.use_case }}
+          smoke_test_uri: ${{ secrets.SMOKE_TEST_URI }}
+          slack_access_token: ${{ secrets.SLACK_ACCESS_TOKEN }}
+          slack_channel_id: ${{ secrets.SLACK_CHANNEL_ID }}

@@ -1,4 +1,6 @@
 #!/bin/sh
+# TODO: delete once using the smoke test action successfull
+
 STATUS=$(curl -s -o /dev/null -w '%{http_code}' "https://$SMOKE_TEST_URI/smoke-test/$1")
 if [ $STATUS -eq 200 ]; then
   exit 0;
