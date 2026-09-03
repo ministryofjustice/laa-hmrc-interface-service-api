@@ -6,7 +6,7 @@ LABEL org.opencontainers.image.vendor="Ministry of Justice" \
       org.opencontainers.image.description="Wrapper API for accessing HRMC API for LAA use cases" \
       org.opencontainers.image.url="https://github.com/ministryofjustice/laa-hmrc-interface-service-api"
 
-ENV RAILS_ENV production
+ENV RAILS_ENV=production
 
 RUN set -ex
 
@@ -69,8 +69,8 @@ ENV APP_BRANCH=${APP_BRANCH}
 
 
 # allow public files to be served
-ENV RAILS_SERVE_STATIC_FILES true
+ENV RAILS_SERVE_STATIC_FILES=true
 
 USER 1001
 
-CMD "./docker_scripts/run"
+CMD ["./docker_scripts/run"]
