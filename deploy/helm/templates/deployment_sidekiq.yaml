@@ -26,12 +26,7 @@ spec:
           imagePullPolicy: IfNotPresent
           command: ['bundle', 'exec', 'sidekiq', '-q', 'uc-one-{{ .Values.sidekiq.queue_name }}submissions', '-c', '1'] # queue_name is set in bin/uat_deploy
           resources:
-            limits:
-              cpu: 500m
-              memory: 1Gi
-            requests:
-              cpu: 10m
-              memory: 512Mi
+{{ toYaml .Values.sidekiq_resources | indent 12 }}
           ports:
             - containerPort: 7433
           livenessProbe:
@@ -58,12 +53,7 @@ spec:
           imagePullPolicy: IfNotPresent
           command: ['bundle', 'exec', 'sidekiq', '-q', 'uc-two-{{ .Values.sidekiq.queue_name }}submissions', '-c', '1'] # queue_name is set in bin/uat_deploy
           resources:
-            limits:
-              cpu: 500m
-              memory: 1Gi
-            requests:
-              cpu: 10m
-              memory: 512Mi
+{{ toYaml .Values.sidekiq_resources | indent 12 }}
           ports:
             - containerPort: 7433
           livenessProbe:
@@ -90,12 +80,7 @@ spec:
           imagePullPolicy: IfNotPresent
           command: ['bundle', 'exec', 'sidekiq', '-q', 'uc-three-{{ .Values.sidekiq.queue_name }}submissions', '-c', '1'] # queue_name is set in bin/uat_deploy
           resources:
-            limits:
-              cpu: 500m
-              memory: 1Gi
-            requests:
-              cpu: 10m
-              memory: 512Mi
+{{ toYaml .Values.sidekiq_resources | indent 12 }}
           ports:
             - containerPort: 7433
           livenessProbe:
@@ -122,12 +107,7 @@ spec:
           imagePullPolicy: IfNotPresent
           command: ['bundle', 'exec', 'sidekiq', '-q', 'uc-four-{{ .Values.sidekiq.queue_name }}submissions', '-c', '1'] # queue_name is set in bin/uat_deploy
           resources:
-            limits:
-              cpu: 500m
-              memory: 1Gi
-            requests:
-              cpu: 10m
-              memory: 512Mi
+{{ toYaml .Values.sidekiq_resources | indent 12 }}
           ports:
             - containerPort: 7433
           livenessProbe:
@@ -155,12 +135,7 @@ spec:
           command: ['bundle', 'exec', 'sidekiq', '-q', 'default']
 {{ include "app.envs" . | nindent 10 }}
           resources:
-            limits:
-              cpu: 500m
-              memory: 1Gi
-            requests:
-              cpu: 10m
-              memory: 512Mi
+{{ toYaml .Values.sidekiq_resources | indent 12 }}
           ports:
             - containerPort: 7433
           livenessProbe:

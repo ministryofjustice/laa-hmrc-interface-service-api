@@ -47,4 +47,4 @@ spec:
             capabilities:
               drop: [ "ALL" ]
           resources:
-{{ toYaml .Values.resources | indent 12 }}
+{{ toYaml .Values.web_resources | indent 12 }}
