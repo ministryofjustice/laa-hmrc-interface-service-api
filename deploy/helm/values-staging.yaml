@@ -4,13 +4,23 @@
 
 replicaCount: 2
 
-resources:
+web_resources:
   limits:
     cpu: 500m
     memory: 1Gi
   requests:
     cpu: 200m
     memory: 512Mi
+
+sidekiq_resources:
+  limits:
+    cpu: 500m
+    memory: 1Gi
+    ephemeral-storage: 1Gi
+  requests:
+    cpu: 100m
+    memory: 512Mi
+    ephemeral-storage: 100Mi
 
 ingress:
   path: /ping
