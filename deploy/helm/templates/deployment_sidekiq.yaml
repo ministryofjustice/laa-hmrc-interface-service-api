@@ -32,8 +32,6 @@ spec:
             requests:
               cpu: 10m
               memory: 512Mi
-          ports:
-            - containerPort: 7433
           livenessProbe:
             exec:
               command: ['bin/sidekiq_health_check']
@@ -64,8 +62,6 @@ spec:
             requests:
               cpu: 10m
               memory: 512Mi
-          ports:
-            - containerPort: 7433
           livenessProbe:
             exec:
               command: ['bin/sidekiq_health_check']
@@ -96,8 +92,6 @@ spec:
             requests:
               cpu: 10m
               memory: 512Mi
-          ports:
-            - containerPort: 7433
           livenessProbe:
             exec:
               command: ['bin/sidekiq_health_check']
@@ -128,8 +122,6 @@ spec:
             requests:
               cpu: 10m
               memory: 512Mi
-          ports:
-            - containerPort: 7433
           livenessProbe:
             exec:
               command: ['bin/sidekiq_health_check']
@@ -161,8 +153,6 @@ spec:
             requests:
               cpu: 10m
               memory: 512Mi
-          ports:
-            - containerPort: 7433
           livenessProbe:
             exec:
               command: ['bin/sidekiq_health_check']
