@@ -27,8 +27,6 @@ spec:
           command: ['bundle', 'exec', 'sidekiq', '-q', 'uc-one-{{ .Values.sidekiq.queue_name }}submissions', '-c', '1'] # queue_name is set in bin/uat_deploy
           resources:
 {{ toYaml .Values.sidekiq_resources | indent 12 }}
-          ports:
-            - containerPort: 7433
           livenessProbe:
             exec:
               command: ['bin/sidekiq_health_check']
@@ -54,8 +52,6 @@ spec:
           command: ['bundle', 'exec', 'sidekiq', '-q', 'uc-two-{{ .Values.sidekiq.queue_name }}submissions', '-c', '1'] # queue_name is set in bin/uat_deploy
           resources:
 {{ toYaml .Values.sidekiq_resources | indent 12 }}
-          ports:
-            - containerPort: 7433
           livenessProbe:
             exec:
               command: ['bin/sidekiq_health_check']
@@ -81,8 +77,6 @@ spec:
           command: ['bundle', 'exec', 'sidekiq', '-q', 'uc-three-{{ .Values.sidekiq.queue_name }}submissions', '-c', '1'] # queue_name is set in bin/uat_deploy
           resources:
 {{ toYaml .Values.sidekiq_resources | indent 12 }}
-          ports:
-            - containerPort: 7433
           livenessProbe:
             exec:
               command: ['bin/sidekiq_health_check']
@@ -108,8 +102,6 @@ spec:
           command: ['bundle', 'exec', 'sidekiq', '-q', 'uc-four-{{ .Values.sidekiq.queue_name }}submissions', '-c', '1'] # queue_name is set in bin/uat_deploy
           resources:
 {{ toYaml .Values.sidekiq_resources | indent 12 }}
-          ports:
-            - containerPort: 7433
           livenessProbe:
             exec:
               command: ['bin/sidekiq_health_check']
@@ -136,8 +128,6 @@ spec:
 {{ include "app.envs" . | nindent 10 }}
           resources:
 {{ toYaml .Values.sidekiq_resources | indent 12 }}
-          ports:
-            - containerPort: 7433
           livenessProbe:
             exec:
               command: ['bin/sidekiq_health_check']
