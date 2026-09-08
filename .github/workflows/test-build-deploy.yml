@@ -179,10 +179,9 @@ jobs:
           payload: |
             channel: ${{ secrets.SLACK_CHANNEL_ID }}
             text: |
-              :github-green: ${{ github.event.pull_request.merged_by.login || github.event.pull_request.user.login }} has a pending production approval for ${{ github.ref_name }}
+              :github-green: ${{ github.actor }} has a pending production approval for ${{ github.ref_name }}
 
-              *Merged by:* ${{ github.event.pull_request.merged_by.login }}
-              *PR author:* ${{ github.event.pull_request.user.login }}
+              *Triggered by:* ${{ github.actor }}
               *Repository:* `${{ github.repository }}`
               *Branch:* ${{ github.ref_name }}
               *Review and approve:* ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
