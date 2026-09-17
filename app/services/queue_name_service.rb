@@ -13,6 +13,6 @@ class QueueNameService
 
   def uat_queue_name
     branch_name = Settings.status.app_branch
-    branch_name.tr(" _/[]().", "-")
+    branch_name.tr(" _/[]().", "-").squeeze("-")
   end
 end
