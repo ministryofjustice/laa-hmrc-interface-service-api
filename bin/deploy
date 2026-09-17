@@ -8,12 +8,8 @@ IP_ALLOWLIST="${PINGDOM_IPS}\,${LAA_IP_RANGES}"
 
 deploy_branch() {
   RELEASE_HOST="$RELEASE_NAME-laa-hmrc-interface-uat.cloud-platform.service.justice.gov.uk"
-  BRANCH_NAME=$(echo "$BRANCH_NAME" | tr -s ' _/[]().' '-')
+  SIDEKIQ_QUEUE_NAME=$(printf '%s' "$BRANCH_NAME" | tr -s ' _/[]().' '-')
   IDENTIFIER="$RELEASE_NAME-laa-hmrc-interface-service-api-laa-hmrc-interface-uat-green"
-  if [[ $(echo "$BRANCH_NAME" | awk -F/ '{print NF-1}')  != '0' ]]
-  then
-    BRANCH_NAME="$(echo "$BRANCH_NAME" | awk -F/ '{print $1}')-$(echo "$BRANCH_NAME" | awk -F/ '{print $NF}')"
-  fi
 
   echo "Deploying GIT_SHA: $GIT_SHA under release name: '$RELEASE_NAME'..."
 
@@ -28,7 +24,7 @@ deploy_branch() {
     --set "ingress.hosts={$RELEASE_HOST}" \
     --set "ingress.annotations.external-dns\.alpha\.kubernetes\.io/set-identifier=$IDENTIFIER" \
     --set "database.name=$RELEASE_NAME" \
-    --set "sidekiq.queue_name=$BRANCH_NAME-" \
+    --set "sidekiq.queue_name=$SIDEKIQ_QUEUE_NAME-" \
     --set-string "ipAllowlist=$IP_ALLOWLIST"
 }
 
