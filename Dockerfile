@@ -22,6 +22,10 @@ RUN apk --no-cache add --virtual build-dependencies \
 && apk --no-cache add postgresql-client \
                     gcompat
 
+RUN apk add --no-cache --upgrade \
+    ca-certificates \
+    ca-certificates-bundle
+
 RUN mkdir /app
 WORKDIR /app
 
